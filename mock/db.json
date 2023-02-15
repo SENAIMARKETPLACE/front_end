@@ -2,15 +2,16 @@
 {
   "usuarios": [
     {
-      "id": 1,
+      "idUsuario": 1,
       "nome": "João Vitor De Abreu Sousa",
       "cpf": "11111111111", 
       "dtNascimento": "03/03/2004", 
       "senha": "hahaBorges", 
       "telefone": "123456789", 
+      "email": "jvabreusousa12@gmail.com", 
       "endereco": {
-        "id": 1, 
-        "id_endereco": 1, 
+        "idEndereco": 1, 
+        "idUsuario": 1,
         "logadrouro": "Rua", 
         "numero": "89", 
         "bairro": "Capão Redondo", 
@@ -19,25 +20,6 @@
         "complemento": "C1", 
         "cep": "05051-020"
       }
-    }, 
-    {
-      "id": 2,
-      "Nome": "César Gabriel",
-      "CPF": "2233333333", 
-      "dtNascimento": "03/03/2007", 
-      "senha": "hahaRetcheeee", 
-      "telefone": "123456789", 
-      "endereco": {
-        "id": 2, 
-        "id_endereco": "22", 
-        "logadrouro": "Rua", 
-        "numero": 89, 
-        "bairro": "Capão Quadrado", 
-        "cidade": "São Pedro" , 
-        "estado": "SP", 
-        "complemento": "C5", 
-        "cep": "05051-020"
-      }
-    }
+    } 
   ]  
 }
