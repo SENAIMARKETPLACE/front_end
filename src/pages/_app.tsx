@@ -1,7 +1,13 @@
-import React from "react"
-import '../styles/Global.scss'
+import Head from "next/head";
+import React from "react";
+import Header from "../layout/Header";
+import "../styles/Global.scss";
 
-function MyApp({Component, pageProps}){
-    return <Component {...pageProps}/>
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Component {...pageProps} />
+    </>
+  );
 }
-export default MyApp
+export default MyApp;

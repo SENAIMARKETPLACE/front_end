@@ -1,3 +1,9 @@
-import CadastroUsuario from "../screens/CadastroScreen";
+import CadastroUsuarioScreen from "../screens/CadastroUsuarioScreen";
 
-export default CadastroUsuario; 
+
+const CadastroUsuario = () => {
+    return(
+        <CadastroUsuarioScreen/>
+    )
+}
+export default CadastroUsuario;
