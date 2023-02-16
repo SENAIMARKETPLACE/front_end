@@ -1,0 +1,12 @@
+.form__body{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: rgb(237, 245, 242);
+    height: 100%;
+    .form__components{
+        background-color: rgba(224, 82, 82, 0.153);
+        margin-bottom: 1em;
+        
+    }
+}
