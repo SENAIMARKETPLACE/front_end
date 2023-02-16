@@ -5,7 +5,7 @@ import LogoMain from "../../../public/images/logo_sollaris.png";
 const CadastroUsuarioScreen = () => {
   return (
     <section className={styles.divisao}>
-       <div className={styles.sessaoCadastro__form}>
+      <div className={styles.sessaoCadastro__form}>
         <h1>
           <img className={styles.logo} src={LogoMain.src} alt="Logo Sollaris" />
         </h1>
@@ -18,9 +18,7 @@ const CadastroUsuarioScreen = () => {
         <FormCadastroUsuario />
       </div>
       <div className={styles.sessaoImagem}></div>
-    
     </section>
-     
   );
 };
 export default CadastroUsuarioScreen;

@@ -1,0 +1,32 @@
+.divisao {
+    display: flex;
+
+    .sessaoCadastro__form {
+        padding: 10px 50px;
+        text-align: center;
+        background-color: #ffffff;
+        .logo {
+            width: 70px;
+            border-radius: 50%;
+        }
+
+        .titulo {
+            font-size: 20px;
+            font-weight: 400;
+
+            .titulo__endereco {
+                color: #3120FF;
+                font-style: italic;
+            }
+        }
+
+    }
+    .sessaoImagem {
+        width: 100%;
+        height: 100vh;
+        background: url('../../../public/images/garotoboy.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+}
