@@ -1,11 +1,17 @@
 import { TextField } from "@mui/material";
+import React, {FC, InputHTMLAttributes} from "react";
 
-interface InputTextProps {
-    label: string
+interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
+    label: string;
 }
 
-export default function InputText  ({label}) {
+
+const InputText = ({label}) => {
     return (
-        <TextField id="outlined-basic" label={label} variant="outlined" />
+        <TextField id="outlined-basic" label={label}  margin="dense"/>
     )
+
 }
+export default InputText
+
+

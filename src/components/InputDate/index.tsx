@@ -1,23 +1,41 @@
 import * as React from 'react';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { margin } from '@mui/system';
 
-export default function InputDate() {
+
+
+interface InputDateProps {
+  label: string;
+
+}
+
+
+export default function InputDate({ label }) {
   const [value, setValue] = React.useState<Dayjs | null>(null);
 
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
-        label="Data de Nascimento"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
+    <LocalizationProvider dateAdapter={AdapterDayjs} >
+      <Stack spacing={3}>
+        <DesktopDatePicker
+          label={label}
+          inputFormat="MM/DD/YYYY"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} margin="dense" />}
+        />
+      </Stack>  
     </LocalizationProvider>
   );
 }
