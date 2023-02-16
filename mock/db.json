@@ -12,7 +12,7 @@
       "endereco": {
         "idEndereco": 1, 
         "idUsuario": 1,
-        "logadrouro": "Rua", 
+        "logradouro": "Rua", 
         "numero": "89", 
         "bairro": "Capão Redondo", 
         "cidade": "São Paulo" , 
