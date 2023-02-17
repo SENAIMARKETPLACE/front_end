@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import styles from "./FormCadastroUsuario.module.scss";
 import { IUsuario } from "../../compartilhado/IUsuario";
+import Router from 'next/router'
 
 const InputField = styled(TextField)({
   gridColumn: "1/3",
@@ -27,20 +28,39 @@ const LinkForm = styled(Link)({
 const FormCadastroUsuario = () => {
 
   const [nome, setNome] = useState('')
-  const [data, setData] = useState('')
+  const [dataNasc, setDataNasc] = useState('')
   const [cpf, setCpf] = useState('')
   const [email, setEmail] = useState('')
   const [telefone, setTelefone] = useState('')
   const [senha, setSenha] = useState('')
 
+  const enviarDados = (nome: string, dataNasc:string, cpf: string, email: string, telefone: string, senha: string) => {
+    Router.push({
+      pathname: '/cadastroEndereco', 
+      query: {
+        nome: nome, 
+        dataNasc: dataNasc,  
+        cpf: cpf, 
+        email: email, 
+        telefone: telefone, 
+        senha: senha
+      }
+    })
+  }
+
+
+
 
   const criarDados = (e: React.FormEvent<HTMLFormElement>): IUsuario => {
     e.preventDefault()
-    const usuario: IUsuario = { nome: nome, dtNascimento: data, cpf: cpf, email: email, telefone: telefone, senha: senha }
+    const usuario: IUsuario = { nome: nome, dtNascimento: dataNasc, cpf: cpf, email: email, telefone: telefone, senha: senha }
     alert(JSON.stringify(usuario))
+    enviarDados(nome, dataNasc, cpf  ,email, telefone, senha)
     return usuario;
 
   }
+
+
 
   return (
     <form className={styles.form__body} onSubmit={criarDados}>
@@ -57,7 +77,7 @@ const FormCadastroUsuario = () => {
         variant="outlined"
         type="date"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => setData(e.target.value)}
+        onChange={(e) => setDataNasc(e.target.value)}
 
       />
 
@@ -98,10 +118,10 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
       />
 
-      <ButtonForm variant="contained" type="submit">
-        <LinkForm href="/cadastroEndereco">
+      <ButtonForm variant="contained" type="submit" onClick={() => criarDados}>
+        {/* <LinkForm href="/cadastroEndereco"> */}
           Salvar e Continuar
-        </LinkForm>
+        {/* </LinkForm> */}
       </ButtonForm>
     </form>
   );
