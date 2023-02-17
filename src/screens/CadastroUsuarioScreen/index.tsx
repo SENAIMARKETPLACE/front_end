@@ -1,8 +1,12 @@
 import FormCadastroUsuario from "../../patterns/FormCadastroUsuario";
 import styles from "./CadastroUsuarioScreen.module.scss";
 import LogoMain from "../../../public/images/logo_sollaris.png";
+import { use, useState } from "react";
 
 const CadastroUsuarioScreen = () => {
+
+
+
   return (
     <section className={styles.divisao}>
       <div className={styles.sessaoCadastro__form}>
