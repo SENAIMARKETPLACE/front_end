@@ -1,28 +1,27 @@
-import FormCadastroUsuario from "../../patterns/FormCadastroUsuario";
-import styles from "./CadastroUsuarioScreen.module.scss";
-import LogoMain from "../../../public/images/logo_sollaris.png";
-import { use, useState } from "react";
+import FormCadastroUsuario from '../../patterns/FormCadastroUsuario';
+import styles from './CadastroUsuarioScreen.module.scss';
+import LogoMain from '../../../public/images/logo_sollaris.png';
 
 const CadastroUsuarioScreen = () => {
-
-
-
   return (
-    <section className={styles.divisao}>
-      <div className={styles.sessaoCadastro__form}>
-        <h1>
-          <img className={styles.logo} src={LogoMain.src} alt="Logo Sollaris" />
-        </h1>
-        <div className={styles.sessaoTitulo}>
-          <h2 className={styles.titulo}>
-            Crie sua Conta na{" "}
-            <span className={styles.titulo__sollaris}>Sollaris</span>
-          </h2>
+    <main className={styles.main}>
+      <section className={styles.register}>
+        <div className={styles.register__header}>
+          <h1 className={styles.register__title}>
+            Crie sua conta na <span>Sollaris</span>
+          </h1>
+          <img
+            className={styles.register__logo}
+            src={LogoMain.src}
+            alt="Logo Sollaris"
+          />
         </div>
-        <FormCadastroUsuario />
-      </div>
-      <div className={styles.sessaoImagem}></div>
-    </section>
+        <div className={styles.register__forms}>
+          <FormCadastroUsuario />
+        </div>
+        <div className={styles.register__image}></div>
+      </section>
+    </main>
   );
 };
 export default CadastroUsuarioScreen;

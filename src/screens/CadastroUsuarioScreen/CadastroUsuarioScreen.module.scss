@@ -1,31 +1,66 @@
-.divisao {
-    display: flex;
+@import '../../styles/Breakpoints.scss';
 
-    .sessaoCadastro__form {
-        padding: 10px 50px;
-        text-align: center;
 
-        .logo {
-            width: 70px;
-            border-radius: 50%;
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .register {
+    width: 100%;
+    max-width: map-get($breakpoints, 'desktop');
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+
+    .register__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem 0;
+
+      @include for-tablet-landscape {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+
+      .register__title {
+        font-size: 20px;
+        font-weight: 400;
+
+        span {
+          color: #3120ff;
         }
+      }
 
-        .titulo {
-            font-size: 20px;
-            font-weight: 400;
-
-            .titulo__sollaris {
-                color: #3120FF;
-                font-style: italic;
-            }
-        }
-
-    }
-    .sessaoImagem {
-        width: 100%;
-        height: 100vh;
-        background: url('https://images.unsplash.com/flagged/photo-1556746834-cbb4a38ee593?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80');
-
+      .register__logo {
+        width: 70px;
+        border-radius: 50%;
+      }
     }
 
+    .register__forms {
+      padding: 3rem 3rem 3rem 0;
+
+      @include for-tablet-landscape {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        padding: 3rem;
+      }
+    }
+
+    .register__image {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      background: url('https://cdn.discordapp.com/attachments/924735221855834154/1076033682067963964/cross-fit-for-gym-motivation-0ra2euytul519v1i.jpg');
+      background-size: 100%;
+      background-repeat: no-repeat;
+
+      @include for-tablet-landscape {
+        display: none;
+      }
+    }
+  }
 }

@@ -6,6 +6,7 @@ import styles from "./FormCadastroEndereco.module.scss";
 import { useState } from "react";
 import { IUsuario } from "../../compartilhado/IUsuario";
 
+const steps = ['Dados pessoais', 'Endereço'];
 
 interface FormCadastroEnderecoProps{
   dadosUsuarios: IUsuario
@@ -16,6 +17,10 @@ const InputField = styled(TextField)({
   width: "90%",
   margin: "5px 0",
 });
+
+const isStepOptional = (step: number) => {
+    return step === -1;
+  };
 
 const ButtonForm = styled(Button)({
   backgroundColor: "#25D3DC",
@@ -104,3 +109,4 @@ const FormCadastroEndereco = ({dadosUsuarios}: FormCadastroEnderecoProps) => {
   );
 };
 export default FormCadastroEndereco;
+

@@ -1,32 +1,29 @@
-import styled from "@emotion/styled";
-import { Button, TextField } from "@mui/material";
-import Link from "next/link";
-import React, { useState } from "react";
-import styles from "./FormCadastroUsuario.module.scss";
-import { IUsuario } from "../../compartilhado/IUsuario";
+
+import styled from '@emotion/styled';
+import { Button, TextField } from '@mui/material';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import styles from './FormCadastroUsuario.module.scss';
+import { IUsuario } from '../../compartilhado/IUsuario';
 import Router from 'next/router'
 
 const InputField = styled(TextField)({
-  gridColumn: "1/3",
-  width: "90%",
-  margin: "5px 0",
+  gridColumn: '1/3',
+  width: '100%',
+  margin: '5px 0',
 });
 
 const ButtonForm = styled(Button)({
-  backgroundColor: "#25D3DC",
-  gridColumn: "2/3",
-  marginTop: "10px",
+  backgroundColor: '#25D3DC',
+  gridColumn: '2/3',
+  marginTop: '10px',
 });
 
 const LinkForm = styled(Link)({
-  color: "#fff",
+  color: '#fff',
 });
 
-
-
-
 const FormCadastroUsuario = () => {
-
   const [nome, setNome] = useState('')
   const [dataNasc, setDataNasc] = useState('')
   const [cpf, setCpf] = useState('')
@@ -82,7 +79,6 @@ const FormCadastroUsuario = () => {
     })
 
   }
-
 
 
   return (
@@ -165,6 +161,7 @@ const FormCadastroUsuario = () => {
           Criar Usuário
         {/* </LinkForm> */}
       </ButtonForm>
+
     </form>
   );
 };

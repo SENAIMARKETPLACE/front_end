@@ -17,6 +17,33 @@
       "email": "liza.jane727@gmail.com",
       "telefone": "11940333175",
       "id": 2
+    },
+    {
+      "nome": "Ale",
+      "cpf": "12",
+      "dtNascimento": "2004-03-03",
+      "senha": "213",
+      "email": "jvabreusousa12@gmail.com",
+      "telefone": "11940333175",
+      "id": 3
+    },
+    {
+      "nome": "João Vitor Abreu",
+      "cpf": "539.505.168-67",
+      "dtNascimento": "2004-03-03",
+      "senha": "123",
+      "email": "jvabreusousa12@gmail.com",
+      "telefone": "11940333175",
+      "id": 4
+    },
+    {
+      "nome": "Chupetinha",
+      "cpf": "123",
+      "dtNascimento": "2004-03-03",
+      "senha": "Santos",
+      "email": "jvabruesousa",
+      "telefone": "123456",
+      "id": 5
     }
   ]
 }

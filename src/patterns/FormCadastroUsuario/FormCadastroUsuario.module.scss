@@ -1,9 +1,10 @@
-.form__body{
-    display: grid;
-    grid-template-columns: 50% 50% ;
-    justify-items: end;
-    flex-direction: column;
-    margin-top: 10px;
-    width: 500px;
-    
+
+.form__body {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: end;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 600px;
 }
