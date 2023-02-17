@@ -1,8 +1,16 @@
 import LogoMain from "../../../public/images/logo_sollaris.png";
+import { IUsuario } from "../../compartilhado/IUsuario";
 import FormCadastroEndereco from "../../patterns/FormCadastroEndereco";
 import styles from './CadastroEnderecoScreen.module.scss'
 
-const CadastroEnderecoScreen = () => {
+
+interface CadastroEnderecoScreenProps{
+  dadosUsuarios: IUsuario
+}
+
+
+
+const CadastroEnderecoScreen = ({dadosUsuarios} :CadastroEnderecoScreenProps)  => {
   return (
     <section className={styles.divisao}>
       <div className={styles.sessaoCadastro__form}>
@@ -14,7 +22,7 @@ const CadastroEnderecoScreen = () => {
             Agora seu <span className={styles.titulo__endereco}>Endereço</span>
           </h2>
         </div>
-        <FormCadastroEndereco />
+        <FormCadastroEndereco dadosUsuarios={dadosUsuarios}/>
       </div>
       <div className={styles.sessaoImagem}></div>
     </section>

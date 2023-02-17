@@ -33,6 +33,7 @@ const FormCadastroUsuario = () => {
   const [email, setEmail] = useState('')
   const [telefone, setTelefone] = useState('')
   const [senha, setSenha] = useState('')
+  const [confirmeSenha, setConfirmeSenha] = useState('')
 
   const enviarDados = (nome: string, dataNasc:string, cpf: string, email: string, telefone: string, senha: string) => {
     Router.push({
@@ -51,12 +52,34 @@ const FormCadastroUsuario = () => {
 
 
 
-  const criarDados = (e: React.FormEvent<HTMLFormElement>): IUsuario => {
+  const criarDados = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    const usuario: IUsuario = { nome: nome, dtNascimento: dataNasc, cpf: cpf, email: email, telefone: telefone, senha: senha }
+    const usuario: IUsuario = { nome: nome, cpf: cpf, dtNascimento: dataNasc, senha: senha, email: email, telefone: telefone}
+    console.log(usuario)
     alert(JSON.stringify(usuario))
-    enviarDados(nome, dataNasc, cpf  ,email, telefone, senha)
-    return usuario;
+  
+    fetch('http://localhost:5000/usuarios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(usuario),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(`Usuário ${usuario.nome} Cadastrado com sucesso!`)
+      setNome('')
+      setDataNasc('')
+      setCpf('')
+      setEmail('')
+      setTelefone('')
+      setSenha('')
+      setConfirmeSenha('')
+    })
+    .catch((error) =>{
+      console.log('Error:', error)
+      
+    })
 
   }
 
@@ -70,6 +93,7 @@ const FormCadastroUsuario = () => {
         variant="outlined"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => console.log(setNome(e.target.value))}
+        value={nome}
       />
       <InputField
         id="dt_nasc"
@@ -78,6 +102,8 @@ const FormCadastroUsuario = () => {
         type="date"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setDataNasc(e.target.value)}
+        value={dataNasc}
+
 
       />
 
@@ -87,6 +113,7 @@ const FormCadastroUsuario = () => {
         variant="outlined"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setCpf(e.target.value)}
+        value={cpf}
       />
       <InputField
         id="email"
@@ -94,6 +121,7 @@ const FormCadastroUsuario = () => {
         variant="outlined"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setEmail(e.target.value)}
+        value={email}
       />
       <InputField
         id="telefone"
@@ -101,6 +129,7 @@ const FormCadastroUsuario = () => {
         variant="outlined"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setTelefone(e.target.value)}
+        value={telefone}
       />
       <InputField
         id="senha"
@@ -109,6 +138,7 @@ const FormCadastroUsuario = () => {
         type="password"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setSenha(e.target.value)}
+        value={senha}
       />
       <InputField
         id="confirmaSenha"
@@ -116,11 +146,13 @@ const FormCadastroUsuario = () => {
         variant="outlined"
         type="password"
         InputLabelProps={{ shrink: true }}
+        onChange={(e) => setConfirmeSenha(e.target.value)}
+        value={confirmeSenha}
       />
 
       <ButtonForm variant="contained" type="submit" onClick={() => criarDados}>
         {/* <LinkForm href="/cadastroEndereco"> */}
-          Salvar e Continuar
+          Criar Usuário
         {/* </LinkForm> */}
       </ButtonForm>
     </form>

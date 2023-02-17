@@ -1,14 +1,15 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import styled from "@emotion/styled";
 import { Link, TextField } from "@mui/material";
 import styles from "./FormCadastroEndereco.module.scss";
 import { useState } from "react";
+import { IUsuario } from "../../compartilhado/IUsuario";
+
+
+interface FormCadastroEnderecoProps{
+  dadosUsuarios: IUsuario
+}
 
 const InputField = styled(TextField)({
   gridColumn: "1/3",
@@ -26,32 +27,37 @@ const LinkForm = styled(Link)({
   color: "#fff",
 });
 
-const FormCadastroEndereco = () => {
+const FormCadastroEndereco = ({dadosUsuarios}: FormCadastroEnderecoProps) => {
 
-  const [nome, setNome] = useState('')
-  const [data, setData] = useState('')
-  const [cpf, setCpf] = useState('')
-  const [email, setEmail] = useState('')
-  const [telefone, setTelefone] = useState('')
-  const [senha, setSenha] = useState('')
+  const [cep, setCep] = useState('')
+  const [logradouro, setLogradouro] = useState('')
+  const [numero, setNumero] = useState('')
+  const [bairro, setBairro] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [estado, setEstado] = useState('')
+  const [complemento, setComplemento] = useState('')
 
 
 
   return (
     <form className={styles.form__body}>
+
+      <h1>{dadosUsuarios.nome} Insira seu endereço</h1>
+
+
       <InputField
         id="cep"
         label="CEP"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => console.log(setNome(e.target.value))}
+        onChange={(e) => console.log(setCep(e.target.value))}
       />
       <InputField
         id="logradouro"
         label="Logradouro"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => setData(e.target.value)}
+        onChange={(e) => setLogradouro(e.target.value)}
 
       />
 
@@ -60,34 +66,36 @@ const FormCadastroEndereco = () => {
         label="Número"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => setCpf(e.target.value)}
+        onChange={(e) => setNumero(e.target.value)}
       />
       <InputField
         id="bairro"
         label="Bairro"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setBairro(e.target.value)}
       />
       <InputField
         id="cidade"
         label="Cidade"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => setTelefone(e.target.value)}
+        onChange={(e) => setCidade(e.target.value)}
       />
       <InputField
         id="estado"
         label="Estado"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
-        onChange={(e) => setSenha(e.target.value)}
+        onChange={(e) => setEstado(e.target.value)}
       />
       <InputField
         id="complemento"
         label="Complemento"
         variant="outlined"
         InputLabelProps={{ shrink: true }}
+        onChange={(e) => setComplemento(e.target.value)}
+
       />
 
       <ButtonForm variant="contained" type="submit">

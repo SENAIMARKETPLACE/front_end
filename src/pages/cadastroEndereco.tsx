@@ -1,5 +1,6 @@
 import CadastroEnderecoScreen from "../screens/CadastroEnderecoScreen";
 import { useRouter } from "next/router";
+import { IUsuario } from "../compartilhado/IUsuario";
 
 const CadastroEndereco = () => {
 
@@ -8,7 +9,7 @@ const CadastroEndereco = () => {
         query : {nome, dataNasc, cpf, email, telefone, senha}
     } = router
 
-    const usuario = {
+    const props = {
         nome, 
         dataNasc,  
         cpf, 
@@ -17,9 +18,18 @@ const CadastroEndereco = () => {
         senha
     }
 
-    console.log(usuario)
+    const dadosUsuarios: IUsuario = {
+        nome: props.nome, 
+        cpf: props.cpf, 
+        dtNascimento: props.dataNasc,
+        telefone: props.telefone, 
+        email: props.email, 
+        senha: props.senha 
+    }
+
+    
     return(
-        <CadastroEnderecoScreen/>
+        <CadastroEnderecoScreen dadosUsuarios={dadosUsuarios}/>
     )
 }
 export default CadastroEndereco;

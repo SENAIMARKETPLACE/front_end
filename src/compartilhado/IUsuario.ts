@@ -1,11 +1,11 @@
 import { IEndereco } from "./IEndereco";
 
 export interface IUsuario{
-    nome: string;
-    cpf: string; 
-    dtNascimento: string; 
-    telefone:  string; 
-    email: string;
-    senha: string;
-    endereco?: IEndereco[];
+    nome: string | string[] ;
+    cpf: string | string[] ; 
+    dtNascimento: string | string[];  
+    senha: string | string[] ;
+    telefone:  string | string[] ; 
+    email: string | string[] ;
+
 }
