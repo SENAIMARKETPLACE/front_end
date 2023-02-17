@@ -1,46 +1,47 @@
-import styled from "@emotion/styled";
-import { Button, TextField } from "@mui/material";
-import Link from "next/link";
-import React, { useState } from "react";
-import styles from "./FormCadastroUsuario.module.scss";
-import { IUsuario } from "../../compartilhado/IUsuario";
+import styled from '@emotion/styled';
+import { Button, TextField } from '@mui/material';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import styles from './FormCadastroUsuario.module.scss';
+import { IUsuario } from '../../compartilhado/IUsuario';
 
 const InputField = styled(TextField)({
-  gridColumn: "1/3",
-  width: "90%",
-  margin: "5px 0",
+  gridColumn: '1/3',
+  width: '100%',
+  margin: '5px 0',
 });
 
 const ButtonForm = styled(Button)({
-  backgroundColor: "#25D3DC",
-  gridColumn: "2/3",
-  marginTop: "10px",
+  backgroundColor: '#25D3DC',
+  gridColumn: '2/3',
+  marginTop: '10px',
 });
 
 const LinkForm = styled(Link)({
-  color: "#fff",
+  color: '#fff',
 });
 
-
-
-
 const FormCadastroUsuario = () => {
-
-  const [nome, setNome] = useState('')
-  const [data, setData] = useState('')
-  const [cpf, setCpf] = useState('')
-  const [email, setEmail] = useState('')
-  const [telefone, setTelefone] = useState('')
-  const [senha, setSenha] = useState('')
-
+  const [nome, setNome] = useState('');
+  const [data, setData] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [senha, setSenha] = useState('');
 
   const criarDados = (e: React.FormEvent<HTMLFormElement>): IUsuario => {
-    e.preventDefault()
-    const usuario: IUsuario = { nome: nome, dtNascimento: data, cpf: cpf, email: email, telefone: telefone, senha: senha }
-    alert(JSON.stringify(usuario))
+    e.preventDefault();
+    const usuario: IUsuario = {
+      nome: nome,
+      dtNascimento: data,
+      cpf: cpf,
+      email: email,
+      telefone: telefone,
+      senha: senha,
+    };
+    alert(JSON.stringify(usuario));
     return usuario;
-
-  }
+  };
 
   return (
     <form className={styles.form__body} onSubmit={criarDados}>
@@ -58,7 +59,6 @@ const FormCadastroUsuario = () => {
         type="date"
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setData(e.target.value)}
-
       />
 
       <InputField
@@ -99,9 +99,7 @@ const FormCadastroUsuario = () => {
       />
 
       <ButtonForm variant="contained" type="submit">
-        <LinkForm href="/cadastroEndereco">
-          Salvar e Continuar
-        </LinkForm>
+        <LinkForm href="/cadastroEndereco">Salvar e Continuar</LinkForm>
       </ButtonForm>
     </form>
   );
