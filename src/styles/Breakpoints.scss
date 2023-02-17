@@ -1,0 +1,46 @@
+$breakpoints: (
+  'phone': 480px,
+  'tablet-portrait': 600px,
+  'tablet-landscape': 900px,
+  'desktop': 1200px,
+  'lgDesktop': 1800px,
+);
+
+@mixin for-phone-only {
+  @media (max-width: map-get($breakpoints, 'phone')) {
+    @content;
+  }
+}
+@mixin for-tablet-portrait {
+  @media (max-width: map-get($breakpoints, 'tablet-portrait')) {
+    @content;
+  }
+}
+@mixin for-tablet-landscape {
+  @media (max-width: map-get($breakpoints, 'tablet-landscape')) {
+    @content;
+  }
+}
+@mixin for-desktop {
+  @media (max-width: map-get($breakpoints, 'desktop')) {
+    @content;
+  }
+}
+@mixin for-large-desktop {
+  @media (max-width: map-get($breakpoints, 'lgDesktop')) {
+    @content;
+  }
+}
+
+// Como usar
+
+// 1. Importe este arquivo no .scss da rota que terá responsividade
+// @import "../../styles/Breakpoints.scss";
+
+// 2. Adicione o @include dentro da classe/id CSS, defina o breakpoint e estilize a responsividade
+
+// .souUmaClasse {
+// @include for-phone-only {
+//     padding: 0px;
+// }
+// }
