@@ -42,7 +42,6 @@ const FormCadastroEndereco = ({dadosUsuarios}: FormCadastroEnderecoProps) => {
   return (
     <form className={styles.form__body}>
 
-      <h1>{dadosUsuarios.nome} Insira seu endereço</h1>
 
 
       <InputField

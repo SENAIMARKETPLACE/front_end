@@ -94,6 +94,7 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => console.log(setNome(e.target.value))}
         value={nome}
+        required
       />
       <InputField
         id="dt_nasc"
@@ -103,8 +104,7 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setDataNasc(e.target.value)}
         value={dataNasc}
-
-
+        required
       />
 
       <InputField
@@ -114,6 +114,8 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setCpf(e.target.value)}
         value={cpf}
+        required
+        
       />
       <InputField
         id="email"
@@ -122,6 +124,8 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setEmail(e.target.value)}
         value={email}
+        required
+
       />
       <InputField
         id="telefone"
@@ -130,6 +134,8 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setTelefone(e.target.value)}
         value={telefone}
+        required
+
       />
       <InputField
         id="senha"
@@ -139,6 +145,8 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setSenha(e.target.value)}
         value={senha}
+        required
+
       />
       <InputField
         id="confirmaSenha"
@@ -148,6 +156,8 @@ const FormCadastroUsuario = () => {
         InputLabelProps={{ shrink: true }}
         onChange={(e) => setConfirmeSenha(e.target.value)}
         value={confirmeSenha}
+        required
+
       />
 
       <ButtonForm variant="contained" type="submit" onClick={() => criarDados}>
