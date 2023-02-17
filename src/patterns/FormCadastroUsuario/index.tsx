@@ -51,9 +51,8 @@ const FormCadastroUsuario = () => {
 
   const criarDados = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    const usuario: IUsuario = { nome: nome, cpf: cpf, dtNascimento: dataNasc, senha: senha, email: email, telefone: telefone}
+    const usuario: IUsuario = { nome: nome, cpf: cpf, dt_nascimento: dataNasc, senha: senha, email: email, telefone: telefone}
     console.log(usuario)
-    alert(JSON.stringify(usuario))
   
     fetch('http://localhost:5000/usuarios', {
       method: 'POST',

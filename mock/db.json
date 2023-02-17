@@ -1,49 +1,13 @@
 {
   "usuarios": [
     {
-      "nome": "João Vitor Abreu",
+      "nome": "João Augusto",
       "cpf": "123",
-      "dtNascimento": "2004-03-03",
-      "senha": "123",
-      "email": "jaabdb@gmail.com",
-      "telefone": "11940333175",
+      "dt_nascimento": "2002-02-17",
+      "senha": "Cortin",
+      "email": "jvabreu@gamil.com",
+      "telefone": "94949494",
       "id": 1
-    },
-    {
-      "nome": "Kaiozin",
-      "cpf": "123",
-      "dtNascimento": "2005-03-03",
-      "senha": "123",
-      "email": "liza.jane727@gmail.com",
-      "telefone": "11940333175",
-      "id": 2
-    },
-    {
-      "nome": "Ale",
-      "cpf": "12",
-      "dtNascimento": "2004-03-03",
-      "senha": "213",
-      "email": "jvabreusousa12@gmail.com",
-      "telefone": "11940333175",
-      "id": 3
-    },
-    {
-      "nome": "João Vitor Abreu",
-      "cpf": "539.505.168-67",
-      "dtNascimento": "2004-03-03",
-      "senha": "123",
-      "email": "jvabreusousa12@gmail.com",
-      "telefone": "11940333175",
-      "id": 4
-    },
-    {
-      "nome": "Chupetinha",
-      "cpf": "123",
-      "dtNascimento": "2004-03-03",
-      "senha": "Santos",
-      "email": "jvabruesousa",
-      "telefone": "123456",
-      "id": 5
     }
   ]
 }

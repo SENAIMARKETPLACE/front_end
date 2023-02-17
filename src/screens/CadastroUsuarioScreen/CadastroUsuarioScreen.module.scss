@@ -14,12 +14,11 @@
     grid-template-columns: 1fr 1fr;
     gap: 0 3rem;
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
-
+    
     .register__header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 2rem 3rem 0;
+      padding: 2rem 0rem 0;
 
       @include for-tablet-landscape {
         grid-column-start: 1;
@@ -29,7 +28,6 @@
       .register__title {
         font-size: 20px;
         font-weight: 400;
-
         span {
           color: #3120ff;
         }
