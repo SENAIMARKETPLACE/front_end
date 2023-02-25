@@ -11,6 +11,8 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
+    "noImplicitAny": true,
+    "removeComments": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",

@@ -21,7 +21,7 @@ const CadastroEndereco = () => {
     const dadosUsuarios: IUsuario = {
         nome: props.nome, 
         cpf: props.cpf, 
-        dtNascimento: props.dataNasc,
+        dt_nascimento: props.dataNasc,
         telefone: props.telefone, 
         email: props.email, 
         senha: props.senha 

@@ -8,6 +8,24 @@
       "email": "jvabreu@gamil.com",
       "telefone": "94949494",
       "id": 1
+    },
+    {
+      "nome": "Francisco Chiquinho ",
+      "cpf": "1233",
+      "dt_nascimento": "2005-03-03",
+      "senha": "123",
+      "email": "1234",
+      "telefone": "11941231",
+      "id": 2
+    },
+    {
+      "nome": "teste",
+      "cpf": "123",
+      "dt_nascimento": "2023-02-24",
+      "senha": "123",
+      "email": "123",
+      "telefone": "123",
+      "id": 3
     }
   ]
 }
