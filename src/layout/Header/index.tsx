@@ -14,7 +14,7 @@ const Header = () => {
           <MdOutlineLogin />
           <p>Log-In</p>
         </Link>
-        <Link href="/cadastroUsuario" className={styles.header__btn_cadastro}>
+        <Link href="/cadastro-usuario" className={styles.header__btn_cadastro}>
           <p>Cadastre-se</p>
         </Link>
       </nav>
