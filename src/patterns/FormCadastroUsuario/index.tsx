@@ -7,6 +7,11 @@ import { IUsuario } from "../../compartilhado/IUsuario";
 import Router from "next/router";
 import http from "../../http";
 import axios from "axios";
+import { MdNavigateNext, MdNavigateBefore, MdDone } from "react-icons/md";
+import Agradecimento from "../../components/userFormStepper/Agradecimentos";
+import DadosPessoais from "../../components/userFormStepper/DadosPessoais";
+import DadosResidencial from "../../components/userFormStepper/DadosResidencial";
+import Steps from "../../components/userFormStepper/Steps";
 
 const InputField = styled(TextField)({
   gridColumn: "1/3",
@@ -32,6 +37,12 @@ const FormCadastroUsuario = () => {
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmeSenha, setConfirmeSenha] = useState("");
+  const formComponents = [
+    <DadosPessoais />,
+    <DadosResidencial />,
+    <Agradecimento />,
+  ];
+  const [idPasso, setIdPasso] = useState(0);
 
   const enviarDados = (
     nome: string,
@@ -52,6 +63,28 @@ const FormCadastroUsuario = () => {
         senha: senha,
       },
     });
+  };
+
+  //EVENTOS DE ANTERIOR E PRÓXIMO PASSo
+  const nextStep = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (idPasso === formComponents.length - 1) {
+      setIdPasso(2);
+    } else {
+      const passo = idPasso + 1;
+      return setIdPasso(passo);
+    }
+  };
+
+
+  
+  const prevStep = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (idPasso === 0) {
+      setIdPasso(0);
+    } else {
+      const passo = idPasso - 1;
+      return setIdPasso(passo);
+    }
   };
 
   const criarDados = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -116,82 +149,57 @@ const FormCadastroUsuario = () => {
     //   .catch(error => console.log(error));
   };
 
+  const renderizacaoButtons = (step: number) => {
+    if (step == 3) {
+      return <Button onClick={nextStep}>CADASTRAR</Button>;
+    }
+    return <Button>ENVIAR</Button>;
+  };
+
   return (
-    <form className={styles.form__body} onSubmit={criarDados}>
-      <InputField
-        id="nome"
-        label="Nome"
-        variant="outlined"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => console.log(setNome(e.target.value))}
-        value={nome}
-        required
-      />
-      <InputField
-        id="dt_nasc"
-        label="Data de Nascimento"
-        variant="outlined"
-        type="date"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => setDataNasc(e.target.value)}
-        value={dataNasc}
-        required
-      />
+    <section className="section__Form">
+      <div className="setion__FormContainer">
+        {<Steps passoAtual={idPasso}/>}
+        <form>
+          {/* FORMULÁRIO SERÁ MODIFICADO DE FORMA DINÂMICA. */}
+          <div className="section__InputsContainer">
+            {formComponents[idPasso]}
+          </div>
+          <div className="section_FormButtons">
+            {idPasso === 0 ? (
+              ""
+            ) : (
+              <Button variant="contained" color="success" onClick={prevStep}>
+                <MdNavigateBefore />
+                <span>VOLTAR</span>
+              </Button>
+            )}
 
-      <InputField
-        id="cpf"
-        label="CPF"
-        variant="outlined"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => setCpf(e.target.value)}
-        value={cpf}
-        required
-      />
-      <InputField
-        id="email"
-        label="E-mail"
-        variant="outlined"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-        required
-      />
-      <InputField
-        id="telefone"
-        label="Telefone"
-        variant="outlined"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => setTelefone(e.target.value)}
-        value={telefone}
-        required
-      />
-      <InputField
-        id="senha"
-        label="Senha"
-        variant="outlined"
-        type="password"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => setSenha(e.target.value)}
-        value={senha}
-        required
-      />
-      <InputField
-        id="confirmaSenha"
-        label="Confirme sua Senha"
-        variant="outlined"
-        type="password"
-        InputLabelProps={{ shrink: true }}
-        onChange={(e) => setConfirmeSenha(e.target.value)}
-        value={confirmeSenha}
-        required
-      />
-
-      <ButtonForm variant="contained" type="submit" onClick={() => criarDados}>
-        {/* <LinkForm href="/cadastroEndereco"> */}
-        Criar Usuário
-        {/* </LinkForm> */}
-      </ButtonForm>
-    </form>
+            {idPasso === 2 ? (
+              <Button
+                variant="contained"
+                color="success"
+                type="submit"
+                onClick={nextStep}
+              >
+                <span>CADASTRAR</span>
+                <MdDone />
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="success"
+                type="submit"
+                onClick={nextStep}
+              >
+                <span>PRÓXIMO</span>
+                <MdNavigateNext />
+              </Button>
+            )}
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 export default FormCadastroUsuario;
