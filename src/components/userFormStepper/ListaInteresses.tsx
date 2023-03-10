@@ -1,15 +1,17 @@
 import { Button } from "@mui/material"
-
-const Agradecimento = () => {
-    return(
+import { Idata } from "../../compartilhado/IData"
+interface ListaInteressesProps {
+    data: Idata
+}
+const ListaInteresses = ({data}: ListaInteressesProps) => {
+    return (
         <div>
             <Button variant="contained">Acessórios</Button>
             <Button variant="contained">Suplementos</Button>
             <Button variant="contained">Esportes</Button>
             <Button variant="contained">Roupas</Button>
-            <Button variant="contained">Marcas</Button>
-
+            <Button variant="contained">Calçados</Button>
         </div>
     )
 }
-export default Agradecimento
+export default ListaInteresses

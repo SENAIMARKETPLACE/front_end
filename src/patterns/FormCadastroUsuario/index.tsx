@@ -1,17 +1,19 @@
 import styled from "@emotion/styled";
 import { Button, TextField } from "@mui/material";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import styles from "./FormCadastroUsuario.module.scss";
 import { IUsuario } from "../../compartilhado/IUsuario";
 import Router from "next/router";
 import http from "../../http";
 import axios from "axios";
 import { MdNavigateNext, MdNavigateBefore, MdDone } from "react-icons/md";
-import Agradecimento from "../../components/userFormStepper/Agradecimentos";
+import Agradecimento from "../../components/userFormStepper/ListaInteresses";
 import DadosPessoais from "../../components/userFormStepper/DadosPessoais";
 import DadosResidencial from "../../components/userFormStepper/DadosResidencial";
 import Steps from "../../components/userFormStepper/Steps";
+import { Idata } from "../../compartilhado/IData";
+import ListaInteresses from "../../components/userFormStepper/ListaInteresses";
 
 const InputField = styled(TextField)({
   gridColumn: "1/3",
@@ -29,7 +31,36 @@ const LinkForm = styled(Link)({
   color: "#fff",
 });
 
+
+const formTemplate: Idata = {
+  nome: "",
+  cpf: "", 
+  telefone: "", 
+  urlFotoPerfil: "", 
+  dataNasc: "", 
+  genero: "", 
+  email: "", 
+  senha: "", 
+  confirmeSenha: "", 
+  cep: "", 
+  logradouro: "", 
+  complemento: "", 
+  numero: "", 
+  cidade: "", 
+  estado: "", 
+  bairro: "", 
+}
+
 const FormCadastroUsuario = () => {
+  const [data, setData] = useState(formTemplate)
+ 
+  const atualizarCampo = (key: string, value: string) => {
+    setData((prev) => {
+      return {...prev, [key]: value}
+    })
+
+  }
+  
   const [nome, setNome] = useState("");
   const [dataNasc, setDataNasc] = useState("");
   const [cpf, setCpf] = useState("");
@@ -38,9 +69,9 @@ const FormCadastroUsuario = () => {
   const [senha, setSenha] = useState("");
   const [confirmeSenha, setConfirmeSenha] = useState("");
   const formComponents = [
-    <DadosPessoais />,
-    <DadosResidencial />,
-    <Agradecimento />,
+    <DadosPessoais data={data} atualizarCampo={atualizarCampo}/>,
+    <DadosResidencial data={data} atualizarCampo={atualizarCampo}/>,
+    <ListaInteresses data={data} atualizarCampo={atualizarCampo}/>,
   ];
   const [idPasso, setIdPasso] = useState(0);
 
