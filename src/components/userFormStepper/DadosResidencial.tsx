@@ -21,10 +21,10 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
 
   function preencherDados(cepRecebido: ICep, data: Idata) {
    
-    (data.logradouro = cepRecebido.logradouro),
     (data.bairro = cepRecebido.bairro),
     (data.cidade = cepRecebido.localidade),
-    (data.estado = cepRecebido.uf);
+    (data.estado = cepRecebido.uf), 
+    (data.logradouro = cepRecebido.logradouro); 
 
     return console.log(cepRecebido);
   }
