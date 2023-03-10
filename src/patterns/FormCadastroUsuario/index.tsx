@@ -9,7 +9,7 @@ import http from "../../http";
 import axios from "axios";
 import { MdNavigateNext, MdNavigateBefore, MdDone } from "react-icons/md";
 import Agradecimento from "../../components/userFormStepper/ListaInteresses";
-import DadosPessoais from "../../components/userFormStepper/DadosPessoais";
+import DadosPessoais from "../../components/userFormStepper/DadosPessoais/main";
 import DadosResidencial from "../../components/userFormStepper/DadosResidencial";
 import Steps from "../../components/userFormStepper/Steps";
 import { Idata } from "../../compartilhado/IData";
