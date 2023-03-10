@@ -20,17 +20,18 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   const [cepDados, setCEPDados] = useState<ICep>(null);
 
   function preencherDados(cepRecebido: ICep, data: Idata) {
-   
-    (data.bairro = cepRecebido.bairro),
-    (data.cidade = cepRecebido.localidade),
-    (data.estado = cepRecebido.uf), 
-    (data.logradouro = cepRecebido.logradouro); 
+    {
+      (data.bairro = cepRecebido.bairro),
+      (data.cidade = cepRecebido.localidade),
+      (data.estado = cepRecebido.uf),
+      (data.logradouro = cepRecebido.logradouro);
+    }
 
     return console.log(cepRecebido);
   }
 
   const consumirApiViaCEP = (cep: string) => {
-      axios
+    axios
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .then((response) => setCEPDados(response.data))
       .catch((erro) => alert("CEP não encontrado!"));
@@ -91,7 +92,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         InputLabelProps={{ shrink: true }}
         value={data.bairro || ""}
         onChange={(e) => {
-          atualizarCampo("estado", e.target.value);
+          atualizarCampo("bairro", e.target.value);
         }}
       ></InputField>
     </div>
