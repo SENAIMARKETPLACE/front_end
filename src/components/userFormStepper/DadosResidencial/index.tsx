@@ -4,7 +4,7 @@ import { Idata } from "../../../compartilhado/IData";
 import { use, useState } from "react";
 import axios from "axios";
 import { ICep } from "../../../compartilhado/ICep";
-import styles from './DadosResidencial.module.scss'
+import styles from "./DadosResidencial.module.scss";
 
 interface DadosResidencialProps {
   data: Idata;
@@ -20,22 +20,23 @@ const InputField = styled(TextField)({
 const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   const [cepDados, setCEPDados] = useState<ICep>(null);
 
-  function preencherDados(cepRecebido: ICep, data: Idata) {
-    data.bairro = cepRecebido.bairro,
-    data.cidade = cepRecebido.localidade,
-    data.estado = cepRecebido.uf,
-    data.logradouro = cepRecebido.logradouro;
-
-    return console.log(cepRecebido);
+  function preencherDados(cepRecebido: ICep, dataPreencher: Idata) {
+    if (cepRecebido) {
+      (dataPreencher.bairro = cepRecebido.bairro),
+      (dataPreencher.cidade = cepRecebido.localidade),
+      (dataPreencher.estado = cepRecebido.uf),
+      (dataPreencher.logradouro = cepRecebido.logradouro);
+      return console.log(cepRecebido);
+    }
   }
 
-  const consumirApiViaCEP = (cep: string) => {
+  const consumirApiViaCEP = (cep: string, dataPreencher: Idata) => {
     axios
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .then((response) => setCEPDados(response.data))
       .catch((erro) => alert("CEP não encontrado!"));
 
-    return preencherDados(cepDados, data);
+    return preencherDados(cepDados, dataPreencher);
   };
 
   return (
@@ -53,7 +54,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
       <Button
         variant="contained"
         onClick={(e) => {
-          consumirApiViaCEP(data.cep);
+          consumirApiViaCEP(data.cep, data);
         }}
       >
         Preencher Dados

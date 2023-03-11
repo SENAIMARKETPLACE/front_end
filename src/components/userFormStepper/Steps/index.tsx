@@ -17,15 +17,15 @@ const Steps = ({ passoAtual }:PropsSteps) => {
       </div>
       <div className={styles.step}>
         <div className={styles.icone + " " + `${passoAtual >= 1 ? styles.iconeAtivo: ''}`}>
-          <MdHome />
-        </div>
-        <p>DADOS RESIDENCIAIS</p>
-      </div>
-      <div className={styles.step}>
-        <div className={styles.icone + " " + `${passoAtual >= 2 ? styles.iconeAtivo: ''}`}>
           <MdLightbulbOutline />
         </div>
         <p>LISTA DE INTERESSE</p>
+      </div>
+      <div className={styles.step}>
+        <div className={styles.icone + " " + `${passoAtual >= 2 ? styles.iconeAtivo: ''}`}>
+          <MdHome />
+        </div>
+        <p>DADOS RESIDENCIAIS</p>
       </div>
     </div>
   );

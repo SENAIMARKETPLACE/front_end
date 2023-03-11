@@ -69,8 +69,8 @@ const FormCadastroUsuario = () => {
   const [confirmeSenha, setConfirmeSenha] = useState("");
   const formComponents = [
     <DadosPessoais data={data} atualizarCampo={atualizarCampo}/>,
-    <DadosResidencial data={data} atualizarCampo={atualizarCampo}/>,
     <ListaInteresses data={data} atualizarCampo={atualizarCampo}/>,
+    <DadosResidencial data={data} atualizarCampo={atualizarCampo}/>,
   ];
   const [idPasso, setIdPasso] = useState(0);
 
