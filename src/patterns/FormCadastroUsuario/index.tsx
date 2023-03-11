@@ -187,7 +187,7 @@ const FormCadastroUsuario = () => {
   };
 
   return (
-    <section className="section__Form">
+    <section className={styles.section__Form}>
       <div className={styles.setion__FormContainer}>
         {<Steps passoAtual={idPasso}/>}
         <form>
