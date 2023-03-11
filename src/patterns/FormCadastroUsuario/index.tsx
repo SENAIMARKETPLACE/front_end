@@ -23,8 +23,7 @@ const InputField = styled(TextField)({
 
 const ButtonForm = styled(Button)({
   backgroundColor: "#25D3DC",
-  gridColumn: "2/3",
-  marginTop: "10px",
+  width: "50px",
 });
 
 const LinkForm = styled(Link)({
@@ -189,14 +188,14 @@ const FormCadastroUsuario = () => {
 
   return (
     <section className="section__Form">
-      <div className="setion__FormContainer">
+      <div className={styles.setion__FormContainer}>
         {<Steps passoAtual={idPasso}/>}
         <form>
           {/* FORMULÁRIO SERÁ MODIFICADO DE FORMA DINÂMICA. */}
           <div className="section__InputsContainer">
             {formComponents[idPasso]}
           </div>
-          <div className="section_FormButtons">
+          <div className={styles.section_FormButtons}>
             {idPasso === 0 ? (
               ""
             ) : (

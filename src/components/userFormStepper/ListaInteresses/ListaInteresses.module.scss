@@ -1,0 +1,12 @@
+.camposCadastro{
+    display: grid;
+    grid-area: 1/1/3/2;
+    column-gap: 15px;
+    row-gap: 18px;
+    .camposCadastro__acessorios{
+        grid-area: 1/1/1/2;
+    }
+    .camposCadastro__suplementos{
+        grid-area: 1/2/1/2;
+    }
+}

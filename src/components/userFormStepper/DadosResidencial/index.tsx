@@ -1,9 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
-import { Idata } from "../../compartilhado/IData";
+import { Idata } from "../../../compartilhado/IData";
 import { use, useState } from "react";
 import axios from "axios";
-import { ICep } from "../../compartilhado/ICep";
+import { ICep } from "../../../compartilhado/ICep";
+import styles from './DadosResidencial.module.scss'
 
 interface DadosResidencialProps {
   data: Idata;
@@ -20,12 +21,10 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   const [cepDados, setCEPDados] = useState<ICep>(null);
 
   function preencherDados(cepRecebido: ICep, data: Idata) {
-    {
-      (data.bairro = cepRecebido.bairro),
-      (data.cidade = cepRecebido.localidade),
-      (data.estado = cepRecebido.uf),
-      (data.logradouro = cepRecebido.logradouro);
-    }
+    data.bairro = cepRecebido.bairro,
+    data.cidade = cepRecebido.localidade,
+    data.estado = cepRecebido.uf,
+    data.logradouro = cepRecebido.logradouro;
 
     return console.log(cepRecebido);
   }
@@ -40,7 +39,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   };
 
   return (
-    <div>
+    <div className={styles.camposCadastros}>
       <InputField
         label="CEP"
         InputLabelProps={{ shrink: true }}
@@ -49,6 +48,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         onChange={(e) => {
           atualizarCampo("cep", e.target.value);
         }}
+        className={styles.camposCadastros__cep}
       ></InputField>
       <Button
         variant="contained"
@@ -62,14 +62,17 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         label="Logradouro"
         InputLabelProps={{ shrink: true }}
         value={data.logradouro || ""}
+        className={styles.camposCadastros__logradouro}
       ></InputField>
       <InputField
         label="Complemento"
         InputLabelProps={{ shrink: true }}
+        className={styles.camposCadastros__complemento}
       ></InputField>
       <InputField
         label="Número"
         InputLabelProps={{ shrink: true }}
+        className={styles.camposCadastros__numero}
       ></InputField>
       <InputField
         label="Cidade"
@@ -78,6 +81,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         onChange={(e) => {
           atualizarCampo("cidade", e.target.value);
         }}
+        className={styles.camposCadastros__cidade}
       ></InputField>
       <InputField
         label="Estado"
@@ -86,6 +90,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         onChange={(e) => {
           atualizarCampo("estado", e.target.value);
         }}
+        className={styles.camposCadastros__estado}
       ></InputField>
       <InputField
         label="Bairro"
@@ -94,6 +99,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         onChange={(e) => {
           atualizarCampo("bairro", e.target.value);
         }}
+        className={styles.camposCadastros__bairro}
       ></InputField>
     </div>
   );
