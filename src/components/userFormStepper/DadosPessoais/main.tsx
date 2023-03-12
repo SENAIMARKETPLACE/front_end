@@ -28,7 +28,7 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
       <InputField label="Data de Nascimento" type="date" InputLabelProps={{ shrink: true }} required value={data.dataNasc || ""} onChange={(e) => atualizarCampo("dataNasc", e.target.value)} className={styles.camposCadastro__dtNasc}></InputField>
       <InputField label="Gênero" InputLabelProps={{ shrink: true }} required value={data.genero|| ""} onChange={(e) => atualizarCampo("genero", e.target.value)} className={styles.camposCadastro__genero}></InputField>
       <InputField label="E-mail" InputLabelProps={{ shrink: true }} required value={data.email || ""} onChange={(e) => atualizarCampo("email", e.target.value)} className={styles.camposCadastro__email}></InputField>
-      <InputField label="Senha" type="password" InputLabelProps={{ shrink: true }} required value={data.senha || ""} onChange={(e) => atualizarCampo("senha", e.target.value)} className={styles.camposCadastro__senha}></InputField>
+      <InputField label="Senha"  type="password" InputLabelProps={{ shrink: true }} required value={data.senha || ""} onChange={(e) => atualizarCampo("senha", e.target.value)} className={styles.camposCadastro__senha}></InputField>
       <InputField label="Confirmar Senha" type="password" InputLabelProps={{ shrink: true }} required value={data.confirmeSenha || ""} onChange={(e) => atualizarCampo("confirmeSenha", e.target.value)} className={styles.camposCadastro__confirmarSenha}></InputField>
     </section>
   );

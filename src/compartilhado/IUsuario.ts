@@ -7,5 +7,6 @@ export interface IUsuario{
     senha: string | string[] ;
     telefone:  string | string[] ; 
     email: string | string[] ;
-
+    listaInterresses?: string | string[] ;
+    endereco? : IEndereco; 
 }

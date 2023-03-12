@@ -179,6 +179,11 @@ const FormCadastroUsuario = () => {
     //   .catch(error => console.log(error));
   };
 
+  const exibirDadosCapturados = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    return console.log(data)
+  }
+
   const renderizacaoButtons = (step: number) => {
     if (step == 3) {
       return <Button onClick={nextStep}>CADASTRAR</Button>;
@@ -210,7 +215,7 @@ const FormCadastroUsuario = () => {
                 variant="contained"
                 color="success"
                 type="submit"
-                onClick={nextStep}
+                onClick={exibirDadosCapturados}
               >
                 <span>CADASTRAR</span>
                 <MdDone />

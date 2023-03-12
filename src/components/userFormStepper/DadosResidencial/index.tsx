@@ -63,17 +63,22 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         label="Logradouro"
         InputLabelProps={{ shrink: true }}
         value={data.logradouro || ""}
-        className={styles.camposCadastros__logradouro}
+        className={styles.camposCadastros__logradouro} 
+        onChange={(e) => atualizarCampo("Logradouro", e.target.value)}
       ></InputField>
       <InputField
         label="Complemento"
         InputLabelProps={{ shrink: true }}
         className={styles.camposCadastros__complemento}
+        value={data.complemento || ""} 
+        onChange={(e) => atualizarCampo("complemento", e.target.value)}
       ></InputField>
       <InputField
         label="Número"
         InputLabelProps={{ shrink: true }}
         className={styles.camposCadastros__numero}
+        value={data.numero || ""}
+        onChange={(e) => atualizarCampo("numero", e.target.value)}
       ></InputField>
       <InputField
         label="Cidade"
@@ -106,3 +111,4 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   );
 };
 export default DadosResidencial;
+
