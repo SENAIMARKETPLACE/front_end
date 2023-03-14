@@ -10,7 +10,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
  3º -> npm install sass
 ```
 
-## COMAND NECESSARY TO RUN JSON.SERVE IN PORT 5000
+## NECESSARY COMMANDS TO RUN JSON.SERVER IN PORT 5000
 ```bash
 1º -> cd mock
 2º -> json-server --watch db.json --port 5000
