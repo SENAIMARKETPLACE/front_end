@@ -10,6 +10,8 @@ interface ListaInteressesProps {
 const ListaInteresses = ({ data }: ListaInteressesProps) => {
   const listaInteresses: string[] = data.listaInteresses || [];
 
+  
+
   useEffect(() => {
     persistirInteressesSelecionados(listaInteresses);
     console.log(data.listaInteresses);

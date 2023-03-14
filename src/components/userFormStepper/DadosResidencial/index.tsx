@@ -5,6 +5,7 @@ import { use, useState } from "react";
 import axios from "axios";
 import { ICep } from "../../../compartilhado/ICep";
 import styles from "./DadosResidencial.module.scss";
+import { IUsuario } from "../../../compartilhado/IUsuario";
 
 interface DadosResidencialProps {
   data: Idata;
@@ -38,6 +39,9 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
 
     return preencherDados(cepDados, dataPreencher);
   };
+
+  
+  
 
   return (
     <div className={styles.camposCadastros}>
