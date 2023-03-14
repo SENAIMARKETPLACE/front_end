@@ -19,7 +19,7 @@ const Steps = ({ passoAtual }:PropsSteps) => {
         <div className={styles.icone + " " + `${passoAtual >= 1 ? styles.iconeAtivo: ''}`}>
           <MdLightbulbOutline />
         </div>
-        <p>LISTA DE INTERESSE</p>
+        <p>LISTA DE INTERESSES</p>
       </div>
       <div className={styles.step}>
         <div className={styles.icone + " " + `${passoAtual >= 2 ? styles.iconeAtivo: ''}`}>

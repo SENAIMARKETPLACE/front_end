@@ -64,7 +64,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         InputLabelProps={{ shrink: true }}
         value={data.logradouro || ""}
         className={styles.camposCadastros__logradouro} 
-        onChange={(e) => atualizarCampo("Logradouro", e.target.value)}
+        onChange={(e) => atualizarCampo("logradouro", e.target.value)}
       ></InputField>
       <InputField
         label="Complemento"

@@ -8,6 +8,7 @@ export interface Idata{
     email: string, 
     senha: string, 
     confirmeSenha: string, 
+    listaInteresses?: Array<string>; 
     cep: string, 
     logradouro: string, 
     complemento: string, 
@@ -15,5 +16,4 @@ export interface Idata{
     cidade: string, 
     estado: string, 
     bairro: string, 
-    listaIntereces?: string[]; 
 }

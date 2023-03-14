@@ -9,4 +9,10 @@
     .camposCadastro__suplementos{
         grid-area: 1/2/1/2;
     }
+    .botaoAtivo{
+        background-color: #399CCE;
+        &:hover{
+            background-color: #399CCE;
+        }
+    }
 }
