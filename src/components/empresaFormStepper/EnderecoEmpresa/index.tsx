@@ -3,6 +3,7 @@ import axios from "axios";
 import { IDataEmpresa } from "../../../compartilhado/IDataEmpresa";
 import { ICep } from "../../../compartilhado/ICep";
 import { useState } from "react";
+import styles from './EnderecoEmpresa.module.scss'
 
 interface EnderecoEmpresaProps {
   data: IDataEmpresa;
@@ -35,9 +36,10 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
   };
 
   return (
-    <div>
+    <section className={styles.camposCadastros}>
       <InputField
         label="CEP"
+        className={styles.camposCadastros__cep}
         InputLabelProps={{ shrink: true }}
         required
         value={data.cep || ""}
@@ -54,24 +56,28 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
         Preencher Dados
       </Button>
       <InputField
+        className={styles.camposCadastros__logradouro}
         label="Logradouro"
         InputLabelProps={{ shrink: true }}
         value={data.logradouro || ""}
         onChange={(e) => atualizarCampo("logradouro", e.target.value)}
       ></InputField>
       <InputField
+        className={styles.camposCadastros__complemento}
         label="Complemento"
         InputLabelProps={{ shrink: true }}
         value={data.complemento || ""}
         onChange={(e) => atualizarCampo("complemento", e.target.value)}
       ></InputField>
       <InputField
+        className={styles.camposCadastros__numero}
         label="Número"
         InputLabelProps={{ shrink: true }}
         value={data.numero || ""}
         onChange={(e) => atualizarCampo("numero", e.target.value)}
       ></InputField>
       <InputField
+        className={styles.camposCadastros__cidade}
         label="Cidade"
         InputLabelProps={{ shrink: true }}
         value={data.cidade || ""}
@@ -80,6 +86,7 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
         }}
       ></InputField>
       <InputField
+        className={styles.camposCadastros__estado}
         label="Estado"
         InputLabelProps={{ shrink: true }}
         value={data.estado || ""}
@@ -88,6 +95,7 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
         }}
       ></InputField>
       <InputField
+        className={styles.camposCadastros__bairro}
         label="Bairro"
         InputLabelProps={{ shrink: true }}
         value={data.bairro || ""}
@@ -95,7 +103,7 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
           atualizarCampo("bairro", e.target.value);
         }}
       ></InputField>
-    </div>
+    </section>
   );
 };
 export default EnderecoEmpresa;

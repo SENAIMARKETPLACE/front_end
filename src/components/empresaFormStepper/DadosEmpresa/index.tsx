@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { styled } from "@mui/styles";
 import { IDataEmpresa } from "../../../compartilhado/IDataEmpresa";
-
+import styles from './DadosEmpresa.module.scss'
 interface DadosEmpresaProps {
   data: IDataEmpresa;
   atualizarCampo: (key: string, value: string) => void;
@@ -13,15 +13,16 @@ const InputField = styled(TextField)({
 
 const DadosEmpresa = ({ data, atualizarCampo }: DadosEmpresaProps) => {
   return (
-    <section>
+    <section className={styles.camposCadastros}>
       <InputField
+        className={styles.camposCadastros__NomeProprietario}
         label="Nome Proprietário"
         InputLabelProps={{ shrink: true }}
         required
         value={data.nome_proprietario || ""}
         onChange={(e) => atualizarCampo("nome_proprietario", e.target.value)}
       ></InputField>
-      <div>
+      <div className={styles.camposCadastros__Cnpj}>
         <InputField
           label="CNPJ"
           InputLabelProps={{ shrink: true }}
@@ -46,6 +47,7 @@ const DadosEmpresa = ({ data, atualizarCampo }: DadosEmpresaProps) => {
         required
         value={data.razao_social || ""}
         onChange={(e) => atualizarCampo("razao_social", e.target.value)}
+        className={styles.camposCadastros__RazaoSocial}
       ></InputField>
       <InputField
         label="Nome Fantasia"
@@ -53,6 +55,7 @@ const DadosEmpresa = ({ data, atualizarCampo }: DadosEmpresaProps) => {
         required
         value={data.nome_fantasia || ""}
         onChange={(e) => atualizarCampo("nome_fantasia", e.target.value)}
+        className={styles.camposCadastros__NomeFantasia}
       ></InputField>
       <InputField
         label="Telefone"

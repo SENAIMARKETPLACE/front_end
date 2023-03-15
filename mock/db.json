@@ -1,32 +1,5 @@
 {
-  "usuarios": [
-    {
-      "nome": "João Vitor de Abreu Sousa",
-      "cpf": "53950516867",
-      "dt_nascimento": "2004-03-03",
-      "senha": "123",
-      "telefone": "11940333175",
-      "genero": "Masculino",
-      "email": "jvabreusousa",
-      "grupos_interesses": [
-        "suplementos",
-        "esportes",
-        "acessorios"
-      ],
-      "img": "joao.png",
-      "id": 1
-    }
-  ],
-  "enderecos": [
-    {
-      "cep": "05881020",
-      "logradouro": "Rua Abílio César",
-      "numero": "28",
-      "bairro": "Jardim Soraia",
-      "cidade": "São Paulo",
-      "estado": "SP",
-      "complemento": "Casa 1",
-      "id": 1
-    }
-  ]
+  "usuarios": [],
+  "enderecos": [],
+  "empresas": []
 }

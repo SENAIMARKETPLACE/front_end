@@ -115,12 +115,7 @@ const FormCadastroUsuario = () => {
     return console.log(data)
   }
 
-  const renderizacaoButtons = (step: number) => {
-    if (step == 3) {
-      return <Button onClick={nextStep}>CADASTRAR</Button>;
-    }
-    return <Button>ENVIAR</Button>;
-  };
+  
 
   return (
     <section className={styles.section__Form}>
