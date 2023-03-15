@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
-import { Idata } from "../../../compartilhado/IData";
+import { IDataUser } from "../../../compartilhado/IDataUser";
 import { use, useState } from "react";
 import axios from "axios";
 import { ICep } from "../../../compartilhado/ICep";
@@ -8,7 +8,7 @@ import styles from "./DadosResidencial.module.scss";
 import { IUsuario } from "../../../compartilhado/IUsuario";
 
 interface DadosResidencialProps {
-  data: Idata;
+  data: IDataUser;
   atualizarCampo: (key: string, value: string) => void;
 }
 
@@ -21,7 +21,7 @@ const InputField = styled(TextField)({
 const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   const [cepDados, setCEPDados] = useState<ICep>(null);
 
-  function preencherDados(cepRecebido: ICep, dataPreencher: Idata) {
+  function preencherDados(cepRecebido: ICep, dataPreencher: IDataUser) {
     if (cepRecebido) {
       (dataPreencher.bairro = cepRecebido.bairro),
       (dataPreencher.cidade = cepRecebido.localidade),
@@ -31,7 +31,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
     }
   }
 
-  const consumirApiViaCEP = (cep: string, dataPreencher: Idata) => {
+  const consumirApiViaCEP = (cep: string, dataPreencher: IDataUser) => {
     axios
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .then((response) => setCEPDados(response.data))

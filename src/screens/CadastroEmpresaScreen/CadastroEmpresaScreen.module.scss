@@ -1,0 +1,64 @@
+@import '../../styles/Breakpoints.scss';
+
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .register {
+    width: 100%;
+    max-width: map-get($breakpoints, 'desktop');
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+    
+    .register__header {
+      display: flex;
+      align-items: center;
+      padding: 2rem 0rem 0;
+
+      @include for-tablet-landscape {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+
+      .register__title {
+        font-size: 20px;
+        font-weight: 400;
+        span {
+          color: #ff2020;
+        }
+      }
+
+      .register__logo {
+        width: 70px;
+        border-radius: 50%;
+      }
+    }
+
+    .register__forms {
+      padding: 3rem 3rem 3rem 0;
+
+      @include for-tablet-landscape {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        padding: 3rem;
+      }
+    }
+
+    .register__image {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      background: url('https://cdn.discordapp.com/attachments/924735221855834154/1076033682067963964/cross-fit-for-gym-motivation-0ra2euytul519v1i.jpg');
+      background-size: 100%;
+      background-repeat: no-repeat;
+
+      @include for-tablet-landscape {
+        display: none;
+      }
+    }
+  }
+}

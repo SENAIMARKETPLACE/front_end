@@ -12,13 +12,13 @@ import Agradecimento from "../../components/userFormStepper/ListaInteresses";
 import DadosPessoais from "../../components/userFormStepper/DadosPessoais/main";
 import DadosResidencial from "../../components/userFormStepper/DadosResidencial";
 import Steps from "../../components/userFormStepper/Steps";
-import { Idata } from "../../compartilhado/IData";
+import { IDataUser } from "../../compartilhado/IDataUser";
 import ListaInteresses from "../../components/userFormStepper/ListaInteresses";
 import { IEndereco } from "../../compartilhado/IEndereco";
 
 
 
-const formTemplate: Idata = {
+const formTemplate: IDataUser = {
   nome: "",
   cpf: "", 
   telefone: "", 
@@ -47,13 +47,7 @@ const FormCadastroUsuario = () => {
 
   }
   
-  const [nome, setNome] = useState("");
-  const [dataNasc, setDataNasc] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [senha, setSenha] = useState("");
-  const [confirmeSenha, setConfirmeSenha] = useState("");
+
   const formComponents = [
     <DadosPessoais data={data} atualizarCampo={atualizarCampo}/>,
     <ListaInteresses data={data}/>,
@@ -62,7 +56,7 @@ const FormCadastroUsuario = () => {
   const [idPasso, setIdPasso] = useState(0);
 
 
-  const salvarUsuarioEEndereco = (e: React.MouseEvent<HTMLButtonElement>, dados: Idata) => {
+  const salvarUsuarioEEndereco = (e: React.MouseEvent<HTMLButtonElement>, dados: IDataUser) => {
     e.preventDefault()
     const user: IUsuario = {
       nome: dados.nome, 
@@ -85,7 +79,7 @@ const FormCadastroUsuario = () => {
       complemento: dados.complemento
     }
     http.post('usuarios', user)
-    // MULTIPLA REQUISIÇÃO -> POS
+    // MULTIPLAS REQUISIÇÕES -> POS
     .then((resp) => http.post('enderecos', endereco))
     .then((resp) => alert(`${user.nome} criado com sucesso`))
     .catch((err) => alert("Deu Ruim"))

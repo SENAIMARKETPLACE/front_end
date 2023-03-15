@@ -1,13 +1,13 @@
 import { Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import styled from "@emotion/styled";
-import { Idata } from "../../../compartilhado/IData";
+import { IDataUser } from "../../../compartilhado/IDataUser";
 import React from "react";
 import styles from "./DadosPessoais.module.scss";
 import { height } from "@mui/system";
 
 
 interface DadosPessoaisProps {
-  data: Idata
+  data: IDataUser
   atualizarCampo: (key: string, value: string) => void
 }
 

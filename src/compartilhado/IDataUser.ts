@@ -1,4 +1,4 @@
-export interface Idata{
+export interface IDataUser{
     nome: string,
     cpf: string, 
     telefone: string, 
