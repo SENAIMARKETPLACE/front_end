@@ -1,10 +1,10 @@
 import { Button, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Idata } from "../../../compartilhado/IData";
+import { IDataUser } from "../../../compartilhado/IDataUser";
 import styles from "./ListaInteresses.module.scss";
 
 interface ListaInteressesProps {
-  data: Idata;
+  data: IDataUser;
 }
 
 const ListaInteresses = ({ data }: ListaInteressesProps) => {

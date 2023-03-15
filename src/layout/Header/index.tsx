@@ -15,7 +15,11 @@ const Header = () => {
           <p>Log-In</p>
         </Link>
         <Link href="/cadastro-usuario" className={styles.header__btn_cadastro}>
-          <p>Cadastre-se</p>
+          <p>Cadastre-se PF</p>
+        </Link>
+        | 
+        <Link href="/cadastro-empresa" className={styles.header__btn_cadastro}>
+          <p>Cadastre-se PJ</p>
         </Link>
       </nav>
     </header>
