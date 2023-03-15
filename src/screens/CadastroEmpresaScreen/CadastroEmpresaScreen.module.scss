@@ -6,15 +6,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  background: url('https://s3-alpha-sig.figma.com/img/65c8/da92/b81298a9098c1c5e1f7d18ac4618ca46?Expires=1679875200&Signature=euy88NXb3bYnGDyU54vKLJqGyyHR9p8RznwLxa6tAKlh0NH6NwkT4VG153XMD0N0FWrR1fkihHfuUalSA~O1gIY33VcooSrdAN3izAirnp4sExUVaC4p2axFaPU-xiPdIlh2-1K3keaE4u~F2q0TBiOaH4Q5chuWomMbi6-aSkaOQA-z2WW96ux3cyZCFADzpkagsJBnw5wl95R8YZCKlq9CJWEkaJNd~iv1WKA9MTkIsSd0BpLWenqS65LWcGaVZd0CPmei~GQnyWwBZgGkt5RFNxj4AYfN4oT8rtLDIikWkvX5DmhJK-8fzahEDniEeaHkez2czxLizo8tyF6BUg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4');
   .register {
+    z-index: 10;
     width: 100%;
     max-width: map-get($breakpoints, 'desktop');
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0 3rem;
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
-    
+    background-color: #fff ;
     .register__header {
       display: flex;
       align-items: center;
