@@ -124,14 +124,14 @@ const FormCadastroUsuario = () => {
 
   return (
     <section className={styles.section__Form}>
-      <div className={styles.setion__FormContainer}>
+      <div className={styles.section__FormContainer}>
         {<Steps passoAtual={idPasso}/>}
         <form>
           {/* FORMULÁRIO SERÁ MODIFICADO DE FORMA DINÂMICA. */}
           <div className="section__InputsContainer">
             {formComponents[idPasso]}
           </div>
-          <div className={styles.section_FormButtons}>
+          <div className={styles.section__FormButtons}>
             {idPasso === 0 ? (
               ""
             ) : (

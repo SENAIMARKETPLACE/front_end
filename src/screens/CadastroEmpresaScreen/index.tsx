@@ -8,7 +8,7 @@ const CadastroEmpresaScreen = () => {
             <section className={styles.register}>
                 <div className={styles.register__header}>
                     <h1 className={styles.register__title}>
-                        Gerencie sua empresa<span> Sollaris</span>
+                        Gerencie sua empresa na <span> Sollaris</span>
                     </h1>
                     <img
                         className={styles.register__logo}
