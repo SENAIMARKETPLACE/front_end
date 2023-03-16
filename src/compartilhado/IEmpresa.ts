@@ -1,3 +1,5 @@
+import { IEndereco } from "./IEndereco";
+
 export interface IEmpresa{
     id?: string, 
     nome_proprietario: string,
@@ -7,5 +9,6 @@ export interface IEmpresa{
     telefone: string, 
     url_logo: string, 
     email: string, 
-    senha: string
+    senha: string, 
+    endereco? : IEndereco; 
 }

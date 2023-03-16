@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { AxiosResponse } from "axios";
 import { useState } from "react";
 import { MdDone, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { IDataEmpresa } from "../../compartilhado/IDataEmpresa";
@@ -70,6 +71,16 @@ const FormCadastroEmpresa = () => {
     return console.log(data)
   }
 
+
+
+  
+  const capturarIdEmpresa = (respApi: AxiosResponse, dataRecebida: IDataEmpresa, variavelEndereco: IEndereco): void =>  {
+    dataRecebida.id = respApi.data.id;
+    variavelEndereco.empresa_id = dataRecebida.id
+    console.log(variavelEndereco)
+  }
+
+
   const salvarEmpresa = (e: React.MouseEvent<HTMLButtonElement>, dados: IDataEmpresa) => {
     e.preventDefault()
     const empresa: IEmpresa = {
@@ -92,7 +103,8 @@ const FormCadastroEmpresa = () => {
       complemento: dados.complemento
     }
     http.post('empresas', empresa)
-    .then((resp) => http.post('enderecos', endereco))
+    .then((resp) => capturarIdEmpresa(resp, data, endereco) )
+    .then((resp) =>  http.post('enderecos', endereco))
     .then((respo) => alert(`${empresa.nome_fantasia} cadastrada com sucesso!`))
     .catch((error) => alert("Deu Ruim"))
   }

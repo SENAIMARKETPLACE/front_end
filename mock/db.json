@@ -1,5 +1,57 @@
 {
-  "usuarios": [],
-  "enderecos": [],
-  "empresas": []
+  "usuarios": [
+    {
+      "nome": "",
+      "cpf": "",
+      "dt_nascimento": "",
+      "senha": "",
+      "telefone": "",
+      "genero": "",
+      "email": "",
+      "grupos_interesses": [
+        "acessorios",
+        "roupas",
+        "calcados"
+      ],
+      "img": "",
+      "id": 1
+    }
+  ],
+  "enderecos": [
+    {
+      "cep": "05881020",
+      "logradouro": "Rua Abílio César",
+      "numero": "21",
+      "bairro": "Jardim Soraia",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "complemento": "Casa1",
+      "empresa_id": 1,
+      "id": 1
+    },
+    {
+      "cep": "",
+      "logradouro": "",
+      "numero": "",
+      "bairro": "",
+      "cidade": "",
+      "estado": "",
+      "complemento": "",
+      "usuario_id": 1,
+      "id": 2
+    }
+  ],
+  "empresas": [
+    {
+      "nome_proprietario": "",
+      "nome_fantasia": "",
+      "razao_social": "",
+      "cnpj": "",
+      "telefone": "",
+      "email": "",
+      "url_logo": "",
+      "senha": "",
+      "id": 1
+    }
+  ]
 }

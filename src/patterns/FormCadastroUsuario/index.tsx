@@ -6,7 +6,7 @@ import styles from "./FormCadastroUsuario.module.scss";
 import { IUsuario } from "../../compartilhado/IUsuario";
 import Router from "next/router";
 import http from "../../http";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { MdNavigateNext, MdNavigateBefore, MdDone } from "react-icons/md";
 import Agradecimento from "../../components/userFormStepper/ListaInteresses";
 import DadosPessoais from "../../components/userFormStepper/DadosPessoais/main";
@@ -20,38 +20,45 @@ import { IEndereco } from "../../compartilhado/IEndereco";
 
 const formTemplate: IDataUser = {
   nome: "",
-  cpf: "", 
-  telefone: "", 
-  urlFotoPerfil: "", 
-  dataNasc: "", 
-  genero: "", 
-  email: "", 
-  senha: "", 
-  confirmeSenha: "", 
-  cep: "", 
-  logradouro: "", 
-  complemento: "", 
-  numero: "", 
-  cidade: "", 
-  estado: "", 
-  bairro: "", 
+  cpf: "",
+  telefone: "",
+  urlFotoPerfil: "",
+  dataNasc: "",
+  genero: "",
+  email: "",
+  senha: "",
+  confirmeSenha: "",
+  cep: "",
+  logradouro: "",
+  complemento: "",
+  numero: "",
+  cidade: "",
+  estado: "",
+  bairro: "",
+  id: "",
 }
 
 const FormCadastroUsuario = () => {
   const [data, setData] = useState(formTemplate)
- 
+
   const atualizarCampo = (key: string, value: string) => {
     setData((prev) => {
-      return {...prev, [key]: value}
+      return { ...prev, [key]: value }
     })
 
   }
-  
+
+
+
+  const capturarIdUser = (respApi: AxiosResponse, dataRecebida: IDataUser, variavelEndereco: IEndereco): void =>  {
+    dataRecebida.id = respApi.data.id;
+    variavelEndereco.usuario_id = dataRecebida.id
+  }
 
   const formComponents = [
-    <DadosPessoais data={data} atualizarCampo={atualizarCampo}/>,
-    <ListaInteresses data={data}/>,
-    <DadosResidencial data={data} atualizarCampo={atualizarCampo}/>,
+    <DadosPessoais data={data} atualizarCampo={atualizarCampo} />,
+    <ListaInteresses data={data} />,
+    <DadosResidencial data={data} atualizarCampo={atualizarCampo} />,
   ];
   const [idPasso, setIdPasso] = useState(0);
 
@@ -59,34 +66,35 @@ const FormCadastroUsuario = () => {
   const salvarUsuarioEEndereco = (e: React.MouseEvent<HTMLButtonElement>, dados: IDataUser) => {
     e.preventDefault()
     const user: IUsuario = {
-      nome: dados.nome, 
-      cpf: dados.cpf, 
-      dt_nascimento: dados.dataNasc, 
-      senha: dados.senha, 
-      telefone: dados.telefone, 
-      genero: dados.genero, 
-      email: dados.email, 
-      grupos_interesses: dados.listaInteresses, 
-      img: dados.urlFotoPerfil, 
+      nome: dados.nome,
+      cpf: dados.cpf,
+      dt_nascimento: dados.dataNasc,
+      senha: dados.senha,
+      telefone: dados.telefone,
+      genero: dados.genero,
+      email: dados.email,
+      grupos_interesses: dados.listaInteresses,
+      img: dados.urlFotoPerfil,
     }
     const endereco: IEndereco = {
-      cep: dados.cep, 
-      logradouro: dados.logradouro, 
-      numero: dados.numero, 
-      bairro: dados.bairro, 
-      cidade: dados.cidade, 
-      estado: dados.estado, 
+      cep: dados.cep,
+      logradouro: dados.logradouro,
+      numero: dados.numero,
+      bairro: dados.bairro,
+      cidade: dados.cidade,
+      estado: dados.estado,
       complemento: dados.complemento
     }
     http.post('usuarios', user)
-    // MULTIPLAS REQUISIÇÕES -> POS
-    .then((resp) => http.post('enderecos', endereco))
-    .then((resp) => alert(`${user.nome} criado com sucesso`))
-    .catch((err) => alert("Deu Ruim"))
+      // MULTIPLAS REQUISIÇÕES -> POS
+      .then((resp) => capturarIdUser(resp, dados, endereco))
+      .then((resp) => http.post('enderecos', endereco))
+      .then((resp) => alert(`${user.nome} criado com sucesso`))
+      .catch((err) => alert("Deu Ruim"))
   }
 
 
-  
+
   //EVENTOS DE ANTERIOR E PRÓXIMO PASSo
   const nextStep = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -99,7 +107,7 @@ const FormCadastroUsuario = () => {
   };
 
 
-  
+
   const prevStep = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (idPasso === 0) {
       setIdPasso(0);
@@ -109,18 +117,18 @@ const FormCadastroUsuario = () => {
     }
   };
 
-  
+
   const exibirDadosCapturados = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     return console.log(data)
   }
 
-  
+
 
   return (
     <section className={styles.section__Form}>
       <div className={styles.section__FormContainer}>
-        {<Steps passoAtual={idPasso}/>}
+        {<Steps passoAtual={idPasso} />}
         <form>
           {/* FORMULÁRIO SERÁ MODIFICADO DE FORMA DINÂMICA. */}
           <div className="section__InputsContainer">
@@ -141,7 +149,7 @@ const FormCadastroUsuario = () => {
                 variant="contained"
                 color="success"
                 type="submit"
-                onClick={(e) => {salvarUsuarioEEndereco(e, data)}}
+                onClick={(e) => { salvarUsuarioEEndereco(e, data) }}
               >
                 <span>CADASTRAR</span>
                 <MdDone />
