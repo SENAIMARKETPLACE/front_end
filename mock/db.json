@@ -1,4 +1,18 @@
 {
   "usuarios": [],
-  "enderecos": [ ]
+  "enderecos": [ ],
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Camiseta Nike Manga Longa Element",
+      "preco":"199.99",
+      "url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR_W88KCGT5uAweZjnKKE7AEQueGxtfhFfqhnZXh7xvj_4_9yt2gaX0fRFPmU4JGc4TqBQXiIHT_KoEQ4bbmAWuZnmBMc1dRxsZaeHtKCNc&usqp=CAE"
+    },
+    {
+      "id": 2,
+      "nome": "Camiseta Nike Manga Longa Element",
+      "preco":"149.99",
+      "url": "https://cdn.shopify.com/s/files/1/0060/1728/6214/products/eua_grande.jpg?v=1630430522"
+    }
+  ]
 }

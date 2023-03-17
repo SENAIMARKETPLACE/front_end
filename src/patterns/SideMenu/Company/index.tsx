@@ -11,7 +11,6 @@ const listItems = [
     {
         text: 'Minha loja',
         icon: <BiHomeAlt />,
-        // icon: <MdHome/>,
         url: ''
     },
     {
@@ -29,7 +28,7 @@ const listItems = [
         icon: <FiSettings />,
         url: ''
     },
-].map(li => <MenuItems text={li.text} icon={li.icon} url={li.url} />)
+].map((li, i) => <MenuItems key={i} text={li.text} icon={li.icon} url={li.url} />)
 
 const SideMenuCompany = () => {
     return (
