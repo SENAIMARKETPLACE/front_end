@@ -50,9 +50,9 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
           <MenuItem value="">
             Gênero
           </MenuItem>
-          <MenuItem value="Feminino">Feminino</MenuItem>
-          <MenuItem value="Masculino">Masculino</MenuItem>
-          <MenuItem value="Não Informar">Não Informar</MenuItem>
+          <MenuItem value="FEMININO">Feminino</MenuItem>
+          <MenuItem value="MASCULINO">Masculino</MenuItem>
+          <MenuItem value="NAO_INFORMADO">Não Informar</MenuItem>
         </SelectField>
       <InputField label="E-mail" InputLabelProps={{ shrink: true }} required value={data.email || ""} onChange={(e) => atualizarCampo("email", e.target.value)} className={styles.camposCadastro__email}></InputField>
       <InputField label="Senha"  type="password" InputLabelProps={{ shrink: true }} required value={data.senha || ""} onChange={(e) => atualizarCampo("senha", e.target.value)} className={styles.camposCadastro__senha}></InputField>
