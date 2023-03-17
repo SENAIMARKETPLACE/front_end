@@ -1,4 +1,5 @@
 export interface IDataEmpresa{ 
+    id?: string,
     nome_proprietario: string, 
     nome_fantasia: string, 
     razao_social: string, 
