@@ -1,13 +1,13 @@
 import { Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import styled from "@emotion/styled";
-import { Idata } from "../../../compartilhado/IData";
+import { IDataUser } from "../../../compartilhado/IDataUser";
 import React from "react";
 import styles from "./DadosPessoais.module.scss";
 import { height } from "@mui/system";
 
 
 interface DadosPessoaisProps {
-  data: Idata
+  data: IDataUser
   atualizarCampo: (key: string, value: string) => void
 }
 
@@ -50,9 +50,9 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
           <MenuItem value="">
             Gênero
           </MenuItem>
-          <MenuItem value="Feminino">Feminino</MenuItem>
-          <MenuItem value="Masculino">Masculino</MenuItem>
-          <MenuItem value="Não Informar">Não Informar</MenuItem>
+          <MenuItem value="FEMININO">Feminino</MenuItem>
+          <MenuItem value="MASCULINO">Masculino</MenuItem>
+          <MenuItem value="NAO_INFORMADO">Não Informar</MenuItem>
         </SelectField>
       <InputField label="E-mail" InputLabelProps={{ shrink: true }} required value={data.email || ""} onChange={(e) => atualizarCampo("email", e.target.value)} className={styles.camposCadastro__email}></InputField>
       <InputField label="Senha"  type="password" InputLabelProps={{ shrink: true }} required value={data.senha || ""} onChange={(e) => atualizarCampo("senha", e.target.value)} className={styles.camposCadastro__senha}></InputField>
