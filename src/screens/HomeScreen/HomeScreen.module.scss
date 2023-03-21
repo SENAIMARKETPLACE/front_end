@@ -35,6 +35,7 @@
     padding: 50px;
     .sectionUser__texto{
         color: #fff;
+        display: flex;
         .sectionUser__texto__titulo{
             display: flex;
             font-size: 40px;
@@ -50,6 +51,11 @@
             span{
                 font-weight: bold;
             }
+        }
+
+        .sectionUser__texto__imagem{
+            position: absolute;
+            right: 100px;
         }
         
     }
