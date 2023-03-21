@@ -1,5 +1,56 @@
-.sectionMain {
+.sectionMain__Principal {
     display: flex;
     align-items: center;
-    justify-content: center;
+    margin: 50px;
+
+    .sectionMain__Slogan {
+        display: flex;
+        margin: 20px;
+        flex-direction: column;
+
+        h3 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #016170;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 24px;
+            margin-bottom: 20px;
+            width: 50vw;
+        }
+
+
+        .imagensApresentacao {
+            width: 100px;
+            height: 100px;
+        }
+    }
+    
+}
+.sectionUser{
+    background-color: #7D2B73;
+    display: flex;
+    padding: 50px;
+    .sectionUser__texto{
+        color: #fff;
+        .sectionUser__texto__titulo{
+            display: flex;
+            font-size: 40px;
+            gap: 10px;
+            font-style: italic;
+            margin-bottom: 30px;
+            
+        }
+        .sectionUser__texto__descricao{
+            width: 60%;
+            font-size: 25px;
+            line-height: 40px;
+            span{
+                font-weight: bold;
+            }
+        }
+        
+    }
 }
