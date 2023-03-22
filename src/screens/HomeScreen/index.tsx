@@ -1,16 +1,17 @@
 import React from "react";
-import { MdPerson } from "react-icons/md";
-import Header from "../../layout/Header";
+import { MdGroups, MdPerson, MdStar, MdStore } from "react-icons/md";
+import HeaderSollaris from "../../layout/Header";
 import styles from "./HomeScreen.module.scss";
 import beneficios1 from "../../../public/images/beneficios1.png";
-import CarrouselJs from "../../components/CarrouselJs";
+import Link from "next/link";
+import FooterSollaris from "../../layout/Footer";
 
 const HomeScreen = () => {
   return (
     <>
-      <Header></Header>
+      <HeaderSollaris></HeaderSollaris>
       <main className={styles.sectionMain}>
-        <section className={styles.sectionMain__Principal}>
+        <section className={styles.sectionMain__principal}>
           <div className={styles.sectionMain__Slogan}>
             <h3>Sollaris</h3>
             <p>
@@ -42,38 +43,149 @@ const HomeScreen = () => {
             />
           </div>
         </section>
+        {/* ============================================================ */}
         <section className={styles.sectionUser}>
           <div className={styles.sectionUser__texto}>
             <div>
               <div className={styles.sectionUser__texto__titulo}>
-                <h3>Benefícios Para o Usuário</h3>
+                <h3>BENEFÍCIOS PARA USUÁRIOS</h3>
                 <MdPerson />
               </div>
               <div className={styles.sectionUser__texto__descricao}>
                 A <span>Sollaris</span> oferece um{" "}
                 <span>
-                  marketplace e rede social que ajuda pessoas como você a alcançar
-                  seus objetivos relacionados a saúde e esporte.
+                  marketplace e rede social que ajuda pessoas como você a
+                  alcançar seus objetivos relacionados a saúde e esporte.
                 </span>
                 Em nosso site, você encontrará{" "}
                 <span>
                   uma ampla variedade de produtos de alta qualidade, desde
-                  equipamentos de ginástica até suplementos nutricionais, tudo em
-                  um só lugar.
+                  equipamentos de ginástica até suplementos nutricionais, tudo
+                  em um só lugar.
                 </span>{" "}
                 Além disso, você pode ler{" "}
                 <span>artigos informativos e educacionais</span> para se manter
-                atualizado sobre as últimas tendências e dicas de saúde e esporte.
+                atualizado sobre as últimas tendências e dicas de saúde e
+                esporte.
               </div>
             </div>
             <div className={styles.sectionUser__texto__imagem}>
               <img src={beneficios1.src} alt="produtos" />
             </div>
           </div>
-          
+
+          <div className={styles.sectionUser__btnRedirect__signUser}>
+            <Link href="/cadastro-usuario">
+              <div>CADASTRE-SE COMO USUÁRIO</div>
+            </Link>
+          </div>
         </section>
 
+        {/*  ================================================= */}
+        <section className={styles.sectionEmpresa}>
+          <div className={styles.sectionEmpresa__sectionTexto}>
+            <div>
+              <div className={styles.sectionEmpresa__sectionTexto__titulo}>
+                <h3>BENEFÍCIOS PARA EMPRESAS</h3>
+                <MdStore />
+              </div>
+              <div className={styles.sectionEmpresa__sectionTexto__descricao}>
+                Para empresas cadastradas, a{" "}
+                <span>
+                  Sollaris oferece uma plataforma online cheia de entusiastas de
+                  esportes
+                </span>{" "}
+                que querem comprar equipamentos e acessórios com facilidade,{" "}
+                <span>
+                  além de fornecer ferramentas como personalização da sua loja
+                  virtual e gerenciamento de pedidos, estoque e envios para
+                  ajudar as empresas a maximizar sua rentabilidade.
+                </span>
+              </div>
+            </div>
+            <div className={styles.sectionEmpresa__sectionTexto__imagem}></div>
+          </div>
+          <div className={styles.sectionEmpresa__beneficios}>
+            <h3>
+              DADOS DO COMÉRCIO ELETRÔNICO E MAIS VANTAGENS DE ESTAR NA SOLLARIS
+            </h3>
+            <div className={styles.sectionEmpresa__beneficios__lista}>
+              <div className={styles.beneficios}>
+                <h6>
+                  <MdStar />
+                </h6>
+                <p>
+                  O comércio eletrônico global atingiu US$ 4,2 trilhões em
+                  vendas em 2020 e espera-se que alcance US$ 6,4 trilhões em
+                  2024. (Fonte: Statista)
+                </p>
+              </div>
+              <div className={styles.beneficios}>
+                <h6>
+                  <MdStar />
+                </h6>
+                <p>
+                  Controle : Tenha controle sobre sua loja, aqui você tem o
+                  poder de personalizar sua loja, controlar o seu estoque e
+                  muito mais.
+                </p>
+              </div>
+              <div className={styles.beneficios}>
+                <h6>
+                  <MdStar />
+                </h6>
+                <p>
+                  As vendas online em todo o mundo aumentaram em 27,6% em 2020
+                  devido à pandemia do COVID-19, que levou ao aumento das
+                  compras online e à mudança de comportamento do consumidor.
+                  (Fonte: Digital Commerce 360)
+                </p>
+              </div>
+              <div className={styles.beneficios}>
+                <h6>
+                  <MdStar />
+                </h6>
+                <p>
+                  Visibilidade: Poste seus produtos, mantenha-se ativo na rede,
+                  para que você ganhe visibilidade e consumidores conheçam e
+                  consigam adquirir seus produtos.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className={styles.sectionEmpresa__btnRedirect__signEmpresa}>
+            <Link href="/cadastro-empresa">
+              <div>CADASTRE A SUA LOJA</div>
+            </Link>
+          </div>
+        </section>
+        <section className={styles.sectionServicos}>
+          <div className={styles.sectionServicos__sectionTexto}>
+            <div>
+              <div className={styles.sectionServicos__sectionTexto__titulo}>
+                <h3>BENEFÍCIOS PARA PRESTADORES DE SERVIÇOS</h3>
+                <MdGroups />
+              </div>
+              <div className={styles.sectionServicos__sectionTexto__descricao}>
+                Aqui também temos espaços para profissionais que estão dispostos
+                a realizarem seus serviços relacionados com saúde, bem-estar ou
+                esportes. Oferecemos ferramentas de agendamento online de
+                serviços, personalização do seus perfil, suporte com a
+                plataforma, feedbacks de usuários que já tiveram experiências
+                com seus serviços e muito mais.
+              </div>
+            </div>
+            <div className={styles.sectionServicos__sectionTexto__imagem}></div>
+          </div>
+          
+          <div className={styles.sectionServicos__btnRedirect__signEmpresa}>
+            <Link href="/#">
+              <div>CADASTRE SEUS SERVIÇOS</div>
+            </Link>
+          </div>
+        </section>
       </main>
+      <FooterSollaris></FooterSollaris>
     </>
   );
 };
