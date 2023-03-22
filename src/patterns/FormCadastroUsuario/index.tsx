@@ -50,7 +50,7 @@ const FormCadastroUsuario = () => {
 
 
 
-  const capturarIdUser = (respApi: AxiosResponse, dataRecebida: IDataUser, variavelEndereco: IEndereco): void =>  {
+  const capturarIdUser = (respApi: AxiosResponse, dataRecebida: IDataUser, variavelEndereco: IEndereco): void => {
     dataRecebida.id = respApi.data.id;
     variavelEndereco.usuario_id = dataRecebida.id
   }
