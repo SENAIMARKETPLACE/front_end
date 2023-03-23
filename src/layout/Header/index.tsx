@@ -2,6 +2,8 @@ import Link from "next/link";
 import styles from "./Header.module.scss";
 import { MdOutlineLogin } from "react-icons/md";
 import logoMain from "../../../public/images/logo_sollaris.png"
+import TransitionsModal from "../../components/modalLoginUsuario";
+
 
 const Header = () => {
   return (
@@ -11,9 +13,8 @@ const Header = () => {
         <p>Sollaris</p>
       </div>
       <nav>
-        <Link href="/login-user" className={styles.header__btn}>
-          <p>Login Usuário</p>
-        </Link>
+        <TransitionsModal/>
+        
         <Link href="/login-empresa" className={styles.header__btn}>
           <p>Login Empresa</p>
         </Link>
