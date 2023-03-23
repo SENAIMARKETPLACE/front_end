@@ -1,0 +1,29 @@
+.modal__leftSide{
+    padding: 1em 5em;
+    width: 50%;
+    height: 100%;
+    .modal__leftSide__textoModal{
+        text-align: center;
+        h2{
+            color: #016170;
+            font-weight: 700;
+        }
+        p{
+            font-size: 16px;
+        }
+    }
+    img{
+        width: 90px;
+        height: 90px;
+        left: 2px;
+        position: static;
+        left: 0;
+    }
+}
+.modal__divImagem{
+    width: 50%;
+    height: 100%;
+    background: url('https://s3-alpha-sig.figma.com/img/47cf/8d49/0a17c4332f4f48611a2f8f1b451c83c4?Expires=1680480000&Signature=NFt9bMBvoOXlSDkLixi4aQqRrRLeXH-VE1Yd0s~YHJNURGy3UqK4tjNNtVCibwFzy79lmmuIh~h6RBrK8YPMjZ4Q8OmJnA3x72aSzW6nfcTsng4ozC5DCTRVJmMnMq1eiXMDerUzppDE2dxGIvRHm4LS3YlqynBQYCn1Py9GHqOy3yi1USowRhseiS3dnoQKYuWSZtG~KypbIvpipegXQBcBTdLDwHhwHOazg1Pg8Yw144C5~8dBWOVhuWHzY0-VemxZYqwx-Xrt~DxlMlKYVsZjwCdCoGuOJW6W2POA7JW-dCzKHVgaubKYjWN3YTWGyzw8MFyR~nEvs0BQ0X~-2w__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
