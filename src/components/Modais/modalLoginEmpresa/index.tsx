@@ -1,85 +1,128 @@
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { styled } from '@mui/styles';
+import * as React from "react";
+import styles from './modalLoginEmpresa.module.scss'
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/styles";
+import { TextField, Checkbox } from "@mui/material";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
+import logo from "../../../../public/images/logo_sollaris.png";
+
+
 
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '80%',
-  bgcolor: 'background.paper',
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "80%",
+  height: "700px",
+  bgcolor: "background.paper",
   boxShadow: 24,
-  p: 4,
+  display: "flex"
 };
 
-const ButtonLogin = styled(Button)({
-  marginRight: '30px',
-  boxShadow: 'none',
-  textTransform: 'none',
+
+
+const InputField = styled(TextField)({
+  width: "100%",
+  margin: "10px 0",
+});
+
+const ButtonLogar = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
   fontSize: 16,
-  padding: '0px 10px',
-  border: '1px solid',
-  height: '50px',
+  padding: "0px 10px",
+  border: "1px solid",
+  height: "50px",
   lineHeight: 1.5,
-  fontWeight: '400', 
-  backgroundColor: '#fff',
-  borderSize: '2',
-  borderColor: '#65bce8a9',
-  color: '#000',
-  transition: 'background-color 1s ease-out', 
+  fontWeight: "400",
+  borderSize: "2",
+  borderColor: "#000",
+  backgroundColor: "#000",
+  color: "#FFF",
+  "&:hover": {
+    backgroundColor: "#000",
+    borderColor: "#000",
+    boxShadow: "none",
+    color: "#fff",
+  },
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#000",
+    borderColor: "#000",
+  },
+});
+const ButtonLogarGoogle = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "0px 10px",
+  border: "1px solid",
+  height: "50px",
+  lineHeight: 1.5,
+  fontWeight: "400",
+  borderSize: "2",
+  borderColor: "#000",
+  backgroundColor: "#fff",
+  color: "#000",
+  "&:hover": {
+    backgroundColor: "#fff",
+    borderColor: "#000",
+    boxShadow: "none",
+    color: "#000",
+  },
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#fff",
+    borderColor: "#000",
+  },
+});
+
+const ButtonLogin = styled(Button)({
+  marginRight: "15px",
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "0px 10px",
+  border: "1px solid",
+  height: "50px",
+  lineHeight: 1.5,
+  fontWeight: "400",
+  backgroundColor: "#fff",
+  borderSize: "2",
+  borderColor: "#65bce8a9",
+  color: "#000",
+  transition: "background-color 1s ease-out",
   fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
+    "-apple-system",
+    "BlinkMacSystemFont",
     '"Segoe UI"',
-    'Roboto',
+    "Roboto",
     '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
+    "Arial",
+    "sans-serif",
     '"Apple Color Emoji"',
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
-  ].join(','),
-  '&:hover': {
-    backgroundColor: '#65bce8',
-    borderColor: '#0062cc',
-    boxShadow: 'none',
-    color: '#fff'
+  ].join(","),
+  "&:hover": {
+    backgroundColor: "#65bce8",
+    borderColor: "#0062cc",
+    boxShadow: "none",
+    color: "#fff",
   },
-  '&:active': {
-    boxShadow: 'none',
-    backgroundColor: '#65bce8',
-    borderColor: '#005cbf',
-  }
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#65bce8",
+    borderColor: "#005cbf",
+  },
+});
 
-})
-
-
-//margin-right: 30px;
-// display: flex;
-// align-items: center;
-// justify-content: center;
-// border: none;
-// height: 50px;
-// font-weight: 400;
-// font-size: 20px;
-// width: max-content;
-// justify-content: space-around;
-// text-decoration: none;
-// color: #000;
-// padding: 0 10px;
-// border: 2px solid #65bce8a9;
-// transition: background-color 1s ease-out;
-// &:hover{
-//     cursor: pointer;
-//     background-color: #65bce8;
-//     color: #fff;
-// }
 
 
 
@@ -106,7 +149,38 @@ export default function ModalLoginEmpresa() {
       >
         <Fade in={open}>
           <Box sx={style}>
-          <h1>Oi</h1>
+
+            <div className={styles.modal__leftSide}>
+              <div><img src={logo.src} alt="" /></div>
+              <div className={styles.modal__leftSide__textoModal}>
+                <h2>SEJA BEM VINDO</h2>
+                <p>
+                Queremos que se sintam em casa e que trabalhemos juntos em harmonia, sempre buscando inovação e excelência na prestação de serviços. Juntos, somos mais fortes!
+                </p>
+              </div>
+              <form>
+                <InputField label="Email" type="email" />
+                <InputField label="Senha" type="password" />
+                <div className={styles.modal__leftSide__ganchos}>
+                  <div className={styles.modal__leftSide__checkbox}>
+                    <Checkbox />
+                    <p>Lembrar Senha</p>
+                  </div>
+                  <div>
+                    <p>Esqueceu a Senha?</p>
+                  </div>
+                </div>
+                <div className={styles.modal__leftSide__buttons}>
+                  <ButtonLogar type="submit">ENTRAR</ButtonLogar>
+                  <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
+                </div>
+
+              </form>
+              <div className={styles.modal__leftSide__singIn}>Não conta tem sua usuário cadastrada? <Link href='cadastro-usuario'>Cadastre-se</Link></div>
+            </div>
+            <div className={styles.modal__divImagem}>
+
+            </div>
           </Box>
         </Fade>
       </Modal>

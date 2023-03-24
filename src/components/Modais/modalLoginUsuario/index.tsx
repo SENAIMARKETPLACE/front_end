@@ -9,7 +9,7 @@ import { styled } from "@mui/styles";
 import { TextField, Checkbox } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
-import logo from "../../../../public/images/logo_sollaris.png"; 
+import logo from "../../../../public/images/logo_sollaris.png";
 
 
 
@@ -149,7 +149,7 @@ export default function ModalLoginUsuario() {
       >
         <Fade in={open}>
           <Box sx={style}>
-           
+
             <div className={styles.modal__leftSide}>
               <div><img src={logo.src} alt="" /></div>
               <div className={styles.modal__leftSide__textoModal}>
@@ -161,22 +161,27 @@ export default function ModalLoginUsuario() {
                 </p>
               </div>
               <form>
-                <InputField label="Email" />
+                <InputField label="Email" type="email" />
                 <InputField label="Senha" type="password" />
-                <div>
-                  <Checkbox />
-                  <p>Lembrar Senha</p>
+                <div className={styles.modal__leftSide__ganchos}>
+                  <div className={styles.modal__leftSide__checkbox}>
+                    <Checkbox />
+                    <p>Lembrar Senha</p>
+                  </div>
+                  <div>
+                    <p>Esqueceu a Senha?</p>
+                  </div>
                 </div>
-                <div>
-                  Esqueceu a Senha?
+                <div className={styles.modal__leftSide__buttons}>
+                  <ButtonLogar type="submit">ENTRAR</ButtonLogar>
+                  <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
                 </div>
-                <ButtonLogar type="submit">ENTRAR</ButtonLogar>
-                <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
+
               </form>
-              <div>Não conta tem sua usuário cadastrada? <Link href='cadastro-usuario'>Cadastre-se</Link></div>
+              <div className={styles.modal__leftSide__singIn}>Não conta tem sua usuário cadastrada? <Link href='cadastro-usuario'>Cadastre-se</Link></div>
             </div>
             <div className={styles.modal__divImagem}>
-              
+
             </div>
           </Box>
         </Fade>
