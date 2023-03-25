@@ -2,4 +2,38 @@
 
 .page_container {
   display: flex;
+  background-color: #f7f8fa;
+
+  .main_content {
+    padding: 40px;
+
+    .title_container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+
+      .title {
+        font-size: 28px;
+        color: #5c5c5c;
+      }
+    }
+
+    .products {
+      display: flex;
+      gap: 28px;
+      width: 100%;
+      margin-top: 44px;
+
+      .products__list {
+        height: 30px;
+        width: 100%;
+      }
+
+      .products__options {
+        width: 280px;
+        height: 30px;
+      }
+    }
+  }
 }
