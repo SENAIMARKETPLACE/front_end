@@ -7,18 +7,14 @@
   border-radius: 5px;
   font-size: 14px;
   margin-bottom: 8px;
+  color: #3c3c3c;
 
   .product__photo {
     width: 60px;
     height: 60px;
   }
 
-  .product__name {
-    color: #3c3c3c;
-  }
-
-  .product__price {
-    color: #3c3c3c;
+  .product__highlight {
     font-weight: 700;
   }
 

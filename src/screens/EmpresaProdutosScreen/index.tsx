@@ -5,7 +5,6 @@ import ModalAddProduto from '../../components/Modais/modalAddProduto';
 import Banner from '../../../public/images/banner.png';
 import { useEffect, useState } from 'react';
 import http from '../../http';
-import ItemMenuLateral from '../../components/itemMenuLateral';
 import ProdutoLista from '../../components/EmpresaProduto/ProdutoItemLista';
 
 const EmpresaProdutosScreen = () => {
@@ -33,7 +32,6 @@ const EmpresaProdutosScreen = () => {
             <h1 className={styles.title}>Meus Produtos</h1>
             <ModalAddProduto />
           </div>
-          {/* <div> */}
           <ul className={styles.products__list}>
             <ul className={styles.products__list}>
               {products.map((product) => (
@@ -47,7 +45,6 @@ const EmpresaProdutosScreen = () => {
               ))}
             </ul>
           </ul>
-          {/* </div> */}
         </main>
       </section>
     </div>

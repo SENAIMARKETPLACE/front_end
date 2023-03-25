@@ -19,7 +19,7 @@ export default function ModalAddProduto() {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     minWidth: '900px',
-    maxWidth: '900px',
+    maxWidth: '1200px',
     width: '95 %',
     bgcolor: 'background.paper',
     boxShadow: 24,
