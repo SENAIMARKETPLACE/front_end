@@ -1,9 +1,9 @@
 import styles from './ProdutoLista.module.scss';
-import { MdDelete } from 'react-icons/md';
 import { MdModeEdit } from 'react-icons/md';
 import ModalDeletarProduto from '../../Modais/ModalDeletarProduto';
 
 interface ProductItemListProps {
+  id: string;
   key: string;
   photo: string;
   name: string;
@@ -11,13 +11,25 @@ interface ProductItemListProps {
   amount: string;
 }
 
-function alertz() {
-  console.log('Bobão');
+function enviaId(id: string) {
+  console.log(id);
+  return id;
 }
 
-const ProdutoLista = ({ photo, name, price, amount }: ProductItemListProps) => {
+const ProdutoLista = ({
+  id,
+  photo,
+  name,
+  price,
+  amount,
+}: ProductItemListProps) => {
   return (
-    <li className={styles.product}>
+    <li
+      className={styles.product}
+      onClick={() => {
+        enviaId(id);
+      }}
+    >
       <img
         className={styles.product__photo}
         src={photo}
@@ -28,9 +40,8 @@ const ProdutoLista = ({ photo, name, price, amount }: ProductItemListProps) => {
       <p className={styles.product__highlight}>{price}</p>
       <div className={styles.product__btns}>
         <MdModeEdit className={styles.product__edit} />
-        <MdDelete className={styles.product__remove} onClick={alertz} />
+        <ModalDeletarProduto />
       </div>
-      <ModalDeletarProduto />
     </li>
   );
 };

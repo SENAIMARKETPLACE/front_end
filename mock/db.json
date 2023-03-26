@@ -1,24 +1,95 @@
 {
   "usuarios": [],
-  "enderecos": [
-   
-  ],
+  "enderecos": [],
   "empresas": [],
   "produtos": [
     {
-      "id": 1,
-      "nome": "Camiseta Nike Manga Longa Element",
-      "preco":"199.99",
-      "unidades": "120",
-      "url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR_W88KCGT5uAweZjnKKE7AEQueGxtfhFfqhnZXh7xvj_4_9yt2gaX0fRFPmU4JGc4TqBQXiIHT_KoEQ4bbmAWuZnmBMc1dRxsZaeHtKCNc&usqp=CAE"
+      "nome_produto": "",
+      "descricao": "Camiseta verde",
+      "url_imagem": "https://www.google.com.br",
+      "publico": "",
+      "categoria": "",
+      "sub_categoria": "",
+      "quantidade": "",
+      "preco": "",
+      "id": 1
     },
     {
-      "id": 2,
-      "nome": "Camiseta Nike Manga Longa Element",
-      "preco":"149.99",
-      "unidades": "30",
-      "url": "https://cdn.shopify.com/s/files/1/0060/1728/6214/products/eua_grande.jpg?v=1630430522"
+      "nome_produto": "",
+      "descricao": "Camiseta verde",
+      "url_imagem": "https://www.google.com.br",
+      "publico": "masculino",
+      "categoria": "Suplementos",
+      "sub_categoria": "corrida",
+      "quantidade": "13",
+      "preco": "20000",
+      "id": 3
+    },
+    {
+      "nome_produto": "",
+      "descricao": "Camiseta verde",
+      "url_imagem": "https://www.google.com.br",
+      "publico": "masculino",
+      "categoria": "Suplementos",
+      "sub_categoria": "corrida",
+      "quantidade": "13",
+      "preco": "20000",
+      "id": 4
+    },
+    {
+      "nome_produto": "Camisetar",
+      "descricao": "Camiseta verde",
+      "url_imagem": "https://www.google.com.br",
+      "publico": "masculino",
+      "categoria": "Suplementos",
+      "sub_categoria": "corrida",
+      "quantidade": "13",
+      "preco": "20000",
+      "id": 5
+    },
+    {
+      "nome_produto": "Camiseta",
+      "descricao": "Branca",
+      "url_imagem": "url",
+      "publico": "feminino",
+      "categoria": "Suplementos",
+      "sub_categoria": "corrida",
+      "quantidade": "10",
+      "preco": "2000",
+      "id": 6
+    },
+    {
+      "nome_produto": "Camiseta",
+      "descricao": "Teste",
+      "url_imagem": "https://www.google.com.br",
+      "publico": "masculino",
+      "categoria": "Acessórios",
+      "sub_categoria": "corrida",
+      "quantidade": "13",
+      "preco": "2",
+      "id": 7
+    },
+    {
+      "nome_produto": "Camiseta",
+      "descricao": "Trs",
+      "url_imagem": "https://www.google.com.br",
+      "publico": "unissex",
+      "categoria": "Esportes",
+      "sub_categoria": "casual",
+      "quantidade": "32",
+      "preco": "386",
+      "id": 8
+    },
+    {
+      "nome_produto": "Camiseta",
+      "descricao": "fa",
+      "url_imagem": "dsa",
+      "publico": "feminino",
+      "categoria": "Suplementos",
+      "sub_categoria": "corrida",
+      "quantidade": "2",
+      "preco": "2",
+      "id": 9
     }
   ]
-
 }

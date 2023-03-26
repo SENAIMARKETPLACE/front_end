@@ -2,15 +2,25 @@ import styles from './ModalDeletarProduto.module.scss';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { MdDelete } from 'react-icons/md';
 import TextField from '@mui/material/TextField';
 import { Button, FormControl, OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 
-const ModalDeletarProduto = () => {
+interface modalDeletarProps {
+  idExcluir?: string;
+}
+
+const ModalDeletarProduto = ({ idExcluir }: modalDeletarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  function teste(e: any) {
+    handleOpen();
+    console.log(e.target);
+  }
 
   const style = {
     display: 'flex',
@@ -28,12 +38,10 @@ const ModalDeletarProduto = () => {
 
   return (
     <div>
-      <button className={styles.open_btn} onClick={handleOpen}>
-        Open modal
-      </button>
+      <MdDelete className={styles.product__remove} onClick={handleOpen} />
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
-          <p>Deseja excluir este produto?</p>
+          <p>Deseja excluir este produto? {idExcluir}</p>
           <div className={styles.btns_container}>
             <Button>Sim</Button>
             <Button>Não</Button>

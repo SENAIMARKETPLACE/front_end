@@ -22,6 +22,14 @@ const EmpresaProdutosScreen = () => {
     getProducts();
   }, []);
 
+  // const exibirIdSelecionado = (produtoSelecionado: React.Component) => {
+  //   return console.log(produtoSelecionado)
+  // };
+
+  function enviarID(e: React.MouseEvent<HTMLButtonElement>) {
+    return console.log(e.target);
+  }
+
   return (
     <div className={styles.page_container}>
       <MenuLateralEmpresa />
@@ -36,6 +44,7 @@ const EmpresaProdutosScreen = () => {
             <ul className={styles.products__list}>
               {products.map((product) => (
                 <ProdutoLista
+                  id={product.id}
                   key={product.id}
                   photo={product.url}
                   name={product.nome}
