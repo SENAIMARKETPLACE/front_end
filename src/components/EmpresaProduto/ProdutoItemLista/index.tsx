@@ -30,17 +30,13 @@ const ProdutoLista = ({
         enviaId(id);
       }}
     >
-      <img
-        className={styles.product__photo}
-        src={photo}
-        alt={`Ilustração - ${name}`}
-      />
+      <img className={styles.product__photo} src={photo} alt={name} />
       <p>{name}</p>
       <p>{amount} unid.</p>
       <p className={styles.product__highlight}>{price}</p>
       <div className={styles.product__btns}>
         <MdModeEdit className={styles.product__edit} />
-        <ModalDeletarProduto />
+        <ModalDeletarProduto idExcluir={id} />
       </div>
     </li>
   );

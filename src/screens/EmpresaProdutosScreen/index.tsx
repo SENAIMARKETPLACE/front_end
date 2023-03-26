@@ -46,10 +46,10 @@ const EmpresaProdutosScreen = () => {
                 <ProdutoLista
                   id={product.id}
                   key={product.id}
-                  photo={product.url}
-                  name={product.nome}
+                  photo={product.url_imagem}
+                  name={product.nome_produto}
                   price={product.preco}
-                  amount={product.unidades}
+                  amount={product.quantidade}
                 />
               ))}
             </ul>
