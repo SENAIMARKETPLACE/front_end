@@ -11,10 +11,18 @@ import { useState } from 'react';
 import http from '../../../http';
 import { IProduto } from '../../../compartilhado/IProduto';
 import { BsPlus } from 'react-icons/bs';
-export default function ModalAddProduto() {
+import ReactDOM from 'react-dom';
+
+
+interface modalAddProductProp {
+  setarLista: (listaAtualizada: string[]) => void
+}
+export default function ModalAddProduto({setarLista}: modalAddProductProp) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  
 
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState('');
@@ -104,6 +112,12 @@ export default function ModalAddProduto() {
     </MenuItem>
   ));
 
+  const resgatarListaProdutos = () => {
+    http.get('produtos')
+    .then((resp) => {setarLista(resp.data)})
+    .catch((err) => console.log(err))
+  }
+
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let produto: IProduto = {
@@ -119,9 +133,10 @@ export default function ModalAddProduto() {
     http
       .post('/produtos', produto)
       .then((resp: any) => {
-        console.log('Produto Criado com Sucesso', resp);
+        console.log('Produto Criado com Sucesso');
       })
       .then((resp) => {
+        resgatarListaProdutos()
         setOpen(false);
         setNomeProduto('');
         setDescricao('');
