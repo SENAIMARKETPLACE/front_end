@@ -6,6 +6,9 @@ import Banner from '../../../public/images/banner.png';
 import { useEffect, useState } from 'react';
 import http from '../../http';
 import ProdutoLista from '../../components/EmpresaProduto/ProdutoItemLista';
+import SearchBar from '../../components/SearchBar';
+import ToggleBtn from '../../components/Buttons/ToggleButton';
+import StatusAlert from '../../components/StatusMsg/SucessMsg';
 
 const EmpresaProdutosScreen = () => {
   async function getProducts() {
@@ -22,14 +25,6 @@ const EmpresaProdutosScreen = () => {
     getProducts();
   }, []);
 
-  // const exibirIdSelecionado = (produtoSelecionado: React.Component) => {
-  //   return console.log(produtoSelecionado)
-  // };
-
-  function enviarID(e: React.MouseEvent<HTMLButtonElement>) {
-    return console.log(e.target);
-  }
-
   return (
     <div className={styles.page_container}>
       <MenuLateralEmpresa />
@@ -39,6 +34,11 @@ const EmpresaProdutosScreen = () => {
           <div className={styles.title_container}>
             <h1 className={styles.title}>Meus Produtos</h1>
             <ModalAddProduto />
+          </div>
+          <div className={styles.searchAndFilter}>
+            <SearchBar />
+            <ToggleBtn />
+            <StatusAlert />
           </div>
           <ul className={styles.products__list}>
             <ul className={styles.products__list}>

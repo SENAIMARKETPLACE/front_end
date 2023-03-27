@@ -10,7 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { useState } from 'react';
 import http from '../../../http';
 import { IProduto } from '../../../compartilhado/IProduto';
-
+import { BsPlus } from 'react-icons/bs';
 export default function ModalAddProduto() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -118,7 +118,9 @@ export default function ModalAddProduto() {
     };
     http
       .post('/produtos', produto)
-      .then((resp: any) => console.log('Produto Criado com Sucesso', resp))
+      .then((resp: any) => {
+        console.log('Produto Criado com Sucesso', resp);
+      })
       .then((resp) => {
         setOpen(false);
         setNomeProduto('');
@@ -135,9 +137,14 @@ export default function ModalAddProduto() {
 
   return (
     <div>
-      <button className={styles.open_btn} onClick={handleOpen}>
-        Open modal
-      </button>
+      <Button
+        variant="outlined"
+        startIcon={<BsPlus />}
+        onClick={handleOpen}
+        className={styles.open_btn}
+      >
+        Adicionar produto
+      </Button>
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
           <form className={styles.form}>
@@ -217,7 +224,7 @@ export default function ModalAddProduto() {
               type="submit"
               className={styles.submit_btn}
             >
-              Adicionar produto
+              Salvar
             </Button>
           </form>
         </Box>
