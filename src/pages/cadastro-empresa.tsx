@@ -1,3 +1,4 @@
+
 import CadastroEmpresaScreen from "../screens/CadastroEmpresaScreen";
 
 const CadastroEmpresa = () => {
