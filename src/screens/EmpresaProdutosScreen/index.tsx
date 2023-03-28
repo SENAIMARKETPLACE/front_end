@@ -9,17 +9,8 @@ import ProdutoLista from "../../components/EmpresaProduto/ProdutoItemLista";
 import SearchBar from "../../components/SearchBar";
 import ToggleBtn from "../../components/Buttons/ToggleButton";
 import StatusAlert from "../../components/StatusMsg/SucessMsg";
-import ContextProdutos from "./ContextProdutos";
 
  
-type ProdutosType = {
-  listaProdutos: string[]
-}
-
-type PropsProductsContext = {
-  products: ProdutosType;
-  setProducts: React.Dispatch<React.SetStateAction<ProdutosType>>;
-}
 
 
 
@@ -38,6 +29,8 @@ const EmpresaProdutosScreen = () => {
     setProducts(novaLista);
   }
 
+
+ 
   useEffect(() => {
     getProducts();
   }, []);
@@ -60,14 +53,15 @@ const EmpresaProdutosScreen = () => {
           <ul className={styles.products__list}>
             <ul className={styles.products__list}>
               {products.map((product) => (
-                  <ProdutoLista
-                    id={product.id}
-                    key={product.id}
-                    photo={product.url_imagem}
-                    name={product.nome_produto}
-                    price={product.preco}
-                    amount={product.quantidade}
-                  />
+                    <ProdutoLista
+                      setarLista={atualizarListaProdutos}
+                      id={product.id}
+                      key={product.id}
+                      photo={product.url_imagem}
+                      name={product.nome_produto}
+                      price={product.preco}
+                      amount={product.quantidade}
+                    />
               ))}
             </ul>
           </ul>

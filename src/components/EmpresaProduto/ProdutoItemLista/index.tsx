@@ -1,6 +1,8 @@
 import styles from './ProdutoLista.module.scss';
 import { MdModeEdit } from 'react-icons/md';
 import ModalDeletarProduto from '../../Modais/ModalDeletarProduto';
+import ModalAddProduto from '../../Modais/modalAddProduto';
+import ModalEditarProduto from '../../Modais/modalEditProduto';
 
 interface ProductItemListProps {
   id: string;
@@ -9,6 +11,8 @@ interface ProductItemListProps {
   name: string;
   price: string;
   amount: string;
+  setarLista: (listaAtualizada: string[]) => void
+  
 }
 
 function enviaId(id: string) {
@@ -22,6 +26,7 @@ const ProdutoLista = ({
   name,
   price,
   amount,
+  setarLista
 }: ProductItemListProps) => {
   return (
     <li
@@ -35,8 +40,8 @@ const ProdutoLista = ({
       <p>{amount} unid.</p>
       <p className={styles.product__highlight}>{price}</p>
       <div className={styles.product__btns}>
-        <MdModeEdit className={styles.product__edit} />
-        <ModalDeletarProduto idExcluir={id} />
+        <ModalEditarProduto setarLista={setarLista} idSelecionado={id}/>
+        <ModalDeletarProduto setarLista={setarLista} idExcluir={id} />
       </div>
     </li>
   );
