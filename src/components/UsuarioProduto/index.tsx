@@ -10,17 +10,22 @@ const UsuarioProduto = () => {
             <span className={styles.favorite_container}>
                 <BsHeartFill className={styles.favorite_icon} />
             </span>
-            <img src={Camiseta.src} alt='Camiseta de Nike' />
+            <div className={styles.photo_container}>
+
+                <img className={styles.photo} src={Camiseta.src} alt='Camiseta de Nike' />
+
+            </div>
             <p className={styles.name}>Camiseta Nike Manga Longa Element</p>
-            <p className={styles.price}>RR$ 159,99</p>
             <div className={styles.icons_container}>
                 <div className={styles.rate}>
                     <p className={styles.rate_value}>3.9</p>
                     <FaStar />
                 </div>
-                <span className={styles.cart_container}>
+                <p className={styles.price}>RR$ 159,99</p>
+
+                {/* <span className={styles.cart_container}>
                     <RiShoppingCart2Fill className={styles.cart_icon} />
-                </span>
+                </span> */}
             </div>
         </div>
     )

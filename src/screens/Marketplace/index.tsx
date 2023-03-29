@@ -33,9 +33,28 @@ const MarketplaceScreen = () => {
                         <ProdutoCategoria />
                         <ProdutoCategoria />
                     </div>
-                    
+
                     <h2 className={styles.section__title}>Produtos para você</h2>
-                    <UsuarioProduto />
+                    <section className={styles.products_list}>
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                    </section>
+
+                    <h2 className={styles.section__title}>Produtos mais visitados da semana</h2>
+                    
+                    <h2 className={styles.section__title}>Suplementos</h2>
+                    <section className={styles.products_list}>
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                        <UsuarioProduto />
+                    </section>
                 </main>
             </section>
         </div>

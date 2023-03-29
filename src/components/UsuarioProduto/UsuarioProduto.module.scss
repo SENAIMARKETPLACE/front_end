@@ -1,16 +1,11 @@
 .produto {
-    position: relative;
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding: 35px 20px;
     border-radius: 10px;
-    max-width: 220px;
-
-    // .icon {
-    //     width: 30px;
-    //     height: 30px;
-    //     background-color: red;
-    // }
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 100%;
+    max-width: 210px;
+    padding: 35px 20px 20px;
+    position: relative;
 
     .favorite_container {
         display: flex;
@@ -18,7 +13,7 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        padding: 8px;
+        padding: 6px;
         border-radius: 50%;
         background-color: #9a9a9a;
 
@@ -27,8 +22,24 @@
         }
     }
 
+    .photo_container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .photo {
+        height: 120px;
+        margin-bottom: 15px;
+    }
+
+    .name, .price {
+        padding-bottom: 5px;
+    }
+
     .name {
+        line-height: 1.4;
         font-size: 13px;
+        margin-bottom: 5px;
     }
 
     .price {
@@ -58,13 +69,6 @@
         padding: 8px;
         border-radius: 50%;
         background-color: #399CCE;
-
+        color: white;
     }
-
-    // .favorite_icon, .cart_icon {
-    // }
-
-    // .favorite_icon {
-
-    // }
 }
