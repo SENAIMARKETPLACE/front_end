@@ -22,8 +22,8 @@ const brandsLogo = [
 
 const ProdutoCategoria = () => {
     return (
-        <div>
-            <span className={styles.avatar}>
+        <div className={styles.category}>
+            <span className={styles.avatars}>
                 <Avatar
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
@@ -39,14 +39,14 @@ const ProdutoCategoria = () => {
                     src="/static/images/avatar/1.jpg"
                     sx={{ width: 24, height: 24 }}
                 />
-                                <Avatar
+                <Avatar
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
                     sx={{ width: 24, height: 24 }}
                 />
             </span>
+            <p className={styles.text}>Treino e Academia</p>
         </div>
-
     )
 }
 

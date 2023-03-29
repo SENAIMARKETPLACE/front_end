@@ -32,7 +32,12 @@
         
         .section__title {
             color: #4E4E4E;
-            margin-top: 30px;
+            margin: 35px 0px 15px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: space-between;
         }
     }
   }

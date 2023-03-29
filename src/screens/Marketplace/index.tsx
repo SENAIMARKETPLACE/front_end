@@ -6,6 +6,7 @@ import SearchBar from '../../components/SearchBar';
 import { Avatar, FormControl, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import MiniSearchBar from '../../components/MiniSearchBar';
 import ProdutoCategoria from '../../components/ProdutoCategoria';
+import UsuarioProduto from '../../components/UsuarioProduto';
 
 const MarketplaceScreen = () => {
     return (
@@ -27,9 +28,14 @@ const MarketplaceScreen = () => {
                 <main className={styles.main_content}>
 
                     <h2 className={styles.section__title}>Explore Categorias Populares</h2>
-                    <ProdutoCategoria />
-
-
+                    <div className={styles.categories}>
+                        <ProdutoCategoria />
+                        <ProdutoCategoria />
+                        <ProdutoCategoria />
+                    </div>
+                    
+                    <h2 className={styles.section__title}>Produtos para você</h2>
+                    <UsuarioProduto />
                 </main>
             </section>
         </div>
