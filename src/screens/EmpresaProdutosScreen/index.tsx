@@ -16,6 +16,10 @@ import StatusAlert from "../../components/StatusMsg/SucessMsg";
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false); 
+  const [mensagem, setMensagem] = useState(""); 
+
+
   async function getProducts() {
     try {
       const response = await http.get("produtos");
@@ -29,6 +33,10 @@ const EmpresaProdutosScreen = () => {
     setProducts(novaLista);
   }
 
+  function setarMensagemEEstadoRequisicao(isOpenProps: boolean, mensagemProps: string): void {
+    setIsOpen(isOpenProps)
+    setMensagem(mensagemProps)
+  }
 
  
   useEffect(() => {
@@ -43,12 +51,12 @@ const EmpresaProdutosScreen = () => {
         <main className={styles.main_content}>
           <div className={styles.title_container}>
             <h1 className={styles.title}>Meus Produtos</h1>
-            <ModalAddProduto setarLista={atualizarListaProdutos} />
+            <ModalAddProduto setarLista={atualizarListaProdutos} setarMensagemEEstadoRequisicao={setarMensagemEEstadoRequisicao} />
           </div>
           <div className={styles.searchAndFilter}>
             <SearchBar />
             <ToggleBtn />
-            <StatusAlert />
+            <StatusAlert isOpen={isOpen} mensagem={mensagem}/>
           </div>
           <ul className={styles.products__list}>
             <ul className={styles.products__list}>

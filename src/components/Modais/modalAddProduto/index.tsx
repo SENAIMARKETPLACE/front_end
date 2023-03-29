@@ -14,9 +14,13 @@ import { BsPlus } from "react-icons/bs";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
+  setarMensagemEEstadoRequisicao: (isOpenProps: boolean, mensagemProps: string) => void;
+
 }
-export default function ModalAddProduto({ setarLista }: modalAddProductProp) {
+export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequisicao }: modalAddProductProp) {
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const [mensagem, setMensagem] = useState("Produto Cadastrado!");
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -39,6 +43,7 @@ export default function ModalAddProduto({ setarLista }: modalAddProductProp) {
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+  
 
   const style = {
     position: "absolute" as "absolute",
@@ -141,11 +146,12 @@ export default function ModalAddProduto({ setarLista }: modalAddProductProp) {
     };
     http
       .post("/produtos", produto)
-      .then((resp: any) => {
+      .then((resp) => {
         console.log("Produto Criado com Sucesso");
       })
       .then((resp) => {
         resgatarListaProdutos();
+        setarMensagemEEstadoRequisicao(isOpen, mensagem)
         setOpen(false);
         setNomeProduto("");
         setDescricao("");
@@ -249,6 +255,7 @@ export default function ModalAddProduto({ setarLista }: modalAddProductProp) {
               variant="contained"
               type="submit"
               className={styles.submit_btn}
+              
             >
               Salvar
             </Button>
