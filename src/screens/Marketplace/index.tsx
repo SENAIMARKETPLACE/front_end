@@ -7,6 +7,10 @@ import { Avatar, FormControl, InputAdornment, InputLabel, OutlinedInput } from '
 import MiniSearchBar from '../../components/MiniSearchBar';
 import ProdutoCategoria from '../../components/ProdutoCategoria';
 import UsuarioProduto from '../../components/UsuarioProduto';
+import 'swiper/css';
+// import CarouselProducts from '../../components/CarouselProducts';
+import { EmblaCarousel } from '../../components/CarouselProducts';
+import FooterSollaris from '../../layout/Footer';
 
 const MarketplaceScreen = () => {
     return (
@@ -47,7 +51,8 @@ const MarketplaceScreen = () => {
                     </section>
 
                     <h2 className={styles.section__title}>Produtos mais visitados da semana</h2>
-                    
+                    <EmblaCarousel />
+
                     <h2 className={styles.section__title}>Suplementos</h2>
                     <section className={styles.products_list}>
                         <UsuarioProduto />
@@ -57,6 +62,7 @@ const MarketplaceScreen = () => {
                     </section>
                 </main>
             </section>
+        {/* <FooterSollaris /> */}
         </div>
     )
 }
