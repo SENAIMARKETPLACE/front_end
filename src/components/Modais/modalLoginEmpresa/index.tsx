@@ -11,27 +11,6 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 
-
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80%",
-  height: "700px",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  display: "flex"
-};
-
-
-
-const InputField = styled(TextField)({
-  width: "100%",
-  margin: "10px 0",
-});
-
 const ButtonLogar = styled(Button)({
   boxShadow: "none",
   textTransform: "none",
@@ -125,6 +104,27 @@ const ButtonLogin = styled(Button)({
 
 
 
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "80%",
+  height: "700px",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  display: "flex"
+};  
+
+
+
+const InputField = styled(TextField)({
+  width: "100%",
+  margin: "10px 0",
+});  
+
+
+
 
 export default function ModalLoginEmpresa() {
   const [open, setOpen] = React.useState(false);
@@ -176,7 +176,7 @@ export default function ModalLoginEmpresa() {
                 </div>
 
               </form>
-              <div className={styles.modal__leftSide__singIn}>Não conta tem sua usuário cadastrada? <Link href='cadastro-usuario'>Cadastre-se</Link></div>
+              <div className={styles.modal__leftSide__singIn}>Não conta tem sua usuário cadastrada? <Link href='cadastro-empresa'>Cadastre-se</Link></div>
             </div>
             <div className={styles.modal__divImagem}>
 
