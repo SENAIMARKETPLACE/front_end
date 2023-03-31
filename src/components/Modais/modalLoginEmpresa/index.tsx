@@ -114,14 +114,14 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   display: "flex"
-};  
+};
 
 
 
 const InputField = styled(TextField)({
   width: "100%",
   margin: "10px 0",
-});  
+});
 
 
 
@@ -133,7 +133,7 @@ export default function ModalLoginEmpresa() {
 
   return (
     <div>
-      <ButtonLogin onClick={handleOpen}>Login Empresa</ButtonLogin>
+      <Button onClick={handleOpen}>Login Empresa</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -155,7 +155,7 @@ export default function ModalLoginEmpresa() {
               <div className={styles.modal__leftSide__textoModal}>
                 <h2>SEJA BEM VINDO</h2>
                 <p>
-                Queremos que se sintam em casa e que trabalhemos juntos em harmonia, sempre buscando inovação e excelência na prestação de serviços. Juntos, somos mais fortes!
+                  Queremos que se sintam em casa e que trabalhemos juntos em harmonia, sempre buscando inovação e excelência na prestação de serviços. Juntos, somos mais fortes!
                 </p>
               </div>
               <form>

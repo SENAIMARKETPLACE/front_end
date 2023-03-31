@@ -24,6 +24,17 @@
       "quantidade": "45",
       "preco": "110,00",
       "id": 3
+    },
+    {
+      "nome_produto": "Camisa Santos FC",
+      "descricao": "Camisa do Peixão",
+      "url_imagem": "https://pbs.twimg.com/media/DU3yfg7WkAEzEnd.jpg",
+      "publico": "masculino",
+      "categoria": "Esportes",
+      "sub_categoria": "casual",
+      "quantidade": "78",
+      "preco": "99,99",
+      "id": 4
     }
   ]
 }

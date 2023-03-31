@@ -10,6 +10,7 @@ import { TextField, Checkbox } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
+import { ILogin } from "../../../compartilhado/ILogin";
 
 
 
@@ -26,37 +27,6 @@ const style = {
 };
 
 
-
-const InputField = styled(TextField)({
-  width: "100%",
-  margin: "10px 0",
-});
-
-const ButtonLogar = styled(Button)({
-  boxShadow: "none",
-  textTransform: "none",
-  fontSize: 16,
-  padding: "0px 10px",
-  border: "1px solid",
-  height: "50px",
-  lineHeight: 1.5,
-  fontWeight: "400",
-  borderSize: "2",
-  borderColor: "#000",
-  backgroundColor: "#000",
-  color: "#FFF",
-  "&:hover": {
-    backgroundColor: "#000",
-    borderColor: "#000",
-    boxShadow: "none",
-    color: "#fff",
-  },
-  "&:active": {
-    boxShadow: "none",
-    backgroundColor: "#000",
-    borderColor: "#000",
-  },
-});
 const ButtonLogarGoogle = styled(Button)({
   boxShadow: "none",
   textTransform: "none",
@@ -82,6 +52,39 @@ const ButtonLogarGoogle = styled(Button)({
     borderColor: "#000",
   },
 });
+
+const InputField = styled(TextField)({
+  width: "100%",
+  margin: "10px 0",
+})
+
+
+const ButtonLogar = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "0px 10px",
+  border: "1px solid",
+  height: "50px",
+  lineHeight: 1.5,
+  fontWeight: "400",
+  borderSize: "2",
+  borderColor: "#000",
+  backgroundColor: "#000",
+  color: "#FFF",
+  "&:hover": {
+    backgroundColor: "#000",
+    borderColor: "#000",
+    boxShadow: "none",
+    color: "#fff",
+  },
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#000",
+    borderColor: "#000",
+  },
+})
+
 
 const ButtonLogin = styled(Button)({
   marginRight: "15px",
@@ -120,7 +123,7 @@ const ButtonLogin = styled(Button)({
     boxShadow: "none",
     backgroundColor: "#65bce8",
     borderColor: "#005cbf",
-  },
+  }
 });
 
 
@@ -128,12 +131,23 @@ const ButtonLogin = styled(Button)({
 
 export default function ModalLoginUsuario() {
   const [open, setOpen] = React.useState(false);
+  const [login, setLogin] = React.useState<ILogin>({ email: "", password: ""}); 
+  const [email, setEmail] = React.useState<string>("");
+  const [password, setPassWord] = React.useState<string>("");
+  const [keepPassword, setKeepPassword] = React.useState<boolean>(false)
+
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+  function SetarObjectLogin() {
+    setLogin({ email: email, password: password})
+  }
+
   return (
     <div>
-      <ButtonLogin onClick={handleOpen}>Login Usuário</ButtonLogin>
+      <Button onClick={handleOpen}>Login Usuário</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -160,9 +174,10 @@ export default function ModalLoginUsuario() {
                   viver uma vida mais saudável e ativa.
                 </p>
               </div>
-              <form>
-                <InputField label="Email" type="email" />
-                <InputField label="Senha" type="password" />
+              <form onSubmit={(e) => e.preventDefault()}>
+                <InputField label="Email" type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+                <InputField label="Senha" type="password" onChange={(e) => setPassWord(e.target.value)} value={password} />
+                <div className={styles.modal__leftSide__mensagemErro + " " + styles.ocultar}>Verifique seu email ou senha!</div>
                 <div className={styles.modal__leftSide__ganchos}>
                   <div className={styles.modal__leftSide__checkbox}>
                     <Checkbox />
@@ -173,7 +188,9 @@ export default function ModalLoginUsuario() {
                   </div>
                 </div>
                 <div className={styles.modal__leftSide__buttons}>
-                  <ButtonLogar type="submit">ENTRAR</ButtonLogar>
+                  <ButtonLogar type="submit" onClick={
+                    SetarObjectLogin
+                  }>ENTRAR</ButtonLogar>
                   <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
                 </div>
 
