@@ -1,5 +1,5 @@
 export interface IProduto{
-    id_empresa?: string
+    id_empresa?: string, 
     nome_produto: string, 
     descricao: string, 
     url_imagem: string, 

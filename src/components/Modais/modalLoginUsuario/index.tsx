@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 import { ILogin } from "../../../compartilhado/ILogin";
+import http from "../../../http";
 
 
 
@@ -141,9 +142,27 @@ export default function ModalLoginUsuario() {
   const handleClose = () => setOpen(false);
 
 
-  function SetarObjectLogin() {
+  function setarObjectLogin() {
     setLogin({ email: email, password: password})
   }
+
+
+  const gatilhoFuncoesLogin = () => {
+    setarObjectLogin()
+    console.log(login)
+  }
+
+  const realizarLogin = () => {
+
+
+    setarObjectLogin()
+
+    http.post('/usuarios', login)
+    .then((resp) => console.log(resp))
+    .catch((err) => console.log(err))
+  }
+
+
 
   return (
     <div>
@@ -187,10 +206,8 @@ export default function ModalLoginUsuario() {
                     <p>Esqueceu a Senha?</p>
                   </div>
                 </div>
-                <div className={styles.modal__leftSide__buttons}>
-                  <ButtonLogar type="submit" onClick={
-                    SetarObjectLogin
-                  }>ENTRAR</ButtonLogar>
+              <div className={styles.modal__leftSide__buttons}>
+                  <ButtonLogar type="submit" onClick={(e) => realizarLogin()}>ENTRAR</ButtonLogar>
                   <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
                 </div>
 

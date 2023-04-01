@@ -1,5 +1,19 @@
 {
-  "usuarios": [],
+  "usuarios": [
+    {
+      "jvabreusousa@gmail.com": "",
+      "id": 1
+    },
+    {
+      "jvabreusousa@gmail.com": "",
+      "id": 2
+    },
+    {
+      "email": "jvabreusousa@gmail.com",
+      "password": "12334",
+      "id": 3
+    }
+  ],
   "enderecos": [],
   "empresas": [],
   "produtos": [
