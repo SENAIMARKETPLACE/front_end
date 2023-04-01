@@ -1,5 +1,233 @@
 .sectionMain {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 5em;
+    .sectionMain__principal {
+        display: flex;
+        align-items: center;
+        margin: 50px;
+
+        .sectionMain__Slogan {
+            display: flex;
+            margin: 20px;
+            flex-direction: column;
+
+            h3 {
+                font-size: 50px;
+                margin-bottom: 20px;
+                color: #016170;
+            }
+
+            p {
+                font-size: 24px;
+                line-height: 24px;
+                margin-bottom: 20px;
+                width: 50vw;
+            }
+
+
+            .imagensApresentacao {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+    }
+
+    .sectionUser {
+
+        .sectionUser__texto {
+            background-color: #7D2B73;
+            color: #fff;
+            display: flex;
+            padding: 50px;
+
+            .sectionUser__texto__titulo {
+                display: flex;
+                font-size: 40px;
+                gap: 10px;
+                font-style: italic;
+                margin-bottom: 30px;
+
+            }
+
+            .sectionUser__texto__descricao {
+                width: 60%;
+                font-size: 25px;
+                line-height: 40px;
+
+                span {
+                    font-weight: bold;
+                }
+            }
+
+            .sectionUser__texto__imagem {
+                position: absolute;
+                right: 100px;
+            }
+
+        }
+        .sectionUser__btnRedirect__signUser {
+            font-weight: bold;
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+            background-color: #7D2B73;
+            margin-top: 5em;
+            padding: 1em;
+            font-style: italic;
+    
+            div {
+                width: 100%;
+                color: #fff;
+            }
+    
+        }
+    }
+
+ 
+
+    .sectionEmpresa {
+        margin-top: 5em;
+
+        .sectionEmpresa__sectionTexto {
+            color: #fff;
+            width: 100%;
+            background-color: #F56767;
+            padding: 50px;
+            line-height: 40px;
+            display: flex;
+
+            .sectionEmpresa__sectionTexto__titulo {
+                display: flex;
+                font-size: 40px;
+                gap: 10px;
+                font-style: italic;
+                margin-bottom: 30px;
+            }
+
+            .sectionEmpresa__sectionTexto__descricao {
+                font-size: 25px;
+                width: 50%;
+                line-height: 40px;
+
+                span {
+                    font-weight: bold;
+
+                }
+            }
+
+
+            .sectionEmpresa__sectionTexto__imagem {
+                width: 635px;
+                height: 350px;
+                position: absolute;
+                border-radius: 100%;
+                background-image: url("https://s3-alpha-sig.figma.com/img/f1a6/4c1e/1507f0ca3dc09c4e1cc5468c77c61366?Expires=1680480000&Signature=PJChlN-pgldsZrCcd2VnuHJwTTCY6oxvurUofrEP8Mhpx79c2BSSxph0lQjKm-cKAnC0RvvZ4CYfMglMlh23vu-4SjVg4zYhs6gQHUPd7Lz-jj1iRhlX6Y9aFj1zQWWoq-7T6DSMhlWPt9T8nziCxGZoIxaRErpRu19KZQJHaUNWxCRF5NdphMOs1F3p4hywzkqdIptM-bqRFcPz9dq6EMsAfLGut~pi1cmGddgQUmHGtQ4DJYMqEG~o-l0t9ElVRlMHU~1WmmFtvNl619RU-J4kBAyWN0TiTMnBSNXcYNw~SjSle9Ur8twRVonYa9g9ISpjGFKFS165a6W4zArHQA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
+                background-position: center;
+                background-size: contain;
+                right: 50px;
+            }
+
+        }
+
+        .sectionEmpresa__beneficios {
+            padding: 50px;
+
+            h3 {
+                font-size: 40px;
+            }
+
+            .sectionEmpresa__beneficios__lista {
+                display: grid;
+                grid-template-columns: repeat(2, 50%);
+                grid-template-rows: repeat(2, 1fr);
+                margin: 20px 0;
+
+                .beneficios {
+                    display: flex;
+                    gap: 10px;
+                    font-weight: bold;
+                    line-height: 20px;
+                    font-size: 16px;
+                    margin-top: 20px;
+
+                    h6 {
+                        color: #ffea00;
+                    }
+
+                }
+            }
+        }
+
+        .sectionEmpresa__btnRedirect__signEmpresa {
+            font-weight: bold;
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+            background-color: #F56767;
+            margin-top: 5em;
+            padding: 1em;
+            font-style: italic;
+
+            div {
+                width: 100%;
+                color: #fff;
+            }
+
+        }
+    }
+
+
+    .sectionServicos{
+        margin-top: 5em;
+        .sectionServicos__sectionTexto {
+            color: #fff;
+            width: 100%;
+            background-color: #399CCE;
+            padding: 50px;
+            line-height: 40px;
+            display: flex;
+            position: relative;
+            .sectionServicos__sectionTexto__titulo {
+                display: flex;
+                font-size: 40px;
+                gap: 10px;
+                font-style: italic;
+                margin-bottom: 30px;
+            }
+
+            .sectionServicos__sectionTexto__descricao {
+                font-size: 25px;
+                width: 50%;
+                line-height: 40px;
+            }
+            .sectionServicos__sectionTexto__imagem{
+                width: 565px;
+                height: 425px;
+                right: 50px;
+                top: 100px;
+                position: absolute;
+                background: url("https://s3-alpha-sig.figma.com/img/64cc/7428/e1ecde6656f054a97a99b0c3a7e08bc5?Expires=1680480000&Signature=FNUeQAV8WoEBChZ4DTj1AVW9nZycoOSn-rGPPxdHJ9qCwiiFLAFMgF8Fs-ySWObToBkDeynFEO-uKKQkCtHVWm-U-oZoKX8~smF5uZloaxlQOVXIyGHOfTaDIu1Y8jtYvN4L6ySXWSNsQjeT4AXFDs2Ec3hhTPtD1dVKelZDSyHGK5o0zS66xMXONAQkg8q-aQRdLNUaiu~uaFIUp7YZUGGWRQXL8Kii642rfnQ2F32VwCdHUKnsx8O~UbgPLOnctIATQgZ6Gu-dbOVyeMADR7hQJZrOtJ0OtLSILqUuGT8p4gPzpvaRiIOXckvCf1LjKtnTEBvV-JdnSNMei6d23w__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .sectionServicos__btnRedirect__signEmpresa {
+            font-weight: bold;
+            width: 100%;
+            font-size: 20px;
+            text-align: center;
+            background-color: #399CCE;
+            margin-top: 5em;
+            padding: 1em;
+            font-style: italic;
+
+            div {
+                width: 100%;
+                color: #fff;
+            }
+
+        }
+    }
 }

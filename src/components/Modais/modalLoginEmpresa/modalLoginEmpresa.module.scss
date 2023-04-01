@@ -1,0 +1,61 @@
+.modal__leftSide {
+    padding: 1em 5em;
+    width: 50%;
+    height: 100%;
+    .modal__leftSide__textoModal {
+        text-align: center;
+        margin-bottom: 20px;
+
+        h2 {
+            color: #016170;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    .modal__leftSide__ganchos {
+        margin-top: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .modal__leftSide__checkbox {
+            display: flex;
+            align-items: center;
+        }
+    }
+    .modal__leftSide__buttons{
+        margin-top: 20px ;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .modal__leftSide__singIn{
+        text-align: center;
+        margin-top: 2em;
+    }
+    img {
+        width: 90px;
+        height: 90px;
+        left: 2px;
+        position: static;
+        left: 0;
+    }
+}
+
+.modal__divImagem {
+    width: 50%;
+    height: 100%;
+    background: url('https://s3-alpha-sig.figma.com/img/011b/0c94/f90ad0489821056d6887822a3cfb808f?Expires=1680480000&Signature=hhZdA2xBX58lmCg11zYPULWdnncJKZHKDC4xs05ZXBkQZ1kmGQrXaede-nQXiuI6qQcj~3oJiklRkyF2pJAHTElX9CMwQRkcxRj1FtSiNxXG9yZUtVURS2IBUi-TZxBntF3vq7UoalaB9KB0aVoybaPR~HU~FACvGP~KBViRVTDn5X46oGDnMPEYjuPs5~LAAVqeEphT4-gKbt1qJDaLiN3p2mpX6sg0arL2XES~SoCEODWWbRSzJbWoI8DqR00wusoy-M4Jkie8RjLtc5cHE6xEqFRTvfZuFzThkrFqOT0Brz~7zRow0jjwmkMj4n~r0dw4ktMxKJ1Iy1dazQ6XKQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+
+
+
+
