@@ -1,5 +1,19 @@
 {
-  "usuarios": [],
+  "usuarios": [
+    {
+      "jvabreusousa@gmail.com": "",
+      "id": 1
+    },
+    {
+      "jvabreusousa@gmail.com": "",
+      "id": 2
+    },
+    {
+      "email": "jvabreusousa@gmail.com",
+      "password": "12334",
+      "id": 3
+    }
+  ],
   "enderecos": [],
   "empresas": [],
   "produtos": [
@@ -24,6 +38,17 @@
       "quantidade": "45",
       "preco": "110,00",
       "id": 3
+    },
+    {
+      "nome_produto": "Camisa Santos FC",
+      "descricao": "Camisa do Peixão",
+      "url_imagem": "https://pbs.twimg.com/media/DU3yfg7WkAEzEnd.jpg",
+      "publico": "masculino",
+      "categoria": "Esportes",
+      "sub_categoria": "casual",
+      "quantidade": "78",
+      "preco": "99,99",
+      "id": 4
     }
   ]
 }
