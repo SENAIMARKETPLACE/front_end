@@ -1,0 +1,63 @@
+@import "../../styles/Breakpoints.scss";
+@import "../../styles/Breakpoints.scss";
+
+.page {
+    display: flex;
+    background-color: #f6f6fb;
+
+    .banner {
+        width: 100%;
+    }
+
+    .content {
+        height: min-content;
+        padding: 40px;
+        background-color: burlywood;
+
+        .title__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 36px;
+
+            .title__h1 {
+                font-size: 28px;
+                color: #5c5c5c;
+            }
+        }
+
+        .searchBar__container {
+            display: flex;
+            gap: 28px;
+            justify-content: space-between;
+            // background-color: red;
+
+            .searchBar__view{
+                display: flex;
+                justify-content: flex-end;
+                width: 280px;
+                // background-color: red;
+            }
+        }
+
+        .products {
+            display: flex;
+            gap: 28px;
+            width: 100%;
+            margin-top: 44px;
+
+            .products__list {
+                height: 30px;
+                width: 100%;
+            }
+            
+            .products__options {
+                background-color: blue;
+                width: 280px;
+                height: 30px;
+            }
+
+        }
+    }
+}
+

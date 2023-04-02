@@ -1,60 +1,79 @@
-import styles from './modalAddProduct.module.scss';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { Button, FormControl, OutlinedInput } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import { useState } from 'react';
-import http from '../../../http';
-import { IProduto } from '../../../compartilhado/IProduto';
-import { BsPlus } from 'react-icons/bs';
-export default function ModalAddProduto() {
-  const [open, setOpen] = React.useState(false);
+import styles from "./modalAddProduct.module.scss";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import { Button, FormControl, OutlinedInput } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import { useState } from "react";
+import http from "../../../http";
+import { IProduto } from "../../../compartilhado/IProduto";
+import { BsPlus } from "react-icons/bs";
+
+interface modalAddProductProp {
+  setarLista: (listaAtualizada: string[]) => void;
+  setarMensagemEEstadoRequisicao: (isOpenProps: boolean, mensagemProps: string) => void;
+
+}
+export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequisicao }: modalAddProductProp) {
+  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const [mensagem, setMensagem] = useState("Produto Cadastrado!");
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setNomeProduto("");
+    setDescricao("");
+    setUrlImagem("");
+    setPublico("");
+    setCategoria("");
+    setQuantidade("");
+    setSubCategoria("");
+    setPreco("");
+  };
 
   // STATES PARA CAPTURA DE CAMPOS
-  const [nomeProduto, setNomeProduto] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [urlImagem, setUrlImagem] = useState('');
-  const [publico, setPublico] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [subCategoria, setSubCategoria] = useState('');
-  const [quantidade, setQuantidade] = useState('');
-  const [preco, setPreco] = useState('');
+  const [nomeProduto, setNomeProduto] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [urlImagem, setUrlImagem] = useState("");
+  const [publico, setPublico] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [subCategoria, setSubCategoria] = useState("");
+  const [quantidade, setQuantidade] = useState("");
+  const [preco, setPreco] = useState("");
+  
 
   const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    minWidth: '900px',
-    maxWidth: '1200px',
-    width: '95 %',
-    bgcolor: 'background.paper',
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    minWidth: "900px",
+    maxWidth: "1200px",
+    width: "95 %",
+    bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
   };
 
   const targetAudienceList = [
     {
-      value: 'masculino',
-      label: 'Masculino',
+      value: "masculino",
+      label: "Masculino",
     },
     {
-      value: 'feminino',
-      label: 'Feminino',
+      value: "feminino",
+      label: "Feminino",
     },
     {
-      value: 'unissex',
-      label: 'Unissex',
+      value: "unissex",
+      label: "Unissex",
     },
     {
-      value: 'criança',
-      label: 'Criança',
+      value: "criança",
+      label: "Criança",
     },
   ].map((option) => (
     <MenuItem key={option.value} value={option.value}>
@@ -64,24 +83,24 @@ export default function ModalAddProduto() {
 
   const categories = [
     {
-      value: 'Acessórios',
-      label: 'Acessórios',
+      value: "Acessórios",
+      label: "Acessórios",
     },
     {
-      value: 'Suplementos',
-      label: 'Suplementos',
+      value: "Suplementos",
+      label: "Suplementos",
     },
     {
-      value: 'Esportes',
-      label: 'Esportes',
+      value: "Esportes",
+      label: "Esportes",
     },
     {
-      value: 'Roupas',
-      label: 'Roupas',
+      value: "Roupas",
+      label: "Roupas",
     },
     {
-      value: 'Calçados',
-      label: 'Calçados',
+      value: "Calçados",
+      label: "Calçados",
     },
   ].map((option) => (
     <MenuItem key={option.value} value={option.value}>
@@ -91,18 +110,27 @@ export default function ModalAddProduto() {
 
   const subscategories = [
     {
-      value: 'corrida',
-      label: 'Corrida',
+      value: "corrida",
+      label: "Corrida",
     },
     {
-      value: 'casual',
-      label: 'Casual',
+      value: "casual",
+      label: "Casual",
     },
   ].map((option) => (
     <MenuItem key={option.value} value={option.value}>
       {option.label}
     </MenuItem>
   ));
+
+  const resgatarListaProdutos = () => {
+    http
+      .get("produtos")
+      .then((resp) => {
+        setarLista(resp.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -117,20 +145,22 @@ export default function ModalAddProduto() {
       preco,
     };
     http
-      .post('/produtos', produto)
-      .then((resp: any) => {
-        console.log('Produto Criado com Sucesso', resp);
+      .post("/produtos", produto)
+      .then((resp) => {
+        console.log("Produto Criado com Sucesso");
       })
       .then((resp) => {
+        resgatarListaProdutos();
+        setarMensagemEEstadoRequisicao(isOpen, mensagem)
         setOpen(false);
-        setNomeProduto('');
-        setDescricao('');
-        setUrlImagem('');
-        setPublico('');
-        setCategoria('');
-        setQuantidade('');
-        setSubCategoria('');
-        setPreco('');
+        setNomeProduto("");
+        setDescricao("");
+        setUrlImagem("");
+        setPublico("");
+        setCategoria("");
+        setQuantidade("");
+        setSubCategoria("");
+        setPreco("");
       })
       .catch((erro: any) => console.log(erro));
   };
@@ -149,7 +179,9 @@ export default function ModalAddProduto() {
         <Box sx={style}>
           <form className={styles.form}>
             <div className={styles.product}>
-              <div className={styles.photo}></div>
+              <div className={styles.photo}>
+                <img src={urlImagem} alt={nomeProduto} />
+              </div>
               <TextField
                 label="Nome do produto"
                 className={styles.name}
@@ -223,6 +255,7 @@ export default function ModalAddProduto() {
               variant="contained"
               type="submit"
               className={styles.submit_btn}
+              
             >
               Salvar
             </Button>

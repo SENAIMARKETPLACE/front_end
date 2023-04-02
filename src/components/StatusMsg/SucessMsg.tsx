@@ -5,19 +5,23 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function StatusAlert() {
-  const [open, setOpen] = React.useState(false);
+interface StatusAlertProps{
+  isOpen: boolean,
+  mensagem: string;
+}
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+export default function StatusAlert({isOpen, mensagem}: StatusAlertProps) {
+
+  const [open, setOpen] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setOpen(isOpen);
+  }, [isOpen]);
+
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -26,18 +30,15 @@ export default function StatusAlert() {
     if (reason === 'clickaway') {
       return;
     }
-
+  
     setOpen(false);
   };
 
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button>
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          This is a success message!
+          {mensagem}
         </Alert>
       </Snackbar>
     </Stack>

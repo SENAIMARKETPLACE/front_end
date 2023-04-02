@@ -11,9 +11,10 @@ import http from '../../../http';
 
 interface modalDeletarProps {
   idExcluir?: string;
+  setarLista: (listaAtualizada: string[]) => void
 }
 
-const ModalDeletarProduto = ({ idExcluir }: modalDeletarProps) => {
+const ModalDeletarProduto = ({ idExcluir, setarLista }: modalDeletarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,11 +33,19 @@ const ModalDeletarProduto = ({ idExcluir }: modalDeletarProps) => {
     p: 4,
   };
 
+
+  function regastarListaProdutos(){
+    http.get('/produtos')
+    .then((response) => {setarLista(response.data)})
+    .catch((error) => console.error)
+     
+  }
+
   const deletarProduto = () => {
     http
       .delete(`produtos/${idExcluir}`)
       .then((resp) => {
-        console.log('Produto Excluído com Sucesso');
+        regastarListaProdutos()
         setOpen(false);
       })
       .catch((err) => console.error(err));
