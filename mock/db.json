@@ -12,6 +12,11 @@
       "email": "jvabreusousa@gmail.com",
       "password": "12334",
       "id": 3
+    },
+    {
+      "email": "jvabreusousa12@gmail.com",
+      "password": "123",
+      "id": 4
     }
   ],
   "enderecos": [],
