@@ -4,11 +4,11 @@ import EmpresaBanner from "../../components/EmpresaBanner";
 import ModalAddProduto from "../../components/Modais/modalAddProduto";
 import Banner from "../../../public/images/banner.png";
 import { useEffect, useState } from "react";
-import http from "../../http";
 import ProdutoLista from "../../components/EmpresaProduto/ProdutoItemLista";
 import SearchBar from "../../components/SearchBar";
 import ToggleBtn from "../../components/Buttons/ToggleButton";
 import StatusAlert from "../../components/StatusMsg/SucessMsg";
+import { httpProduto } from "../../http";
 
  
 
@@ -22,8 +22,8 @@ const EmpresaProdutosScreen = () => {
 
   async function getProducts() {
     try {
-      const response = await http.get("produtos");
-      setProducts(response.data);
+      const response = await httpProduto.get("/api/products");
+      setProducts(response.data.content)
     } catch (error) {
       console.error(error);
     }

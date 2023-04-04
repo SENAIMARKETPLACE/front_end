@@ -1,13 +1,13 @@
 import React from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+// import useEmblaCarousel from 'embla-carousel-react'
 import styles from './CarouselProducts.module.scss'
 
 
 export const EmblaCarousel = () => {
-  const [emblaRef] = useEmblaCarousel()
+  // const [emblaRef] = useEmblaCarousel()
 
   return (
-    <div className={styles.embla} ref={emblaRef}>
+    <div className={styles.embla}>
       <div className={styles.embla__container}>
         <div className={styles.embla__slide}>Slide 1</div>
         <div className={styles.embla__slide}>Slide 2</div>

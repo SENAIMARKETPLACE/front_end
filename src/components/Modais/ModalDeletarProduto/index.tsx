@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import { Button, FormControl, OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
-import http from '../../../http';
+import { httpProduto } from '../../../http';
 
 interface modalDeletarProps {
   idExcluir?: string;
@@ -35,15 +35,14 @@ const ModalDeletarProduto = ({ idExcluir, setarLista }: modalDeletarProps) => {
 
 
   function regastarListaProdutos(){
-    http.get('/produtos')
-    .then((response) => {setarLista(response.data)})
+    httpProduto.get('/api/products')
+    .then((response) => {setarLista(response.data.content)})
     .catch((error) => console.error)
-     
   }
 
   const deletarProduto = () => {
-    http
-      .delete(`produtos/${idExcluir}`)
+    httpProduto
+      .delete(`/api/products/${idExcluir}`)
       .then((resp) => {
         regastarListaProdutos()
         setOpen(false);

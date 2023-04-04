@@ -11,7 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 import { ILogin } from "../../../compartilhado/ILogin";
-import http from "../../../http";
+import { httpUsuario } from "../../../http";
 
 
 
@@ -157,7 +157,7 @@ export default function ModalLoginUsuario() {
 
     setarObjectLogin()
 
-    http.post('/usuarios', login)
+    httpUsuario.post('/api/users/login', login)
     .then((resp) => console.log(resp))
     .catch((err) => console.log(err))
   }

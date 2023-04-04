@@ -5,7 +5,7 @@ import React, { use, useState } from "react";
 import styles from "./FormCadastroUsuario.module.scss";
 import { IUsuario } from "../../compartilhado/IUsuario";
 import Router from "next/router";
-import http from "../../http";
+import { httpUsuario } from "../../http";
 import axios, { AxiosResponse } from "axios";
 import { MdNavigateNext, MdNavigateBefore, MdDone } from "react-icons/md";
 import Agradecimento from "../../components/userFormStepper/ListaInteresses";
@@ -85,10 +85,10 @@ const FormCadastroUsuario = () => {
       estado: dados.estado,
       complemento: dados.complemento
     }
-    http.post('usuarios', user)
+    httpUsuario.post('/api/users', user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => capturarIdUser(resp, dados, endereco))
-      .then((resp) => http.post('enderecos', endereco))
+      .then((resp) => httpUsuario.post('/api/user/address', endereco))
       .then((resp) => alert(`${user.nome} criado com sucesso`))
       .catch((err) => alert("Deu Ruim"))
   }

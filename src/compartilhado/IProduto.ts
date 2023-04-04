@@ -1,8 +1,8 @@
 export interface IProduto{
-    id_empresa?: string, 
-    nome_produto: string, 
+    empresa_id?: string, 
+    nome: string, 
     descricao: string, 
-    url_imagem: string, 
+    img: string, 
     publico: string, 
     categoria: string, 
     sub_categoria: string,

@@ -9,7 +9,7 @@ import { BiPlus } from "react-icons/bi";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { FaListUl } from "react-icons/fa";
 import ProductItemList from '../../patterns/Products/List';
-import http from '../../http';
+import { httpProduto } from '../../http';
 import { useEffect, useState } from 'react';
 import NewProductModal from '../../components/Modais/ModalNewProduct';
 
@@ -18,7 +18,7 @@ const CadastroProdutoScreen = () => {
 
     async function getProducts() {
         try {
-            const response = await http.get("produtos");
+            const response = await httpProduto.get("/api/products");
             setProducts(response.data);
         } catch (error) {
             console.error(error);
