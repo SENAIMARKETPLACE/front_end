@@ -26,22 +26,22 @@ const ProdutoCategoria = () => {
             <span className={styles.avatars}>
                 <Avatar
                     alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    src=""
                     sx={{ width: 24, height: 24 }}
                 />
                 <Avatar
                     alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    src=""
                     sx={{ width: 24, height: 24 }}
                 />
                 <Avatar
                     alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    src=""
                     sx={{ width: 24, height: 24 }}
                 />
                 <Avatar
                     alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    src=""
                     sx={{ width: 24, height: 24 }}
                 />
             </span>

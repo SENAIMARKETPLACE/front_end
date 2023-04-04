@@ -54,6 +54,17 @@
       "quantidade": "78",
       "preco": "99,99",
       "id": 4
+    },
+    {
+      "nome_produto": "Nutri Whey Isolado E Concentrado",
+      "descricao": "Maltodextrina, proteína concentrada do soro de leite, frutose, colágeno hidrolisado, albumina desidratada, proteína isolada do soro de leite, mix de minerais [cálcio (fosfato de cálcio tribásico anidro), fósforo (fosfato de cálcio monobásico mono-hidratado), magnésio (sulfato de magnésio mono-hidratado), ferro (ferro reduzido), úor (uoreto de sódio anidro), manganês (sulfato de manganês mono-hidratado), iodo (iodeto de potássio), molibdênio (molibdato de sódio di-hidratado), cromo (dinicotinato glicinato de cromo) e selênio (selenito de sódio)], mix de vitaminas [C (ácido ascórbico), B3 (nicotinamida), E (acetato de tocoferol), B5 (pantotenato de cálcio), B2 (riboavina), B6 (piridoxina) e B1 (tiamina mononitrato), A (palmitato de retinol), B9 (ácido fólico), H (biotina), D (colecalciferol), B12 (cianocobalamina)], aroma idêntico ao natural, sucralose e acessulfame K (edulcorantes). ALÉRGICOS: CONTÉM DERIVADOS DE LEITE E SOJA",
+      "url_imagem": "https://m.media-amazon.com/images/I/41z3RCA2HIL._AC_.jpg",
+      "publico": "unissex",
+      "categoria": "Suplementos",
+      "sub_categoria": "",
+      "quantidade": "23",
+      "preco": "60,90",
+      "id": 5
     }
   ]
 }
