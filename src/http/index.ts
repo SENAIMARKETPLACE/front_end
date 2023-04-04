@@ -8,7 +8,6 @@ export const httpEmpresa = axios.create({
 
 export const httpUsuario = axios.create({
     baseURL: 'http://localhost:8080/'
-
 })
 
 export const httpProduto = axios.create({
