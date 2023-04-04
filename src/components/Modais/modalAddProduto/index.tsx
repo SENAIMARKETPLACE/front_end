@@ -35,6 +35,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     setQuantidade("");
     setSubCategoria("");
     setPreco("");
+    setIsSubCategoriaDisable(true)
   };
 
   // STATES PARA CAPTURA DE CAMPOS
@@ -159,6 +160,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
         setQuantidade("");
         setSubCategoria("");
         setPreco("");
+        setIsSubCategoriaDisable(true)
       })
       .catch((erro: any) => console.log(erro));
   };
