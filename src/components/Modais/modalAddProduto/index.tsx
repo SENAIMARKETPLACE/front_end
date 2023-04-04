@@ -11,6 +11,9 @@ import { useState } from "react";
 import http from "../../../http";
 import { IProduto } from "../../../compartilhado/IProduto";
 import { BsPlus } from "react-icons/bs";
+import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
+
+
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -43,6 +46,13 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+
+  const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
+  const [index, setIndex] = useState(0);
+
+  const [subcategories, setSubcategories] = useState(
+    categories[index].subcategories
+  );
   
 
   const style = {
@@ -81,43 +91,13 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     </MenuItem>
   ));
 
-  const categories = [
-    {
-      value: "Acessórios",
-      label: "Acessórios",
-    },
-    {
-      value: "Suplementos",
-      label: "Suplementos",
-    },
-    {
-      value: "Esportes",
-      label: "Esportes",
-    },
-    {
-      value: "Roupas",
-      label: "Roupas",
-    },
-    {
-      value: "Calçados",
-      label: "Calçados",
-    },
-  ].map((option) => (
+  const categoriasLista = categories.map((option) => (
     <MenuItem key={option.value} value={option.value}>
       {option.label}
     </MenuItem>
   ));
 
-  const subscategories = [
-    {
-      value: "corrida",
-      label: "Corrida",
-    },
-    {
-      value: "casual",
-      label: "Casual",
-    },
-  ].map((option) => (
+  const sub = subcategories.map((option) => (
     <MenuItem key={option.value} value={option.value}>
       {option.label}
     </MenuItem>
@@ -131,6 +111,20 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
       })
       .catch((err) => console.log(err));
   };
+
+  function setarSubCategorias(nomeCategoriaSelecionada: string) {
+    if (nomeCategoriaSelecionada === "Calçados") {
+      setSubcategories(categories[0].subcategories);
+    } else if (nomeCategoriaSelecionada === "Roupas") {
+      setSubcategories(categories[1].subcategories);
+    } else if (nomeCategoriaSelecionada === "Suplementos") {
+      setSubcategories(categories[2].subcategories);
+    } else if (nomeCategoriaSelecionada === "Esportes") {
+      setSubcategories(categories[3].subcategories);
+    } else if (nomeCategoriaSelecionada === "Acessórios") {
+      setSubcategories(categories[4].subcategories);
+    }
+  }
 
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -217,19 +211,20 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
                 select
                 label="Categoria"
                 className={styles.category}
-                onChange={(e) => setCategoria(e.target.value)}
+                onChange={(e) => {setCategoria(e.target.value), setIsSubCategoriaDisable(false)}}
                 value={categoria}
               >
-                {categories}
+                {categoriasLista}
               </TextField>
               <TextField
                 select
+                disabled={isSubCategoriaDisable}
                 label="Subcategoria"
                 className={styles.subcategory}
-                onChange={(e) => setSubCategoria(e.target.value)}
+                onChange={(e) => {setSubCategoria(e.target.value), setarSubCategorias(categoria)}}
                 value={subCategoria}
               >
-                {subscategories}
+                {sub}
               </TextField>
               <TextField
                 label="Quantidade"
