@@ -11,8 +11,9 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 import { ILogin } from "../../../compartilhado/ILogin";
-import http from "../../../http";
+import { httpUsuario } from "../../../http";
 import styledComponents from 'styled-components'
+
 
 const style = {
   position: "absolute" as "absolute",
@@ -161,11 +162,13 @@ export default function ModalLoginUsuario() {
   const realizarLogin = () => {
     setarObjectLogin();
 
-    http
-      .post("/usuarios", login)
-      .then((resp) => setIsBadRequest(false))
-      .catch((err) => setIsBadRequest(true));
-  };
+
+    setarObjectLogin()
+
+    httpUsuario.post('/api/users/login', login)
+    .then((resp) => console.log(resp))
+    .catch((err) => console.log(err))
+  }
 
   return (
     <div>

@@ -8,7 +8,7 @@ import { Button, FormControl, OutlinedInput } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
-import http from "../../../http";
+import { httpProduto } from "../../../http";
 import { IProduto } from "../../../compartilhado/IProduto";
 import { BsPlus } from "react-icons/bs";
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
@@ -46,6 +46,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+  const [empresaid, setEmpresaId] = useState("1")
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [index, setIndex] = useState(0);
@@ -53,6 +54,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   const [subcategories, setSubcategories] = useState(
     categories[index].subcategories
   );
+
   
 
   const style = {
@@ -97,6 +99,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     </MenuItem>
   ));
 
+
   const sub = subcategories.map((option) => (
     <MenuItem key={option.value} value={option.value}>
       {option.label}
@@ -104,10 +107,10 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   ));
 
   const resgatarListaProdutos = () => {
-    http
-      .get("produtos")
+    httpProduto
+      .get("/api/products")
       .then((resp) => {
-        setarLista(resp.data);
+        setarLista(resp.data.content);
       })
       .catch((err) => console.log(err));
   };
@@ -129,17 +132,18 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let produto: IProduto = {
-      nome_produto: nomeProduto,
+      empresa_id: empresaid,
+      nome: nomeProduto,
       descricao: descricao,
-      url_imagem: urlImagem,
+      img: urlImagem,
       publico,
       categoria,
       sub_categoria: subCategoria,
       quantidade,
       preco,
     };
-    http
-      .post("/produtos", produto)
+    httpProduto
+      .post("/api/products", produto)
       .then((resp) => {
         console.log("Produto Criado com Sucesso");
       })

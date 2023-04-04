@@ -2,8 +2,15 @@
 
 import axios from "axios";
 
-const http = axios.create({
-    baseURL: 'http://localhost:5000/'
+export const httpEmpresa = axios.create({
+    baseURL: 'http://localhost:8000/'
 })
 
-export default http;
+export const httpUsuario = axios.create({
+    baseURL: 'http://localhost:8080/'
+
+})
+
+export const httpProduto = axios.create({
+    baseURL: 'http://localhost:8100/'
+})

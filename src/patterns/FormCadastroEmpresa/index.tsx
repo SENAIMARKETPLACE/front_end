@@ -8,7 +8,7 @@ import { IEndereco } from "../../compartilhado/IEndereco";
 import DadosEmpresa from "../../components/empresaFormStepper/DadosEmpresa";
 import EnderecoEmpresa from "../../components/empresaFormStepper/EnderecoEmpresa";
 import Steps from "../../components/empresaFormStepper/Steps";
-import http from "../../http";
+import  { httpEmpresa } from "../../http";
 
 import styles from "./FormCadastroEmpresa.module.scss";
 
@@ -102,9 +102,9 @@ const FormCadastroEmpresa = () => {
       estado: dados.estado, 
       complemento: dados.complemento
     }
-    http.post('empresas', empresa)
+    httpEmpresa.post('/api/business', empresa)
     .then((resp) => capturarIdEmpresa(resp, data, endereco) )
-    .then((resp) =>  http.post('enderecos', endereco))
+    .then((resp) =>  httpEmpresa.post('/api/business/address', endereco))
     .then((respo) => alert(`${empresa.nome_fantasia} cadastrada com sucesso!`))
     .catch((error) => alert("Deu Ruim"))
   }

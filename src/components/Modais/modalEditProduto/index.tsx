@@ -14,7 +14,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { IProduto } from "../../../compartilhado/IProduto";
-import http from "../../../http";
+import { httpProduto } from "../../../http";
+
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
 
 interface modalEditarProps {
@@ -41,6 +42,9 @@ const ModalEditarProduto = ({
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+  const [empresaid, setEmpresaId] = useState("1")
+
+
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
 
@@ -99,12 +103,12 @@ const ModalEditarProduto = ({
 
   
   const regastarInformacoesProdutoSelecionado = () => {
-    http
-      .get<IProduto>(`/produtos/${idSelecionado}`)
+    httpProduto
+      .get<IProduto>(`/api/products/${idSelecionado}`)
       .then((resp) => {
-        setNomeProduto(resp.data.nome_produto);
+        setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
-        setUrlImagem(resp.data.url_imagem);
+        setUrlImagem(resp.data.img);
         setPublico(resp.data.publico);
         setCategoria(resp.data.categoria);
         setSubCategoria(resp.data.sub_categoria);
@@ -141,28 +145,27 @@ const ModalEditarProduto = ({
  
 
   function regastarListaProdutos() {
-    http
-      .get("/produtos")
-      .then((response) => {
-        setarLista(response.data);
-      })
+    httpProduto
+      .get('/api/products')
+      .then((response) => {setarLista(response.data.content)})
       .catch((error) => console.error);
   }
 
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const produtoAtualizado: IProduto = {
-      nome_produto: nomeProduto,
+      empresa_id: empresaid,
+      nome: nomeProduto,
       descricao: descricao,
-      url_imagem: urlImagem,
+      img: urlImagem,
       publico: publico,
       categoria: categoria,
       sub_categoria: subCategoria,
       quantidade: quantidade,
       preco: preco,
     };
-    http
-      .put(`/produtos/${idSelecionado}`, produtoAtualizado)
+    httpProduto
+      .put(`/api/products/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();
