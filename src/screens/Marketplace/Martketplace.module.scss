@@ -1,54 +1,57 @@
 @import "../../styles/Breakpoints.scss";
 
 .page_container {
-    display: flex;
+    // display: flex;
     background-color: #f7f8fa;
 
-    .marketplace {
-        padding: 25px;
+    .content {
+        display: flex;
+        .marketplace {
+            padding: 25px;
+            padding-bottom: 80px;
 
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            line-height: 1.4;
-
-            .searchbar_and_avatar {
+            .header {
                 display: flex;
-                gap: 30px;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 30px;
+                line-height: 1.4;
+
+                .searchbar_and_avatar {
+                    display: flex;
+                    gap: 30px;
+                }
+            }
+
+            .banner_text {
+                background-color: #fff;
+                font-size: 15px;
+                font-weight: 700;
+                padding: 12px;
+                text-align: center;
+                text-transform: uppercase;
+            }
+
+            .main_content {
+                .section__title {
+                    color: #4e4e4e;
+                    margin: 35px 0px 15px;
+                }
+
+                .categories {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    grid-column-gap: 6px;
+                    grid-row-gap: 6px;
+                }
             }
         }
 
-        .banner_text {
-            background-color: #fff;
-            font-size: 15px;
-            font-weight: 700;
-            padding: 12px;
-            text-align: center;
-            text-transform: uppercase;
+        .products_list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-column-gap: 6px;
+            grid-row-gap: 20px;
         }
-
-        .main_content {
-            .section__title {
-                color: #4e4e4e;
-                margin: 35px 0px 15px;
-            }
-
-            .categories {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                grid-column-gap: 6px;
-                grid-row-gap: 6px;
-                
-            }
-        }
-    }
-
-    .products_list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-column-gap: 6px;
-        grid-row-gap: 20px;
     }
 }

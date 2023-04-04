@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from './modalLoginUsuario.module.scss'
+import styles from "./modalLoginUsuario.module.scss";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -12,7 +12,7 @@ import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 import { ILogin } from "../../../compartilhado/ILogin";
 import { httpUsuario } from "../../../http";
-
+import styledComponents from 'styled-components'
 
 
 const style = {
@@ -24,9 +24,8 @@ const style = {
   height: "700px",
   bgcolor: "background.paper",
   boxShadow: 24,
-  display: "flex"
+  display: "flex",
 };
-
 
 const ButtonLogarGoogle = styled(Button)({
   boxShadow: "none",
@@ -57,8 +56,7 @@ const ButtonLogarGoogle = styled(Button)({
 const InputField = styled(TextField)({
   width: "100%",
   margin: "10px 0",
-})
-
+});
 
 const ButtonLogar = styled(Button)({
   boxShadow: "none",
@@ -84,8 +82,7 @@ const ButtonLogar = styled(Button)({
     backgroundColor: "#000",
     borderColor: "#000",
   },
-})
-
+});
 
 const ButtonLogin = styled(Button)({
   marginRight: "15px",
@@ -124,35 +121,46 @@ const ButtonLogin = styled(Button)({
     boxShadow: "none",
     backgroundColor: "#65bce8",
     borderColor: "#005cbf",
-  }
+  },
 });
 
 
+interface DivMensagemErroProps {
+  isBadRequest: boolean 
+}
 
+const DivMensagemErro = styledComponents.div<DivMensagemErroProps>`
+  color: ${props => (props.isBadRequest ? " #CC3A3A" : "#fff")};
+  text-align: center;
+  font-weight: bold;
+`;
 
 export default function ModalLoginUsuario() {
   const [open, setOpen] = React.useState(false);
-  const [login, setLogin] = React.useState<ILogin>({ email: "", password: ""}); 
+  const [login, setLogin] = React.useState<ILogin>({ email: "", password: "" });
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassWord] = React.useState<string>("");
-  const [keepPassword, setKeepPassword] = React.useState<boolean>(false)
+  const [keepPassword, setKeepPassword] = React.useState<boolean>(false);
+  const [isBadRequest, setIsBadRequest] = React.useState<boolean>(false);
 
+
+
+  const mensagemErroRef = React.useRef(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   function setarObjectLogin() {
-    setLogin({ email: email, password: password})
+    setLogin({ email: email, password: password });
   }
-
 
   const gatilhoFuncoesLogin = () => {
-    setarObjectLogin()
-    console.log(login)
-  }
+    setarObjectLogin();
+    console.log(login);
+  };
 
   const realizarLogin = () => {
+    setarObjectLogin();
 
 
     setarObjectLogin()
@@ -161,8 +169,6 @@ export default function ModalLoginUsuario() {
     .then((resp) => console.log(resp))
     .catch((err) => console.log(err))
   }
-
-
 
   return (
     <div>
@@ -182,21 +188,34 @@ export default function ModalLoginUsuario() {
       >
         <Fade in={open}>
           <Box sx={style}>
-
             <div className={styles.modal__leftSide}>
-              <div><img src={logo.src} alt="" /></div>
+              <div>
+                <img src={logo.src} alt="" />
+              </div>
               <div className={styles.modal__leftSide__textoModal}>
                 <h2>SEJA BEM VINDO</h2>
                 <p>
-                  Esperamos que você aproveite ao máximo a sua experiência conosco e
-                  que encontre aqui um espaço para se conectar e se inspirar para
-                  viver uma vida mais saudável e ativa.
+                  Esperamos que você aproveite ao máximo a sua experiência
+                  conosco e que encontre aqui um espaço para se conectar e se
+                  inspirar para viver uma vida mais saudável e ativa.
                 </p>
               </div>
               <form onSubmit={(e) => e.preventDefault()}>
-                <InputField label="Email" type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                <InputField label="Senha" type="password" onChange={(e) => setPassWord(e.target.value)} value={password} />
-                <div className={styles.modal__leftSide__mensagemErro + " " + styles.ocultar}>Verifique seu email ou senha!</div>
+                <InputField
+                  label="Email"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+                <InputField
+                  label="Senha"
+                  type="password"
+                  onChange={(e) => setPassWord(e.target.value)}
+                  value={password}
+                />
+                <DivMensagemErro isBadRequest={isBadRequest}>
+                  Verifique o seu email ou senha
+                </DivMensagemErro>
                 <div className={styles.modal__leftSide__ganchos}>
                   <div className={styles.modal__leftSide__checkbox}>
                     <Checkbox />
@@ -206,17 +225,21 @@ export default function ModalLoginUsuario() {
                     <p>Esqueceu a Senha?</p>
                   </div>
                 </div>
-              <div className={styles.modal__leftSide__buttons}>
-                  <ButtonLogar type="submit" onClick={(e) => realizarLogin()}>ENTRAR</ButtonLogar>
-                  <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
+                <div className={styles.modal__leftSide__buttons}>
+                  <ButtonLogar type="submit" onClick={(e) => realizarLogin()}>
+                    ENTRAR
+                  </ButtonLogar>
+                  <ButtonLogarGoogle startIcon={<FcGoogle />}>
+                    ENTRAR COM GOOGLE
+                  </ButtonLogarGoogle>
                 </div>
-
               </form>
-              <div className={styles.modal__leftSide__singIn}>Não conta tem sua usuário cadastrada? <Link href='cadastro-usuario'>Cadastre-se</Link></div>
+              <div className={styles.modal__leftSide__singIn}>
+                Não conta tem sua usuário cadastrada?{" "}
+                <Link href="cadastro-usuario">Cadastre-se</Link>
+              </div>
             </div>
-            <div className={styles.modal__divImagem}>
-
-            </div>
+            <div className={styles.modal__divImagem}></div>
           </Box>
         </Fade>
       </Modal>
