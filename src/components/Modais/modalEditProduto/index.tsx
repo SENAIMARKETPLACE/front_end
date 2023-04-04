@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { IProduto } from "../../../compartilhado/IProduto";
 import http from "../../../http";
+import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
 
 interface modalEditarProps {
   idSelecionado: string;
@@ -40,6 +41,12 @@ const ModalEditarProduto = ({
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+
+  const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
+
+  const [subcategories, setSubcategories] = useState(
+    categories[0].subcategories
+  );
 
   const style = {
     position: "absolute" as "absolute",
@@ -77,52 +84,20 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
 
-  const categories = [
-    {
-      value: "Acessórios",
-      label: "Acessórios",
-    },
-    {
-      value: "Suplementos",
-      label: "Suplementos",
-    },
-    {
-      value: "Esportes",
-      label: "Esportes",
-    },
-    {
-      value: "Roupas",
-      label: "Roupas",
-    },
-    {
-      value: "Calçados",
-      label: "Calçados",
-    },
-  ].map((option) => (
+  const categorias = categories.map((category) => (
+    <MenuItem key={category.value} value={category.value}>
+      {category.label}
+    </MenuItem>
+  ));
+
+  const sub = subcategories.map((option) => (
     <MenuItem key={option.value} value={option.value}>
       {option.label}
     </MenuItem>
   ));
 
-  const subscategories = [
-    {
-      value: "corrida",
-      label: "Corrida",
-    },
-    {
-      value: "casual",
-      label: "Casual",
-    },
-  ].map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ));
 
-  function atirarFuncoes() {
-    handleOpen(), regastarInformacoesProdutoSelecionado();
-  }
-
+  
   const regastarInformacoesProdutoSelecionado = () => {
     http
       .get<IProduto>(`/produtos/${idSelecionado}`)
@@ -135,14 +110,42 @@ const ModalEditarProduto = ({
         setSubCategoria(resp.data.sub_categoria);
         setQuantidade(resp.data.quantidade);
         setPreco(resp.data.preco);
+        setarSubCategorias(categoria)
+
       })
       .catch((err) => alert(err));
   };
 
+
+
+  function setarSubCategorias(nomeCategoriaSelecionada: string) {
+    if (nomeCategoriaSelecionada === "Calçados") {
+      setSubcategories(categories[0].subcategories);
+    } else if (nomeCategoriaSelecionada === "Roupas") {
+      setSubcategories(categories[1].subcategories);
+    } else if (nomeCategoriaSelecionada === "Suplementos") {
+      setSubcategories(categories[2].subcategories);
+    } else if (nomeCategoriaSelecionada === "Esportes") {
+      setSubcategories(categories[3].subcategories);
+    } else if (nomeCategoriaSelecionada === "Acessórios") {
+      setSubcategories(categories[4].subcategories);
+    }
+  }
+
+  
+  function atirarFuncoes() {
+    handleOpen(), regastarInformacoesProdutoSelecionado();
+  }
+
+
+ 
+
   function regastarListaProdutos() {
     http
-      .get('/produtos')
-      .then((response) => {setarLista(response.data)})
+      .get("/produtos")
+      .then((response) => {
+        setarLista(response.data);
+      })
       .catch((error) => console.error);
   }
 
@@ -176,7 +179,7 @@ const ModalEditarProduto = ({
           <form className={styles.form}>
             <div className={styles.product}>
               <div className={styles.photo}>
-                <img src={urlImagem} alt={nomeProduto}/>
+                <img src={urlImagem} alt={nomeProduto} />
               </div>
               <TextField
                 InputLabelProps={{ shrink: true }}
@@ -218,20 +221,21 @@ const ModalEditarProduto = ({
                 InputLabelProps={{ shrink: true }}
                 label="Categoria"
                 className={styles.category}
-                onChange={(e) => setCategoria(e.target.value)}
+                onChange={(e) =>  {setCategoria(e.target.value)}}
                 value={categoria}
               >
-                {categories}
+                {categorias}
               </TextField>
               <TextField
                 InputLabelProps={{ shrink: true }}
                 select
-                label="Subcategoria"
+                label="Sub-categoria"
+                disabled={false}
                 className={styles.subcategory}
-                onChange={(e) => setSubCategoria(e.target.value)}
+                onChange={(e) => {setSubCategoria(e.target.value), setarSubCategorias(categoria)}}
                 value={subCategoria}
               >
-                {subscategories}
+                {sub}
               </TextField>
               <TextField
                 InputLabelProps={{ shrink: true }}

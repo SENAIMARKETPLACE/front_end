@@ -23,45 +23,12 @@
   "empresas": [],
   "produtos": [
     {
-      "nome_produto": "Camisa Corinthians",
-      "descricao": "Timão",
-      "url_imagem": "https://static.netshoes.com.br/produtos/camisa-corinthians-i-2223-sn-torcedor-nike-masculina/28/2IC-7604-028/2IC-7604-028_zoom1.jpg?ts=1650507131&ims=544x",
-      "publico": "masculino",
-      "categoria": "Esportes",
-      "sub_categoria": "casual",
-      "quantidade": "50",
-      "preco": "250,00",
-      "id": 2
-    },
-    {
-      "nome_produto": "Camisa Brasil I 22/23",
-      "descricao": "Assim como outras camisas da nossa coleção Stadium, esse modelo combina detalhes de design de réplica com tecido que absorve o suor para oferecer um visual preparado para o jogo e inspirado na sua seleção favorita. Benefícios Tecnologia Nike Dri-FIT absorve o suor da sua pele para evaporação mais rápida, ajudando a manter você seco e confortável. O design de réplica é baseado naquele que os craques usam em campo. Detalhes do Produto 100% poliéster Lavável à máquina Importado Tamanho & Caimento Produto com modelagem justa. Considere adquirir um tamanho maior caso deseje um caimento mais solto. P - Busto 88-96 Cintura 73-81 Quadril 88-96 M - Busto 96-104 Cintura 81-89 Quadril 96-104 G - Busto 104-112 Cintura 89-97 Quadril 104-112 GG - Busto 112-124 Cintura 97-109 Quadril 112-120 GGG - Busto 124-136 Cintura 109-121 Quadril 120-128 Medidas em cm",
-      "url_imagem": "https://static.netshoes.com.br/produtos/camisa-nike-brasil-i-202223-torcedor-pro-masculina/30/2IC-9532-030/2IC-9532-030_zoom1.jpg?ts=1660303077&ims=544x",
-      "publico": "masculino",
-      "categoria": "Esportes",
-      "sub_categoria": "casual",
-      "quantidade": "45",
-      "preco": "110,00",
-      "id": 3
-    },
-    {
-      "nome_produto": "Camisa Santos FC",
-      "descricao": "Camisa do Peixão",
-      "url_imagem": "https://pbs.twimg.com/media/DU3yfg7WkAEzEnd.jpg",
-      "publico": "masculino",
-      "categoria": "Esportes",
-      "sub_categoria": "casual",
-      "quantidade": "78",
-      "preco": "99,99",
-      "id": 4
-    },
-    {
-      "nome_produto": "Nutri Whey Isolado E Concentrado",
+      "nome_produto": "Nutri Whey Isolado",
       "descricao": "Maltodextrina, proteína concentrada do soro de leite, frutose, colágeno hidrolisado, albumina desidratada, proteína isolada do soro de leite, mix de minerais [cálcio (fosfato de cálcio tribásico anidro), fósforo (fosfato de cálcio monobásico mono-hidratado), magnésio (sulfato de magnésio mono-hidratado), ferro (ferro reduzido), úor (uoreto de sódio anidro), manganês (sulfato de manganês mono-hidratado), iodo (iodeto de potássio), molibdênio (molibdato de sódio di-hidratado), cromo (dinicotinato glicinato de cromo) e selênio (selenito de sódio)], mix de vitaminas [C (ácido ascórbico), B3 (nicotinamida), E (acetato de tocoferol), B5 (pantotenato de cálcio), B2 (riboavina), B6 (piridoxina) e B1 (tiamina mononitrato), A (palmitato de retinol), B9 (ácido fólico), H (biotina), D (colecalciferol), B12 (cianocobalamina)], aroma idêntico ao natural, sucralose e acessulfame K (edulcorantes). ALÉRGICOS: CONTÉM DERIVADOS DE LEITE E SOJA",
       "url_imagem": "https://m.media-amazon.com/images/I/41z3RCA2HIL._AC_.jpg",
       "publico": "unissex",
       "categoria": "Suplementos",
-      "sub_categoria": "",
+      "sub_categoria": "Proteínas",
       "quantidade": "23",
       "preco": "60,90",
       "id": 5
