@@ -12,8 +12,6 @@ import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 import { ILogin } from "../../../compartilhado/ILogin";
 import { httpUsuario } from "../../../http";
-import styledComponents from 'styled-components'
-
 
 const style = {
   position: "absolute" as "absolute",
@@ -129,11 +127,7 @@ interface DivMensagemErroProps {
   isBadRequest: boolean 
 }
 
-const DivMensagemErro = styledComponents.div<DivMensagemErroProps>`
-  color: ${props => (props.isBadRequest ? " #CC3A3A" : "#fff")};
-  text-align: center;
-  font-weight: bold;
-`;
+
 
 export default function ModalLoginUsuario() {
   const [open, setOpen] = React.useState(false);
@@ -213,9 +207,7 @@ export default function ModalLoginUsuario() {
                   onChange={(e) => setPassWord(e.target.value)}
                   value={password}
                 />
-                <DivMensagemErro isBadRequest={isBadRequest}>
-                  Verifique o seu email ou senha
-                </DivMensagemErro>
+              
                 <div className={styles.modal__leftSide__ganchos}>
                   <div className={styles.modal__leftSide__checkbox}>
                     <Checkbox />
