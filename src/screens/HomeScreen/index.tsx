@@ -7,12 +7,16 @@ import Link from "next/link";
 import FooterSollaris from "../../layout/Footer";
 import SectionOne from "../../components/homeScreenComponents/sectionOne";
 
+
 const HomeScreen = () => {
   return (
     <div className={styles.bodyHome}>
       <HeaderSollaris></HeaderSollaris>
       <main>
         <SectionOne />
+        asdasdas
+        asdasdasd
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur, eveniet ex dignissimos delectus velit voluptate molestias, culpa maxime praesentium sapiente ipsam aliquam fugiat repellat dolorem cupiditate. Omnis, deleniti. Qui, nesciunt.
       </main>
       <FooterSollaris></FooterSollaris>
     </div>

@@ -3,8 +3,10 @@
     background-position: center;
     background-size: cover;
     height: 50vh;
+    margin-bottom: 10em;
     align-items: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     .sectionOne__mainMessage{
         text-align: center;
