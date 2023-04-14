@@ -1,6 +1,8 @@
 import SectionOneBrands from "../sectionOneBrands";
 import styles from "./sectionOne.module.scss";
 
+
+
 const SectionOne = () => {
   return (
     <section className={styles.sectionOne}>

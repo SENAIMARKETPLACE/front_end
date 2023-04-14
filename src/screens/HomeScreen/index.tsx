@@ -6,7 +6,7 @@ import beneficios1 from "../../../public/images/beneficios1.png";
 import Link from "next/link";
 import FooterSollaris from "../../layout/Footer";
 import SectionOne from "../../components/homeScreenComponents/sectionOne";
-
+import SectionSignIn from "../../components/homeScreenComponents/sectionSignIn";
 
 const HomeScreen = () => {
   return (
@@ -14,9 +14,7 @@ const HomeScreen = () => {
       <HeaderSollaris></HeaderSollaris>
       <main>
         <SectionOne />
-        asdasdas
-        asdasdasd
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur, eveniet ex dignissimos delectus velit voluptate molestias, culpa maxime praesentium sapiente ipsam aliquam fugiat repellat dolorem cupiditate. Omnis, deleniti. Qui, nesciunt.
+        <SectionSignIn/>
       </main>
       <FooterSollaris></FooterSollaris>
     </div>
