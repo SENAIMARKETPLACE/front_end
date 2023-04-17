@@ -1,0 +1,21 @@
+.sectionSign{
+    margin-bottom: 5em;
+
+    h3{
+        font-size: 24px;
+        font-style: italic;
+        color: #016170;
+        font-weight: bold;
+        margin-bottom: 50px ;
+    }
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    .sectionSignCards{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        gap: 50px;
+    }
+}

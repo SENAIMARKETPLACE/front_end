@@ -1,4 +1,3 @@
-import SectionOneBrands from "../sectionOneBrands";
 import styles from "./sectionOne.module.scss";
 
 
@@ -12,7 +11,6 @@ const SectionOne = () => {
           bem-vindo à Sollaris.
         </h2>
       </div>
-      <SectionOneBrands />
     </section>
   );
 };
