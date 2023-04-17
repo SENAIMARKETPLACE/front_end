@@ -1,7 +1,37 @@
+
+.buttonLogin{
+    margin-right: 15px;
+    box-shadow: none;
+    text-transform: none;
+    font-size: 16px;
+    padding:  0px 20px;
+    height: 50px;
+    border-radius: 50px ;
+    font-weight: 400;
+    background-color: #fff;
+    border: 1px solid #000000a9;
+    color: #000;
+    transition: all ease-in 500ms;
+    &:hover{
+        background-color: #000;
+        border-color: #000;
+        box-shadow: none;
+        color: #fff;
+    }
+    &:active{
+        box-shadow: none;
+        background-color: #65bce8;
+        border-color: #005cbf;
+    }
+
+
+}
+
 .modal__leftSide {
     padding: 1em 5em;
     width: 50%;
     height: 100%;
+
     .modal__leftSide__textoModal {
         text-align: center;
         margin-bottom: 20px;
@@ -22,21 +52,25 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .modal__leftSide__checkbox {
             display: flex;
             align-items: center;
         }
     }
-    .modal__leftSide__buttons{
-        margin-top: 20px ;
+
+    .modal__leftSide__buttons {
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    .modal__leftSide__singIn{
+
+    .modal__leftSide__singIn {
         text-align: center;
         margin-top: 2em;
     }
+
     img {
         width: 90px;
         height: 90px;
@@ -52,10 +86,5 @@
     background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
     background-repeat: no-repeat;
     background-size: cover;
-    
+
 }
-
-
-
-
-
