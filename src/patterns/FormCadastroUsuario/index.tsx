@@ -62,13 +62,20 @@ const FormCadastroUsuario = () => {
   ];
   const [idPasso, setIdPasso] = useState(0);
 
+  const converterParaDataLocal = (dataInformada: string): string => {
+     let data = new Date(dataInformada)
+
+     // data local 
+    return  data.toLocaleDateString()
+  }
 
   const salvarUsuarioEEndereco = (e: React.MouseEvent<HTMLButtonElement>, dados: IDataUser) => {
     e.preventDefault()
+    console.log(dados)
     const user: IUsuario = {
       nome: dados.nome,
       cpf: dados.cpf,
-      dt_nascimento: dados.dataNasc,
+      dt_nascimento: converterParaDataLocal(dados.dataNasc),
       senha: dados.senha,
       telefone: dados.telefone,
       genero: dados.genero,
@@ -85,6 +92,7 @@ const FormCadastroUsuario = () => {
       estado: dados.estado,
       complemento: dados.complemento
     }
+    console.log(user)
     httpUsuario.post('/api/users', user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => capturarIdUser(resp, dados, endereco))
