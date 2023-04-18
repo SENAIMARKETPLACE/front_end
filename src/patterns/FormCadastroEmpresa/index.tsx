@@ -91,21 +91,21 @@ const FormCadastroEmpresa = () => {
       telefone: dados.telefone, 
       email: dados.email, 
       url_logo: dados.url_logo, 
-      senha: dados.senha
+      senha: dados.senha,
+      endereco: {
+        cep: dados.cep, 
+        logradouro: dados.logradouro, 
+        numero: dados.numero, 
+        bairro: dados.bairro, 
+        cidade: dados.cidade, 
+        estado: dados.estado, 
+        complemento: dados.complemento
+
+      }
     }
-    const endereco: IEndereco = {
-      cep: dados.cep, 
-      logradouro: dados.logradouro, 
-      numero: dados.numero, 
-      bairro: dados.bairro, 
-      cidade: dados.cidade, 
-      estado: dados.estado, 
-      complemento: dados.complemento
-    }
+    
     httpEmpresa.post('/api/business', empresa)
-    .then((resp) => capturarIdEmpresa(resp, data, endereco) )
-    .then((resp) =>  httpEmpresa.post('/api/business/address', endereco))
-    .then((respo) => alert(`${empresa.nome_fantasia} cadastrada com sucesso!`))
+    .then((resp) => alert(`${empresa.nome_fantasia} cadastrada com sucesso!`))
     .catch((error) => alert("Deu Ruim"))
   }
   

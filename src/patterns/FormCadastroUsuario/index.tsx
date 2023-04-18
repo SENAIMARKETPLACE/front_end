@@ -63,7 +63,7 @@ const FormCadastroUsuario = () => {
   const [idPasso, setIdPasso] = useState(0);
 
   const converterParaDataLocal = (dataInformada: string): string => {
-     let data = new Date(dataInformada)
+    let data = new Date(dataInformada)
 
      // data local 
     return  data.toLocaleDateString()
@@ -82,21 +82,19 @@ const FormCadastroUsuario = () => {
       email: dados.email,
       grupos_interesses: dados.listaInteresses,
       img: dados.urlFotoPerfil,
-    }
-    const endereco: IEndereco = {
-      cep: dados.cep,
-      logradouro: dados.logradouro,
-      numero: dados.numero,
-      bairro: dados.bairro,
-      cidade: dados.cidade,
-      estado: dados.estado,
-      complemento: dados.complemento
-    }
-    console.log(user)
+      endereco: {
+        cep: dados.cep,
+        logradouro: dados.logradouro,
+        numero: dados.numero,
+        bairro: dados.bairro,
+        cidade: dados.cidade,
+        estado: dados.estado,
+        complemento: dados.complemento
+
+      }
+    }  
     httpUsuario.post('/api/users', user)
       // MULTIPLAS REQUISIÇÕES -> POS
-      .then((resp) => capturarIdUser(resp, dados, endereco))
-      .then((resp) => httpUsuario.post('/api/user/address', endereco))
       .then((resp) => alert(`${user.nome} criado com sucesso`))
       .catch((err) => alert("Deu Ruim"))
   }

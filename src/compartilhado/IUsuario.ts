@@ -11,5 +11,5 @@ export interface IUsuario{
     email: string | string[] ;
     grupos_interesses: string | string[];
     img: string | string[],
-    endereco? : IEndereco; 
+    endereco : IEndereco; 
 }
