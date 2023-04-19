@@ -53,6 +53,9 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         onChange={(e) => {
           atualizarCampo("cep", e.target.value);
         }}
+        onBlur={(e) => {
+          consumirApiViaCEP(data.cep, data);
+        }}
         className={styles.camposCadastros__cep}
       ></InputField>
       <Button
