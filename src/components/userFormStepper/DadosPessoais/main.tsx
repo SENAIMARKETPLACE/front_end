@@ -55,8 +55,10 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
-  const [errorGenero, setErrorGenero] = useState(true);
-  const [errorData, setErrorData] = useState(true);
+  const [errorGenero, setErrorGenero] = useState(false);
+  const [errorTelefone, setErrorTelefone] = useState(false);
+  const [errorNome, setErrorNome] = useState(false);
+  const [errorFotoPerfil, setErrorFotoPerfil] = useState(false);
 
   /* 
     ^: início da string
@@ -69,8 +71,31 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
   */
 
 
-  const validarGenero = (genero : string) => {
-    if(data.genero === ""){
+
+
+  const validarFoto = (fotoDigitada: string) => {
+    const regexFoto = /\.(png|jpg)$/
+    if(regexFoto.test(fotoDigitada)){
+      setErrorFotoPerfil(false)
+    }else{
+      setErrorFotoPerfil(true)
+    }
+
+  }  
+
+  const validarNome = (nomeDigitado: string) => {
+    const regexNome = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s-]+$/;
+    if(regexNome.test(nomeDigitado)){
+      setErrorNome(false)
+    }else{
+      setErrorNome(true)
+    }
+   
+
+  }
+
+  const validarGenero = (generoDigitado : string) => {
+    if(data.genero  === ""){
       setErrorGenero(true)
     } else {
       setErrorGenero(false)
@@ -95,6 +120,14 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
       setErrorEmail(true)
     }
 
+  }
+
+  const validarTelefone = (telefoneDigitado: string) => {
+    if(telefoneDigitado.length === 11 ){
+      setErrorTelefone(false)
+    }else {
+      setErrorTelefone(true)
+    }
   }
 
   const validarCampoConfirmarSenha = (senhaDigitada: string) => {
@@ -148,6 +181,8 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
         InputLabelProps={{ shrink: true }}
         required
         value={data.nome || ""}
+        error={errorNome}
+        onBlur={(e) => {validarNome(data.nome)}}
         onChange={(e) => {
           atualizarCampo("nome", e.target.value);
         }}
@@ -172,14 +207,19 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
         label="URL Foto de Perfil"
         InputLabelProps={{ shrink: true }}
         required
+        error={errorFotoPerfil}
+        onBlur={(e) => {validarFoto(data.urlFotoPerfil)}}
         value={data.urlFotoPerfil || ""}
         onChange={(e) => atualizarCampo("urlFotoPerfil", e.target.value)}
         className={styles.campoCadastro__urlPerfil}
       ></InputField>
       <InputField
         label="Telefone"
+        inputProps={{ maxLength: 11 }}
         InputLabelProps={{ shrink: true }}
         required
+        error={errorTelefone}
+        onBlur={(e) => validarTelefone(data.telefone)}
         value={data.telefone || ""}
         onChange={(e) => atualizarCampo("telefone", e.target.value)}
         className={styles.camposCadastro__telefone}
