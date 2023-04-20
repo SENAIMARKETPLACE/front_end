@@ -40,6 +40,12 @@ const formTemplate: IDataUser = {
 
 const FormCadastroUsuario = () => {
   const [data, setData] = useState(formTemplate)
+  const [isDisabled, setIsDisable] = useState<boolean>(true)
+
+  const atualizarPeloFilho = (dadoFilho: boolean) => {
+    setIsDisable(dadoFilho)
+  }
+
 
   const atualizarCampo = (key: string, value: string) => {
     setData((prev) => {
@@ -50,13 +56,15 @@ const FormCadastroUsuario = () => {
 
 
 
+
+
   const capturarIdUser = (respApi: AxiosResponse, dataRecebida: IDataUser, variavelEndereco: IEndereco): void => {
     dataRecebida.id = respApi.data.id;
     variavelEndereco.usuario_id = dataRecebida.id
   }
 
   const formComponents = [
-    <DadosPessoais data={data} atualizarCampo={atualizarCampo} />,
+    <DadosPessoais onData={atualizarPeloFilho} data={data} atualizarCampo={atualizarCampo} />,
     <ListaInteresses data={data} />,
     <DadosResidencial data={data} atualizarCampo={atualizarCampo} />,
   ];
@@ -166,6 +174,7 @@ const FormCadastroUsuario = () => {
                 color="success"
                 type="submit"
                 onClick={nextStep}
+                disabled={isDisabled}
               >
                 <span>PRÓXIMO</span>
                 <MdNavigateNext />

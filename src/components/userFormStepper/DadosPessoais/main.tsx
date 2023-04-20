@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { IDataUser } from "../../../compartilhado/IDataUser";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { IMaskInput } from "react-imask";
 import styles from "./DadosPessoais.module.scss";
 import { height } from "@mui/system";
@@ -16,6 +16,7 @@ import { height } from "@mui/system";
 interface DadosPessoaisProps {
   data: IDataUser;
   atualizarCampo: (key: string, value: string) => void;
+  onData: (data: boolean) => void;
 }
 
 const InputField = styled(TextField)({
@@ -29,28 +30,10 @@ const SelectField = styled(Select)({
   margin: "5px 0",
 });
 
-interface CustomProps {
-  onChange: (event: { target: { name: string; value: string } }) => void;
-  name: string;
-}
 
-const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
-  function TextMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
-    return (
-      <IMaskInput
-        {...other}
-        mask="000.000.000-00"
-        onAccept={(value: any) =>
-          onChange({ target: { name: props.name, value } })
-        }
-        overwrite
-      />
-    );
-  }
-);
 
-const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
+
+const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: DadosPessoaisProps) => {
   const [errorCPF, setErrorCPF] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
@@ -59,7 +42,9 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
   const [errorTelefone, setErrorTelefone] = useState(false);
   const [errorNome, setErrorNome] = useState(false);
   const [errorFotoPerfil, setErrorFotoPerfil] = useState(false);
+  const [errorData, setErrorData] = useState(false);
 
+  const [buttonNextDisable, setButtonNextDisable] = useState<boolean>(false)
   /* 
     ^: início da string
     (?=.*\d): deve conter pelo menos um dígito
@@ -70,6 +55,10 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
     $: fim da string
   */
 
+  
+  
+   
+  
 
 
 
@@ -79,12 +68,15 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
       setErrorFotoPerfil(false)
     }else{
       setErrorFotoPerfil(true)
+      // setButtonNextDisable(true)
+      // onData(buttonNextDisable)
+
     }
 
   }  
 
   const validarNome = (nomeDigitado: string) => {
-    const regexNome = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s-]+$/;
+    const regexNome = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s-]{10,50}$/;
     if(regexNome.test(nomeDigitado)){
       setErrorNome(false)
     }else{
@@ -136,9 +128,16 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
     }else{
       setErrorConfirmPassword(false)
     }
-
-
   }
+
+  const validarData = (dataEscolhida: string) => {
+    if(data.dataNasc !== " "){
+      setErrorData(false)
+    }else{
+      setErrorData(true)
+    }
+  }
+
 
   const validarCampoCpf = (cpfDigitado: string) => {
     if (cpfDigitado.length !== 11) {
@@ -230,6 +229,8 @@ const DadosPessoais = ({ data, atualizarCampo }: DadosPessoaisProps) => {
         InputLabelProps={{ shrink: true }}
         required
         value={data.dataNasc || ""}
+        error={errorData}
+        onBlur={(e) => validarData(data.dataNasc)}
         onChange={(e) => atualizarCampo("dataNasc", e.target.value)}
         className={styles.camposCadastro__dtNasc}
       ></InputField>
