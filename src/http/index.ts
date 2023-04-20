@@ -7,9 +7,14 @@ export const httpEmpresa = axios.create({
 })
 
 export const httpUsuario = axios.create({
-    baseURL: 'http://localhost:8080/'
+    baseURL: 'http://localhost:8200/'
 })
 
 export const httpProduto = axios.create({
     baseURL: 'http://localhost:8100/'
+})
+
+
+export const httpApiMockada = axios.create({
+    baseURL: 'http://localhost:5000/'
 })

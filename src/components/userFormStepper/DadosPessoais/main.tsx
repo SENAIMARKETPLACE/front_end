@@ -9,10 +9,11 @@ import {
 import styled from "@emotion/styled";
 import { IDataUser } from "../../../compartilhado/IDataUser";
 import React, { FC, useState } from "react";
-import { IMaskInput } from "react-imask";
+import { IMaskInput, useIMask } from "react-imask";
 import styles from "./DadosPessoais.module.scss";
 import { height } from "@mui/system";
-
+import { InputMask } from "imask";
+import { useMask } from 'react-mask-field'
 interface DadosPessoaisProps {
   data: IDataUser;
   atualizarCampo: (key: string, value: string) => void;
@@ -33,7 +34,33 @@ const SelectField = styled(Select)({
 
 
 
-const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: DadosPessoaisProps) => {
+interface CustomProps {
+  onChange: (event: { target: { name: string; value: string } }) => void;
+  name: string;
+}
+
+
+const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
+  function TextMaskCustom(props, ref) {
+    const { onChange, ...other } = props;
+    return (
+      <IMaskInput
+        {...other}
+        mask="000.000.000-00"
+        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+        overwrite
+      />
+    );
+  },
+);
+
+
+
+const DadosPessoais: FC<DadosPessoaisProps> = ({
+  data,
+  atualizarCampo,
+  onData,
+}: DadosPessoaisProps) => {
   const [errorCPF, setErrorCPF] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
@@ -44,7 +71,37 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
   const [errorFotoPerfil, setErrorFotoPerfil] = useState(false);
   const [errorData, setErrorData] = useState(false);
 
-  const [buttonNextDisable, setButtonNextDisable] = useState<boolean>(false)
+  const [buttonNextDisable, setButtonNextDisable] = useState<boolean>(false);
+
+
+  const validarFoto = (fotoDigitada: string) => {
+    const regexFoto = /\.(png|jpg)$/;
+    if (regexFoto.test(fotoDigitada)) {
+      setErrorFotoPerfil(false);
+    } else {
+      setErrorFotoPerfil(true);
+      // setButtonNextDisable(true)
+      // onData(buttonNextDisable)
+    }
+  };
+
+  const validarNome = (nomeDigitado: string) => {
+    const regexNome = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s-]{10,50}$/;
+    if (regexNome.test(nomeDigitado)) {
+      setErrorNome(false);
+    } else {
+      setErrorNome(true);
+    }
+  };
+
+  const validarGenero = (generoDigitado: string) => {
+    if (data.genero === "") {
+      setErrorGenero(true);
+    } else {
+      setErrorGenero(false);
+    }
+  };
+
   /* 
     ^: início da string
     (?=.*\d): deve conter pelo menos um dígito
@@ -55,45 +112,6 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
     $: fim da string
   */
 
-  
-  
-   
-  
-
-
-
-  const validarFoto = (fotoDigitada: string) => {
-    const regexFoto = /\.(png|jpg)$/
-    if(regexFoto.test(fotoDigitada)){
-      setErrorFotoPerfil(false)
-    }else{
-      setErrorFotoPerfil(true)
-      // setButtonNextDisable(true)
-      // onData(buttonNextDisable)
-
-    }
-
-  }  
-
-  const validarNome = (nomeDigitado: string) => {
-    const regexNome = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s-]{10,50}$/;
-    if(regexNome.test(nomeDigitado)){
-      setErrorNome(false)
-    }else{
-      setErrorNome(true)
-    }
-   
-
-  }
-
-  const validarGenero = (generoDigitado : string) => {
-    if(data.genero  === ""){
-      setErrorGenero(true)
-    } else {
-      setErrorGenero(false)
-    }
-  }
-
   const validarCampoSenha = (senhaDigitada: string) => {
     const regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,16}$/;
     if (regexSenha.test(senhaDigitada)) {
@@ -103,41 +121,38 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
     }
   };
 
-
   const validarEmail = (emailDigitado: string) => {
-    const regexEmail= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; 
-    if(regexEmail.test(emailDigitado)){
-      setErrorEmail(false)
-    } else{
-      setErrorEmail(true)
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (regexEmail.test(emailDigitado)) {
+      setErrorEmail(false);
+    } else {
+      setErrorEmail(true);
     }
-
-  }
+  };
 
   const validarTelefone = (telefoneDigitado: string) => {
-    if(telefoneDigitado.length === 11 ){
-      setErrorTelefone(false)
-    }else {
-      setErrorTelefone(true)
+    if (telefoneDigitado.length === 11) {
+      setErrorTelefone(false);
+    } else {
+      setErrorTelefone(true);
     }
-  }
+  };
 
   const validarCampoConfirmarSenha = (senhaDigitada: string) => {
-    if(senhaDigitada !== data.senha){
-      setErrorConfirmPassword(true)
-    }else{
-      setErrorConfirmPassword(false)
+    if (senhaDigitada !== data.senha) {
+      setErrorConfirmPassword(true);
+    } else {
+      setErrorConfirmPassword(false);
     }
-  }
+  };
 
   const validarData = (dataEscolhida: string) => {
-    if(data.dataNasc !== " "){
-      setErrorData(false)
-    }else{
-      setErrorData(true)
+    if (data.dataNasc !== " ") {
+      setErrorData(false);
+    } else {
+      setErrorData(true);
     }
-  }
-
+  };
 
   const validarCampoCpf = (cpfDigitado: string) => {
     if (cpfDigitado.length !== 11) {
@@ -181,7 +196,9 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
         required
         value={data.nome || ""}
         error={errorNome}
-        onBlur={(e) => {validarNome(data.nome)}}
+        onBlur={(e) => {
+          validarNome(data.nome);
+        }}
         onChange={(e) => {
           atualizarCampo("nome", e.target.value);
         }}
@@ -190,7 +207,8 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
       <InputField
         error={errorCPF}
         label="CPF"
-        inputProps={{ maxLength: 11 }}
+        // ref={refFieldCPF}
+        inputProps={{ maxLength: 11}}
         InputLabelProps={{ shrink: true }}
         required
         value={data.cpf || ""}
@@ -200,14 +218,18 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
         onBlur={(e) => {
           validarCampoCpf(data.cpf);
         }}
+        
         className={styles.camposCadastro__cpf}
       ></InputField>
+
       <InputField
         label="URL Foto de Perfil"
         InputLabelProps={{ shrink: true }}
         required
         error={errorFotoPerfil}
-        onBlur={(e) => {validarFoto(data.urlFotoPerfil)}}
+        onBlur={(e) => {
+          validarFoto(data.urlFotoPerfil);
+        }}
         value={data.urlFotoPerfil || ""}
         onChange={(e) => atualizarCampo("urlFotoPerfil", e.target.value)}
         className={styles.campoCadastro__urlPerfil}
@@ -267,7 +289,10 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({ data, atualizarCampo, onData}: 
         InputLabelProps={{ shrink: true }}
         required
         value={data.senha || ""}
-        onChange={(e) => {atualizarCampo("senha", e.target.value), validarCampoConfirmarSenha(data.confirmeSenha)}}
+        onChange={(e) => {
+          atualizarCampo("senha", e.target.value),
+            validarCampoConfirmarSenha(data.confirmeSenha);
+        }}
         onBlur={(e) => validarCampoSenha(data.senha)}
         className={styles.camposCadastro__senha}
       ></InputField>
