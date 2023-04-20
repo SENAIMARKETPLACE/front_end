@@ -1,0 +1,193 @@
+@import "../../styles/Breakpoints.scss";
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700&display=swap");
+
+.page_container {
+    background-color: #f7f8fa;
+
+    .content {
+        display: flex;
+        .marketplace {
+            width: 100%;
+            padding: 25px;
+            padding-bottom: 80px;
+
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                border-bottom: 1px solid black;
+                cursor: pointer;
+                padding-bottom: 25px;
+                line-height: 1.4;
+
+                .return_icon {
+                    font-size: 40px;
+                    color: #454545;
+                }
+
+                .searchbar_and_avatar {
+                    display: flex;
+                    gap: 30px;
+                }
+            }
+
+            .categories {
+                display: flex;
+                justify-content: space-around;
+
+                background-color: #fff;
+                font-size: 14px;
+                padding: 12px;
+                text-transform: uppercase;
+            }
+
+            .product {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: 40px;
+
+                .product_images {
+                    display: grid;
+                    gap: 10px;
+                    grid-template-columns: 55px 1fr;
+
+                    .aditional_imgs {
+                        .product_img {
+                            border-radius: 5px;
+                            border: 1px solid #cecece;
+                            box-shadow: rgba(228, 228, 236, 0.2) 0px 8px 24px;
+                            max-height: 55px;
+                            width: 100%;
+                        }
+                    }
+
+                    .main_img {
+                        .product_img {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .product_info {
+                    padding: 10px;
+                    width: 100%;
+                    // background-color: yellow;
+
+                    .name {
+                        font-family: Fira Sans;
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+
+                    .rate {
+                        display: flex;
+                        font-size: 14px;
+                        gap: 10px;
+
+                        .star_selected {
+                            color: #5f78e7;
+                        }
+
+                        .star_default {
+                            color: #c7c7c7;
+                        }
+                    }
+
+                    .price {
+                        font-size: 35px;
+                        font-weight: 300;
+                    }
+
+                    .payment {
+                        color: #3c3c3c;
+                        font-size: 15px;
+                    }
+
+                    .payment_options {
+                        color: #5f78e7;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    .description {
+                        text-align: justify;
+                    }
+
+                    .size_options {
+                        display: flex;
+                        gap: 5px;
+
+                        .size {
+                            background-color: #4e4e4e;
+                            color: #fff;
+                            cursor: pointer;
+                            font-size: 14px;
+                            padding: 8px 14px;
+
+                            &:hover {
+                                background-color: #5f78e7;
+                            }
+                        }
+
+                        input[type="radio"]:after {
+                            width: 15px;
+                            height: 15px;
+                            border-radius: 15px;
+                            top: -2px;
+                            left: -1px;
+                            position: relative;
+                            background-color: #d1d3d1;
+                            content: "";
+                            display: inline-block;
+                            visibility: visible;
+                            border: 2px solid white;
+                        }
+
+                        input[type="radio"]:checked:after {
+                            width: 15px;
+                            height: 15px;
+                            border-radius: 15px;
+                            top: -2px;
+                            left: -1px;
+                            position: relative;
+                            background-color: #ffa500;
+                            content: "";
+                            display: inline-block;
+                            visibility: visible;
+                            border: 2px solid white;
+                        }
+                        .black {
+                        }
+                    }
+
+                    .button {
+                        // border-radius: 10px;
+                        padding: 15px;
+                        width: 100%;
+                    }
+
+                    .details {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+            }
+
+            .main_content {
+                .section__title {
+                    color: #4e4e4e;
+                    margin: 35px 0px 15px;
+                }
+            }
+        }
+
+        .products_list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-column-gap: 6px;
+            grid-row-gap: 20px;
+        }
+    }
+}
