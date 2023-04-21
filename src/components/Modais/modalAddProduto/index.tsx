@@ -12,6 +12,9 @@ import { httpProduto } from "../../../http";
 import { IProduto } from "../../../compartilhado/IProduto";
 import { BsPlus } from "react-icons/bs";
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
+import ModalInformacaoCadastro from "../modalInformacaoCadastro";
+import { IconType } from "react-icons/lib";
+import { MdCheckCircle, MdError } from "react-icons/md";
 
 
 
@@ -38,6 +41,14 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     setIsSubCategoriaDisable(true)
   };
 
+  const [openModalRegister, setOpenModalRegister] = useState(false);
+  const [mensagemModal, setMensagemModal] = useState<string>("");
+  const [descricaoModal, setDescricaoModal] = useState<string>("");
+  const [legendaBotao, setLegendaBotao] = useState<string>("");
+  const [corModal, setCorModal] = useState<string>("");
+  const [iconModal, setIconModal] = useState<IconType>();
+
+
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -56,7 +67,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     categories[index].subcategories
   );
 
-  
+
 
   const style = {
     position: "absolute" as "absolute",
@@ -162,107 +173,133 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
         setPreco("");
         setIsSubCategoriaDisable(true)
       })
-      .catch((erro: any) => console.log(erro));
+      .then((resp) => {
+        setOpenModalRegister(true);
+        setMensagemModal("PRODUTO CADASTRO COM SUCESSO!");
+        setDescricaoModal(
+          "MANTENHA ATUALIZADO E VÍSIVEL PARA SEUS CLIENTES"
+        );
+        setCorModal("#06C270");
+        setLegendaBotao("VOLTAR PARA A HOME E REALIZAR O LOGIN");
+        setIconModal(MdCheckCircle);
+      })
+      .catch((erro: any) => {
+        setOpenModalRegister(true);
+        setMensagemModal("FALHA A CADASTRAR PRODUTO!");
+        setCorModal("#CC3A3A");
+        setIconModal(MdError);
+        setLegendaBotao("REALIZAR O CADASTRO NOVAMENTE");
+      });
   };
 
   return (
-    <div>
-      <Button
-        variant="outlined"
-        startIcon={<BsPlus />}
-        onClick={handleOpen}
-        className={styles.open_btn}
-      >
-        Adicionar produto
-      </Button>
-      <Modal keepMounted open={open} onClose={handleClose}>
-        <Box sx={style}>
-          <form className={styles.form}>
-            <div className={styles.product}>
-              <div className={styles.photo}>
-                <img src={urlImagem} alt={nomeProduto} />
-              </div>
-              <TextField
-                label="Nome do produto"
-                className={styles.name}
-                onChange={(e) => setNomeProduto(e.target.value)}
-                value={nomeProduto}
-              />
-              <TextField
-                label="Descrição"
-                onChange={(e) => {
-                  setDescricao(e.target.value);
-                }}
-                multiline
-                rows={4}
-                className={styles.description}
-                value={descricao}
-              />
-              <TextField
-                label="URL da imagem"
-                className={styles.url}
-                onChange={(e) => setUrlImagem(e.target.value)}
-                value={urlImagem}
-              />
-              <TextField
-                select
-                label="Público"
-                className={styles.genre}
-                onChange={(e) => setPublico(e.target.value)}
-                value={publico}
-              >
-                {targetAudienceList}
-              </TextField>
-              <TextField
-                select
-                label="Categoria"
-                className={styles.category}
-                onChange={(e) => {setCategoria(e.target.value), setIsSubCategoriaDisable(false)}}
-                value={categoria}
-              >
-                {categoriasLista}
-              </TextField>
-              <TextField
-                select
-                disabled={isSubCategoriaDisable}
-                label="Subcategoria"
-                className={styles.subcategory}
-                onChange={(e) => {setSubCategoria(e.target.value), setarSubCategorias(categoria)}}
-                value={subCategoria}
-              >
-                {sub}
-              </TextField>
-              <TextField
-                label="Quantidade"
-                className={styles.amount}
-                onChange={(e) => setQuantidade(e.target.value)}
-                value={quantidade}
-              />
-              <FormControl className={styles.price}>
-                <InputLabel>Preço</InputLabel>
-                <OutlinedInput
-                  startAdornment={
-                    <InputAdornment position="start">R$</InputAdornment>
-                  }
-                  label="Amount"
-                  value={preco}
-                  onChange={(e) => setPreco(e.target.value)}
-                />
-              </FormControl>
-            </div>
+    <>
 
-            <Button
-              onClick={criarProduto}
-              variant="contained"
-              type="submit"
-              className={styles.submit_btn}
-              
-            >
-              Salvar
-            </Button>
-          </form>
-        </Box>
-      </Modal>
-    </div>
+      <ModalInformacaoCadastro isOpen={openModalRegister}
+        mensagemModalPrincipalProps={mensagemModal}
+        descricaoModalProps={descricaoModal}
+        colorProps={corModal}
+        iconeProps={iconModal}
+        legendaBotaoProps={legendaBotao} />
+      <div>
+        <Button
+          variant="outlined"
+          startIcon={<BsPlus />}
+          onClick={handleOpen}
+          className={styles.open_btn}
+        >
+          Adicionar produto
+        </Button>
+        <Modal keepMounted open={open} onClose={handleClose}>
+          <Box sx={style}>
+            <form className={styles.form}>
+              <div className={styles.product}>
+                <div className={styles.photo}>
+                  <img src={urlImagem} alt={nomeProduto} />
+                </div>
+                <TextField
+                  label="Nome do produto"
+                  className={styles.name}
+                  onChange={(e) => setNomeProduto(e.target.value)}
+                  value={nomeProduto}
+                />
+                <TextField
+                  label="Descrição"
+                  onChange={(e) => {
+                    setDescricao(e.target.value);
+                  }}
+                  multiline
+                  rows={4}
+                  className={styles.description}
+                  value={descricao}
+                />
+                <TextField
+                  label="URL da imagem"
+                  className={styles.url}
+                  onChange={(e) => setUrlImagem(e.target.value)}
+                  value={urlImagem}
+                />
+                <TextField
+                  select
+                  label="Público"
+                  className={styles.genre}
+                  onChange={(e) => setPublico(e.target.value)}
+                  value={publico}
+                >
+                  {targetAudienceList}
+                </TextField>
+                <TextField
+                  select
+                  label="Categoria"
+                  className={styles.category}
+                  onChange={(e) => { setCategoria(e.target.value), setIsSubCategoriaDisable(false) }}
+                  value={categoria}
+                >
+                  {categoriasLista}
+                </TextField>
+                <TextField
+                  select
+                  disabled={isSubCategoriaDisable}
+                  label="Subcategoria"
+                  className={styles.subcategory}
+                  onChange={(e) => { setSubCategoria(e.target.value), setarSubCategorias(categoria) }}
+                  value={subCategoria}
+                >
+                  {sub}
+                </TextField>
+                <TextField
+                  label="Quantidade"
+                  className={styles.amount}
+                  onChange={(e) => setQuantidade(e.target.value)}
+                  value={quantidade}
+                />
+                <FormControl className={styles.price}>
+                  <InputLabel>Preço</InputLabel>
+                  <OutlinedInput
+                    startAdornment={
+                      <InputAdornment position="start">R$</InputAdornment>
+                    }
+                    label="Amount"
+                    value={preco}
+                    onChange={(e) => setPreco(e.target.value)}
+                  />
+                </FormControl>
+              </div>
+
+              <Button
+                onClick={criarProduto}
+                variant="contained"
+                type="submit"
+                className={styles.submit_btn}
+
+              >
+                Salvar
+              </Button>
+            </form>
+          </Box>
+        </Modal>
+      </div>
+
+    </>
   );
 }

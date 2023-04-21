@@ -122,7 +122,7 @@ const FormCadastroUsuario = () => {
     //   .then((resp) => alert(`${user.nome} criado com sucesso`))
     //   .catch((err) => alert("Deu Ruim"))
     httpApiMockada
-      .post("usuarios", user)
+      .post('usuarios', user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => {
         {
@@ -143,7 +143,6 @@ const FormCadastroUsuario = () => {
         setCorModal("#CC3A3A");
         setIconModal(MdError);
         setLegendaBotao("REALIZAR O CADASTRO NOVAMENTE");
-        console.log("Deu ruim");
       });
   };
 
