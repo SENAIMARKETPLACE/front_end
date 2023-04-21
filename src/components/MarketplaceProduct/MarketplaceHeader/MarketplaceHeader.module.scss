@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    padding-bottom: 25px;
+    line-height: 1.4;
+
+    .return_icon {
+        font-size: 40px;
+        color: #454545;
+    }
+
+    .searchbar_and_avatar {
+        display: flex;
+        gap: 30px;
+    }
+}
