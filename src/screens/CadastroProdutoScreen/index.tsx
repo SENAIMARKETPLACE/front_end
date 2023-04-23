@@ -61,7 +61,7 @@ const CadastroProdutoScreen = () => {
                             {products.map(product =>
                                 <ProductItemList
                                     key={product.id}
-                                    photo={product.url}
+                                    photo={product.img}
                                     name={product.nome}
                                     price={product.preco}
                                 />)}

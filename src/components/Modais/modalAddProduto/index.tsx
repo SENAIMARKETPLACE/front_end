@@ -8,22 +8,28 @@ import { Button, FormControl, OutlinedInput } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
-import { httpProduto } from "../../../http";
+import { httpApiMockada, httpProduto } from "../../../http";
 import { IProduto } from "../../../compartilhado/IProduto";
 import { BsPlus } from "react-icons/bs";
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
 
-
-
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
-  setarMensagemEEstadoRequisicao: (isOpenProps: boolean, mensagemProps: string) => void;
-
+  setarMensagemEEstadoRequisicao: (
+    isOpenProps: boolean,
+    mensagemProps: string
+  ) => void;
+  snackbarOpen: boolean;
+  setSnackbarOpen: (open: boolean) => void;
 }
-export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequisicao }: modalAddProductProp) {
+export default function ModalAddProduto({
+  setarLista,
+  setarMensagemEEstadoRequisicao,
+  snackbarOpen,
+  setSnackbarOpen,
+}: modalAddProductProp) {
   const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
-  const [mensagem, setMensagem] = useState("Produto Cadastrado!");
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -35,7 +41,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     setQuantidade("");
     setSubCategoria("");
     setPreco("");
-    setIsSubCategoriaDisable(true)
+    setIsSubCategoriaDisable(true);
   };
 
   // STATES PARA CAPTURA DE CAMPOS
@@ -47,7 +53,7 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
-  const [empresaid, setEmpresaId] = useState("1")
+  const [empresaid, setEmpresaId] = useState("1");
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [index, setIndex] = useState(0);
@@ -55,8 +61,6 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   const [subcategories, setSubcategories] = useState(
     categories[index].subcategories
   );
-
-  
 
   const style = {
     position: "absolute" as "absolute",
@@ -100,7 +104,6 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
     </MenuItem>
   ));
 
-
   const sub = subcategories.map((option) => (
     <MenuItem key={option.value} value={option.value}>
       {option.label}
@@ -108,10 +111,16 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
   ));
 
   const resgatarListaProdutos = () => {
-    httpProduto
-      .get("/api/products")
+    // httpProduto
+    //   .get("/api/products")
+    //   .then((resp) => {
+    //     setarLista(resp.data.content);
+    //   })
+    //   .catch((err) => console.log(err));
+    httpApiMockada
+      .get("produtos")
       .then((resp) => {
-        setarLista(resp.data.content);
+        setarLista(resp.data);
       })
       .catch((err) => console.log(err));
   };
@@ -143,15 +152,20 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
       quantidade,
       preco,
     };
-    httpProduto
-      .post("/api/products", produto)
+    // httpProduto
+    //   .post("/api/products", produto)
+    //   .then((resp) => {
+    //     console.log("Produto Criado com Sucesso");
+    //   })
+    httpApiMockada
+      .post("produtos", produto)
       .then((resp) => {
         console.log("Produto Criado com Sucesso");
       })
       .then((resp) => {
         resgatarListaProdutos();
-        setarMensagemEEstadoRequisicao(isOpen, mensagem)
         setOpen(false);
+        setSnackbarOpen(true);
         setNomeProduto("");
         setDescricao("");
         setUrlImagem("");
@@ -160,9 +174,10 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
         setQuantidade("");
         setSubCategoria("");
         setPreco("");
-        setIsSubCategoriaDisable(true)
+        setIsSubCategoriaDisable(true);
       })
       .catch((erro: any) => console.log(erro));
+    setIsSubCategoriaDisable(true);
   };
 
   return (
@@ -217,7 +232,9 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
                 select
                 label="Categoria"
                 className={styles.category}
-                onChange={(e) => {setCategoria(e.target.value), setIsSubCategoriaDisable(false)}}
+                onChange={(e) => {
+                  setCategoria(e.target.value), setIsSubCategoriaDisable(false);
+                }}
                 value={categoria}
               >
                 {categoriasLista}
@@ -227,7 +244,10 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
                 disabled={isSubCategoriaDisable}
                 label="Subcategoria"
                 className={styles.subcategory}
-                onChange={(e) => {setSubCategoria(e.target.value), setarSubCategorias(categoria)}}
+                onChange={(e) => {
+                  setSubCategoria(e.target.value),
+                    setarSubCategorias(categoria);
+                }}
                 value={subCategoria}
               >
                 {sub}
@@ -256,7 +276,6 @@ export default function ModalAddProduto({ setarLista, setarMensagemEEstadoRequis
               variant="contained"
               type="submit"
               className={styles.submit_btn}
-              
             >
               Salvar
             </Button>

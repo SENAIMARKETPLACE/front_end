@@ -14,18 +14,22 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { IProduto } from "../../../compartilhado/IProduto";
-import { httpProduto } from "../../../http";
+import { httpApiMockada, httpProduto } from "../../../http";
 
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
 
 interface modalEditarProps {
   idSelecionado: string;
   setarLista: (listaAtualizada: string[]) => void;
+  snackbarOpenEdit: boolean; 
+  setSnackbarEditOpen: (open: boolean) => void; 
 }
 
 const ModalEditarProduto = ({
   idSelecionado,
   setarLista,
+  setSnackbarEditOpen, 
+  snackbarOpenEdit
 }: modalEditarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -103,8 +107,10 @@ const ModalEditarProduto = ({
 
   
   const regastarInformacoesProdutoSelecionado = () => {
-    httpProduto
-      .get<IProduto>(`/api/products/${idSelecionado}`)
+    // httpProduto
+    //   .get<IProduto>(`/api/products/${idSelecionado}`)
+    httpApiMockada
+      .get<IProduto>(`produtos/${idSelecionado}`)
       .then((resp) => {
         setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
@@ -115,7 +121,6 @@ const ModalEditarProduto = ({
         setQuantidade(resp.data.quantidade);
         setPreco(resp.data.preco);
         setarSubCategorias(categoria)
-
       })
       .catch((err) => alert(err));
   };
@@ -145,9 +150,11 @@ const ModalEditarProduto = ({
  
 
   function regastarListaProdutos() {
-    httpProduto
-      .get('/api/products')
-      .then((response) => {setarLista(response.data.content)})
+    // httpProduto
+    //   .get('/api/products')
+    httpApiMockada
+      .get('produtos')
+      .then((response) => {setarLista(response.data)})
       .catch((error) => console.error);
   }
 
@@ -164,11 +171,19 @@ const ModalEditarProduto = ({
       quantidade: quantidade,
       preco: preco,
     };
-    httpProduto
-      .put(`/api/products/${idSelecionado}`, produtoAtualizado)
+    // httpProduto
+    //   .put(`produtos/${idSelecionado}`, produtoAtualizado)
+    //   .then((response) => setOpen(false))
+    //   .then((resp) => {
+    //     regastarListaProdutos();
+    //   })
+    //   .catch((err) => console.log(err));
+    httpApiMockada
+      .put(`produtos/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();
+        setSnackbarEditOpen(true)
       })
       .catch((err) => console.log(err));
   };
