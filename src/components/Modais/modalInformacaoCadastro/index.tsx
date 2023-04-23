@@ -94,7 +94,6 @@ const ModalInformacaoCadastro: FC<modalInformacaoCadastroProps> = ({
     <div>
       <Modal
         open={open}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

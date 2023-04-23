@@ -4,6 +4,7 @@ import { IDataEmpresa } from "../../../compartilhado/IDataEmpresa";
 import { ICep } from "../../../compartilhado/ICep";
 import { useState } from "react";
 import styles from './EnderecoEmpresa.module.scss'
+import { IconType } from "react-icons/lib";
 
 interface EnderecoEmpresaProps {
   data: IDataEmpresa;
@@ -16,6 +17,7 @@ const InputField = styled(TextField)({
 
 const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
   const [cepDados, setCEPDados] = useState<ICep>(null);
+  
 
   const consumirApiViaCEP = (cep: string, dataPreencher: IDataEmpresa) => {
     function preencherDados(cepRecebido: ICep, dataPreencher: IDataEmpresa) {

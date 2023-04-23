@@ -12,6 +12,9 @@ import { httpApiMockada, httpProduto } from "../../../http";
 import { IProduto } from "../../../compartilhado/IProduto";
 import { BsPlus } from "react-icons/bs";
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
+import ModalInformacaoCadastro from "../modalInformacaoCadastro";
+import { IconType } from "react-icons/lib";
+import { MdCheckCircle, MdError } from "react-icons/md";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -44,6 +47,14 @@ export default function ModalAddProduto({
     setIsSubCategoriaDisable(true);
   };
 
+  const [openModalRegister, setOpenModalRegister] = useState(false);
+  const [mensagemModal, setMensagemModal] = useState<string>("");
+  const [descricaoModal, setDescricaoModal] = useState<string>("");
+  const [legendaBotao, setLegendaBotao] = useState<string>("");
+  const [corModal, setCorModal] = useState<string>("");
+  const [iconModal, setIconModal] = useState<IconType>();
+
+
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -61,8 +72,9 @@ export default function ModalAddProduto({
   const [subcategories, setSubcategories] = useState(
     categories[index].subcategories
   );
-
-  const style = {
+  
+  
+ const style = {
     position: "absolute" as "absolute",
     top: "50%",
     left: "50%",

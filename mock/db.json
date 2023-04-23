@@ -759,10 +759,151 @@
         "complemento": ""
       },
       "id": 38
+    },
+    {
+      "nome": "",
+      "cpf": "",
+      "dt_nascimento": "Invalid Date",
+      "senha": "",
+      "telefone": "",
+      "genero": "",
+      "email": "",
+      "img": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 39
+    },
+    {
+      "nome": "",
+      "cpf": "",
+      "dt_nascimento": "Invalid Date",
+      "senha": "",
+      "telefone": "",
+      "genero": "",
+      "email": "",
+      "img": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 40
+    },
+    {
+      "nome": "",
+      "cpf": "",
+      "dt_nascimento": "Invalid Date",
+      "senha": "",
+      "telefone": "",
+      "genero": "",
+      "email": "",
+      "img": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 41
     }
   ],
   "enderecos": [],
-  "empresas": [],
+  "empresas": [
+    {
+      "nome_proprietario": "123123",
+      "nome_fantasia": "1231231",
+      "razao_social": "1231231",
+      "cnpj": "213123",
+      "telefone": "12312312",
+      "email": "123123",
+      "url_logo": "123123",
+      "senha": "123123",
+      "endereco": {
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
+        "numero": "28",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": "Casa1"
+      },
+      "id": 1
+    },
+    {
+      "nome_proprietario": "",
+      "nome_fantasia": "",
+      "razao_social": "",
+      "cnpj": "",
+      "telefone": "",
+      "email": "",
+      "url_logo": "",
+      "senha": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 2
+    },
+    {
+      "nome_proprietario": "",
+      "nome_fantasia": "",
+      "razao_social": "",
+      "cnpj": "",
+      "telefone": "",
+      "email": "",
+      "url_logo": "",
+      "senha": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 3
+    },
+    {
+      "nome_proprietario": "",
+      "nome_fantasia": "",
+      "razao_social": "",
+      "cnpj": "",
+      "telefone": "",
+      "email": "",
+      "url_logo": "",
+      "senha": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 4
+    }
+  ],
   "produtos": [
     {
       "empresa_id": "1",
