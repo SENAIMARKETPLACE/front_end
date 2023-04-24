@@ -10,5 +10,6 @@ declare module 'styled-components' {
     SectionIcone?: string; // adicione aqui a sua propriedade personalizada
     TituloModal?: string; //
     ButtonRedirecionamento?: string
+    Color1: string;
 }
 }

@@ -907,14 +907,14 @@
   "produtos": [
     {
       "empresa_id": "1",
-      "nome": "Camisa Brasil 23/25",
+      "nome": "Camisa Brasil 22/23",
       "descricao": "Camisa Brasil",
       "img": "https://imgnike-a.akamaihd.net/1920x1920/0226390L.jpg",
       "publico": "masculino",
       "categoria": "Esportes",
       "sub_categoria": "Futebol",
       "quantidade": "20",
-      "preco": "249",
+      "preco": "249,00",
       "id": 14
     }
   ]

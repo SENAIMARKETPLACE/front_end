@@ -11,16 +11,17 @@ export default function NewProductModal() {
   const handleClose = () => setOpen(false);
 
   const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '800px',
-    width: '95 %',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    color: "#fff",
+    transform: "translate(-50%, -50%)",
+    width: "100vw",
     boxShadow: 24,
-    p: 4,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    p: 10,
   };
 
   return (

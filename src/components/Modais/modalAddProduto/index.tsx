@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { Button, FormControl, OutlinedInput } from "@mui/material";
+import { Button, FormControl, OutlinedInput, Select } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
@@ -15,6 +15,15 @@ import { categories } from "../../../compartilhado/variaveis/categorias-variavei
 import ModalInformacaoCadastro from "../modalInformacaoCadastro";
 import { IconType } from "react-icons/lib";
 import { MdCheckCircle, MdError } from "react-icons/md";
+import styled from "styled-components";
+// One of the following themes
+import "@simonwep/pickr/dist/themes/classic.min.css"; // 'classic' theme
+import "@simonwep/pickr/dist/themes/monolith.min.css"; // 'monolith' theme
+import "@simonwep/pickr/dist/themes/nano.min.css"; // 'nano' theme
+
+// Modern or es5 bundle (pay attention to the note below!)
+import Pickr from "@simonwep/pickr";
+import PickrComponent from "../../PickrComponent";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -32,7 +41,7 @@ export default function ModalAddProduto({
   setSnackbarOpen,
 }: modalAddProductProp) {
   const [open, setOpen] = useState(false);
-
+  const selectOptions = ["Kg", "g"];
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -54,7 +63,6 @@ export default function ModalAddProduto({
   const [corModal, setCorModal] = useState<string>("");
   const [iconModal, setIconModal] = useState<IconType>();
 
-
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -62,28 +70,33 @@ export default function ModalAddProduto({
   const [publico, setPublico] = useState("");
   const [categoria, setCategoria] = useState("");
   const [subCategoria, setSubCategoria] = useState("");
-  const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
   const [empresaid, setEmpresaId] = useState("1");
+  const [peso, setPeso] = useState("");
+  const [corArray, setCorArray] = useState([]);
+  const [tamanho, setTamanho] = useState("");
+  const [quantidade, setQuantidade] = useState("");
 
+  const [color, setColor] = useState("#000000");
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [index, setIndex] = useState(0);
 
   const [subcategories, setSubcategories] = useState(
     categories[index].subcategories
   );
-  
-  
- const style = {
+
+  const style = {
     position: "absolute" as "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     minWidth: "900px",
     maxWidth: "1200px",
-    width: "95 %",
+    width: "100vw",
     bgcolor: "background.paper",
     boxShadow: 24,
+    display: "flex",
+    justifyContent: "center",
     p: 4,
   };
 
@@ -265,6 +278,7 @@ export default function ModalAddProduto({
                 {sub}
               </TextField>
               <TextField
+                type="number"
                 label="Quantidade"
                 className={styles.amount}
                 onChange={(e) => setQuantidade(e.target.value)}
@@ -281,6 +295,29 @@ export default function ModalAddProduto({
                   onChange={(e) => setPreco(e.target.value)}
                 />
               </FormControl>
+              <TextField
+                label="Tamanho"
+                className={styles.size}
+                onChange={(e) => setTamanho(e.target.value)}
+                value={tamanho}
+              />
+              <TextField
+                label="Peso"
+                className={styles.weight}
+                onChange={(e) => setPeso(e.target.value)}
+                value={peso}
+              />
+
+              <div className={styles.colors}>
+                Cores:
+                <PickrComponent
+                  initialColor={color}
+                  onColorSelected={(color) => setColor(color)}
+                />
+                <div style={{ marginTop: "1rem" }}>
+                  Selected color: {color}
+                </div>
+              </div>
             </div>
 
             <Button

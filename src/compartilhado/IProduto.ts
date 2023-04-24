@@ -1,3 +1,5 @@
+import { IDetalhesProduto } from "./IDetalhesProduto";
+
 export interface IProduto{
     empresa_id?: string, 
     nome: string, 
@@ -6,6 +8,7 @@ export interface IProduto{
     publico: string, 
     categoria: string, 
     sub_categoria: string,
-    quantidade: string,
-    preco: string
+    quantidade?: string,
+    preco: string, 
+    detalhes_produto?: IDetalhesProduto
 }
