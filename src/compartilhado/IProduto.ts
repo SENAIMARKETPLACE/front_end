@@ -10,5 +10,5 @@ export interface IProduto{
     sub_categoria: string,
     quantidade?: string,
     preco: string, 
-    detalhes_produto?: IDetalhesProduto
+    detalhes_produto: IDetalhesProduto
 }

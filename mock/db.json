@@ -913,8 +913,13 @@
       "publico": "masculino",
       "categoria": "Esportes",
       "sub_categoria": "Futebol",
-      "quantidade": "20",
       "preco": "249,00",
+      "detalhes_produto": {
+        "peso": "2",
+        "quantidade": "10",
+        "tamanho": "222",
+        "cor": "021294"
+      },
       "id": 14
     }
   ]

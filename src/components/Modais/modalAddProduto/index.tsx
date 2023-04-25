@@ -16,13 +16,8 @@ import ModalInformacaoCadastro from "../modalInformacaoCadastro";
 import { IconType } from "react-icons/lib";
 import { MdCheckCircle, MdError } from "react-icons/md";
 import styled from "styled-components";
-// One of the following themes
-import "@simonwep/pickr/dist/themes/classic.min.css"; // 'classic' theme
-import "@simonwep/pickr/dist/themes/monolith.min.css"; // 'monolith' theme
-import "@simonwep/pickr/dist/themes/nano.min.css"; // 'nano' theme
 
 // Modern or es5 bundle (pay attention to the note below!)
-import Pickr from "@simonwep/pickr";
 import PickrComponent from "../../PickrComponent";
 
 interface modalAddProductProp {
@@ -36,6 +31,7 @@ interface modalAddProductProp {
 }
 export default function ModalAddProduto({
   setarLista,
+
   setarMensagemEEstadoRequisicao,
   snackbarOpen,
   setSnackbarOpen,
@@ -62,6 +58,7 @@ export default function ModalAddProduto({
   const [legendaBotao, setLegendaBotao] = useState<string>("");
   const [corModal, setCorModal] = useState<string>("");
   const [iconModal, setIconModal] = useState<IconType>();
+  const [categoriasESubCategorias, setCategoriasESubCategorias ] = useState<string>("")
 
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState("");
@@ -73,11 +70,13 @@ export default function ModalAddProduto({
   const [preco, setPreco] = useState("");
   const [empresaid, setEmpresaId] = useState("1");
   const [peso, setPeso] = useState("");
-  const [corArray, setCorArray] = useState([]);
   const [tamanho, setTamanho] = useState("");
   const [quantidade, setQuantidade] = useState("");
 
-  const [color, setColor] = useState("#000000");
+  const [colorPrimary, setColorPrimary] = useState("");
+  const [colorSecondary, setColorSecondary] = useState("");
+  const [colors, setColors] = useState("");
+
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [index, setIndex] = useState(0);
 
@@ -150,6 +149,9 @@ export default function ModalAddProduto({
       .catch((err) => console.log(err));
   };
 
+
+
+
   function setarSubCategorias(nomeCategoriaSelecionada: string) {
     if (nomeCategoriaSelecionada === "Calçados") {
       setSubcategories(categories[0].subcategories);
@@ -174,8 +176,13 @@ export default function ModalAddProduto({
       publico,
       categoria,
       sub_categoria: subCategoria,
-      quantidade,
       preco,
+      detalhes_produto: {
+        tamanho: tamanho,
+        peso: peso,
+        cor: colorPrimary,
+        quantidade: quantidade
+      }
     };
     // httpProduto
     //   .post("/api/products", produto)
@@ -199,11 +206,33 @@ export default function ModalAddProduto({
         setQuantidade("");
         setSubCategoria("");
         setPreco("");
+        setTamanho("");
+        setPeso("");
+        setColorPrimary("")
         setIsSubCategoriaDisable(true);
       })
       .catch((erro: any) => console.log(erro));
     setIsSubCategoriaDisable(true);
   };
+
+  const PrimaryColor = styled.div`
+    height: 55px; 
+    width: 50px; 
+    background-color: #${colorPrimary};
+    border: 1px solid #000
+  `
+  const SecondaryColor = styled.div`
+    height: 55px; 
+    width: 50px; 
+    background-color: #${colorSecondary};
+    border: 1px solid #000
+  `
+
+  React.useEffect(() => {
+    
+
+    
+  });
 
   return (
     <div>
@@ -309,15 +338,16 @@ export default function ModalAddProduto({
               />
 
               <div className={styles.colors}>
-                Cores:
-                <PickrComponent
-                  initialColor={color}
-                  onColorSelected={(color) => setColor(color)}
+                <TextField
+                  label="Cor Primária"
+                  className={styles.weight}
+                  onChange={(e) => setColorPrimary(e.target.value)}
+                  value={colorPrimary}
                 />
-                <div style={{ marginTop: "1rem" }}>
-                  Selected color: {color}
-                </div>
+                <PrimaryColor />
               </div>
+
+
             </div>
 
             <Button

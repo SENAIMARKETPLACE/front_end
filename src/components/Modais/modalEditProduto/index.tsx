@@ -17,18 +17,19 @@ import { IProduto } from "../../../compartilhado/IProduto";
 import { httpApiMockada, httpProduto } from "../../../http";
 
 import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
+import styled from "styled-components";
 
 interface modalEditarProps {
   idSelecionado: string;
   setarLista: (listaAtualizada: string[]) => void;
-  snackbarOpenEdit: boolean; 
-  setSnackbarEditOpen: (open: boolean) => void; 
+  snackbarOpenEdit: boolean;
+  setSnackbarEditOpen: (open: boolean) => void;
 }
 
 const ModalEditarProduto = ({
   idSelecionado,
   setarLista,
-  setSnackbarEditOpen, 
+  setSnackbarEditOpen,
   snackbarOpenEdit
 }: modalEditarProps) => {
   const [open, setOpen] = React.useState(false);
@@ -47,7 +48,9 @@ const ModalEditarProduto = ({
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
   const [empresaid, setEmpresaId] = useState("1")
-
+  const [peso, setPeso] = useState("");
+  const [tamanho, setTamanho] = useState("");
+  const [colorPrimary, setColorPrimary] = useState("");
 
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
@@ -63,27 +66,29 @@ const ModalEditarProduto = ({
     transform: "translate(-50%, -50%)",
     minWidth: "900px",
     maxWidth: "1200px",
-    width: "95 %",
+    width: "100vw",
     bgcolor: "background.paper",
     boxShadow: 24,
+    display: "flex",
+    justifyContent: "center",
     p: 4,
   };
 
   const targetAudienceList = [
     {
-      value: "masculino",
+      value: "MASCULINO",
       label: "Masculino",
     },
     {
-      value: "feminino",
+      value: "FEMININO",
       label: "Feminino",
     },
     {
-      value: "unissex",
+      value: "UNISSEX",
       label: "Unissex",
     },
     {
-      value: "criança",
+      value: "CRIANÇA",
       label: "Criança",
     },
   ].map((option) => (
@@ -105,26 +110,36 @@ const ModalEditarProduto = ({
   ));
 
 
-  
+
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
     httpApiMockada
       .get<IProduto>(`produtos/${idSelecionado}`)
       .then((resp) => {
+        console.log(resp.data)
         setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
         setUrlImagem(resp.data.img);
         setPublico(resp.data.publico);
         setCategoria(resp.data.categoria);
         setSubCategoria(resp.data.sub_categoria);
-        setQuantidade(resp.data.quantidade);
         setPreco(resp.data.preco);
+        setPeso(resp.data.detalhes_produto.peso);
+        setTamanho(resp.data.detalhes_produto.tamanho)
+        setQuantidade(resp.data.detalhes_produto.quantidade);
+        setColorPrimary(resp.data.detalhes_produto.cor);
         setarSubCategorias(categoria)
       })
       .catch((err) => alert(err));
   };
 
+
+  const categoriasLista = categories.map((option) => (
+    <MenuItem key={option.value} value={option.value}>
+      {option.label}
+    </MenuItem>
+  ));
 
 
   function setarSubCategorias(nomeCategoriaSelecionada: string) {
@@ -141,20 +156,20 @@ const ModalEditarProduto = ({
     }
   }
 
-  
+
   function atirarFuncoes() {
     handleOpen(), regastarInformacoesProdutoSelecionado();
   }
 
 
- 
+
 
   function regastarListaProdutos() {
     // httpProduto
     //   .get('/api/products')
     httpApiMockada
       .get('produtos')
-      .then((response) => {setarLista(response.data)})
+      .then((response) => { setarLista(response.data) })
       .catch((error) => console.error);
   }
 
@@ -168,8 +183,13 @@ const ModalEditarProduto = ({
       publico: publico,
       categoria: categoria,
       sub_categoria: subCategoria,
-      quantidade: quantidade,
       preco: preco,
+      detalhes_produto: {
+        peso: peso,
+        quantidade: quantidade,
+        tamanho: tamanho, 
+        cor: colorPrimary
+      }
     };
     // httpProduto
     //   .put(`produtos/${idSelecionado}`, produtoAtualizado)
@@ -187,27 +207,34 @@ const ModalEditarProduto = ({
       })
       .catch((err) => console.log(err));
   };
+  // <h1>PRODUTO DE CÓDIGO: {idSelecionado} </h1>
+
+
+
+  const PrimaryColor = styled.div`
+    height: 55px; 
+    width: 50px; 
+    background-color: #${colorPrimary};
+    border: 1px solid #000
+  `
 
   return (
     <div>
       <MdModeEdit className={styles.product__edit} onClick={atirarFuncoes} />
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
-          <h1>PRODUTO DE CÓDIGO: {idSelecionado} </h1>
           <form className={styles.form}>
             <div className={styles.product}>
               <div className={styles.photo}>
                 <img src={urlImagem} alt={nomeProduto} />
               </div>
               <TextField
-                InputLabelProps={{ shrink: true }}
                 label="Nome do produto"
                 className={styles.name}
                 onChange={(e) => setNomeProduto(e.target.value)}
                 value={nomeProduto}
               />
               <TextField
-                InputLabelProps={{ shrink: true }}
                 label="Descrição"
                 onChange={(e) => {
                   setDescricao(e.target.value);
@@ -218,14 +245,12 @@ const ModalEditarProduto = ({
                 value={descricao}
               />
               <TextField
-                InputLabelProps={{ shrink: true }}
                 label="URL da imagem"
                 className={styles.url}
                 onChange={(e) => setUrlImagem(e.target.value)}
                 value={urlImagem}
               />
               <TextField
-                InputLabelProps={{ shrink: true }}
                 select
                 label="Público"
                 className={styles.genre}
@@ -236,27 +261,30 @@ const ModalEditarProduto = ({
               </TextField>
               <TextField
                 select
-                InputLabelProps={{ shrink: true }}
                 label="Categoria"
                 className={styles.category}
-                onChange={(e) =>  {setCategoria(e.target.value)}}
+                onChange={(e) => {
+                  setCategoria(e.target.value), setIsSubCategoriaDisable(false);
+                }}
                 value={categoria}
               >
-                {categorias}
+                {categoriasLista}
               </TextField>
               <TextField
-                InputLabelProps={{ shrink: true }}
                 select
-                label="Sub-categoria"
-                disabled={false}
+                disabled={isSubCategoriaDisable}
+                label="Subcategoria"
                 className={styles.subcategory}
-                onChange={(e) => {setSubCategoria(e.target.value), setarSubCategorias(categoria)}}
+                onChange={(e) => {
+                  setSubCategoria(e.target.value),
+                    setarSubCategorias(categoria);
+                }}
                 value={subCategoria}
               >
                 {sub}
               </TextField>
               <TextField
-                InputLabelProps={{ shrink: true }}
+                type="number"
                 label="Quantidade"
                 className={styles.amount}
                 onChange={(e) => setQuantidade(e.target.value)}
@@ -273,7 +301,32 @@ const ModalEditarProduto = ({
                   onChange={(e) => setPreco(e.target.value)}
                 />
               </FormControl>
+              <TextField
+                label="Tamanho"
+                className={styles.size}
+                onChange={(e) => setTamanho(e.target.value)}
+                value={tamanho}
+              />
+              <TextField
+                label="Peso"
+                className={styles.weight}
+                onChange={(e) => setPeso(e.target.value)}
+                value={peso}
+              />
+
+              <div className={styles.colors}>
+                <TextField
+                  label="Cor Primária"
+                  className={styles.weight}
+                  onChange={(e) => setColorPrimary(e.target.value)}
+                  value={colorPrimary}
+                />
+                <PrimaryColor />
+              </div>
+              
+
             </div>
+
 
             <Button
               variant="contained"

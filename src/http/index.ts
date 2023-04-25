@@ -14,7 +14,12 @@ export const httpProduto = axios.create({
     baseURL: 'http://localhost:8100/'
 })
 
+export const httpCategoria = axios.create({
+    baseURL: 'http://localhost:8100/api/categories'
+})
 
 export const httpApiMockada = axios.create({
     baseURL: 'http://localhost:5000/'
 })
+
+

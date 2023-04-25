@@ -157,7 +157,7 @@ const EmpresaProdutosScreen = () => {
                     photo={product.img}
                     name={product.nome}
                     price={product.preco}
-                    amount={product.quantidade}
+                    amount={product.detalhes_produto.quantidade}
                   />
                 ))}
               </ul>
