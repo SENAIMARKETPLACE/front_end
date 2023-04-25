@@ -907,20 +907,168 @@
   "produtos": [
     {
       "empresa_id": "1",
-      "nome": "Camisa Brasil 22/23",
-      "descricao": "Camisa Brasil",
-      "img": "https://imgnike-a.akamaihd.net/1920x1920/0226390L.jpg",
-      "publico": "masculino",
-      "categoria": "Esportes",
-      "sub_categoria": "Futebol",
-      "preco": "249,00",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria": 1,
+      "sub_categoria": 1,
+      "preco": "",
       "detalhes_produto": {
-        "peso": "2",
-        "quantidade": "10",
-        "tamanho": "222",
-        "cor": "021294"
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
       },
-      "id": 14
+      "id": 1
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria": 2,
+      "sub_categoria": 7,
+      "preco": "",
+      "detalhes_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 2
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria": 3,
+      "sub_categoria": 12,
+      "preco": "",
+      "detalhes_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 3
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria": 2,
+      "sub_categoria": 6,
+      "preco": "",
+      "detalhes_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 4
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria": 2,
+      "sub_categoria": 6,
+      "preco": "",
+      "detalhes_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 5
+    }
+  ],
+  "categoriasSubcategorias": [
+    {
+      "id": 1,
+      "nome": "Roupas",
+      "subCategorias": [
+        {
+          "id": 1,
+          "nome": "Bermudas"
+        },
+        {
+          "id": 2,
+          "nome": "Casacos"
+        },
+        {
+          "id": 3,
+          "nome": "Calças"
+        },
+        {
+          "id": 4,
+          "nome": "Camisetas"
+        },
+        {
+          "id": 5,
+          "nome": "Outros"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Calçados",
+      "subCategorias": [
+        {
+          "id": 6,
+          "nome": "Casual"
+        },
+        {
+          "id": 7,
+          "nome": "Corrida"
+        },
+        {
+          "id": 8,
+          "nome": "Chuteiras"
+        },
+        {
+          "id": 9,
+          "nome": "Treino e Academia"
+        },
+        {
+          "id": 10,
+          "nome": "Outros"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Suplementos",
+      "subCategorias": [
+        {
+          "id": 11,
+          "nome": "Proteína"
+        },
+        {
+          "id": 12,
+          "nome": "Aminoácidos"
+        },
+        {
+          "id": 13,
+          "nome": "Carboidratos"
+        },
+        {
+          "id": 14,
+          "nome": "Termogênicos"
+        },
+        {
+          "id": 15,
+          "nome": "Vitaminas"
+        }
+      ]
     }
   ]
 }

@@ -24,10 +24,12 @@ interface modalEditarProps {
   setarLista: (listaAtualizada: string[]) => void;
   snackbarOpenEdit: boolean;
   setSnackbarEditOpen: (open: boolean) => void;
+  categoriesAndSubCategories: string[];
 }
 
 const ModalEditarProduto = ({
   idSelecionado,
+  categoriesAndSubCategories,
   setarLista,
   setSnackbarEditOpen,
   snackbarOpenEdit
@@ -51,8 +53,8 @@ const ModalEditarProduto = ({
   const [peso, setPeso] = useState("");
   const [tamanho, setTamanho] = useState("");
   const [colorPrimary, setColorPrimary] = useState("");
-
-
+  const [recuperarSubCategorias, setRecuperarSubCategorias] = useState("");
+  let  [subCategoriasTeste, setSubCategoriasTeste] = useState("");
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
 
   const [subcategories, setSubcategories] = useState(
@@ -111,6 +113,29 @@ const ModalEditarProduto = ({
 
 
 
+ 
+
+
+  const categoriasLista = categoriesAndSubCategories.map((option) => (
+    <MenuItem key={option.id} value={option.id}>
+      {option.nome}
+    </MenuItem>
+  ));
+
+  
+  const setarSub = (idCategorieSelected: string) => {
+    let categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
+    console.log(`CATEGORIA ATUAL: ` + categorias)
+    let subCategoriasLista = categorias[0].subCategorias.map((option) => (
+      <MenuItem key={option.id}>
+        {option.nome}
+      </MenuItem>
+    ));
+
+    setSubCategoriasTeste(subCategoriasLista)
+  }
+
+
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
@@ -129,17 +154,13 @@ const ModalEditarProduto = ({
         setTamanho(resp.data.detalhes_produto.tamanho)
         setQuantidade(resp.data.detalhes_produto.quantidade);
         setColorPrimary(resp.data.detalhes_produto.cor);
-        setarSubCategorias(categoria)
+        setarSub(resp.data.categoria)
       })
       .catch((err) => alert(err));
   };
 
 
-  const categoriasLista = categories.map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ));
+
 
 
   function setarSubCategorias(nomeCategoriaSelecionada: string) {
@@ -266,6 +287,9 @@ const ModalEditarProduto = ({
                 onChange={(e) => {
                   setCategoria(e.target.value), setIsSubCategoriaDisable(false);
                 }}
+                onBlur={(e) => {
+                  setarSub(categoria)
+                }}
                 value={categoria}
               >
                 {categoriasLista}
@@ -276,12 +300,11 @@ const ModalEditarProduto = ({
                 label="Subcategoria"
                 className={styles.subcategory}
                 onChange={(e) => {
-                  setSubCategoria(e.target.value),
-                    setarSubCategorias(categoria);
+                  setSubCategoria(e.target.value)
                 }}
                 value={subCategoria}
               >
-                {sub}
+                {subCategoriasTeste}
               </TextField>
               <TextField
                 type="number"

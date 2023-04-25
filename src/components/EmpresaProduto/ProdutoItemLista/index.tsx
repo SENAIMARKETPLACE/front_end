@@ -16,6 +16,7 @@ interface ProductItemListProps {
   setSnackbarEditOpen: (open: boolean) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
+  categoriesAndSubCategories: string[];
 }
 
 function enviaId(id: string) {
@@ -30,6 +31,7 @@ const ProdutoLista = ({
   price,
   amount,
   setarLista,
+  categoriesAndSubCategories,
   snackbarOpenEdit,
   setSnackbarEditOpen,
   snackbarDeleteOpen, 
@@ -47,7 +49,7 @@ const ProdutoLista = ({
       <p>{amount} unid.</p>
       <p className={styles.product__highlight}>R$ {price}</p>
       <div className={styles.product__btns}>
-        <ModalEditarProduto setSnackbarEditOpen={setSnackbarEditOpen} snackbarOpenEdit={snackbarOpenEdit} setarLista={setarLista} idSelecionado={id} />
+        <ModalEditarProduto setSnackbarEditOpen={setSnackbarEditOpen} snackbarOpenEdit={snackbarOpenEdit} setarLista={setarLista} idSelecionado={id} categoriesAndSubCategories={categoriesAndSubCategories}/>
         <ModalDeletarProduto setSnackbarDeleteOpen={setSnackbarDeleteOpen} snackbarDeleteOpen={snackbarDeleteOpen} setarLista={setarLista} idExcluir={id} />
       </div>
     </li>

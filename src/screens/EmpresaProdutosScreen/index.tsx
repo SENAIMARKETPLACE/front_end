@@ -12,6 +12,8 @@ import { httpApiMockada, httpProduto } from "../../http";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { error } from "console";
+import { stringify } from "querystring";
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +22,16 @@ const EmpresaProdutosScreen = () => {
   const [snackbarEditOpen, setSnackbarEditOpen] = useState(false);
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [catchCategorias, setCatchCategorias] = useState<string[]>([]);
+
+  useEffect(() => {
+    httpApiMockada
+      .get("categoriasSubcategorias")
+      .then((response) => {
+        setCatchCategorias(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -57,8 +69,6 @@ const EmpresaProdutosScreen = () => {
 
     setSnackbarDeleteOpen(false);
   };
-
-
 
   async function getProducts() {
     try {
@@ -105,7 +115,7 @@ const EmpresaProdutosScreen = () => {
           autoHideDuration={4000}
           onClose={handleSnackbarDeleteClose}
         >
-            <div>
+          <div>
             <Alert onClose={handleSnackbarDeleteClose} severity="success">
               Produto deletado com sucesso!
             </Alert>
@@ -116,7 +126,7 @@ const EmpresaProdutosScreen = () => {
           autoHideDuration={4000}
           onClose={handleSnackbarEditClose}
         >
-            <div>
+          <div>
             <Alert onClose={handleSnackbarEditClose} severity="success">
               Produto alterado com sucesso!
             </Alert>
@@ -132,6 +142,7 @@ const EmpresaProdutosScreen = () => {
             <div className={styles.title_container}>
               <h1 className={styles.title}>Meus Produtos</h1>
               <ModalAddProduto
+                categoriesAndSubCategories={catchCategorias}
                 snackbarOpen={snackbarOpen}
                 setSnackbarOpen={setSnackbarOpen}
                 setarLista={atualizarListaProdutos}
@@ -147,6 +158,7 @@ const EmpresaProdutosScreen = () => {
               <ul className={styles.products__list}>
                 {products.map((product) => (
                   <ProdutoLista
+                    categoriesAndSubCategories={catchCategorias}
                     snackbarOpenEdit={snackbarEditOpen}
                     setSnackbarEditOpen={setSnackbarEditOpen}
                     snackbarDeleteOpen={snackbarDeleteOpen}

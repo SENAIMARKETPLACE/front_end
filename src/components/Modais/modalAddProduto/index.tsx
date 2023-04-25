@@ -28,16 +28,16 @@ interface modalAddProductProp {
   ) => void;
   snackbarOpen: boolean;
   setSnackbarOpen: (open: boolean) => void;
+  categoriesAndSubCategories: string[];
 }
 export default function ModalAddProduto({
   setarLista,
-
+  categoriesAndSubCategories,
   setarMensagemEEstadoRequisicao,
   snackbarOpen,
   setSnackbarOpen,
 }: modalAddProductProp) {
   const [open, setOpen] = useState(false);
-  const selectOptions = ["Kg", "g"];
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
@@ -77,6 +77,9 @@ export default function ModalAddProduto({
   const [colorSecondary, setColorSecondary] = useState("");
   const [colors, setColors] = useState("");
 
+  let  [subCategoriasTeste, setSubCategoriasTeste] = useState("");
+
+
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [index, setIndex] = useState(0);
 
@@ -101,19 +104,19 @@ export default function ModalAddProduto({
 
   const targetAudienceList = [
     {
-      value: "masculino",
+      value: "MASCULINO",
       label: "Masculino",
     },
     {
-      value: "feminino",
+      value: "FEMININO",
       label: "Feminino",
     },
     {
-      value: "unissex",
+      value: "UNISSEX",
       label: "Unissex",
     },
     {
-      value: "criança",
+      value: "CRIANÇA",
       label: "Criança",
     },
   ].map((option) => (
@@ -122,11 +125,26 @@ export default function ModalAddProduto({
     </MenuItem>
   ));
 
-  const categoriasLista = categories.map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
+  const categoriasLista = categoriesAndSubCategories.map((option) => (
+    <MenuItem key={option.id} value={option.id}>
+      {option.nome}
     </MenuItem>
   ));
+
+
+
+
+  const setarSub = (idCategorieSelected: string) => {
+    const categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
+    let subCategoriasLista = categorias[0].subCategorias.map((option) => (
+      <MenuItem key={option.id} value={option.id}>
+        {option.nome}
+      </MenuItem>
+    ));
+
+    setSubCategoriasTeste(subCategoriasLista)
+  }
+
 
   const sub = subcategories.map((option) => (
     <MenuItem key={option.value} value={option.value}>
@@ -289,6 +307,9 @@ export default function ModalAddProduto({
                 onChange={(e) => {
                   setCategoria(e.target.value), setIsSubCategoriaDisable(false);
                 }}
+                onBlur={(e) => {
+                  setarSub(categoria)
+                }}
                 value={categoria}
               >
                 {categoriasLista}
@@ -299,12 +320,11 @@ export default function ModalAddProduto({
                 label="Subcategoria"
                 className={styles.subcategory}
                 onChange={(e) => {
-                  setSubCategoria(e.target.value),
-                    setarSubCategorias(categoria);
+                  setSubCategoria(e.target.value)
                 }}
                 value={subCategoria}
               >
-                {sub}
+                {subCategoriasTeste}
               </TextField>
               <TextField
                 type="number"
