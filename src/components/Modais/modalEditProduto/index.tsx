@@ -203,7 +203,7 @@ const ModalEditarProduto = ({
     //   })
     //   .catch((err) => console.log(err));
     httpApiMockada
-      .put(`produtos/${idSelecionado}`, produtoAtualizado)
+      .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();

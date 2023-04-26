@@ -907,18 +907,18 @@
   "produtos-post": [
     {
       "empresa_id": "1",
-      "nome": "teste",
-      "descricao": "teste",
-      "img": "sadasdasdasd",
+      "nome": "Nike Camiseta",
+      "descricao": "Melhor camiseta do mundo",
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
       "publico": "MASCULINO",
-      "categoria_id": 5,
-      "sub_categoria_id": 19,
-      "preco": "22",
+      "categoria_id": 4,
+      "sub_categoria_id": 22,
+      "preco": "150.00",
       "detalhes_do_produto": {
-        "tamanho": "M",
-        "peso": "55g",
-        "cor": "000",
-        "quantidade": "20"
+        "tamanho": "70cm",
+        "quantidade": "1000",
+        "peso": "150gr",
+        "cor": "Preta e Branca"
       },
       "id": 1
     },
