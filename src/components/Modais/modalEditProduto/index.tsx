@@ -13,10 +13,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { IProduto } from "../../../compartilhado/IProduto";
 import { httpApiMockada, httpProduto } from "../../../http";
 
-import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
 import styled from "styled-components";
 
 interface modalEditarProps {
@@ -57,10 +55,7 @@ const ModalEditarProduto = ({
   let  [subCategoriasTeste, setSubCategoriasTeste] = useState("");
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
 
-  const [subcategories, setSubcategories] = useState(
-    categories[0].subcategories
-  );
-
+  
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -99,19 +94,9 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
 
-  const categorias = categories.map((category) => (
-    <MenuItem key={category.value} value={category.value}>
-      {category.label}
-    </MenuItem>
-  ));
-
-  const sub = subcategories.map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ));
 
 
+ 
 
  
 
@@ -163,20 +148,7 @@ const ModalEditarProduto = ({
 
 
 
-  function setarSubCategorias(nomeCategoriaSelecionada: string) {
-    if (nomeCategoriaSelecionada === "Calçados") {
-      setSubcategories(categories[0].subcategories);
-    } else if (nomeCategoriaSelecionada === "Roupas") {
-      setSubcategories(categories[1].subcategories);
-    } else if (nomeCategoriaSelecionada === "Suplementos") {
-      setSubcategories(categories[2].subcategories);
-    } else if (nomeCategoriaSelecionada === "Esportes") {
-      setSubcategories(categories[3].subcategories);
-    } else if (nomeCategoriaSelecionada === "Acessórios") {
-      setSubcategories(categories[4].subcategories);
-    }
-  }
-
+  
 
   function atirarFuncoes() {
     handleOpen(), regastarInformacoesProdutoSelecionado();

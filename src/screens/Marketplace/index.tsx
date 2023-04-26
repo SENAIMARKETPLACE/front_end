@@ -11,7 +11,7 @@ import { EmblaCarousel } from '../../components/CarouselProducts';
 import FooterSollaris from '../../layout/Footer';
 import http from '../../http';
 import { useEffect, useState } from 'react';
-import { IProduto } from '../../compartilhado/IProduto';
+import { IProduto } from '../../compartilhado/IProdutoPost';
 
 const MarketplaceScreen = () => {
     const [products, setProducts] = useState<IProduto[]>([]);

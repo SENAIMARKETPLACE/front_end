@@ -905,92 +905,101 @@
     }
   ],
   "produtos": [
+
     {
       "empresa_id": "1",
-      "nome": "",
-      "descricao": "",
-      "img": "",
-      "publico": "",
-      "categoria": 1,
-      "sub_categoria": 1,
-      "preco": "",
-      "detalhes_produto": {
-        "tamanho": "",
-        "peso": "",
-        "cor": "",
-        "quantidade": ""
-      },
-      "id": 1
-    },
-    {
-      "empresa_id": "1",
-      "nome": "",
-      "descricao": "",
-      "img": "",
-      "publico": "",
+      "nome": "Camisa Santos 22/23",
+      "descricao": "hahaha",
+      "img": "https://static3.tcdn.com.br/img/img_prod/311840/camisa_umbro_santos_ii_2023_116125_1_81b67efbc3df0343f08a681e17dea36f.jpg",
+      "publico": "MASCULINO",
       "categoria": 2,
-      "sub_categoria": 7,
-      "preco": "",
+      "preco": "500.00",
       "detalhes_produto": {
-        "tamanho": "",
-        "peso": "",
-        "cor": "",
-        "quantidade": ""
+        "peso": "99g",
+        "quantidade": "20",
+        "tamanho": "P",
+        "cor": "021231"
       },
       "id": 2
-    },
-    {
-      "empresa_id": "1",
-      "nome": "",
-      "descricao": "",
-      "img": "",
-      "publico": "",
-      "categoria": 3,
-      "sub_categoria": 12,
-      "preco": "",
-      "detalhes_produto": {
-        "tamanho": "",
-        "peso": "",
-        "cor": "",
-        "quantidade": ""
-      },
-      "id": 3
-    },
-    {
-      "empresa_id": "1",
-      "nome": "",
-      "descricao": "",
-      "img": "",
-      "publico": "",
-      "categoria": 2,
-      "sub_categoria": 6,
-      "preco": "",
-      "detalhes_produto": {
-        "tamanho": "",
-        "peso": "",
-        "cor": "",
-        "quantidade": ""
-      },
-      "id": 4
-    },
-    {
-      "empresa_id": "1",
-      "nome": "",
-      "descricao": "",
-      "img": "",
-      "publico": "",
-      "categoria": 2,
-      "sub_categoria": 6,
-      "preco": "",
-      "detalhes_produto": {
-        "tamanho": "",
-        "peso": "",
-        "cor": "",
-        "quantidade": ""
-      },
-      "id": 5
     }
   ],
+  "produtos-post": [
+    {
+      "id": 1, 
+      "nome": "Nike Camiseta", 
+      "decricao": "Melhor camiseta do mundo", 
+      "preco": 215.15, 
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x", 
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 1,
+        "nome": "Roupas", 
+        "sub_categorias": {
+          "id": 4, 
+          "nome": "Camisetas"
+        }
+      }, 
+      "detalhes_dos_produtos": [
+        {
+          "id": 1, 
+          "tamanho": "70cm",
+          "peso": "150gr", 
+          "cor": "Preta e Branca", 
+          "quantidade": "1000"
+        }
+      ]
+    }, 
+    {
+      "id": 2, 
+      "nome": "Nike Calça", 
+      "decricao": "Melhor camiseta do mundo", 
+      "preco": 215.15, 
+      "img": "https://static.netshoes.com.br/produtos/calca-moletom-nike-nsw-club-jsy-masculina/26/HZM-1929-026/HZM-1929-026_zoom1.jpg?ts=1564754158&ims=544x", 
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 1,
+        "nome": "Roupas", 
+        "sub_categorias": {
+          "id": 4, 
+          "nome": "Camisetas"
+        }
+      }, 
+      "detalhes_dos_produtos": [
+        {
+          "id": 1, 
+          "tamanho": "70cm",
+          "peso": "150gr", 
+          "cor": "Preta e Branca", 
+          "quantidade": "400"
+        }
+      ]
+    },
+    {
+      "id": 3, 
+      "nome": "Nike Boné", 
+      "decricao": "Melhor camiseta do mundo", 
+      "preco": 100.00, 
+      "img": "https://static.netshoes.com.br/produtos/bone-nike-sportswear-h86-futura-washed-aba-curva/26/D12-9796-026/D12-9796-026_zoom2.jpg?ts=1630602306&ims=326x", 
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 1,
+        "nome": "Roupas", 
+        "sub_categorias": {
+          "id": 4, 
+          "nome": "Camisetas"
+        }
+      }, 
+      "detalhes_dos_produtos": [
+        {
+          "id": 1, 
+          "tamanho": "70cm",
+          "peso": "150gr", 
+          "cor": "Preta e Branca", 
+          "quantidade": "500"
+        }
+      ]
+    }
+  ], 
   "categoriasSubcategorias": [
     {
       "id": 1,

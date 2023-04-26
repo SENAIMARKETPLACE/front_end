@@ -1,5 +1,5 @@
 export interface IDetalhesProduto{
-    id_produto?: string;
+    id?: string;
     tamanho: string; 
     peso: string; 
     cor: string;

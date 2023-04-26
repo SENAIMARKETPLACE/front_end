@@ -1,4 +1,4 @@
 export interface ISubcategory{
-    value: string; 
-    label: string;
+    id: string; 
+    nome: string; 
 }

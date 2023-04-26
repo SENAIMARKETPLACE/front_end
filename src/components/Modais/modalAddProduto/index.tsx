@@ -9,9 +9,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
 import { httpApiMockada, httpProduto } from "../../../http";
-import { IProduto } from "../../../compartilhado/IProduto";
+import { IProdutoPost } from "../../../compartilhado/IProdutoPost";
 import { BsPlus } from "react-icons/bs";
-import { categories } from "../../../compartilhado/variaveis/categorias-variaveis";
 import ModalInformacaoCadastro from "../modalInformacaoCadastro";
 import { IconType } from "react-icons/lib";
 import { MdCheckCircle, MdError } from "react-icons/md";
@@ -19,6 +18,8 @@ import styled from "styled-components";
 
 // Modern or es5 bundle (pay attention to the note below!)
 import PickrComponent from "../../PickrComponent";
+import { IProdutoGet } from "../../../compartilhado/IProdutoGet";
+import { ICategory } from "../../../compartilhado/ICategory";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -83,9 +84,7 @@ export default function ModalAddProduto({
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [index, setIndex] = useState(0);
 
-  const [subcategories, setSubcategories] = useState(
-    categories[index].subcategories
-  );
+
 
   const style = {
     position: "absolute" as "absolute",
@@ -131,9 +130,6 @@ export default function ModalAddProduto({
     </MenuItem>
   ));
 
-
-
-
   const setarSub = (idCategorieSelected: string) => {
     const categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
     let subCategoriasLista = categorias[0].subCategorias.map((option) => (
@@ -146,11 +142,7 @@ export default function ModalAddProduto({
   }
 
 
-  const sub = subcategories.map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ));
+  
 
   const resgatarListaProdutos = () => {
     // httpProduto
@@ -170,32 +162,22 @@ export default function ModalAddProduto({
 
 
 
-  function setarSubCategorias(nomeCategoriaSelecionada: string) {
-    if (nomeCategoriaSelecionada === "Calçados") {
-      setSubcategories(categories[0].subcategories);
-    } else if (nomeCategoriaSelecionada === "Roupas") {
-      setSubcategories(categories[1].subcategories);
-    } else if (nomeCategoriaSelecionada === "Suplementos") {
-      setSubcategories(categories[2].subcategories);
-    } else if (nomeCategoriaSelecionada === "Esportes") {
-      setSubcategories(categories[3].subcategories);
-    } else if (nomeCategoriaSelecionada === "Acessórios") {
-      setSubcategories(categories[4].subcategories);
-    }
-  }
-
+ 
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let produto: IProduto = {
+    // SETAR VARIÁVEL DO TIPO CATEGORIA
+
+
+    let produto: IProdutoPost = {
       empresa_id: empresaid,
       nome: nomeProduto,
       descricao: descricao,
       img: urlImagem,
       publico,
-      categoria,
-      sub_categoria: subCategoria,
+      categoria_id: categoria,
+      sub_categoria_id: subCategoria,
       preco,
-      detalhes_produto: {
+      detalhes_do_produto: {
         tamanho: tamanho,
         peso: peso,
         cor: colorPrimary,
