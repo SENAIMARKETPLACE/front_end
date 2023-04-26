@@ -3,6 +3,7 @@ import { MdModeEdit } from "react-icons/md";
 import ModalDeletarProduto from "../../Modais/ModalDeletarProduto";
 import ModalAddProduto from "../../Modais/modalAddProduto";
 import ModalEditarProduto from "../../Modais/modalEditProduto";
+import { ICategory } from "../../../compartilhado/ICategory";
 
 interface ProductItemListProps {
   id: string;

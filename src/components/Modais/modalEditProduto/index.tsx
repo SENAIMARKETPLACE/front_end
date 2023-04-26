@@ -16,6 +16,10 @@ import { useState } from "react";
 import { httpApiMockada, httpProduto } from "../../../http";
 
 import styled from "styled-components";
+import { IProdutoPost } from "../../../compartilhado/IProdutoPost";
+import { IProdutoGet } from "../../../compartilhado/IProdutoGet";
+import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
+
 
 interface modalEditarProps {
   idSelecionado: string;
@@ -48,12 +52,15 @@ const ModalEditarProduto = ({
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
   const [empresaid, setEmpresaId] = useState("1")
-  const [peso, setPeso] = useState("");
+  const [peso, setPeso] = useState<string>("");
   const [tamanho, setTamanho] = useState("");
   const [colorPrimary, setColorPrimary] = useState("");
-  const [recuperarSubCategorias, setRecuperarSubCategorias] = useState("");
-  let  [subCategoriasTeste, setSubCategoriasTeste] = useState("");
+  const [subCategoriasTeste, setSubCategoriasTeste] = useState("");
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
+  const [subCategoriaAtual, setSubCategoriaAtual] = useState("");
+
+
+
 
   
   const style = {
@@ -98,8 +105,6 @@ const ModalEditarProduto = ({
 
  
 
- 
-
 
   const categoriasLista = categoriesAndSubCategories.map((option) => (
     <MenuItem key={option.id} value={option.id}>
@@ -107,12 +112,14 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
 
+
+
+
   
   const setarSub = (idCategorieSelected: string) => {
     let categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
-    console.log(`CATEGORIA ATUAL: ` + categorias)
-    let subCategoriasLista = categorias[0].subCategorias.map((option) => (
-      <MenuItem key={option.id}>
+    const subCategoriasLista = categorias[0].sub_categorias.map((option) => (
+      <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
     ));
@@ -125,22 +132,25 @@ const ModalEditarProduto = ({
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
     httpApiMockada
-      .get<IProduto>(`produtos/${idSelecionado}`)
+      .get<IProdutoGet>(`produto-get/${idSelecionado}`)
       .then((resp) => {
         console.log(resp.data)
         setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
         setUrlImagem(resp.data.img);
         setPublico(resp.data.publico);
-        setCategoria(resp.data.categoria);
-        setSubCategoria(resp.data.sub_categoria);
+        setCategoria(resp.data.categoria.id);
+        setSubCategoria(resp.data.categoria.sub_categoria.id);
         setPreco(resp.data.preco);
-        setPeso(resp.data.detalhes_produto.peso);
-        setTamanho(resp.data.detalhes_produto.tamanho)
-        setQuantidade(resp.data.detalhes_produto.quantidade);
-        setColorPrimary(resp.data.detalhes_produto.cor);
-        setarSub(resp.data.categoria)
+        setPeso(resp.data.detalhes_dos_produtos[0].peso);
+        setTamanho(resp.data.detalhes_dos_produtos[0].tamanho)
+        setQuantidade(resp.data.detalhes_dos_produtos[0].quantidade);
+        setColorPrimary(resp.data.detalhes_dos_produtos[0].cor);
+        setarSub(resp.data.categoria.id)
+    
       })
+      .then((resp) => console.log(subCategoria.nome))
+      .then((resp) => console.log(subCategoria.id))
       .catch((err) => alert(err));
   };
 
@@ -168,21 +178,22 @@ const ModalEditarProduto = ({
 
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const produtoAtualizado: IProduto = {
+    const detalhesProduto: IDetalhesProduto ={
+      tamanho: tamanho, 
+      quantidade: quantidade, 
+      peso: peso, 
+      cor: colorPrimary
+    }
+    const produtoAtualizado: IProdutoPost = {
       empresa_id: empresaid,
       nome: nomeProduto,
       descricao: descricao,
       img: urlImagem,
       publico: publico,
-      categoria: categoria,
-      sub_categoria: subCategoria,
+      categoria_id: categoria,
+      sub_categoria_id: subCategoria,
       preco: preco,
-      detalhes_produto: {
-        peso: peso,
-        quantidade: quantidade,
-        tamanho: tamanho, 
-        cor: colorPrimary
-      }
+      detalhes_do_produto: detalhesProduto
     };
     // httpProduto
     //   .put(`produtos/${idSelecionado}`, produtoAtualizado)
@@ -269,7 +280,7 @@ const ModalEditarProduto = ({
               <TextField
                 select
                 disabled={isSubCategoriaDisable}
-                label="Subcategoria"
+                label="Sub-categoria"
                 className={styles.subcategory}
                 onChange={(e) => {
                   setSubCategoria(e.target.value)

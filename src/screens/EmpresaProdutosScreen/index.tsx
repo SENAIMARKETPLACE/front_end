@@ -14,6 +14,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { error } from "console";
 import { stringify } from "querystring";
+import { ICategory } from "../../compartilhado/ICategory";
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
@@ -73,8 +74,9 @@ const EmpresaProdutosScreen = () => {
   async function getProducts() {
     try {
       // const response = await httpProduto.get("/api/products");
-      const response = await httpApiMockada.get("produtos");
+      const response = await httpApiMockada.get("produto-get");
       setProducts(response.data);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -169,7 +171,7 @@ const EmpresaProdutosScreen = () => {
                     photo={product.img}
                     name={product.nome}
                     price={product.preco}
-                    amount={product.detalhes_produto.quantidade}
+                    amount={product.detalhes_dos_produtos[0].quantidade}
                   />
                 ))}
               </ul>

@@ -10,5 +10,4 @@ export interface IProdutoPost{
     publico: string, 
     preco: string, 
     detalhes_do_produto?: IDetalhesProduto; 
-    quantidade?: string,
 }

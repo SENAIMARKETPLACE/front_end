@@ -904,107 +904,150 @@
       "id": 4
     }
   ],
-  "produtos": [
-
-    {
-      "empresa_id": "1",
-      "nome": "Camisa Santos 22/23",
-      "descricao": "hahaha",
-      "img": "https://static3.tcdn.com.br/img/img_prod/311840/camisa_umbro_santos_ii_2023_116125_1_81b67efbc3df0343f08a681e17dea36f.jpg",
-      "publico": "MASCULINO",
-      "categoria": 2,
-      "preco": "500.00",
-      "detalhes_produto": {
-        "peso": "99g",
-        "quantidade": "20",
-        "tamanho": "P",
-        "cor": "021231"
-      },
-      "id": 2
-    }
-  ],
   "produtos-post": [
     {
-      "id": 1, 
-      "nome": "Nike Camiseta", 
-      "decricao": "Melhor camiseta do mundo", 
-      "preco": 215.15, 
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x", 
+      "empresa_id": "1",
+      "nome": "teste",
+      "descricao": "teste",
+      "img": "sadasdasdasd",
       "publico": "MASCULINO",
-      "categoria": {
-        "id": 1,
-        "nome": "Roupas", 
-        "sub_categorias": {
-          "id": 4, 
-          "nome": "Camisetas"
-        }
-      }, 
-      "detalhes_dos_produtos": [
-        {
-          "id": 1, 
-          "tamanho": "70cm",
-          "peso": "150gr", 
-          "cor": "Preta e Branca", 
-          "quantidade": "1000"
-        }
-      ]
-    }, 
+      "categoria_id": 5,
+      "sub_categoria_id": 19,
+      "preco": "22",
+      "detalhes_do_produto": {
+        "tamanho": "M",
+        "peso": "55g",
+        "cor": "000",
+        "quantidade": "20"
+      },
+      "id": 1
+    },
     {
-      "id": 2, 
-      "nome": "Nike Calça", 
-      "decricao": "Melhor camiseta do mundo", 
-      "preco": 215.15, 
-      "img": "https://static.netshoes.com.br/produtos/calca-moletom-nike-nsw-club-jsy-masculina/26/HZM-1929-026/HZM-1929-026_zoom1.jpg?ts=1564754158&ims=544x", 
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 5,
+      "sub_categoria_id": 17,
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 2
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 4,
+      "sub_categoria_id": "Musculação",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 3
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 1,
+      "sub_categoria_id": "Bermudas",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 4
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 1,
+      "sub_categoria_id": "Calças",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 5
+    }
+  ],
+  "produto-get": [
+    {
+      "id": 1,
+      "nome": "Nike Camiseta",
+      "descricao": "Melhor camiseta do mundo",
+      "preco": 215.15,
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
       "publico": "MASCULINO",
       "categoria": {
-        "id": 1,
-        "nome": "Roupas", 
-        "sub_categorias": {
-          "id": 4, 
-          "nome": "Camisetas"
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
         }
-      }, 
+      },
       "detalhes_dos_produtos": [
         {
-          "id": 1, 
+          "id": 1,
           "tamanho": "70cm",
-          "peso": "150gr", 
-          "cor": "Preta e Branca", 
-          "quantidade": "400"
+          "peso": "150gr",
+          "cor": "Preta e Branca",
+          "quantidade": "1000"
         }
       ]
     },
     {
-      "id": 3, 
-      "nome": "Nike Boné", 
-      "decricao": "Melhor camiseta do mundo", 
-      "preco": 100.00, 
-      "img": "https://static.netshoes.com.br/produtos/bone-nike-sportswear-h86-futura-washed-aba-curva/26/D12-9796-026/D12-9796-026_zoom2.jpg?ts=1630602306&ims=326x", 
+      "id": 2,
+      "nome": "Nike Calça",
+      "descricao": "Melhor camiseta do mundo",
+      "preco": 215.15,
+      "img": "https://static.netshoes.com.br/produtos/calca-moletom-nike-nsw-club-jsy-masculina/26/HZM-1929-026/HZM-1929-026_zoom1.jpg?ts=1564754158&ims=544x",
       "publico": "MASCULINO",
       "categoria": {
-        "id": 1,
-        "nome": "Roupas", 
-        "sub_categorias": {
-          "id": 4, 
-          "nome": "Camisetas"
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
         }
-      }, 
+      },
       "detalhes_dos_produtos": [
         {
-          "id": 1, 
+          "id": 1,
           "tamanho": "70cm",
-          "peso": "150gr", 
-          "cor": "Preta e Branca", 
-          "quantidade": "500"
+          "peso": "150gr",
+          "cor": "Preta e Branca",
+          "quantidade": "400"
         }
       ]
     }
-  ], 
+  ],
   "categoriasSubcategorias": [
     {
       "id": 1,
       "nome": "Roupas",
-      "subCategorias": [
+      "sub_categorias": [
         {
           "id": 1,
           "nome": "Bermudas"
@@ -1030,7 +1073,7 @@
     {
       "id": 2,
       "nome": "Calçados",
-      "subCategorias": [
+      "sub_categorias": [
         {
           "id": 6,
           "nome": "Casual"
@@ -1056,7 +1099,7 @@
     {
       "id": 3,
       "nome": "Suplementos",
-      "subCategorias": [
+      "sub_categorias": [
         {
           "id": 11,
           "nome": "Proteína"
@@ -1076,6 +1119,82 @@
         {
           "id": 15,
           "nome": "Vitaminas"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Esportes",
+      "sub_categorias": [
+        {
+          "id": 22,
+          "nome": "Corrida"
+        },
+        {
+          "id": 23,
+          "nome": "Futebol"
+        },
+        {
+          "id": 24,
+          "nome": "Training"
+        },
+        {
+          "id": 25,
+          "nome": "Tênis"
+        },
+        {
+          "id": 26,
+          "nome": "Natação"
+        },
+        {
+          "id": 27,
+          "nome": "Musculação"
+        },
+        {
+          "id": 28,
+          "nome": "Yoga"
+        },
+        {
+          "id": 29,
+          "nome": "Basquete"
+        },
+        {
+          "id": 30,
+          "nome": "Ciclismo"
+        },
+        {
+          "id": 31,
+          "nome": "Outros"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Acessórios",
+      "sub_categorias": [
+        {
+          "id": 16,
+          "nome": "Bonés e Viseiras"
+        },
+        {
+          "id": 17,
+          "nome": "Bolsas e Mochilas"
+        },
+        {
+          "id": 18,
+          "nome": "Bolas"
+        },
+        {
+          "id": 19,
+          "nome": "Meias"
+        },
+        {
+          "id": 20,
+          "nome": "Roupas Íntimas"
+        },
+        {
+          "id": 21,
+          "nome": "Luvas"
         }
       ]
     }

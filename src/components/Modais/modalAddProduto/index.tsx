@@ -20,6 +20,7 @@ import styled from "styled-components";
 import PickrComponent from "../../PickrComponent";
 import { IProdutoGet } from "../../../compartilhado/IProdutoGet";
 import { ICategory } from "../../../compartilhado/ICategory";
+import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -132,8 +133,8 @@ export default function ModalAddProduto({
 
   const setarSub = (idCategorieSelected: string) => {
     const categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
-    let subCategoriasLista = categorias[0].subCategorias.map((option) => (
-      <MenuItem key={option.id} value={option.id}>
+    let subCategoriasLista =  categorias[0].sub_categorias.map((option) => (
+      <MenuItem key={option.id} value={option.nome}>
         {option.nome}
       </MenuItem>
     ));
@@ -166,8 +167,12 @@ export default function ModalAddProduto({
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // SETAR VARIÁVEL DO TIPO CATEGORIA
-
-
+    let detalhes_produto: IDetalhesProduto = {
+      tamanho: tamanho, 
+      peso: peso, 
+      cor: colorPrimary, 
+      quantidade: quantidade
+    }
     let produto: IProdutoPost = {
       empresa_id: empresaid,
       nome: nomeProduto,
@@ -177,12 +182,7 @@ export default function ModalAddProduto({
       categoria_id: categoria,
       sub_categoria_id: subCategoria,
       preco,
-      detalhes_do_produto: {
-        tamanho: tamanho,
-        peso: peso,
-        cor: colorPrimary,
-        quantidade: quantidade
-      }
+      detalhes_do_produto: detalhes_produto
     };
     // httpProduto
     //   .post("/api/products", produto)
@@ -190,7 +190,7 @@ export default function ModalAddProduto({
     //     console.log("Produto Criado com Sucesso");
     //   })
     httpApiMockada
-      .post("produtos", produto)
+      .post("produtos-post", produto)
       .then((resp) => {
         console.log("Produto Criado com Sucesso");
       })
