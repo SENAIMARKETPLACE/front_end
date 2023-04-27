@@ -58,7 +58,7 @@ const ModalEditarProduto = ({
   const [subCategoriasTeste, setSubCategoriasTeste] = useState("");
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
   const [subCategoriaAtual, setSubCategoriaAtual] = useState("");
-
+  const [idDetalhesProduto, setIdDetalhesProdutos] = useState("")
 
 
 
@@ -118,7 +118,7 @@ const ModalEditarProduto = ({
   
   const setarSub = (idCategorieSelected: string) => {
     let categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
-    const subCategoriasLista = categorias[0].sub_categorias.map((option) => (
+    const subCategoriasLista = categorias[0].subCategorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
@@ -131,10 +131,9 @@ const ModalEditarProduto = ({
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
-    httpApiMockada
-      .get<IProdutoGet>(`produto-get/${idSelecionado}`)
+    httpProduto
+      .get(`/api/products/${idSelecionado}`)
       .then((resp) => {
-        console.log(resp.data)
         setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
         setUrlImagem(resp.data.img);
@@ -142,15 +141,16 @@ const ModalEditarProduto = ({
         setCategoria(resp.data.categoria.id);
         setSubCategoria(resp.data.categoria.sub_categoria.id);
         setPreco(resp.data.preco);
+        setIdDetalhesProdutos(resp.data.detalhes_dos_produtos[0].id)
         setPeso(resp.data.detalhes_dos_produtos[0].peso);
         setTamanho(resp.data.detalhes_dos_produtos[0].tamanho)
         setQuantidade(resp.data.detalhes_dos_produtos[0].quantidade);
         setColorPrimary(resp.data.detalhes_dos_produtos[0].cor);
+        // setDetalhesProdutos(resp.data.detalhes_do_produto[0].id)
         setarSub(resp.data.categoria.id)
     
       })
-      .then((resp) => console.log(subCategoria.nome))
-      .then((resp) => console.log(subCategoria.id))
+      
       .catch((err) => alert(err));
   };
 
@@ -168,24 +168,24 @@ const ModalEditarProduto = ({
 
 
   function regastarListaProdutos() {
-    // httpProduto
-    //   .get('/api/products')
-    httpApiMockada
-      .get('produtos')
-      .then((response) => { setarLista(response.data) })
+    httpProduto
+      .get('/api/products')
+    // httpApiMockada
+    //   .get('produtos')
+      .then((response) => { setarLista(response.data.content) })
       .catch((error) => console.error);
   }
 
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const detalhesProduto: IDetalhesProduto ={
+      id: idDetalhesProduto,
       tamanho: tamanho, 
       quantidade: quantidade, 
       peso: peso, 
       cor: colorPrimary
     }
     const produtoAtualizado: IProdutoPost = {
-      empresa_id: empresaid,
       nome: nomeProduto,
       descricao: descricao,
       img: urlImagem,
@@ -202,8 +202,8 @@ const ModalEditarProduto = ({
     //     regastarListaProdutos();
     //   })
     //   .catch((err) => console.log(err));
-    httpApiMockada
-      .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
+    httpProduto
+      .put(`api/products/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();

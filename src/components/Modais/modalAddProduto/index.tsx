@@ -133,8 +133,8 @@ export default function ModalAddProduto({
 
   const setarSub = (idCategorieSelected: string) => {
     const categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
-    let subCategoriasLista =  categorias[0].sub_categorias.map((option) => (
-      <MenuItem key={option.id} value={option.nome}>
+    let subCategoriasLista =  categorias[0].subCategorias.map((option) => (
+      <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
     ));
@@ -146,18 +146,18 @@ export default function ModalAddProduto({
   
 
   const resgatarListaProdutos = () => {
-    // httpProduto
-    //   .get("/api/products")
-    //   .then((resp) => {
-    //     setarLista(resp.data.content);
-    //   })
-    //   .catch((err) => console.log(err));
-    httpApiMockada
-      .get("produtos")
+    httpProduto
+      .get("/api/products")
       .then((resp) => {
-        setarLista(resp.data);
+        setarLista(resp.data.content);
       })
       .catch((err) => console.log(err));
+    // httpApiMockada
+    //   .get("produtos")
+    //   .then((resp) => {
+    //     setarLista(resp.data);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
 
@@ -184,16 +184,14 @@ export default function ModalAddProduto({
       preco,
       detalhes_do_produto: detalhes_produto
     };
-    // httpProduto
-    //   .post("/api/products", produto)
+
+    httpProduto
+      .post("/api/products", produto)
+    // httpApiMockada
+    //   .post("produtos-post", produto)
     //   .then((resp) => {
     //     console.log("Produto Criado com Sucesso");
     //   })
-    httpApiMockada
-      .post("produtos-post", produto)
-      .then((resp) => {
-        console.log("Produto Criado com Sucesso");
-      })
       .then((resp) => {
         resgatarListaProdutos();
         setOpen(false);

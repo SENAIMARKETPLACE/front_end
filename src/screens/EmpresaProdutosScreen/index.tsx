@@ -8,7 +8,7 @@ import ProdutoLista from "../../components/EmpresaProduto/ProdutoItemLista";
 import SearchBar from "../../components/SearchBar";
 import ToggleBtn from "../../components/Buttons/ToggleButton";
 import StatusAlert from "../../components/StatusMsg/SucessMsg";
-import { httpApiMockada, httpProduto } from "../../http";
+import { httpApiMockada, httpCategoria, httpProduto } from "../../http";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
@@ -26,10 +26,10 @@ const EmpresaProdutosScreen = () => {
   const [catchCategorias, setCatchCategorias] = useState<string[]>([]);
 
   useEffect(() => {
-    httpApiMockada
-      .get("categoriasSubcategorias")
+    httpCategoria
+      .get("api/categories")
       .then((response) => {
-        setCatchCategorias(response.data);
+        setCatchCategorias(response.data.content);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -74,9 +74,9 @@ const EmpresaProdutosScreen = () => {
   async function getProducts() {
     try {
       // const response = await httpProduto.get("/api/products");
-      const response = await httpApiMockada.get("produto-get");
-      setProducts(response.data);
-      console.log(response);
+      // /api/products/my_products/{id}
+      const response = await httpProduto.get("/api/products");
+      setProducts(response.data.content);
     } catch (error) {
       console.error(error);
     }
