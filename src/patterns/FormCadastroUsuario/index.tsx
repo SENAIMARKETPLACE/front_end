@@ -84,12 +84,26 @@ const FormCadastroUsuario = () => {
   ];
   const [idPasso, setIdPasso] = useState(0);
 
+
+  // TRATAR DADOS RECEBIDOS
   const converterParaDataLocal = (dataInformada: string): string => {
     let data = new Date(dataInformada);
 
     // data local
     return data.toLocaleDateString();
   };
+
+
+
+  const retirarPontos = (cpfInformado: string): string => {
+    let novoCpf = cpfInformado.replaceAll("-", "").replaceAll(".", "")
+    return novoCpf;
+  }
+
+  const retirarPontosTelefone = (telefoneInformado: string): string => {
+    let novoTelefone = telefoneInformado.replaceAll("(", "").replaceAll(")", "").replaceAll("-", "").replaceAll(" ", "")
+    return novoTelefone;
+  }
 
   const salvarUsuarioEEndereco = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -99,10 +113,10 @@ const FormCadastroUsuario = () => {
     console.log(dados);
     const user: IUsuario = {
       nome: dados.nome,
-      cpf: dados.cpf,
+      cpf: retirarPontos(dados.cpf),
       dt_nascimento: converterParaDataLocal(dados.dataNasc),
       senha: dados.senha,
-      telefone: dados.telefone,
+      telefone: retirarPontosTelefone(dados.telefone),
       genero: dados.genero,
       email: dados.email,
       grupos_interesses: dados.listaInteresses,
@@ -126,6 +140,7 @@ const FormCadastroUsuario = () => {
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => {
         {
+          console.log(user)
           setOpenModalRegister(true);
           setMensagemModal("CADASTRO REALIZADO COM SUCESSO!");
           setDescricaoModal(

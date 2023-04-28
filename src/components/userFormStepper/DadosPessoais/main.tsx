@@ -56,6 +56,7 @@ const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
 
 
 
+
 const DadosPessoais: FC<DadosPessoaisProps> = ({
   data,
   atualizarCampo,
@@ -94,6 +95,10 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
     }
   };
 
+  const maskOnlyLetters = (value: string) => {
+    return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "")
+  }
+
   const validarGenero = (generoDigitado: string) => {
     if (data.genero === "") {
       setErrorGenero(true);
@@ -102,6 +107,25 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
     }
   };
 
+
+
+  const maskCPF = (cpfDigitado: string) => {
+    return cpfDigitado
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1")
+  }
+
+
+  const maskPhone = (value: string) => {
+    return value
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{4})(\d+?)$/, '$1');
+  };
   /* 
     ^: início da string
     (?=.*\d): deve conter pelo menos um dígito
@@ -120,6 +144,10 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
       setErrorPassword(true);
     }
   };
+
+
+
+
 
   const validarEmail = (emailDigitado: string) => {
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -200,7 +228,7 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
           validarNome(data.nome);
         }}
         onChange={(e) => {
-          atualizarCampo("nome", e.target.value);
+          atualizarCampo("nome", maskOnlyLetters(e.target.value));
         }}
         className={styles.camposCadastro__nome}
       ></InputField>
@@ -208,12 +236,11 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         error={errorCPF}
         label="CPF"
         // ref={refFieldCPF}
-        inputProps={{ maxLength: 11}}
         InputLabelProps={{ shrink: true }}
         required
         value={data.cpf || ""}
         onChange={(e) => {
-          atualizarCampo("cpf", e.target.value);
+          atualizarCampo("cpf", maskCPF(e.target.value));
         }}
         onBlur={(e) => {
           validarCampoCpf(data.cpf);
@@ -236,13 +263,12 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
       ></InputField>
       <InputField
         label="Telefone"
-        inputProps={{ maxLength: 11 }}
         InputLabelProps={{ shrink: true }}
         required
         error={errorTelefone}
         onBlur={(e) => validarTelefone(data.telefone)}
         value={data.telefone || ""}
-        onChange={(e) => atualizarCampo("telefone", e.target.value)}
+        onChange={(e) => atualizarCampo("telefone", maskPhone(e.target.value))}
         className={styles.camposCadastro__telefone}
       ></InputField>
       <InputField

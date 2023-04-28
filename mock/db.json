@@ -819,6 +819,54 @@
         "complemento": ""
       },
       "id": 41
+    },
+    {
+      "nome": "João",
+      "cpf": "53950516867",
+      "dt_nascimento": "02/03/2004",
+      "senha": "S@ntos2004",
+      "telefone": "11940333175",
+      "genero": "MASCULINO",
+      "email": "jasnjasjdasdasd",
+      "grupos_interesses": [
+        "esportes"
+      ],
+      "img": "jijijijjijijijjjj",
+      "endereco": {
+        "cep": "05881-020",
+        "logradouro": "Rua Abílio César",
+        "numero": "28",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": "Casa1"
+      },
+      "id": 42
+    },
+    {
+      "nome": "Joao",
+      "cpf": "11221321312",
+      "dt_nascimento": "02/03/2004",
+      "senha": "1'",
+      "telefone": "12 312312312",
+      "genero": "MASCULINO",
+      "email": "jvabreusousa12@gmail.com",
+      "grupos_interesses": [
+        "acessorios",
+        "esportes",
+        "calcados"
+      ],
+      "img": "213123123123",
+      "endereco": {
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
+        "numero": "23",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": "Casa1"
+      },
+      "id": 43
     }
   ],
   "enderecos": [],
