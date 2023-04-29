@@ -1046,36 +1046,36 @@
   ],
   "produtos-post": [
     {
-      "empresa_id": "1",
       "nome": "Nike Camiseta",
       "descricao": "Melhor camiseta do mundo",
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
       "publico": "MASCULINO",
       "categoria_id": 4,
       "sub_categoria_id": 22,
-      "preco": "150.00",
+      "preco": 215.15,
       "detalhes_do_produto": {
+        "id": 1,
         "tamanho": "70cm",
         "quantidade": "1000",
         "peso": "150gr",
-        "cor": "Preta e Branca"
+        "cor": "#902626 #aa8888"
       },
       "id": 1
     },
     {
-      "empresa_id": "1",
-      "nome": "",
-      "descricao": "",
-      "img": "",
-      "publico": "",
-      "categoria_id": 5,
-      "sub_categoria_id": 17,
-      "preco": "",
+      "nome": "Nike Camiseta",
+      "descricao": "Melhor camiseta do mundo",
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
+      "publico": "MASCULINO",
+      "categoria_id": 4,
+      "sub_categoria_id": 22,
+      "preco": 215.15,
       "detalhes_do_produto": {
-        "tamanho": "",
-        "peso": "",
-        "cor": "",
-        "quantidade": ""
+        "id": 1,
+        "tamanho": "70cm",
+        "quantidade": "1000",
+        "peso": "150gr",
+        "cor": "#e78400 #f41"
       },
       "id": 2
     },
@@ -1129,6 +1129,346 @@
         "quantidade": ""
       },
       "id": 5
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 1,
+      "sub_categoria_id": 1,
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 6
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 3,
+      "sub_categoria_id": 11,
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 7
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 1,
+      "sub_categoria_id": 2,
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 8
+    },
+    {
+      "empresa_id": "1",
+      "nome": "Teste",
+      "descricao": "",
+      "img": "",
+      "publico": "MASCULINO",
+      "categoria_id": 3,
+      "sub_categoria_id": 14,
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 9
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "",
+        "quantidade": ""
+      },
+      "id": 10
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#06c270",
+        "quantidade": ""
+      },
+      "id": 11
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#912",
+        "quantidade": ""
+      },
+      "id": 12
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#cc7979",
+        "quantidade": ""
+      },
+      "id": 13
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#cf4b4b",
+        "quantidade": ""
+      },
+      "id": 14
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#ceb8b8#a32727",
+        "quantidade": ""
+      },
+      "id": 15
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#5f2727NaN",
+        "quantidade": ""
+      },
+      "id": 16
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#a51313",
+        "quantidade": ""
+      },
+      "id": 17
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": " +  true?#940808:\"\"",
+        "quantidade": ""
+      },
+      "id": 18
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#000000 +  true?#ffffff",
+        "quantidade": ""
+      },
+      "id": 19
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#000000 true?#ffffff",
+        "quantidade": ""
+      },
+      "id": 20
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#f6f6f6 ",
+        "quantidade": ""
+      },
+      "id": 21
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#ce3030 #341717",
+        "quantidade": ""
+      },
+      "id": 22
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#e7cbcb #771f1f",
+        "quantidade": ""
+      },
+      "id": 23
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": "",
+      "sub_categoria_id": "",
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#902626 #ffffff",
+        "quantidade": ""
+      },
+      "id": 24
+    },
+    {
+      "empresa_id": "1",
+      "nome": "",
+      "descricao": "",
+      "img": "",
+      "publico": "",
+      "categoria_id": 2,
+      "sub_categoria_id": 6,
+      "preco": "",
+      "detalhes_do_produto": {
+        "tamanho": "",
+        "peso": "",
+        "cor": "#d14e4e #210808",
+        "quantidade": ""
+      },
+      "id": 25
     }
   ],
   "produto-get": [
@@ -1152,17 +1492,17 @@
           "id": 1,
           "tamanho": "70cm",
           "peso": "150gr",
-          "cor": "Preta e Branca",
+          "cor": "#902626 #ffffff",
           "quantidade": "1000"
         }
       ]
     },
     {
       "id": 2,
-      "nome": "Nike Calça",
+      "nome": "Nike Camiseta",
       "descricao": "Melhor camiseta do mundo",
       "preco": 215.15,
-      "img": "https://static.netshoes.com.br/produtos/calca-moletom-nike-nsw-club-jsy-masculina/26/HZM-1929-026/HZM-1929-026_zoom1.jpg?ts=1564754158&ims=544x",
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
       "publico": "MASCULINO",
       "categoria": {
         "id": 4,
@@ -1177,8 +1517,8 @@
           "id": 1,
           "tamanho": "70cm",
           "peso": "150gr",
-          "cor": "Preta e Branca",
-          "quantidade": "400"
+          "cor": "#9626 #f41",
+          "quantidade": "1000"
         }
       ]
     }

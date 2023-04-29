@@ -26,10 +26,10 @@ const EmpresaProdutosScreen = () => {
   const [catchCategorias, setCatchCategorias] = useState<string[]>([]);
 
   useEffect(() => {
-    httpCategoria
-      .get("api/categories")
+    httpApiMockada
+      .get("categoriasSubcategorias")
       .then((response) => {
-        setCatchCategorias(response.data.content);
+        setCatchCategorias(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -75,8 +75,8 @@ const EmpresaProdutosScreen = () => {
     try {
       // const response = await httpProduto.get("/api/products");
       // /api/products/my_products/{id}
-      const response = await httpProduto.get("/api/products");
-      setProducts(response.data.content);
+      const response = await httpApiMockada.get("produto-get");
+      setProducts(response.data);
     } catch (error) {
       console.error(error);
     }

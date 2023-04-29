@@ -61,7 +61,7 @@
       grid-area: 5 / 1 / 5 / 3;
     }
     .amount {
-      grid-area: 6 / 1 / 6 / 3 ;
+      grid-area: 5/ 7/ 5/ 9;
     }
     .size{
       grid-area: 5/ 3/ 5 / 5;
@@ -70,12 +70,10 @@
       grid-area: 5 / 5/ 5/ 7;
     }
     .colors{
-      display: flex;
-      grid-area: 5/ 7/ 5/ 9;
+      grid-area: 6 / 1 / 6 / 3 ;
     }
     .colors2{
-      display: flex;
-      grid-area: 6/1/6/4;
+      grid-area: 6 / 3/ 6 / 5;
     }
   }
 

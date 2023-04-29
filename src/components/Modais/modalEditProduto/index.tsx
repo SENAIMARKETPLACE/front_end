@@ -20,6 +20,12 @@ import { IProdutoPost } from "../../../compartilhado/IProdutoPost";
 import { IProdutoGet } from "../../../compartilhado/IProdutoGet";
 import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
 
+import {
+  MuiColorInput,
+  MuiColorInputColors,
+  MuiColorInputFormat,
+} from "mui-color-input";
+
 
 interface modalEditarProps {
   idSelecionado: string;
@@ -34,7 +40,7 @@ const ModalEditarProduto = ({
   categoriesAndSubCategories,
   setarLista,
   setSnackbarEditOpen,
-  snackbarOpenEdit
+  snackbarOpenEdit,
 }: modalEditarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -51,18 +57,28 @@ const ModalEditarProduto = ({
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
-  const [empresaid, setEmpresaId] = useState("1")
+  const [empresaid, setEmpresaId] = useState("1");
   const [peso, setPeso] = useState<string>("");
   const [tamanho, setTamanho] = useState("");
-  const [colorPrimary, setColorPrimary] = useState("");
   const [subCategoriasTeste, setSubCategoriasTeste] = useState("");
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
   const [subCategoriaAtual, setSubCategoriaAtual] = useState("");
-  const [idDetalhesProduto, setIdDetalhesProdutos] = useState("")
+  const [idDetalhesProduto, setIdDetalhesProdutos] = useState("");
 
-
+  const [colorPrimary, setColorPrimary] = useState("");
+  const [colorSecondary, setColorSecondary] = useState("");
+  const [secondColorField, setColorSecondColorField] = useState(true);
 
   
+  const format: MuiColorInputFormat = "hex";
+
+  const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorPrimary(newValue)
+  }
+  const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorSecondary(newValue)
+  }
+
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -101,39 +117,33 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
 
-
-
- 
-
-
   const categoriasLista = categoriesAndSubCategories.map((option) => (
     <MenuItem key={option.id} value={option.id}>
       {option.nome}
     </MenuItem>
   ));
 
-
-
-
-  
   const setarSub = (idCategorieSelected: string) => {
-    let categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
-    const subCategoriasLista = categorias[0].subCategorias.map((option) => (
+    let categorias = categoriesAndSubCategories.filter(
+      (c) => c.id === idCategorieSelected
+    );
+    const subCategoriasLista = categorias[0].sub_categorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
     ));
 
-    setSubCategoriasTeste(subCategoriasLista)
-  }
-
+    setSubCategoriasTeste(subCategoriasLista);
+  };
 
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
-    httpProduto
-      .get(`/api/products/${idSelecionado}`)
+    httpApiMockada
+      .get(`produto-get/${idSelecionado}`)
       .then((resp) => {
+        const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ')
+        console.log(arrayCores)
         setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
         setUrlImagem(resp.data.img);
@@ -141,50 +151,45 @@ const ModalEditarProduto = ({
         setCategoria(resp.data.categoria.id);
         setSubCategoria(resp.data.categoria.sub_categoria.id);
         setPreco(resp.data.preco);
-        setIdDetalhesProdutos(resp.data.detalhes_dos_produtos[0].id)
+        setIdDetalhesProdutos(resp.data.detalhes_dos_produtos[0].id);
         setPeso(resp.data.detalhes_dos_produtos[0].peso);
-        setTamanho(resp.data.detalhes_dos_produtos[0].tamanho)
+        setTamanho(resp.data.detalhes_dos_produtos[0].tamanho);
         setQuantidade(resp.data.detalhes_dos_produtos[0].quantidade);
-        setColorPrimary(resp.data.detalhes_dos_produtos[0].cor);
-        // setDetalhesProdutos(resp.data.detalhes_do_produto[0].id)
-        setarSub(resp.data.categoria.id)
-    
+        setarSub(resp.data.categoria.id);
+        setColorPrimary(arrayCores[0])
+        setColorSecondary(arrayCores[1])
       })
-      
+
       .catch((err) => alert(err));
   };
 
 
-
-
-
-  
 
   function atirarFuncoes() {
     handleOpen(), regastarInformacoesProdutoSelecionado();
   }
 
 
-
-
   function regastarListaProdutos() {
     httpProduto
-      .get('/api/products')
-    // httpApiMockada
-    //   .get('produtos')
-      .then((response) => { setarLista(response.data.content) })
+      .get("/api/products")
+      // httpApiMockada
+      //   .get('produtos')
+      .then((response) => {
+        setarLista(response.data.content);
+      })
       .catch((error) => console.error);
   }
 
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const detalhesProduto: IDetalhesProduto ={
+    const detalhesProduto: IDetalhesProduto = {
       id: idDetalhesProduto,
-      tamanho: tamanho, 
-      quantidade: quantidade, 
-      peso: peso, 
-      cor: colorPrimary
-    }
+      tamanho: tamanho,
+      quantidade: quantidade,
+      peso: peso,
+      cor: `${colorPrimary} ${colorSecondary ? '' + colorSecondary : ''}`
+    };
     const produtoAtualizado: IProdutoPost = {
       nome: nomeProduto,
       descricao: descricao,
@@ -193,7 +198,7 @@ const ModalEditarProduto = ({
       categoria_id: categoria,
       sub_categoria_id: subCategoria,
       preco: preco,
-      detalhes_do_produto: detalhesProduto
+      detalhes_do_produto: detalhesProduto,
     };
     // httpProduto
     //   .put(`produtos/${idSelecionado}`, produtoAtualizado)
@@ -202,25 +207,23 @@ const ModalEditarProduto = ({
     //     regastarListaProdutos();
     //   })
     //   .catch((err) => console.log(err));
-    httpProduto
-      .put(`api/products/${idSelecionado}`, produtoAtualizado)
+    httpApiMockada
+      .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();
-        setSnackbarEditOpen(true)
+        setSnackbarEditOpen(true);
       })
       .catch((err) => console.log(err));
   };
-  // <h1>PRODUTO DE CÓDIGO: {idSelecionado} </h1>
-
-
+  // <h1>PRODUTO DE CÓDIGprodutos-postO: {idSelecionado} </h1>
 
   const PrimaryColor = styled.div`
-    height: 55px; 
-    width: 50px; 
+    height: 55px;
+    width: 50px;
     background-color: #${colorPrimary};
-    border: 1px solid #000
-  `
+    border: 1px solid #000;
+  `;
 
   return (
     <div>
@@ -271,7 +274,7 @@ const ModalEditarProduto = ({
                   setCategoria(e.target.value), setIsSubCategoriaDisable(false);
                 }}
                 onBlur={(e) => {
-                  setarSub(categoria)
+                  setarSub(categoria);
                 }}
                 value={categoria}
               >
@@ -283,7 +286,7 @@ const ModalEditarProduto = ({
                 label="Sub-categoria"
                 className={styles.subcategory}
                 onChange={(e) => {
-                  setSubCategoria(e.target.value)
+                  setSubCategoria(e.target.value);
                 }}
                 value={subCategoria}
               >
@@ -320,19 +323,24 @@ const ModalEditarProduto = ({
                 value={peso}
               />
 
-              <div className={styles.colors}>
-                <TextField
-                  label="Cor Primária"
-                  className={styles.weight}
-                  onChange={(e) => setColorPrimary(e.target.value)}
-                  value={colorPrimary}
-                />
-                <PrimaryColor />
-              </div>
-              
+              <MuiColorInput
+                value={colorPrimary}
+                onChange={trocarPrimeiraCor}
+                onBlur={(e) => setColorSecondColorField(false)}
+                format={format}
+                label="Cor Primária"
+                className={styles.colors}
+              />
 
+              <MuiColorInput
+                disabled={secondColorField}
+                value={colorSecondary}
+                onChange={trocarSegundaCor}
+                format={format}
+                className={styles.colors2}
+                label="Cor Secundária"
+              />
             </div>
-
 
             <Button
               variant="contained"

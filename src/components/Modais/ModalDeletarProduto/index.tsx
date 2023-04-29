@@ -40,8 +40,8 @@ const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSna
     // httpProduto.get('/api/products')
     // .then((response) => {setarLista(response.data.content)})
     // .catch((error) => console.error)
-    httpProduto.get('/api/products')
-    .then((response) => {setarLista(response.data.content)})
+    httpApiMockada.get('produto-get')
+    .then((response) => {setarLista(response.data)})
     .catch((error) => console.error)
   }
 
@@ -53,8 +53,8 @@ const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSna
     //     setOpen(false);
     //   })
     //   .catch((err) => console.error(err));
-    httpProduto
-      .delete(`/api/products/${idExcluir}`)
+    httpApiMockada
+      .delete(`produto-get/${idExcluir}`)
       .then((resp) => {
         regastarListaProdutos()
         setOpen(false);

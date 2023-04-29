@@ -14,13 +14,17 @@ import { BsPlus } from "react-icons/bs";
 import ModalInformacaoCadastro from "../modalInformacaoCadastro";
 import { IconType } from "react-icons/lib";
 import { MdCheckCircle, MdError } from "react-icons/md";
-import styled from "styled-components";
+import {
+  MuiColorInput,
+  MuiColorInputColors,
+  MuiColorInputFormat,
+} from "mui-color-input";
+
+
 
 // Modern or es5 bundle (pay attention to the note below!)
-import PickrComponent from "../../PickrComponent";
-import { IProdutoGet } from "../../../compartilhado/IProdutoGet";
-import { ICategory } from "../../../compartilhado/ICategory";
 import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
+import styled from "@emotion/styled";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -51,6 +55,8 @@ export default function ModalAddProduto({
     setQuantidade("");
     setSubCategoria("");
     setPreco("");
+    setColorPrimary("");
+    setColorSecondary("");
     setIsSubCategoriaDisable(true);
   };
 
@@ -60,7 +66,10 @@ export default function ModalAddProduto({
   const [legendaBotao, setLegendaBotao] = useState<string>("");
   const [corModal, setCorModal] = useState<string>("");
   const [iconModal, setIconModal] = useState<IconType>();
-  const [categoriasESubCategorias, setCategoriasESubCategorias ] = useState<string>("")
+  const [categoriasESubCategorias, setCategoriasESubCategorias] = useState<
+    string
+  >("");
+
 
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState("");
@@ -77,15 +86,15 @@ export default function ModalAddProduto({
 
   const [colorPrimary, setColorPrimary] = useState("");
   const [colorSecondary, setColorSecondary] = useState("");
-  const [colors, setColors] = useState("");
 
-  let  [subCategoriasTeste, setSubCategoriasTeste] = useState("");
-
+  let [subCategoriasTeste, setSubCategoriasTeste] = useState("");
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
+  
+  const [secondColorField, setColorSecondColorField] = useState(true);
   const [index, setIndex] = useState(0);
 
-
+  const format: MuiColorInputFormat = "hex";
 
   const style = {
     position: "absolute" as "absolute",
@@ -101,6 +110,17 @@ export default function ModalAddProduto({
     justifyContent: "center",
     p: 4,
   };
+
+  const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorPrimary(newValue)
+  }
+  const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorSecondary(newValue)
+  }
+
+  const inputFieldStyled = styled.div`
+    width: 100%;
+  `;
 
   const targetAudienceList = [
     {
@@ -132,24 +152,23 @@ export default function ModalAddProduto({
   ));
 
   const setarSub = (idCategorieSelected: string) => {
-    const categorias = categoriesAndSubCategories.filter(c => c.id === idCategorieSelected)
-    let subCategoriasLista =  categorias[0].subCategorias.map((option) => (
+    const categorias = categoriesAndSubCategories.filter(
+      (c) => c.id === idCategorieSelected
+    );
+    let subCategoriasLista = categorias[0].sub_categorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
     ));
 
-    setSubCategoriasTeste(subCategoriasLista)
-  }
-
-
-  
+    setSubCategoriasTeste(subCategoriasLista);
+  };
 
   const resgatarListaProdutos = () => {
-    httpProduto
-      .get("/api/products")
+    httpApiMockada
+      .get("produto-get")
       .then((resp) => {
-        setarLista(resp.data.content);
+        setarLista(resp.data);
       })
       .catch((err) => console.log(err));
     // httpApiMockada
@@ -160,19 +179,15 @@ export default function ModalAddProduto({
     //   .catch((err) => console.log(err));
   };
 
-
-
-
- 
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // SETAR VARIÁVEL DO TIPO CATEGORIA
     let detalhes_produto: IDetalhesProduto = {
-      tamanho: tamanho, 
-      peso: peso, 
-      cor: colorPrimary, 
-      quantidade: quantidade
-    }
+      tamanho: tamanho,
+      peso: peso,
+      cor: `${colorPrimary} ${colorSecondary ? '' + colorSecondary : ''}`,
+      quantidade: quantidade,
+    };
     let produto: IProdutoPost = {
       empresa_id: empresaid,
       nome: nomeProduto,
@@ -182,16 +197,16 @@ export default function ModalAddProduto({
       categoria_id: categoria,
       sub_categoria_id: subCategoria,
       preco,
-      detalhes_do_produto: detalhes_produto
+      detalhes_do_produto: detalhes_produto,
     };
 
-    httpProduto
-      .post("/api/products", produto)
-    // httpApiMockada
-    //   .post("produtos-post", produto)
-    //   .then((resp) => {
-    //     console.log("Produto Criado com Sucesso");
-    //   })
+    httpApiMockada
+      .post("produtos-post", produto)
+      // httpApiMockada
+      //   .post("produtos-post", produto)
+      //   .then((resp) => {
+      //     console.log("Produto Criado com Sucesso");
+      //   })
       .then((resp) => {
         resgatarListaProdutos();
         setOpen(false);
@@ -206,31 +221,15 @@ export default function ModalAddProduto({
         setPreco("");
         setTamanho("");
         setPeso("");
-        setColorPrimary("")
+        setColorPrimary("");
+        setColorSecondary("")
         setIsSubCategoriaDisable(true);
       })
       .catch((erro: any) => console.log(erro));
     setIsSubCategoriaDisable(true);
   };
 
-  const PrimaryColor = styled.div`
-    height: 55px; 
-    width: 50px; 
-    background-color: #${colorPrimary};
-    border: 1px solid #000
-  `
-  const SecondaryColor = styled.div`
-    height: 55px; 
-    width: 50px; 
-    background-color: #${colorSecondary};
-    border: 1px solid #000
-  `
-
-  React.useEffect(() => {
-    
-
-    
-  });
+  React.useEffect(() => {});
 
   return (
     <div>
@@ -288,7 +287,7 @@ export default function ModalAddProduto({
                   setCategoria(e.target.value), setIsSubCategoriaDisable(false);
                 }}
                 onBlur={(e) => {
-                  setarSub(categoria)
+                  setarSub(categoria);
                 }}
                 value={categoria}
               >
@@ -297,10 +296,10 @@ export default function ModalAddProduto({
               <TextField
                 select
                 disabled={isSubCategoriaDisable}
-                label="Subcategoria"
+                label="Sub-categoria"
                 className={styles.subcategory}
                 onChange={(e) => {
-                  setSubCategoria(e.target.value)
+                  setSubCategoria(e.target.value);
                 }}
                 value={subCategoria}
               >
@@ -337,15 +336,23 @@ export default function ModalAddProduto({
                 value={peso}
               />
 
-              <div className={styles.colors}>
-                <TextField
-                  label="Cor Primária"
-                  className={styles.weight}
-                  onChange={(e) => setColorPrimary(e.target.value)}
-                  value={colorPrimary}
-                />
-                <PrimaryColor />
-              </div>
+              <MuiColorInput
+                value={colorPrimary}
+                onChange={trocarPrimeiraCor}
+                onBlur={(e) => setColorSecondColorField(false)}
+                format={format}
+                label="Cor Primária"
+                className={styles.colors}
+              />
+
+              <MuiColorInput
+                disabled={secondColorField}
+                value={colorSecondary}
+                onChange={trocarSegundaCor}
+                format={format}
+                className={styles.colors2}
+                label="Cor Secundária"
+              />
 
 
             </div>
