@@ -24,9 +24,9 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   function preencherDados(cepRecebido: ICep, dataPreencher: IDataUser) {
     if (cepRecebido) {
       (dataPreencher.bairro = cepRecebido.bairro),
-      (dataPreencher.cidade = cepRecebido.localidade),
-      (dataPreencher.estado = cepRecebido.uf),
-      (dataPreencher.logradouro = cepRecebido.logradouro);
+        (dataPreencher.cidade = cepRecebido.localidade),
+        (dataPreencher.estado = cepRecebido.uf),
+        (dataPreencher.logradouro = cepRecebido.logradouro);
       return console.log(cepRecebido);
     }
   }
@@ -40,8 +40,11 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
     return preencherDados(cepDados, dataPreencher);
   };
 
-  
-  
+  const maskCEP = (value: string) => {
+    return value.replace(/\D/g, "").replace(/^(\d{5})(\d{1})/, "$1-$2").replace(/(-\d{3})(\d+?)$/, '$1');;
+  };
+
+
 
   return (
     <div className={styles.camposCadastros}>
@@ -51,7 +54,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         required
         value={data.cep || ""}
         onChange={(e) => {
-          atualizarCampo("cep", e.target.value);
+          atualizarCampo("cep", maskCEP(e.target.value));
         }}
         onBlur={(e) => {
           consumirApiViaCEP(data.cep, data);
@@ -70,14 +73,14 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         label="Logradouro"
         InputLabelProps={{ shrink: true }}
         value={data.logradouro || ""}
-        className={styles.camposCadastros__logradouro} 
+        className={styles.camposCadastros__logradouro}
         onChange={(e) => atualizarCampo("logradouro", e.target.value)}
       ></InputField>
       <InputField
         label="Complemento"
         InputLabelProps={{ shrink: true }}
         className={styles.camposCadastros__complemento}
-        value={data.complemento || ""} 
+        value={data.complemento || ""}
         onChange={(e) => atualizarCampo("complemento", e.target.value)}
       ></InputField>
       <InputField
@@ -118,4 +121,3 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   );
 };
 export default DadosResidencial;
-

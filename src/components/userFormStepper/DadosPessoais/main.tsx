@@ -1,19 +1,25 @@
 import {
   Button,
+  IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { IDataUser } from "../../../compartilhado/IDataUser";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IMaskInput, useIMask } from "react-imask";
 import styles from "./DadosPessoais.module.scss";
 import { height } from "@mui/system";
 import { InputMask } from "imask";
-import { useMask } from 'react-mask-field'
+import { useMask } from "react-mask-field";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormControl from "@mui/material/FormControl";
 interface DadosPessoaisProps {
   data: IDataUser;
   atualizarCampo: (key: string, value: string) => void;
@@ -31,14 +37,10 @@ const SelectField = styled(Select)({
   margin: "5px 0",
 });
 
-
-
-
 interface CustomProps {
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
 }
-
 
 const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
   function TextMaskCustom(props, ref) {
@@ -47,15 +49,14 @@ const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
       <IMaskInput
         {...other}
         mask="000.000.000-00"
-        onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+        onAccept={(value: any) =>
+          onChange({ target: { name: props.name, value } })
+        }
         overwrite
       />
     );
-  },
+  }
 );
-
-
-
 
 const DadosPessoais: FC<DadosPessoaisProps> = ({
   data,
@@ -74,40 +75,81 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
 
   const [buttonNextDisable, setButtonNextDisable] = useState<boolean>(false);
 
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const validarFoto = (fotoDigitada: string) => {
-    const regexFoto = /\.(png|jpg)$/;
+    const regexFoto = /https?:\/\/.*\.(jpe?g|png)/;
     if (regexFoto.test(fotoDigitada)) {
       setErrorFotoPerfil(false);
     } else {
       setErrorFotoPerfil(true);
-      // setButtonNextDisable(true)
-      // onData(buttonNextDisable)
     }
   };
 
+
+  const checkItem = () => {
+    const erros = [
+      errorCPF,
+      errorPassword,
+      errorConfirmPassword,
+      errorEmail,
+      errorGenero,
+      errorTelefone,
+      errorNome,
+      errorFotoPerfil,
+      errorData,
+    ];
+    if (erros.includes(true)) {
+      console.table(erros)
+      onData(true);
+    } else {
+      console.table(erros)
+      onData(false);
+    }
+  };
+
+
+
+  useEffect(() => {
+    checkItem()
+  }, []);
+
+
   const validarNome = (nomeDigitado: string) => {
-    const regexNome = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s-]{10,50}$/;
+    const regexNome = /\D{10,50}$/;
     if (regexNome.test(nomeDigitado)) {
       setErrorNome(false);
     } else {
+      //ERRO NOME
       setErrorNome(true);
     }
   };
 
   const maskOnlyLetters = (value: string) => {
-    return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "")
-  }
+    return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "");
+  };
 
   const validarGenero = (generoDigitado: string) => {
     if (data.genero === "") {
+      //ERRO GENERO
       setErrorGenero(true);
     } else {
-      setErrorGenero(false);
+      if (data.genero === "Gênero") {
+        //ERRO GENERO
+        setErrorGenero(true);
+      } else {
+        setErrorGenero(false);
+      }
     }
   };
-
-
 
   const maskCPF = (cpfDigitado: string) => {
     return cpfDigitado
@@ -115,16 +157,15 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
       .replace(/(\d{3})(\d)/, "$1.$2")
       .replace(/(\d{3})(\d)/, "$1.$2")
       .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1")
-  }
-
+      .replace(/(-\d{2})\d+?$/, "$1");
+  };
 
   const maskPhone = (value: string) => {
     return value
-      .replace(/\D/g, '')
-      .replace(/(\d{2})(\d)/, '($1) $2')
-      .replace(/(\d{5})(\d)/, '$1-$2')
-      .replace(/(-\d{4})(\d+?)$/, '$1');
+      .replace(/\D/g, "")
+      .replace(/(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2")
+      .replace(/(-\d{4})(\d+?)$/, "$1");
   };
   /* 
     ^: início da string
@@ -141,13 +182,17 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
     if (regexSenha.test(senhaDigitada)) {
       setErrorPassword(false);
     } else {
+      //errorPassword
       setErrorPassword(true);
     }
   };
-
-
-
-
+  const validarCampoConfirmarSenha = (senhaDigitada: string) => {
+    if (senhaDigitada !== data.senha) {
+      setErrorConfirmPassword(true);
+    } else {
+      setErrorConfirmPassword(false);
+    }
+  };
 
   const validarEmail = (emailDigitado: string) => {
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -159,6 +204,9 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
   };
 
   const validarTelefone = (telefoneDigitado: string) => {
+    telefoneDigitado = telefoneDigitado
+      .replace(/[,!()-.]/g, "")
+      .replaceAll(" ", "");
     if (telefoneDigitado.length === 11) {
       setErrorTelefone(false);
     } else {
@@ -166,23 +214,38 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
     }
   };
 
-  const validarCampoConfirmarSenha = (senhaDigitada: string) => {
-    if (senhaDigitada !== data.senha) {
-      setErrorConfirmPassword(true);
-    } else {
-      setErrorConfirmPassword(false);
-    }
-  };
+
+  function has18Years(field: string): boolean {
+    const dateOfBirth = new Date(field);
+    const currentDate = new Date();
+
+    let yearsDiff = currentDate.getUTCFullYear() - dateOfBirth.getUTCFullYear();
+    const monthsDiff = currentDate.getUTCMonth() - dateOfBirth.getUTCMonth();
+    const daysDiff = currentDate.getUTCDate() - dateOfBirth.getUTCDate();
+
+    if (monthsDiff < 0 || daysDiff < 0) yearsDiff--;
+
+    return yearsDiff >= 18;
+  }
 
   const validarData = (dataEscolhida: string) => {
-    if (data.dataNasc !== " ") {
-      setErrorData(false);
-    } else {
+    if (dataEscolhida === "") {
       setErrorData(true);
+    } else {
+      if (!has18Years(dataEscolhida)) {
+        setErrorData(true);
+      } else {
+        setErrorData(false);
+      }
     }
   };
 
+
+ 
+
   const validarCampoCpf = (cpfDigitado: string) => {
+    cpfDigitado = cpfDigitado.replace(/[,!()-.]/g, "").replaceAll(" ", "");
+
     if (cpfDigitado.length !== 11) {
       setErrorCPF(true);
     } else {
@@ -227,6 +290,7 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         onBlur={(e) => {
           validarNome(data.nome);
         }}
+        onMouseUp={(e) => checkItem()}
         onChange={(e) => {
           atualizarCampo("nome", maskOnlyLetters(e.target.value));
         }}
@@ -238,6 +302,7 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         // ref={refFieldCPF}
         InputLabelProps={{ shrink: true }}
         required
+        onMouseUp={(e) => checkItem()}
         value={data.cpf || ""}
         onChange={(e) => {
           atualizarCampo("cpf", maskCPF(e.target.value));
@@ -245,7 +310,6 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         onBlur={(e) => {
           validarCampoCpf(data.cpf);
         }}
-        
         className={styles.camposCadastro__cpf}
       ></InputField>
 
@@ -253,6 +317,7 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         label="URL Foto de Perfil"
         InputLabelProps={{ shrink: true }}
         required
+        onMouseUp={(e) => checkItem()}
         error={errorFotoPerfil}
         onBlur={(e) => {
           validarFoto(data.urlFotoPerfil);
@@ -266,7 +331,10 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         InputLabelProps={{ shrink: true }}
         required
         error={errorTelefone}
-        onBlur={(e) => validarTelefone(data.telefone)}
+        onBlur={(e) => {
+          validarTelefone(data.telefone);
+        }}
+        onMouseUp={(e) => checkItem()}
         value={data.telefone || ""}
         onChange={(e) => atualizarCampo("telefone", maskPhone(e.target.value))}
         className={styles.camposCadastro__telefone}
@@ -278,7 +346,10 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         required
         value={data.dataNasc || ""}
         error={errorData}
-        onBlur={(e) => validarData(data.dataNasc)}
+        onBlur={(e) => {
+          validarData(e.target.value);
+        }}
+        onMouseUp={(e) => checkItem()}
         onChange={(e) => atualizarCampo("dataNasc", e.target.value)}
         className={styles.camposCadastro__dtNasc}
       ></InputField>
@@ -289,11 +360,16 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         }
         displayEmpty
         error={errorGenero}
-        onBlur={(e) => validarGenero(data.genero)}
+        onBlur={(e) => {
+          validarGenero(data.genero);
+        }}
+        onMouseUp={(e) => checkItem()}
         required
         className={styles.camposCadastro__genero}
       >
-        <MenuItem value="">Gênero</MenuItem>
+        <MenuItem value="" disabled>
+          Gênero
+        </MenuItem>
         <MenuItem value="FEMININO">Feminino</MenuItem>
         <MenuItem value="MASCULINO">Masculino</MenuItem>
         <MenuItem value="NAO_INFORMADO">Não Informar</MenuItem>
@@ -304,35 +380,103 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         required
         value={data.email || ""}
         onChange={(e) => atualizarCampo("email", e.target.value)}
-        onBlur={(e) => validarEmail(data.email)}
+        onBlur={(e) => {
+          validarEmail(data.email)
+        }}
+        onMouseUp={(e) => checkItem()}
         error={errorEmail}
         className={styles.camposCadastro__email}
       ></InputField>
-      <InputField
-        label="Senha"
-        type="password"
-        error={errorPassword}
-        InputLabelProps={{ shrink: true }}
-        required
-        value={data.senha || ""}
-        onChange={(e) => {
-          atualizarCampo("senha", e.target.value),
-            validarCampoConfirmarSenha(data.confirmeSenha);
-        }}
-        onBlur={(e) => validarCampoSenha(data.senha)}
-        className={styles.camposCadastro__senha}
-      ></InputField>
-      <InputField
-        label="Confirmar Senha"
-        type="password"
-        error={errorConfirmPassword}
-        InputLabelProps={{ shrink: true }}
-        required
-        onBlur={(e) => validarCampoConfirmarSenha(data.confirmeSenha)}
-        value={data.confirmeSenha || ""}
-        onChange={(e) => atualizarCampo("confirmeSenha", e.target.value)}
-        className={styles.camposCadastro__confirmarSenha}
-      ></InputField>
+      {/* <FormControl required variant="filled">
+        <InputLabel htmlFor="outlined-adornment-password" >Senha</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? "text" : "password"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          error={errorPassword}
+          required
+          value={data.senha || ""}
+          onChange={(e) => {
+            atualizarCampo("senha", e.target.value),
+              validarCampoConfirmarSenha(data.confirmeSenha);
+          }}
+          onBlur={(e) => validarCampoSenha(data.senha)}
+          className={styles.camposCadastro__senha}
+        ></OutlinedInput>
+      </FormControl> */}
+      <FormControl variant="outlined">
+        <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? "text" : "password"}
+          required
+          error={errorPassword}
+          value={data.senha || ""}
+          onChange={(e) => {
+            atualizarCampo("senha", e.target.value),
+              validarCampoConfirmarSenha(data.confirmeSenha);
+          }}
+          onMouseUp={(e) => checkItem()}
+          onBlur={(e) => validarCampoSenha(data.senha)}
+          className={styles.camposCadastro__senha}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Password"
+        />
+      </FormControl>
+
+      <FormControl variant="outlined">
+        <InputLabel htmlFor="outlined-adornment-password">
+          Confirmar Senha
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password"
+          type={showPassword ? "text" : "password"}
+          required
+          error={errorConfirmPassword}
+          value={data.confirmeSenha || ""}
+          onChange={(e) => {
+            atualizarCampo("confirmeSenha", e.target.value);
+          }}
+          onMouseUp={(e) => checkItem()}
+          onBlur={(e) => validarCampoConfirmarSenha(data.confirmeSenha)}
+          className={styles.camposCadastro__senha}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Password"
+        />
+      </FormControl>
     </section>
   );
 };

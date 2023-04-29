@@ -84,7 +84,6 @@ const FormCadastroUsuario = () => {
   ];
   const [idPasso, setIdPasso] = useState(0);
 
-
   // TRATAR DADOS RECEBIDOS
   const converterParaDataLocal = (dataInformada: string): string => {
     let data = new Date(dataInformada);
@@ -93,17 +92,9 @@ const FormCadastroUsuario = () => {
     return data.toLocaleDateString();
   };
 
-
-
-  const retirarPontos = (cpfInformado: string): string => {
-    let novoCpf = cpfInformado.replaceAll("-", "").replaceAll(".", "")
-    return novoCpf;
-  }
-
-  const retirarPontosTelefone = (telefoneInformado: string): string => {
-    let novoTelefone = telefoneInformado.replaceAll("(", "").replaceAll(")", "").replaceAll("-", "").replaceAll(" ", "")
-    return novoTelefone;
-  }
+  const removeSpecialCaracteres = (campoInformado: string) => {
+    return campoInformado.replace(/[,!()-.]/g, "").replaceAll(" ", "");
+  };
 
   const salvarUsuarioEEndereco = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -113,16 +104,16 @@ const FormCadastroUsuario = () => {
     console.log(dados);
     const user: IUsuario = {
       nome: dados.nome,
-      cpf: retirarPontos(dados.cpf),
+      cpf: removeSpecialCaracteres(dados.cpf),
       dt_nascimento: converterParaDataLocal(dados.dataNasc),
       senha: dados.senha,
-      telefone: retirarPontosTelefone(dados.telefone),
+      telefone: removeSpecialCaracteres(dados.telefone),
       genero: dados.genero,
       email: dados.email,
       grupos_interesses: dados.listaInteresses,
       img: dados.urlFotoPerfil,
       endereco: {
-        cep: dados.cep,
+        cep: removeSpecialCaracteres(dados.cep),
         logradouro: dados.logradouro,
         numero: dados.numero,
         bairro: dados.bairro,
@@ -136,11 +127,11 @@ const FormCadastroUsuario = () => {
     //   .then((resp) => alert(`${user.nome} criado com sucesso`))
     //   .catch((err) => alert("Deu Ruim"))
     httpApiMockada
-      .post('usuarios', user)
+      .post("usuarios", user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => {
         {
-          console.log(user)
+          console.log(user);
           setOpenModalRegister(true);
           setMensagemModal("CADASTRO REALIZADO COM SUCESSO!");
           setDescricaoModal(
@@ -234,7 +225,7 @@ const FormCadastroUsuario = () => {
                   color="success"
                   type="submit"
                   onClick={nextStep}
-                  disabled={false}
+                  disabled={isDisabled}
                 >
                   <span>PRÓXIMO</span>
                   <MdNavigateNext />
@@ -248,3 +239,4 @@ const FormCadastroUsuario = () => {
   );
 };
 export default FormCadastroUsuario;
+

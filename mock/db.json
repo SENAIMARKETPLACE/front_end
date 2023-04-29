@@ -867,6 +867,98 @@
         "complemento": "Casa1"
       },
       "id": 43
+    },
+    {
+      "nome": "djiadiadijasida",
+      "cpf": "53950516867",
+      "dt_nascimento": "02/03/2004",
+      "senha": "123",
+      "telefone": "12312123123",
+      "genero": "MASCULINO",
+      "email": "jvabreusousa12@gmail.com",
+      "grupos_interesses": [
+        "acessorios",
+        "esportes"
+      ],
+      "img": "05881020",
+      "endereco": {
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
+        "numero": "",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": ""
+      },
+      "id": 44
+    },
+    {
+      "nome": "djiadiadijasida",
+      "cpf": "53950516867",
+      "dt_nascimento": "02/03/2004",
+      "senha": "123",
+      "telefone": "12312123123",
+      "genero": "MASCULINO",
+      "email": "jvabreusousa12@gmail.com",
+      "grupos_interesses": [
+        "acessorios",
+        "esportes"
+      ],
+      "img": "05881020",
+      "endereco": {
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
+        "numero": "",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": ""
+      },
+      "id": 45
+    },
+    {
+      "nome": "João Vitor de Abreu",
+      "cpf": "01231231231",
+      "dt_nascimento": "Invalid Date",
+      "senha": "",
+      "telefone": "11111111111",
+      "genero": "",
+      "email": "",
+      "grupos_interesses": [
+        "acessorios"
+      ],
+      "img": "",
+      "endereco": {
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
+        "numero": "",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": ""
+      },
+      "id": 46
+    },
+    {
+      "nome": "",
+      "cpf": "",
+      "dt_nascimento": "Invalid Date",
+      "senha": "",
+      "telefone": "",
+      "genero": "",
+      "email": "",
+      "grupos_interesses": [],
+      "img": "",
+      "endereco": {
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
+        "numero": "",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "complemento": ""
+      },
+      "id": 47
     }
   ],
   "enderecos": [],
