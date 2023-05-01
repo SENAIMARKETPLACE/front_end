@@ -38,6 +38,9 @@ const ProdutoLista = ({
   snackbarDeleteOpen, 
   setSnackbarDeleteOpen
 }: ProductItemListProps) => {
+
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(price))
+
   return (
     <li
       className={styles.product}
@@ -48,7 +51,7 @@ const ProdutoLista = ({
       <img className={styles.product__photo} src={photo} alt={name} />
       <p>{name}</p>
       <p>{amount} unid.</p>
-      <p className={styles.product__highlight}>R$ {price}</p>
+      <p className={styles.product__highlight}>{precoFormatado}</p>
       <div className={styles.product__btns}>
         <ModalEditarProduto setSnackbarEditOpen={setSnackbarEditOpen} snackbarOpenEdit={snackbarOpenEdit} setarLista={setarLista} idSelecionado={id} categoriesAndSubCategories={categoriesAndSubCategories}/>
         <ModalDeletarProduto setSnackbarDeleteOpen={setSnackbarDeleteOpen} snackbarDeleteOpen={snackbarDeleteOpen} setarLista={setarLista} idExcluir={id} />

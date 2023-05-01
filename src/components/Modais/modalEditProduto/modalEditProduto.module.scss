@@ -4,7 +4,9 @@
   height: 28px;
   width: 28px;
   padding: 6px;
-  cursor: pointer;
+  &:hover{
+    cursor: pointer;
+  }
 
 }
 
@@ -86,6 +88,7 @@
 
     &:hover {
       background-color: #039b59;
+      cursor: pointer;
     }
   }
 }

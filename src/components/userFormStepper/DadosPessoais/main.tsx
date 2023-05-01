@@ -95,6 +95,8 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
   };
 
 
+
+
   const checkItem = () => {
     const erros = [
       errorCPF,

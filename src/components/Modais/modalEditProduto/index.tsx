@@ -348,7 +348,7 @@ const ModalEditarProduto = ({
               type="submit"
               className={styles.submit_btn}
             >
-              Salvar
+              Salvar Alterações
             </Button>
           </form>
         </Box>

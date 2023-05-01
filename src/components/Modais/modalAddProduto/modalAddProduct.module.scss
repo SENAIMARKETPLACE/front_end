@@ -84,10 +84,10 @@
     padding: 10px 20px;
     background-color: #06c270;
     margin-top: 20px;
-    padding: 8px 24px;
 
     &:hover {
       background-color: #039b59;
+      cursor: pointer !important;
     }
   }
 }

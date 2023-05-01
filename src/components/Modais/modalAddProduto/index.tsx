@@ -4,27 +4,23 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { Button, FormControl, OutlinedInput, Select } from "@mui/material";
+import { Button, FormControl, OutlinedInput, styled } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import { useState } from "react";
 import { httpApiMockada, httpProduto } from "../../../http";
 import { IProdutoPost } from "../../../compartilhado/IProdutoPost";
 import { BsPlus } from "react-icons/bs";
-import ModalInformacaoCadastro from "../modalInformacaoCadastro";
 import { IconType } from "react-icons/lib";
-import { MdCheckCircle, MdError } from "react-icons/md";
 import {
   MuiColorInput,
   MuiColorInputColors,
   MuiColorInputFormat,
 } from "mui-color-input";
 
-
-
 // Modern or es5 bundle (pay attention to the note below!)
 import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
-import styled from "@emotion/styled";
+import { FaLessThanEqual } from "react-icons/fa";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -55,21 +51,23 @@ export default function ModalAddProduto({
     setQuantidade("");
     setSubCategoria("");
     setPreco("");
+    setPeso("")
     setColorPrimary("");
     setColorSecondary("");
     setIsSubCategoriaDisable(true);
+    setErroNomeProduto(true)
+    setErroDescricao(true)
+    setErroUrlImagem(true)
+    setErroPublico(true)
+    setErroCategoria(true)
+    setErroSubCategoria(true)
+    setErroPreco(true)
+    setErroPeso(true)
+    setErroPrimaryColor(true)
+    setErroQuantidade(true)
+    setErroTamanho(true)
+  
   };
-
-  const [openModalRegister, setOpenModalRegister] = useState(false);
-  const [mensagemModal, setMensagemModal] = useState<string>("");
-  const [descricaoModal, setDescricaoModal] = useState<string>("");
-  const [legendaBotao, setLegendaBotao] = useState<string>("");
-  const [corModal, setCorModal] = useState<string>("");
-  const [iconModal, setIconModal] = useState<IconType>();
-  const [categoriasESubCategorias, setCategoriasESubCategorias] = useState<
-    string
-  >("");
-
 
   // STATES PARA CAPTURA DE CAMPOS
   const [nomeProduto, setNomeProduto] = useState("");
@@ -83,16 +81,29 @@ export default function ModalAddProduto({
   const [peso, setPeso] = useState("");
   const [tamanho, setTamanho] = useState("");
   const [quantidade, setQuantidade] = useState("");
-
   const [colorPrimary, setColorPrimary] = useState("");
   const [colorSecondary, setColorSecondary] = useState("");
 
   let [subCategoriasTeste, setSubCategoriasTeste] = useState("");
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
-  
+
   const [secondColorField, setColorSecondColorField] = useState(true);
   const [index, setIndex] = useState(0);
+
+  // ERROS
+  const [erroNomeProduto, setErroNomeProduto] = useState(true);
+  const [erroDescricao, setErroDescricao] = useState(true);
+  const [erroUrlImagem, setErroUrlImagem] = useState(true);
+  const [erroPublico, setErroPublico] = useState(true);
+  const [erroCategoria, setErroCategoria] = useState(true);
+  const [erroSubCategoria, setErroSubCategoria] = useState(true);
+  const [erroPreco, setErroPreco] = useState(true);
+  const [erroPeso, setErroPeso] = useState(true);
+  const [erroTamanho, setErroTamanho] = useState(true);
+  const [erroQuantidade, setErroQuantidade] = useState(true);
+  const [erroPrimaryColor, setErroPrimaryColor] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const format: MuiColorInputFormat = "hex";
 
@@ -111,16 +122,21 @@ export default function ModalAddProduto({
     p: 4,
   };
 
-  const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
-    setColorPrimary(newValue)
-  }
-  const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
-    setColorSecondary(newValue)
-  }
 
-  const inputFieldStyled = styled.div`
-    width: 100%;
-  `;
+
+  
+
+
+
+
+  const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorPrimary(newValue);
+  };
+  const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorSecondary(newValue);
+  };
+
+
 
   const targetAudienceList = [
     {
@@ -185,7 +201,7 @@ export default function ModalAddProduto({
     let detalhes_produto: IDetalhesProduto = {
       tamanho: tamanho,
       peso: peso,
-      cor: `${colorPrimary} ${colorSecondary ? '' + colorSecondary : ''}`,
+      cor: `${colorPrimary} ${colorSecondary ? "" + colorSecondary : ""}`,
       quantidade: quantidade,
     };
     let produto: IProdutoPost = {
@@ -196,7 +212,7 @@ export default function ModalAddProduto({
       publico,
       categoria_id: categoria,
       sub_categoria_id: subCategoria,
-      preco,
+      preco: preco.replace(/,/g, "."),
       detalhes_do_produto: detalhes_produto,
     };
 
@@ -222,14 +238,87 @@ export default function ModalAddProduto({
         setTamanho("");
         setPeso("");
         setColorPrimary("");
-        setColorSecondary("")
+        setColorSecondary("");
         setIsSubCategoriaDisable(true);
+        setIsSubCategoriaDisable(true);
+        setErroNomeProduto(true)
+        setErroDescricao(true)
+        setErroUrlImagem(true)
+        setErroPublico(true)
+        setErroCategoria(true)
+        setErroSubCategoria(true)
+        setErroPreco(true)
+        setErroPeso(true)
+        setErroPrimaryColor(true)
+        setErroQuantidade(true)
+        setErroTamanho(true)
       })
       .catch((erro: any) => console.log(erro));
     setIsSubCategoriaDisable(true);
   };
 
-  React.useEffect(() => {});
+
+  const validarSomenteTamanho = (
+    nomeDigitado: string,
+    minimo: string,
+    maximo: string,
+    funcaoSetar?: (valor: React.SetStateAction<boolean>) => void
+  ): boolean => {
+    const regexNome = new RegExp(`^.{${minimo},${maximo}}$`);
+    if (regexNome.test(nomeDigitado)) {
+      funcaoSetar(false);
+      return(false)
+    } else {
+      funcaoSetar(true);
+      return(true)
+    }
+  };
+
+  const validarFoto = (fotoDigitada: string) => {
+    const regexFoto = /https?:\/\/.*\.(jpe?g|png)/;
+    if (regexFoto.test(fotoDigitada)) {
+      setErroUrlImagem(false);
+      return false
+    } else {
+      setErroUrlImagem(true);
+      return true;
+    }
+  };
+
+  const validarField = (
+    opcaoEscolhida: string,
+    funcaoSetar: (valor: React.SetStateAction<boolean>) => void
+  ): boolean => {
+    if (opcaoEscolhida != "") {
+      funcaoSetar(false);
+      return false
+    } else {
+      funcaoSetar(true);
+      return true;
+    }
+  };
+
+  const validarQuantidade = (quantidadeEscolhida: string): boolean => {
+    if(quantidadeEscolhida != ""){
+      if(parseInt(quantidadeEscolhida) <= 0) {
+        setErroQuantidade(true)
+        return true
+      }else{
+        setErroQuantidade(false)
+        return false
+      }
+    } else {
+      setErroQuantidade(true)
+      return true
+    }
+
+  }
+
+
+  React.useEffect(() => {
+    setIsFormValid(!erroNomeProduto && !erroDescricao && !erroUrlImagem && !erroPublico && !erroCategoria && !erroSubCategoria && !erroPeso && !erroTamanho && !erroPrimaryColor && !erroQuantidade && !erroPreco )
+    alert(isFormValid)
+  }, [erroNomeProduto, erroDescricao, erroUrlImagem, erroPublico, erroCategoria, erroSubCategoria, erroPreco, erroPeso, erroTamanho, erroQuantidade, erroPrimaryColor ]);
 
   return (
     <div>
@@ -252,23 +341,40 @@ export default function ModalAddProduto({
                 label="Nome do produto"
                 className={styles.name}
                 onChange={(e) => setNomeProduto(e.target.value)}
+                onBlur={(e) =>
+                  validarSomenteTamanho(
+                    nomeProduto,
+                    "10",
+                    "30",
+                    setErroNomeProduto
+                  )
+                }
                 value={nomeProduto}
+                error={erroNomeProduto}
+                inputProps={{ minLength: 10, maxLength: 30 }}
               />
               <TextField
                 label="Descrição"
                 onChange={(e) => {
                   setDescricao(e.target.value);
                 }}
+                onBlur={(e) =>
+                  validarSomenteTamanho(descricao, "10", "500", setErroDescricao)
+                }
+                error={erroDescricao}
                 multiline
                 rows={4}
                 className={styles.description}
                 value={descricao}
+                inputProps={{ minLength: 10, maxLength: 500 }}
               />
               <TextField
                 label="URL da imagem"
                 className={styles.url}
                 onChange={(e) => setUrlImagem(e.target.value)}
                 value={urlImagem}
+                onBlur={(e) => validarFoto(urlImagem)}
+                error={erroUrlImagem}
               />
               <TextField
                 select
@@ -276,6 +382,10 @@ export default function ModalAddProduto({
                 className={styles.genre}
                 onChange={(e) => setPublico(e.target.value)}
                 value={publico}
+                onBlur={(e) => {
+                  validarField(publico, setErroPublico);
+                }}
+                error={erroPublico}
               >
                 {targetAudienceList}
               </TextField>
@@ -287,9 +397,16 @@ export default function ModalAddProduto({
                   setCategoria(e.target.value), setIsSubCategoriaDisable(false);
                 }}
                 onBlur={(e) => {
-                  setarSub(categoria);
+                  validarField(categoria, setErroCategoria);
+                  {
+                    categoria != ""
+                      ? setarSub(categoria)
+                      : setErroCategoria(true);
+                  }
+                  setErroSubCategoria(true);
                 }}
                 value={categoria}
+                error={erroCategoria}
               >
                 {categoriasLista}
               </TextField>
@@ -301,7 +418,11 @@ export default function ModalAddProduto({
                 onChange={(e) => {
                   setSubCategoria(e.target.value);
                 }}
+                onBlur={(e) => {
+                  validarField(subCategoria, setErroSubCategoria);
+                }}
                 value={subCategoria}
+                error={erroSubCategoria}
               >
                 {subCategoriasTeste}
               </TextField>
@@ -310,7 +431,9 @@ export default function ModalAddProduto({
                 label="Quantidade"
                 className={styles.amount}
                 onChange={(e) => setQuantidade(e.target.value)}
+                onBlur={(e) => validarQuantidade(quantidade)}
                 value={quantidade}
+                error={erroQuantidade}
               />
               <FormControl className={styles.price}>
                 <InputLabel>Preço</InputLabel>
@@ -320,29 +443,39 @@ export default function ModalAddProduto({
                   }
                   label="Amount"
                   value={preco}
+                  onBlur={(e) => validarField(preco, setErroPreco)}
                   onChange={(e) => setPreco(e.target.value)}
+                  error={erroPreco}
                 />
               </FormControl>
               <TextField
                 label="Tamanho"
                 className={styles.size}
                 onChange={(e) => setTamanho(e.target.value)}
+                onBlur={(e) => validarField(tamanho, setErroTamanho)}
                 value={tamanho}
+                error={erroTamanho}
               />
               <TextField
                 label="Peso"
                 className={styles.weight}
                 onChange={(e) => setPeso(e.target.value)}
+                onBlur={(e) => validarField(peso, setErroPeso)}
                 value={peso}
+                error={erroPeso}
               />
 
               <MuiColorInput
                 value={colorPrimary}
                 onChange={trocarPrimeiraCor}
-                onBlur={(e) => setColorSecondColorField(false)}
+                onBlur={(e) => {
+                  setColorSecondColorField(false),
+                    validarField(colorPrimary, setErroPrimaryColor);
+                }}
                 format={format}
                 label="Cor Primária"
                 className={styles.colors}
+                error={erroPrimaryColor}
               />
 
               <MuiColorInput
@@ -353,17 +486,17 @@ export default function ModalAddProduto({
                 className={styles.colors2}
                 label="Cor Secundária"
               />
-
-
             </div>
 
+            {/* SE IsFormValid ser false na propriedade disabled ele vira true | se IsFormValid ser true na propriedade disabled ele vira false  */}
             <Button
               onClick={criarProduto}
               variant="contained"
               type="submit"
+              disabled={!isFormValid}
               className={styles.submit_btn}
             >
-              Salvar
+              CADASTRAR PRODUTO
             </Button>
           </form>
         </Box>
