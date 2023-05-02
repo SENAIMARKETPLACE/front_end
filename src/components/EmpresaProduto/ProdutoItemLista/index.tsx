@@ -1,4 +1,4 @@
-import styles from "./ProdutoLista.module.scss";
+import styles from "./ProdutoItemLista.module.scss";
 import { MdModeEdit } from "react-icons/md";
 import ModalDeletarProduto from "../../Modais/ModalDeletarProduto";
 import ModalAddProduto from "../../Modais/modalAddProduto";
@@ -25,7 +25,7 @@ function enviaId(id: string) {
   return id;
 }
 
-const ProdutoLista = ({
+const ProdutoItemLista = ({
   id,
   photo,
   name,
@@ -60,4 +60,4 @@ const ProdutoLista = ({
   );
 };
 
-export default ProdutoLista;
+export default ProdutoItemLista;

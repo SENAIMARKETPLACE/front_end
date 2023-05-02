@@ -317,7 +317,6 @@ export default function ModalAddProduto({
 
   React.useEffect(() => {
     setIsFormValid(!erroNomeProduto && !erroDescricao && !erroUrlImagem && !erroPublico && !erroCategoria && !erroSubCategoria && !erroPeso && !erroTamanho && !erroPrimaryColor && !erroQuantidade && !erroPreco )
-    alert(isFormValid)
   }, [erroNomeProduto, erroDescricao, erroUrlImagem, erroPublico, erroCategoria, erroSubCategoria, erroPreco, erroPeso, erroTamanho, erroQuantidade, erroPrimaryColor ]);
 
   return (

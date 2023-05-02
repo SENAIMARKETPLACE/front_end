@@ -15,6 +15,10 @@ import Stack from "@mui/material/Stack";
 import { error } from "console";
 import { stringify } from "querystring";
 import { ICategory } from "../../compartilhado/ICategory";
+import { MdGridOn, MdGridView, MdOutlineList } from "react-icons/md";
+import ProductItemList from "../../patterns/Products/List";
+import ProdutoItemLista from "../../components/EmpresaProduto/ProdutoItemLista";
+import ProdutoItemGrid from "../../components/EmpresaProduto/ProdutoItemGrid";
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
@@ -24,6 +28,8 @@ const EmpresaProdutosScreen = () => {
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [catchCategorias, setCatchCategorias] = useState<string[]>([]);
+  const [isButtonListAtivo, setIsButtonListAtivo] = useState(true);
+  const [modoLista, setModoLista] = useState(true);
 
   useEffect(() => {
     httpApiMockada
@@ -37,6 +43,14 @@ const EmpresaProdutosScreen = () => {
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
+
+  const tornarModoGrid = () => {
+    setIsButtonListAtivo(false);
+  };
+
+  const tornarModoList = () => {
+    setIsButtonListAtivo(true);
+  };
 
   const handleSnackbarClose = (
     event: React.SyntheticEvent | undefined,
@@ -153,13 +167,31 @@ const EmpresaProdutosScreen = () => {
             </div>
             <div className={styles.searchAndFilter}>
               <SearchBar />
-              <ToggleBtn />
+              <div className={styles.buttonsVisualization}>
+                <button
+                  onClick={(e) => tornarModoGrid()}
+                  className={`${styles.buttonsVisualization__button} ${
+                    !isButtonListAtivo ? styles.botaoAtivo : ""
+                  }`}
+                >
+                  <MdGridOn />
+                </button>
+                <button
+                  onClick={(e) => tornarModoList()}
+                  className={`${styles.buttonsVisualization__button} ${
+                    isButtonListAtivo ? styles.botaoAtivo : ""
+                  }`}
+                >
+                  <MdOutlineList />
+                </button>
+              </div>
               <StatusAlert isOpen={isOpen} mensagem={mensagem} />
             </div>
-            <ul className={styles.products__list}>
-              <ul className={styles.products__list}>
-                {products.map((product) => (
-                  <ProdutoLista
+
+            <ul className={`${isButtonListAtivo? styles.products__list : styles.products__grid }`}>
+              {products.map((product) =>
+                isButtonListAtivo ? (
+                  <ProdutoItemLista
                     categoriesAndSubCategories={catchCategorias}
                     snackbarOpenEdit={snackbarEditOpen}
                     setSnackbarEditOpen={setSnackbarEditOpen}
@@ -173,8 +205,23 @@ const EmpresaProdutosScreen = () => {
                     price={product.preco}
                     amount={product.detalhes_dos_produtos[0].quantidade}
                   />
-                ))}
-              </ul>
+                ) : (
+                  <ProdutoItemGrid
+                    categoriesAndSubCategories={catchCategorias}
+                    snackbarOpenEdit={snackbarEditOpen}
+                    setSnackbarEditOpen={setSnackbarEditOpen}
+                    snackbarDeleteOpen={snackbarDeleteOpen}
+                    setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                    setarLista={atualizarListaProdutos}
+                    id={product.id}
+                    key={product.id}
+                    photo={product.img}
+                    name={product.nome}
+                    price={product.preco}
+                    amount={product.detalhes_dos_produtos[0].quantidade}
+                  />
+                )
+              )}
             </ul>
           </main>
         </section>
