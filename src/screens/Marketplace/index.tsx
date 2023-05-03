@@ -84,7 +84,7 @@ const MarketplaceScreen = () => {
                 className={styles.searchbar_and_avatar__buttonCart}
               >
                 <BsBag />
-                <p className={styles.buttonCart__quantidadeProdutos}>2</p>
+                <p className={styles.buttonCart__quantidadeProdutos}>0</p>
               </button>
             </div>
           </header>
