@@ -1276,6 +1276,56 @@
           "quantidade": "1000"
         }
       ]
+    },
+    {
+      "id": 3,
+      "nome": "Nike Camiseta",
+      "descricao": "Melhor camiseta do mundo",
+      "preco": 215.15,
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
+        }
+      },
+      "detalhes_dos_produtos": [
+        {
+          "id": 1,
+          "tamanho": "70cm",
+          "peso": "150gr",
+          "cor": "#902626 #ffffff",
+          "quantidade": "1000"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Nike Camiseta",
+      "descricao": "Melhor camiseta do mundo",
+      "preco": 215.15,
+      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
+        }
+      },
+      "detalhes_dos_produtos": [
+        {
+          "id": 1,
+          "tamanho": "70cm",
+          "peso": "150gr",
+          "cor": "#902626 #ffffff",
+          "quantidade": "1000"
+        }
+      ]
     }
   ],
   "categoriasSubcategorias": [

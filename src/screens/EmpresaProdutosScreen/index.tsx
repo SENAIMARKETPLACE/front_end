@@ -167,7 +167,7 @@ const EmpresaProdutosScreen = () => {
 
       <div className={styles.page_container}>
         <MenuLateralEmpresa />
-        <section>
+        <section className={styles.sectionViewProducts}>
           <EmpresaBanner image={Banner} alt="Capa da empresa" />
           <main className={styles.main_content}>
             <div className={styles.title_container}>

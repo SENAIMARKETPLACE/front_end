@@ -3,7 +3,7 @@
 .page_container {
   display: flex;
   background-color: #f7f8fa;
-
+  padding-bottom: 20px;
   .main_content {
     padding: 40px;
 
@@ -58,8 +58,8 @@
     }
 
     .products__list {
-      height: 30px;
       width: 100%;
+      margin: 20px 0;
     }
 
     .products__grid {
