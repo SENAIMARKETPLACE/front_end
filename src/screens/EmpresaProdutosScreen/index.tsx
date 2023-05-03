@@ -31,14 +31,7 @@ const EmpresaProdutosScreen = () => {
   const [isButtonListAtivo, setIsButtonListAtivo] = useState(true);
   const [modoLista, setModoLista] = useState(true);
 
-  useEffect(() => {
-    httpApiMockada
-      .get("categoriasSubcategorias")
-      .then((response) => {
-        setCatchCategorias(response.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -96,6 +89,27 @@ const EmpresaProdutosScreen = () => {
     }
   }
 
+
+  async function getCategoriesAndSubs(){
+    try{
+      const response = await httpApiMockada.get("categoriasSubcategorias"); 
+      setCatchCategorias(response.data);
+      console.log(response.data)
+    } catch (error){
+      console.log(error)
+    }
+
+  }
+
+  // useEffect(() => {
+  //   httpApiMockada
+  //     .get("categoriasSubcategorias")
+  //     .then((response) => {
+  //       setCatchCategorias(response.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
+
   function atualizarListaProdutos(novaLista: string[]): void {
     setProducts(novaLista);
   }
@@ -110,6 +124,7 @@ const EmpresaProdutosScreen = () => {
 
   useEffect(() => {
     getProducts();
+    getCategoriesAndSubs();
   }, []);
 
   return (
@@ -217,6 +232,7 @@ const EmpresaProdutosScreen = () => {
                     key={product.id}
                     photo={product.img}
                     name={product.nome}
+                    subcategoria={product.categoria.sub_categoria.nome}
                     price={product.preco}
                     amount={product.detalhes_dos_produtos[0].quantidade}
                   />

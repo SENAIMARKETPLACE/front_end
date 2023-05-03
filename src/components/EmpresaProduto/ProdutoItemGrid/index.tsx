@@ -8,6 +8,7 @@ interface ProdutoItemGridProps {
   photo: string;
   name: string;
   price: string;
+  subcategoria: string;
   amount: string;
   setarLista: (listaAtualizada: string[]) => void;
   snackbarOpenEdit: boolean;
@@ -29,6 +30,7 @@ const ProdutoItemGrid = ({
   name,
   price,
   amount,
+  subcategoria,
   setarLista,
   snackbarOpenEdit,
   setSnackbarEditOpen,
@@ -50,7 +52,8 @@ const ProdutoItemGrid = ({
     >
       <img className={styles.product__photo} src={photo} alt={name} />
       <div className={styles.product__body}>
-        <p className={styles.product__nome}>{name}</p>
+        <p className={styles.product__name}>{name}</p>
+        <p className={styles.product__subcategoria}>{subcategoria}</p>
         <p className={styles.product__highlight}>{precoFormatado}</p>
         <p className={styles.product__quantidade}>{amount} unid.</p>
 
