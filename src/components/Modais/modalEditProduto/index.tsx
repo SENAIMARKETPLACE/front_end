@@ -122,7 +122,7 @@ const ModalEditarProduto = ({
       {option.nome}
     </MenuItem>
   ));
-
+  
   const setarSub = (idCategorieSelected: string) => {
     let categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
@@ -135,12 +135,13 @@ const ModalEditarProduto = ({
 
     setSubCategoriasTeste(subCategoriasLista);
   };
+  
 
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
     httpApiMockada
-      .get(`produto-get/${idSelecionado}`)
+    .get(`produto-get/${idSelecionado}`)
       .then((resp) => {
         const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ')
         console.log(arrayCores)
@@ -164,11 +165,12 @@ const ModalEditarProduto = ({
   };
 
 
-
+  
+  
   function atirarFuncoes() {
     handleOpen(), regastarInformacoesProdutoSelecionado();
   }
-
+  
 
   function regastarListaProdutos() {
     httpProduto
@@ -179,8 +181,8 @@ const ModalEditarProduto = ({
         setarLista(response.data.content);
       })
       .catch((error) => console.error);
-  }
-
+    }
+    
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const detalhesProduto: IDetalhesProduto = {
@@ -197,7 +199,7 @@ const ModalEditarProduto = ({
       publico: publico,
       categoria_id: categoria,
       sub_categoria_id: subCategoria,
-      preco: preco,
+      preco: preco.replace(/,/g, "."),
       detalhes_do_produto: detalhesProduto,
     };
     // httpProduto
@@ -224,6 +226,16 @@ const ModalEditarProduto = ({
     background-color: #${colorPrimary};
     border: 1px solid #000;
   `;
+
+
+
+ 
+
+  
+  
+
+  
+
 
   return (
     <div>

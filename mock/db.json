@@ -1072,7 +1072,7 @@
       "publico": "MASCULINO",
       "categoria_id": 4,
       "sub_categoria_id": 22,
-      "preco": 215.15,
+      "preco": 225.15,
       "detalhes_do_produto": {
         "id": 1,
         "tamanho": "70cm",
@@ -1106,7 +1106,7 @@
       "publico": "MASCULINO",
       "categoria_id": 4,
       "sub_categoria_id": 22,
-      "preco": 215.15,
+      "preco": "900.50",
       "detalhes_do_produto": {
         "id": 1,
         "tamanho": "70cm",
@@ -1149,6 +1149,40 @@
         "quantidade": "70"
       },
       "id": 5
+    },
+    {
+      "empresa_id": "1",
+      "nome": "sasodjqwodjqwojqwoejqwe",
+      "descricao": "qeqewqeqeqweqweqweqweqwe",
+      "img": "https://.png",
+      "publico": "MASCULINO",
+      "categoria_id": 2,
+      "sub_categoria_id": 7,
+      "preco": "2400.50",
+      "detalhes_do_produto": {
+        "tamanho": "M",
+        "peso": "150g",
+        "cor": "#b29191 ",
+        "quantidade": "100"
+      },
+      "id": 6
+    },
+    {
+      "empresa_id": "1",
+      "nome": "Jogadorasdasda",
+      "descricao": "asdasdasdasdasdasdasd",
+      "img": "https://github.com/joaoabreu004.png",
+      "publico": "MASCULINO",
+      "categoria_id": 2,
+      "sub_categoria_id": 7,
+      "preco": "2.400.50",
+      "detalhes_do_produto": {
+        "tamanho": "GG",
+        "peso": "86kg",
+        "cor": "#a07979 ",
+        "quantidade": "1"
+      },
+      "id": 7
     }
   ],
   "produto-get": [
@@ -1156,9 +1190,9 @@
       "id": 2,
       "nome": "Nike Camiseta",
       "descricao": "Melhor camiseta do mundo",
-      "preco": 215.15,
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
       "publico": "MASCULINO",
+      "preco": 2200.15,
       "categoria": {
         "id": 4,
         "nome": "Esportes",
@@ -1231,7 +1265,7 @@
       "id": 3,
       "nome": "Nike Camiseta",
       "descricao": "Melhor camiseta do mundo",
-      "preco": 215.15,
+      "preco": 2400.5,
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
       "publico": "MASCULINO",
       "categoria": {
