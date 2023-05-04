@@ -127,7 +127,7 @@ const ModalEditarProduto = ({
     let categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
     );
-    const subCategoriasLista = categorias[0].sub_categorias.map((option) => (
+    const subCategoriasLista = categorias[0].subCategorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
@@ -140,8 +140,8 @@ const ModalEditarProduto = ({
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
-    httpApiMockada
-    .get(`produto-get/${idSelecionado}`)
+    httpProduto
+    .get(`/api/products/${idSelecionado}`)
       .then((resp) => {
         const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ')
         console.log(arrayCores)
@@ -209,8 +209,8 @@ const ModalEditarProduto = ({
     //     regastarListaProdutos();
     //   })
     //   .catch((err) => console.log(err));
-    httpApiMockada
-      .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
+    httpProduto
+      .put(`api/products/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();

@@ -121,7 +121,7 @@ const FormCadastroEmpresa = () => {
     // httpEmpresa.post('/api/business', empresa)
     // .then((resp) => alert(`${empresa.nome_fantasia} cadastrada com sucesso!`))
     // .catch((error) => alert("Deu Ruim"))
-    httpApiMockada.post('empresas', empresa)
+    httpEmpresa.post('/api/business', empresa)
       .then((resp) => {
         setOpenModalRegister(true);
         setMensagemModal("CADASTRO REALIZADO COM SUCESSO!");

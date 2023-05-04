@@ -10,7 +10,7 @@ import "swiper/css";
 import { EmblaCarousel } from "../../components/CarouselProducts";
 import FooterSollaris from "../../layout/Footer";
 import { useEffect, useRef, useState } from "react";
-import { httpApiMockada } from "../../http";
+import { httpApiMockada, httpProduto } from "../../http";
 import { MdShoppingCart } from "react-icons/md";
 import { BsBag } from "react-icons/bs";
 import Carrinho from "../../components/Carrinho";
@@ -46,9 +46,9 @@ const MarketplaceScreen = () => {
 
   async function getProducts() {
     try {
-      const response = await httpApiMockada.get("produto-get");
+      const response = await httpProduto.get("/api/products");
       console.log(response);
-      setProducts(response.data);
+      setProducts(response.data.content);
       console.log(products);
     } catch (error) {
       console.error(error);

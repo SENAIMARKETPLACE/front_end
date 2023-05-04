@@ -171,7 +171,7 @@ export default function ModalAddProduto({
     const categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
     );
-    let subCategoriasLista = categorias[0].sub_categorias.map((option) => (
+    let subCategoriasLista = categorias[0].subCategorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
@@ -181,10 +181,10 @@ export default function ModalAddProduto({
   };
 
   const resgatarListaProdutos = () => {
-    httpApiMockada
-      .get("produto-get")
+    httpProduto
+      .get("/api/products")
       .then((resp) => {
-        setarLista(resp.data);
+        setarLista(resp.data.content);
       })
       .catch((err) => console.log(err));
     // httpApiMockada
@@ -216,8 +216,8 @@ export default function ModalAddProduto({
       detalhes_do_produto: detalhes_produto,
     };
 
-    httpApiMockada
-      .post("produtos-post", produto)
+    httpProduto
+      .post("/api/products", produto)
       // httpApiMockada
       //   .post("produtos-post", produto)
       //   .then((resp) => {
