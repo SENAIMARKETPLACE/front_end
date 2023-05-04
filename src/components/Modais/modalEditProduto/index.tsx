@@ -199,7 +199,7 @@ const ModalEditarProduto = ({
       publico: publico,
       categoria_id: categoria,
       sub_categoria_id: subCategoria,
-      preco: preco.replace(/,/g, "."),
+      preco: preco,
       detalhes_do_produto: detalhesProduto,
     };
     // httpProduto

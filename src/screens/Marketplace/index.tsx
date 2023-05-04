@@ -18,7 +18,7 @@ import Carrinho from "../../components/Carrinho";
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-
+  const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0")
   const [aberto, setAberto] = useState(false);
   const ref = useRef();
 
@@ -57,6 +57,7 @@ const MarketplaceScreen = () => {
 
   useEffect(() => {
     getProducts();
+    setQtdProdutosCarrinho("3")
   }, []);
 
   const acionarCarrinho = () => {
@@ -67,7 +68,7 @@ const MarketplaceScreen = () => {
     <div className={styles.page_container}>
       <div className={styles.content}>
         <div ref={carrinhoRef}>
-          {isCartVisible ? <Carrinho isCartAtivado={isCartVisible} /> : ""}
+          {isCartVisible ? <Carrinho quantidadeDeProdutos={qtdProdutosCarrinho} isCartAtivado={isCartVisible} /> : ""}
         </div>
 
         <MenuLateralUsuario />
@@ -84,7 +85,7 @@ const MarketplaceScreen = () => {
                 className={styles.searchbar_and_avatar__buttonCart}
               >
                 <BsBag />
-                <p className={styles.buttonCart__quantidadeProdutos}>0</p>
+                <p className={styles.buttonCart__quantidadeProdutos}>{qtdProdutosCarrinho}</p>
               </button>
             </div>
           </header>
