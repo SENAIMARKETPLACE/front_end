@@ -1,0 +1,27 @@
+.camposCadastros{
+    display: grid;
+    grid-area: 1 / 1 /4 /2;
+    column-gap: 15px;
+    row-gap: 18px;
+    .camposCadastros__cep{
+        grid-area: 1/1/1/3;
+    }
+    .camposCadastros__logradouro{
+        grid-area: 2 / 1 / 2 / 1 ;
+    } 
+    .camposCadastros__complemento{
+        grid-area: 2 / 2 / 2 / 2 ;
+    } 
+    .camposCadastros__numero{
+        grid-area: 3 / 1 / 3 / 1  ;
+    }
+    .camposCadastros__cidade{
+        grid-area: 3/2/3/2;
+    }
+    .camposCadastros__estado{
+        grid-area: 4/1/4/1;
+    }
+    .camposCadastros__bairro{
+        grid-area: 4/2/4/2;
+    }
+}

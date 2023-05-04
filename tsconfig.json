@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "types": [
+      "node"
+    ],
     "lib": [
       "dom",
       "dom.iterable",
@@ -23,7 +26,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "../Globals.d.ts"
   ],
   "exclude": [
     "node_modules"

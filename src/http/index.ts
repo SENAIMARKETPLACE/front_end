@@ -2,8 +2,24 @@
 
 import axios from "axios";
 
-const http = axios.create({
+export const httpEmpresa = axios.create({
+    baseURL: 'http://localhost:8000/'
+})
+
+export const httpUsuario = axios.create({
+    baseURL: 'http://localhost:8200/'
+})
+
+export const httpProduto = axios.create({
+    baseURL: 'http://localhost:8100/'
+})
+
+export const httpCategoria = axios.create({
+    baseURL: 'http://localhost:8100/'
+})
+
+export const httpApiMockada = axios.create({
     baseURL: 'http://localhost:5000/'
 })
 
-export default http;
+

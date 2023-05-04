@@ -1,0 +1,20 @@
+export interface IDataUser{
+    id?: string,
+    nome: string,
+    cpf: string, 
+    telefone: string, 
+    urlFotoPerfil: string, 
+    dataNasc: string, 
+    genero: string, 
+    email: string, 
+    senha: string, 
+    confirmeSenha: string, 
+    listaInteresses?: Array<string>; 
+    cep: string, 
+    logradouro: string, 
+    complemento: string, 
+    numero: string, 
+    cidade: string, 
+    estado: string, 
+    bairro: string, 
+}

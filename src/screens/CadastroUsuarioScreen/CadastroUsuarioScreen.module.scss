@@ -6,15 +6,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  background: url('https://s3-alpha-sig.figma.com/img/5460/7915/e96396edaebb36ace9c80fea99697862?Expires=1679875200&Signature=ZdroygeNoo-DbVsjRqw5V9IEqNzgJMSSU9uokhuvluw6KUVWmlHuZGp6hbMx4w8Tpfvm41SK-PVuoutIvloN-NBI86H1DLxZUZhRR7PQhxOnPUhRBiwo-sjI3ijbNGmIAplFBydzxBN7XaTRghYHCqZm-ce3o3kmfLHVxPZE8VelM3tYTxxU80f-e5P88FoJKcwTxG9ywnfwl8wuS~Yzja-tMrnXnoT4tWAtMHlZlMp8aLB7nl9aSBrVn~LhcJBq9wVb6Rd-hQlb2n7slK1uJ9BWxq0Hvecjji8zl2cSpLBuaM8vNR2cjpo1IBqHZxCo9e3Gxpu1vClu-pl62eLNyQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4');
   .register {
     width: 100%;
     max-width: map-get($breakpoints, 'desktop');
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0 3rem;
+    margin: 2em 0;
+
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
-    
+    background-color: #fff ;
     .register__header {
       display: flex;
       align-items: center;

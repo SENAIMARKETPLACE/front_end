@@ -1,12 +1,22 @@
 .header {
     background-color: #ffffff;
     display: flex;
-    display: flex;
+    top: 0;
+    width: 100%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    justify-content: space-around;
-    padding: 1em;
+    justify-content: space-between;
+    padding: 20px;
+    z-index: 1;
+    position: fixed;
     align-items: center;
     .header__logo {
+        display: flex;
+        align-items: center;
+        p{
+            font-size: 20px;
+            font-weight: 600;
+            color: #016170;
+        }
         img{
             border-radius: 50%;
             height: 100px;
@@ -15,7 +25,7 @@
     }
     nav {
         display: flex;
-        .header__btn_login {
+        .header__btn {
             margin-right: 30px;
             display: flex;
             align-items: center;
@@ -24,33 +34,20 @@
             height: 50px;
             font-weight: 400;
             font-size: 20px;
-            width: 130px;
+            width: max-content;
             justify-content: space-around;
             text-decoration: none;
             color: #000;
             padding: 0 10px;
+            border: 2px solid #65bce8a9;
+            transition: background-color 1s ease-out;
             &:hover{
                 cursor: pointer;
+                background-color: #65bce8;
+                color: #fff;
             }
             
         }
-        .header__btn_cadastro {
-            display: flex; 
-            align-items: center;
-            width: 150px;
-            height: 50px;
-            background-color: #38B6E1;
-            border: none;
-            display: flex;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 20px;
-            color: #FFF;
-            text-align: center;
-        }
-
-      
-
     }
 
 }

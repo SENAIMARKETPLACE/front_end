@@ -1,0 +1,35 @@
+.product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #3c3c3c;
+  margin-bottom: 10px;
+
+  .product__photo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .product__highlight {
+    font-weight: 700;
+  }
+
+  .product__btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .product__edit {
+      background-color: #dcdcdc;
+      border-radius: 50%;
+      height: 28px;
+      width: 28px;
+      padding: 6px;
+    }
+  }
+}

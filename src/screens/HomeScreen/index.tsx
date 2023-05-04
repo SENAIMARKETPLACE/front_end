@@ -1,18 +1,24 @@
 import React from "react";
-import Header from "../../layout/Header";
-import styles from "./HomeScreen.module.scss"
+import { MdGroups, MdPerson, MdStar, MdStore } from "react-icons/md";
+import HeaderSollaris from "../../layout/Header";
+import styles from "./HomeScreen.module.scss";
+import FooterSollaris from "../../layout/Footer";
+import SectionOne from "../../components/homeScreenComponents/sectionOne";
+import SectionSignIn from "../../components/homeScreenComponents/sectionSignIn";
+import CarrosselProdutos from "../../components/CarrosselProdutos";
 
 const HomeScreen = () => {
+
   return (
-    <>
-      <Header></Header>
-      <main className={styles.sectionMain}>
-        <section className={styles.main__alert}>
-          <iframe src="https://embed.lottiefiles.com/animation/83369"></iframe>
-          <h2>PÁGINA EM DESENVOLVIMENTO</h2>
-        </section>
+    <div className={styles.bodyHome}>
+      <HeaderSollaris></HeaderSollaris>
+      <main>
+        <SectionOne />
+        <CarrosselProdutos/>
+        <SectionSignIn />
       </main>
-    </>
+      <FooterSollaris></FooterSollaris>
+    </div>
   );
 };
 export default HomeScreen;
