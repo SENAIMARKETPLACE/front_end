@@ -12,5 +12,6 @@ declare module 'styled-components' {
     ButtonRedirecionamento?: string
     PrimaryColor?: string 
     SecondColor?: string 
+    ColorProduct?: string
 }
 }
