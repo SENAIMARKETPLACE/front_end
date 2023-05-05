@@ -46,7 +46,6 @@ const formTemplate: IDataUser = {
 
 const FormCadastroUsuario = () => {
   const [data, setData] = useState(formTemplate);
-  const [isDisabled, setIsDisable] = useState<boolean>(true);
   const [openModalRegister, setOpenModalRegister] = useState(false);
   const [mensagemModal, setMensagemModal] = useState<string>("");
   const [descricaoModal, setDescricaoModal] = useState<string>("");
@@ -54,9 +53,7 @@ const FormCadastroUsuario = () => {
   const [corModal, setCorModal] = useState<string>("");
   const [iconModal, setIconModal] = useState<IconType>();
 
-  const atualizarPeloFilho = (dadoFilho: boolean) => {
-    setIsDisable(dadoFilho);
-  };
+ 
 
   const atualizarCampo = (key: string, value: string) => {
     setData((prev) => {
@@ -75,7 +72,6 @@ const FormCadastroUsuario = () => {
 
   const formComponents = [
     <DadosPessoais
-      onData={atualizarPeloFilho}
       data={data}
       atualizarCampo={atualizarCampo}
     />,
@@ -225,7 +221,6 @@ const FormCadastroUsuario = () => {
                   color="success"
                   type="submit"
                   onClick={nextStep}
-                  disabled={isDisabled}
                 >
                   <span>PRÓXIMO</span>
                   <MdNavigateNext />

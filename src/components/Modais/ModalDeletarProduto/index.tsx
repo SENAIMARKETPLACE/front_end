@@ -49,7 +49,8 @@ const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSna
     httpProduto
       .delete(`/api/products/${idExcluir}`)
       .then((resp) => {
-        regastarListaProdutos()
+        regastarListaProdutos(); 
+        setSnackbarDeleteOpen(true)
         setOpen(false);
       })
       .catch((err) => console.error(err));
