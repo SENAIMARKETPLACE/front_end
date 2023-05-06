@@ -1,4 +1,4 @@
-import CadastroUsuarioScreen from "../screens/CadastroUsuarioScreen";
+import CadastroUsuarioScreen from "../../screens/CadastroUsuarioScreen";
 
 
 const CadastroUsuario = () => {

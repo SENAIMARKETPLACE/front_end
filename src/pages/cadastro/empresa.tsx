@@ -1,5 +1,5 @@
 
-import CadastroEmpresaScreen from "../screens/CadastroEmpresaScreen";
+import CadastroEmpresaScreen from "../../screens/CadastroEmpresaScreen";
 
 const CadastroEmpresa = () => {
     return (

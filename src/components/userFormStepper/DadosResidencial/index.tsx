@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import { IDataUser } from "../../../compartilhado/IDataUser";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import axios from "axios";
 import { ICep } from "../../../compartilhado/ICep";
 import styles from "./DadosResidencial.module.scss";
@@ -21,30 +21,26 @@ const InputField = styled(TextField)({
 const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
   const [cepDados, setCEPDados] = useState<ICep>(null);
 
-  function preencherDados(cepRecebido: ICep, dataPreencher: IDataUser) {
-    if (cepRecebido) {
-      (dataPreencher.bairro = cepRecebido.bairro),
-        (dataPreencher.cidade = cepRecebido.localidade),
-        (dataPreencher.estado = cepRecebido.uf),
-        (dataPreencher.logradouro = cepRecebido.logradouro);
-      return console.log(cepRecebido);
+
+  async function consumirApiViaCEP(cep: string, dataPreencher: IDataUser) {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      setCEPDados(response.data);
+      dataPreencher.bairro = response.data.bairro;
+      dataPreencher.cidade = response.data.localidade;
+      dataPreencher.estado = response.data.uf;
+      dataPreencher.logradouro = response.data.logradouro;
+    } catch (error) {
+      alert("Deu ruim!" + error);
     }
   }
 
-  const consumirApiViaCEP = (cep: string, dataPreencher: IDataUser) => {
-    axios
-      .get(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((response) => setCEPDados(response.data))
-      .catch((erro) => alert("CEP não encontrado!"));
-
-    return preencherDados(cepDados, dataPreencher);
-  };
-
   const maskCEP = (value: string) => {
-    return value.replace(/\D/g, "").replace(/^(\d{5})(\d{1})/, "$1-$2").replace(/(-\d{3})(\d+?)$/, '$1');;
+    return value
+      .replace(/\D/g, "")
+      .replace(/^(\d{5})(\d{1})/, "$1-$2")
+      .replace(/(-\d{3})(\d+?)$/, "$1");
   };
-
-
 
   return (
     <div className={styles.camposCadastros}>
@@ -52,7 +48,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         label="CEP"
         InputLabelProps={{ shrink: true }}
         required
-        value={data.cep || ""}
+        value={data.cep}
         onChange={(e) => {
           atualizarCampo("cep", maskCEP(e.target.value));
         }}
@@ -61,14 +57,6 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
         }}
         className={styles.camposCadastros__cep}
       ></InputField>
-      <Button
-        variant="contained"
-        onClick={(e) => {
-          consumirApiViaCEP(data.cep, data);
-        }}
-      >
-        Preencher Dados
-      </Button>
       <InputField
         label="Logradouro"
         InputLabelProps={{ shrink: true }}
@@ -102,7 +90,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
       <InputField
         label="Estado"
         InputLabelProps={{ shrink: true }}
-        value={data.estado || ""}
+        value={data.estado}
         onChange={(e) => {
           atualizarCampo("estado", e.target.value);
         }}
@@ -111,7 +99,7 @@ const DadosResidencial = ({ data, atualizarCampo }: DadosResidencialProps) => {
       <InputField
         label="Bairro"
         InputLabelProps={{ shrink: true }}
-        value={data.bairro || ""}
+        value={data.bairro}
         onChange={(e) => {
           atualizarCampo("bairro", e.target.value);
         }}
