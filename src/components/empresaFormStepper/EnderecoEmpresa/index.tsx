@@ -33,6 +33,12 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
     }
   }
 
+  const maskCEP = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/^(\d{5})(\d{1})/, "$1-$2")
+      .replace(/(-\d{3})(\d+?)$/, "$1");
+  };
 
   return (
     <section className={styles.camposCadastros}>
@@ -43,17 +49,13 @@ const EnderecoEmpresa = ({ data, atualizarCampo }: EnderecoEmpresaProps) => {
         required
         value={data.cep || ""}
         onChange={(e) => {
-          atualizarCampo("cep", e.target.value);
+          atualizarCampo("cep", maskCEP(e.target.value));
         }}
-      ></InputField>
-      <Button
-        variant="contained"
-        onClick={(e) => {
+        onBlur={(e) => {
           consumirApiViaCEP(data.cep, data);
         }}
-      >
-        Preencher Dados
-      </Button>
+      ></InputField>
+
       <InputField
         className={styles.camposCadastros__logradouro}
         label="Logradouro"
