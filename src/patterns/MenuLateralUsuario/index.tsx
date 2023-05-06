@@ -13,11 +13,6 @@ const listItems = [
         url: '',
     },
     {
-        text: 'Carrinho',
-        icon: <FiShoppingCart />,
-        url: '',
-    },
-    {
         text: 'Perfil',
         icon: <RxPerson />,
         url: '',

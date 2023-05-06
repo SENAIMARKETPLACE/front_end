@@ -1,7 +1,37 @@
+
+.buttonLogin{
+    margin-right: 15px;
+    box-shadow: none;
+    text-transform: none;
+    font-size: 16px;
+    padding:  0px 20px;
+    height: 50px;
+    border-radius: 50px ;
+    font-weight: 400;
+    background-color: #fff;
+    border: 1px solid #000000a9;
+    color: #000;
+    transition: all ease-in 500ms;
+    &:hover{
+        background-color: #000;
+        border-color: #000;
+        box-shadow: none;
+        color: #fff;
+    }
+    &:active{
+        box-shadow: none;
+        background-color: #65bce8;
+        border-color: #005cbf;
+    }
+
+
+}
+
 .modal__leftSide {
     padding: 1em 5em;
     width: 50%;
     height: 100%;
+
     .modal__leftSide__textoModal {
         text-align: center;
         margin-bottom: 20px;
@@ -22,21 +52,25 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .modal__leftSide__checkbox {
             display: flex;
             align-items: center;
         }
     }
-    .modal__leftSide__buttons{
-        margin-top: 20px ;
+
+    .modal__leftSide__buttons {
+        margin-top: 20px;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    .modal__leftSide__singIn{
+
+    .modal__leftSide__singIn {
         text-align: center;
         margin-top: 2em;
     }
+
     img {
         width: 90px;
         height: 90px;
@@ -49,13 +83,8 @@
 .modal__divImagem {
     width: 50%;
     height: 100%;
-    background: url('https://s3-alpha-sig.figma.com/img/011b/0c94/f90ad0489821056d6887822a3cfb808f?Expires=1680480000&Signature=hhZdA2xBX58lmCg11zYPULWdnncJKZHKDC4xs05ZXBkQZ1kmGQrXaede-nQXiuI6qQcj~3oJiklRkyF2pJAHTElX9CMwQRkcxRj1FtSiNxXG9yZUtVURS2IBUi-TZxBntF3vq7UoalaB9KB0aVoybaPR~HU~FACvGP~KBViRVTDn5X46oGDnMPEYjuPs5~LAAVqeEphT4-gKbt1qJDaLiN3p2mpX6sg0arL2XES~SoCEODWWbRSzJbWoI8DqR00wusoy-M4Jkie8RjLtc5cHE6xEqFRTvfZuFzThkrFqOT0Brz~7zRow0jjwmkMj4n~r0dw4ktMxKJ1Iy1dazQ6XKQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4');
+    background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
     background-repeat: no-repeat;
     background-size: cover;
-    
+
 }
-
-
-
-
-

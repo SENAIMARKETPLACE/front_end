@@ -10,11 +10,20 @@ interface ProductItemListProps {
 }
 
 const ProductItemList = ({ photo, name, price }: ProductItemListProps) => {
+
+    const options = {style: 'currency', currency: 'BRL', minimiumFractionDigits: 2, maximumFractionDigits: 2};
+    const formatarNumeros = new Intl.NumberFormat('pt-br', options)
+
+
+
+
+
+
     return (
         <li className={styles.product}>
             <img className={styles.product__photo} src={photo} alt={`Ilustração - ${name}`} />
             <p className={styles.product__name}>{name}</p>
-            <       p className={styles.product__price}>{price}</p>
+            <       p className={styles.product__price}>{formatarNumeros.format(parseInt(price))}</p>
             <div className={styles.product__btns}>
                 <MdModeEdit className={styles.product__edit} />
                 <MdDelete className={styles.product__remove} />

@@ -10,5 +10,5 @@ export interface IEmpresa{
     url_logo: string, 
     email: string, 
     senha: string, 
-    endereco? : IEndereco; 
+    endereco : IEndereco; 
 }

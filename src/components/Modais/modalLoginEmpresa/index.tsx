@@ -62,46 +62,6 @@ const ButtonLogarGoogle = styled(Button)({
   },
 });
 
-const ButtonLogin = styled(Button)({
-  marginRight: "15px",
-  boxShadow: "none",
-  textTransform: "none",
-  fontSize: 16,
-  padding: "0px 10px",
-  border: "1px solid",
-  height: "50px",
-  lineHeight: 1.5,
-  fontWeight: "400",
-  backgroundColor: "#fff",
-  borderSize: "2",
-  borderColor: "#65bce8a9",
-  color: "#000",
-  transition: "background-color 1s ease-out",
-  fontFamily: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    '"Segoe UI"',
-    "Roboto",
-    '"Helvetica Neue"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
-  "&:hover": {
-    backgroundColor: "#65bce8",
-    borderColor: "#0062cc",
-    boxShadow: "none",
-    color: "#fff",
-  },
-  "&:active": {
-    boxShadow: "none",
-    backgroundColor: "#65bce8",
-    borderColor: "#005cbf",
-  },
-});
-
 
 
 const style = {
@@ -133,7 +93,7 @@ export default function ModalLoginEmpresa() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Login Empresa</Button>
+      <Button className={styles.buttonLogin} onClick={handleOpen}>Login Empresa</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

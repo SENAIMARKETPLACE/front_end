@@ -13,17 +13,34 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { IProduto } from "../../../compartilhado/IProduto";
-import http from "../../../http";
+import { httpApiMockada, httpProduto } from "../../../http";
+
+import styled from "styled-components";
+import { IProdutoPost } from "../../../compartilhado/IProdutoPost";
+import { IProdutoGet } from "../../../compartilhado/IProdutoGet";
+import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
+
+import {
+  MuiColorInput,
+  MuiColorInputColors,
+  MuiColorInputFormat,
+} from "mui-color-input";
+
 
 interface modalEditarProps {
   idSelecionado: string;
   setarLista: (listaAtualizada: string[]) => void;
+  snackbarOpenEdit: boolean;
+  setSnackbarEditOpen: (open: boolean) => void;
+  categoriesAndSubCategories: string[];
 }
 
 const ModalEditarProduto = ({
   idSelecionado,
+  categoriesAndSubCategories,
   setarLista,
+  setSnackbarEditOpen,
+  snackbarOpenEdit,
 }: modalEditarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -40,6 +57,27 @@ const ModalEditarProduto = ({
   const [subCategoria, setSubCategoria] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [preco, setPreco] = useState("");
+  const [empresaid, setEmpresaId] = useState("1");
+  const [peso, setPeso] = useState<string>("");
+  const [tamanho, setTamanho] = useState("");
+  const [subCategoriasTeste, setSubCategoriasTeste] = useState("");
+  const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
+  const [subCategoriaAtual, setSubCategoriaAtual] = useState("");
+  const [idDetalhesProduto, setIdDetalhesProdutos] = useState("");
+
+  const [colorPrimary, setColorPrimary] = useState("");
+  const [colorSecondary, setColorSecondary] = useState("");
+  const [secondColorField, setColorSecondColorField] = useState(true);
+
+  
+  const format: MuiColorInputFormat = "hex";
+
+  const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorPrimary(newValue)
+  }
+  const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
+    setColorSecondary(newValue)
+  }
 
   const style = {
     position: "absolute" as "absolute",
@@ -48,27 +86,29 @@ const ModalEditarProduto = ({
     transform: "translate(-50%, -50%)",
     minWidth: "900px",
     maxWidth: "1200px",
-    width: "95 %",
+    width: "100vw",
     bgcolor: "background.paper",
     boxShadow: 24,
+    display: "flex",
+    justifyContent: "center",
     p: 4,
   };
 
   const targetAudienceList = [
     {
-      value: "masculino",
+      value: "MASCULINO",
       label: "Masculino",
     },
     {
-      value: "feminino",
+      value: "FEMININO",
       label: "Feminino",
     },
     {
-      value: "unissex",
+      value: "UNISSEX",
       label: "Unissex",
     },
     {
-      value: "criança",
+      value: "CRIANÇA",
       label: "Criança",
     },
   ].map((option) => (
@@ -77,116 +117,143 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
 
-  const categories = [
-    {
-      value: "Acessórios",
-      label: "Acessórios",
-    },
-    {
-      value: "Suplementos",
-      label: "Suplementos",
-    },
-    {
-      value: "Esportes",
-      label: "Esportes",
-    },
-    {
-      value: "Roupas",
-      label: "Roupas",
-    },
-    {
-      value: "Calçados",
-      label: "Calçados",
-    },
-  ].map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
+  const categoriasLista = categoriesAndSubCategories.map((option) => (
+    <MenuItem key={option.id} value={option.id}>
+      {option.nome}
     </MenuItem>
   ));
+  
+  const setarSub = (idCategorieSelected: string) => {
+    let categorias = categoriesAndSubCategories.filter(
+      (c) => c.id === idCategorieSelected
+    );
+    const subCategoriasLista = categorias[0].sub_categorias.map((option) => (
+      <MenuItem key={option.id} value={option.id}>
+        {option.nome}
+      </MenuItem>
+    ));
 
-  const subscategories = [
-    {
-      value: "corrida",
-      label: "Corrida",
-    },
-    {
-      value: "casual",
-      label: "Casual",
-    },
-  ].map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ));
-
-  function atirarFuncoes() {
-    handleOpen(), regastarInformacoesProdutoSelecionado();
-  }
+    setSubCategoriasTeste(subCategoriasLista);
+  };
+  
 
   const regastarInformacoesProdutoSelecionado = () => {
-    http
-      .get<IProduto>(`/produtos/${idSelecionado}`)
+    // httpProduto
+    //   .get<IProduto>(`/api/products/${idSelecionado}`)
+    httpApiMockada
+    .get(`produto-get/${idSelecionado}`)
       .then((resp) => {
-        setNomeProduto(resp.data.nome_produto);
+        const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ')
+        console.log(arrayCores)
+        setNomeProduto(resp.data.nome);
         setDescricao(resp.data.descricao);
-        setUrlImagem(resp.data.url_imagem);
+        setUrlImagem(resp.data.img);
         setPublico(resp.data.publico);
-        setCategoria(resp.data.categoria);
-        setSubCategoria(resp.data.sub_categoria);
-        setQuantidade(resp.data.quantidade);
+        setCategoria(resp.data.categoria.id);
+        setSubCategoria(resp.data.categoria.sub_categoria.id);
         setPreco(resp.data.preco);
+        setIdDetalhesProdutos(resp.data.detalhes_dos_produtos[0].id);
+        setPeso(resp.data.detalhes_dos_produtos[0].peso);
+        setTamanho(resp.data.detalhes_dos_produtos[0].tamanho);
+        setQuantidade(resp.data.detalhes_dos_produtos[0].quantidade);
+        setarSub(resp.data.categoria.id);
+        setColorPrimary(arrayCores[0])
+        setColorSecondary(arrayCores[1])
       })
+
       .catch((err) => alert(err));
   };
 
-  function regastarListaProdutos() {
-    http
-      .get('/produtos')
-      .then((response) => {setarLista(response.data)})
-      .catch((error) => console.error);
-  }
 
+  
+  
+  function atirarFuncoes() {
+    handleOpen(), regastarInformacoesProdutoSelecionado();
+  }
+  
+
+  function regastarListaProdutos() {
+    httpProduto
+      .get("/api/products")
+      // httpApiMockada
+      //   .get('produtos')
+      .then((response) => {
+        setarLista(response.data.content);
+      })
+      .catch((error) => console.error);
+    }
+    
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const produtoAtualizado: IProduto = {
-      nome_produto: nomeProduto,
-      descricao: descricao,
-      url_imagem: urlImagem,
-      publico: publico,
-      categoria: categoria,
-      sub_categoria: subCategoria,
+    const detalhesProduto: IDetalhesProduto = {
+      id: idDetalhesProduto,
+      tamanho: tamanho,
       quantidade: quantidade,
-      preco: preco,
+      peso: peso,
+      cor: `${colorPrimary} ${colorSecondary ? '' + colorSecondary : ''}`
     };
-    http
-      .put(`/produtos/${idSelecionado}`, produtoAtualizado)
+    const produtoAtualizado: IProdutoPost = {
+      nome: nomeProduto,
+      descricao: descricao,
+      img: urlImagem,
+      publico: publico,
+      categoria_id: categoria,
+      sub_categoria_id: subCategoria,
+      preco: preco,
+      detalhes_do_produto: detalhesProduto,
+    };
+    // httpProduto
+    //   .put(`produtos/${idSelecionado}`, produtoAtualizado)
+    //   .then((response) => setOpen(false))
+    //   .then((resp) => {
+    //     regastarListaProdutos();
+    //   })
+    //   .catch((err) => console.log(err));
+    httpApiMockada
+      .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();
+        setSnackbarEditOpen(true);
       })
       .catch((err) => console.log(err));
   };
+  // <h1>PRODUTO DE CÓDIGprodutos-postO: {idSelecionado} </h1>
+
+  const PrimaryColor = styled.div`
+    height: 55px;
+    width: 50px;
+    background-color: #${colorPrimary};
+    border: 1px solid #000;
+  `;
+
+
+
+ 
+
+  
+  
+
+  
+
 
   return (
     <div>
       <MdModeEdit className={styles.product__edit} onClick={atirarFuncoes} />
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
-          <h1>PRODUTO DE CÓDIGO: {idSelecionado} </h1>
           <form className={styles.form}>
             <div className={styles.product}>
               <div className={styles.photo}>
-                <img src={urlImagem} alt={nomeProduto}/>
+                <img src={urlImagem} alt={nomeProduto} />
               </div>
               <TextField
-                InputLabelProps={{ shrink: true }}
                 label="Nome do produto"
                 className={styles.name}
                 onChange={(e) => setNomeProduto(e.target.value)}
                 value={nomeProduto}
               />
               <TextField
-                InputLabelProps={{ shrink: true }}
                 label="Descrição"
                 onChange={(e) => {
                   setDescricao(e.target.value);
@@ -197,14 +264,12 @@ const ModalEditarProduto = ({
                 value={descricao}
               />
               <TextField
-                InputLabelProps={{ shrink: true }}
                 label="URL da imagem"
                 className={styles.url}
                 onChange={(e) => setUrlImagem(e.target.value)}
                 value={urlImagem}
               />
               <TextField
-                InputLabelProps={{ shrink: true }}
                 select
                 label="Público"
                 className={styles.genre}
@@ -215,26 +280,32 @@ const ModalEditarProduto = ({
               </TextField>
               <TextField
                 select
-                InputLabelProps={{ shrink: true }}
                 label="Categoria"
                 className={styles.category}
-                onChange={(e) => setCategoria(e.target.value)}
+                onChange={(e) => {
+                  setCategoria(e.target.value), setIsSubCategoriaDisable(false);
+                }}
+                onBlur={(e) => {
+                  setarSub(categoria);
+                }}
                 value={categoria}
               >
-                {categories}
+                {categoriasLista}
               </TextField>
               <TextField
-                InputLabelProps={{ shrink: true }}
                 select
-                label="Subcategoria"
+                disabled={isSubCategoriaDisable}
+                label="Sub-categoria"
                 className={styles.subcategory}
-                onChange={(e) => setSubCategoria(e.target.value)}
+                onChange={(e) => {
+                  setSubCategoria(e.target.value);
+                }}
                 value={subCategoria}
               >
-                {subscategories}
+                {subCategoriasTeste}
               </TextField>
               <TextField
-                InputLabelProps={{ shrink: true }}
+                type="number"
                 label="Quantidade"
                 className={styles.amount}
                 onChange={(e) => setQuantidade(e.target.value)}
@@ -251,6 +322,36 @@ const ModalEditarProduto = ({
                   onChange={(e) => setPreco(e.target.value)}
                 />
               </FormControl>
+              <TextField
+                label="Tamanho"
+                className={styles.size}
+                onChange={(e) => setTamanho(e.target.value)}
+                value={tamanho}
+              />
+              <TextField
+                label="Peso"
+                className={styles.weight}
+                onChange={(e) => setPeso(e.target.value)}
+                value={peso}
+              />
+
+              <MuiColorInput
+                value={colorPrimary}
+                onChange={trocarPrimeiraCor}
+                onBlur={(e) => setColorSecondColorField(false)}
+                format={format}
+                label="Cor Primária"
+                className={styles.colors}
+              />
+
+              <MuiColorInput
+                disabled={secondColorField}
+                value={colorSecondary}
+                onChange={trocarSegundaCor}
+                format={format}
+                className={styles.colors2}
+                label="Cor Secundária"
+              />
             </div>
 
             <Button
@@ -259,7 +360,7 @@ const ModalEditarProduto = ({
               type="submit"
               className={styles.submit_btn}
             >
-              Salvar
+              Salvar Alterações
             </Button>
           </form>
         </Box>

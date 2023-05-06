@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from './modalLoginUsuario.module.scss'
+import styles from "./modalLoginUsuario.module.scss";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -11,9 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import logo from "../../../../public/images/logo_sollaris.png";
 import { ILogin } from "../../../compartilhado/ILogin";
-import http from "../../../http";
-
-
+import { httpUsuario } from "../../../http";
 
 const style = {
   position: "absolute" as "absolute",
@@ -24,9 +22,8 @@ const style = {
   height: "700px",
   bgcolor: "background.paper",
   boxShadow: 24,
-  display: "flex"
+  display: "flex",
 };
-
 
 const ButtonLogarGoogle = styled(Button)({
   boxShadow: "none",
@@ -57,8 +54,7 @@ const ButtonLogarGoogle = styled(Button)({
 const InputField = styled(TextField)({
   width: "100%",
   margin: "10px 0",
-})
-
+});
 
 const ButtonLogar = styled(Button)({
   boxShadow: "none",
@@ -84,89 +80,55 @@ const ButtonLogar = styled(Button)({
     backgroundColor: "#000",
     borderColor: "#000",
   },
-})
-
-
-const ButtonLogin = styled(Button)({
-  marginRight: "15px",
-  boxShadow: "none",
-  textTransform: "none",
-  fontSize: 16,
-  padding: "0px 10px",
-  border: "1px solid",
-  height: "50px",
-  lineHeight: 1.5,
-  fontWeight: "400",
-  backgroundColor: "#fff",
-  borderSize: "2",
-  borderColor: "#65bce8a9",
-  color: "#000",
-  transition: "background-color 1s ease-out",
-  fontFamily: [
-    "-apple-system",
-    "BlinkMacSystemFont",
-    '"Segoe UI"',
-    "Roboto",
-    '"Helvetica Neue"',
-    "Arial",
-    "sans-serif",
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"',
-  ].join(","),
-  "&:hover": {
-    backgroundColor: "#65bce8",
-    borderColor: "#0062cc",
-    boxShadow: "none",
-    color: "#fff",
-  },
-  "&:active": {
-    boxShadow: "none",
-    backgroundColor: "#65bce8",
-    borderColor: "#005cbf",
-  }
 });
 
 
 
 
+interface DivMensagemErroProps {
+  isBadRequest: boolean 
+}
+
+
+
 export default function ModalLoginUsuario() {
   const [open, setOpen] = React.useState(false);
-  const [login, setLogin] = React.useState<ILogin>({ email: "", password: ""}); 
+  const [login, setLogin] = React.useState<ILogin>({ email: "", password: "" });
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassWord] = React.useState<string>("");
-  const [keepPassword, setKeepPassword] = React.useState<boolean>(false)
+  const [keepPassword, setKeepPassword] = React.useState<boolean>(false);
+  const [isBadRequest, setIsBadRequest] = React.useState<boolean>(false);
 
+
+
+  const mensagemErroRef = React.useRef(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   function setarObjectLogin() {
-    setLogin({ email: email, password: password})
+    setLogin({ email: email, password: password });
   }
-
 
   const gatilhoFuncoesLogin = () => {
-    setarObjectLogin()
-    console.log(login)
-  }
+    setarObjectLogin();
+    console.log(login);
+  };
 
   const realizarLogin = () => {
+    setarObjectLogin();
 
 
     setarObjectLogin()
 
-    http.post('/usuarios', login)
+    httpUsuario.post('/api/users/login', login)
     .then((resp) => console.log(resp))
     .catch((err) => console.log(err))
   }
 
-
-
   return (
     <div>
-      <Button onClick={handleOpen}>Login Usuário</Button>
+      <Button className={styles.buttonLogin} onClick={handleOpen}>Login Usuário</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -182,21 +144,32 @@ export default function ModalLoginUsuario() {
       >
         <Fade in={open}>
           <Box sx={style}>
-
             <div className={styles.modal__leftSide}>
-              <div><img src={logo.src} alt="" /></div>
+              <div>
+                <img src={logo.src} alt="" />
+              </div>
               <div className={styles.modal__leftSide__textoModal}>
                 <h2>SEJA BEM VINDO</h2>
                 <p>
-                  Esperamos que você aproveite ao máximo a sua experiência conosco e
-                  que encontre aqui um espaço para se conectar e se inspirar para
-                  viver uma vida mais saudável e ativa.
+                  Esperamos que você aproveite ao máximo a sua experiência
+                  conosco e que encontre aqui um espaço para se conectar e se
+                  inspirar para viver uma vida mais saudável e ativa.
                 </p>
               </div>
               <form onSubmit={(e) => e.preventDefault()}>
-                <InputField label="Email" type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
-                <InputField label="Senha" type="password" onChange={(e) => setPassWord(e.target.value)} value={password} />
-                <div className={styles.modal__leftSide__mensagemErro + " " + styles.ocultar}>Verifique seu email ou senha!</div>
+                <InputField
+                  label="Email"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+                <InputField
+                  label="Senha"
+                  type="password"
+                  onChange={(e) => setPassWord(e.target.value)}
+                  value={password}
+                />
+              
                 <div className={styles.modal__leftSide__ganchos}>
                   <div className={styles.modal__leftSide__checkbox}>
                     <Checkbox />
@@ -206,17 +179,21 @@ export default function ModalLoginUsuario() {
                     <p>Esqueceu a Senha?</p>
                   </div>
                 </div>
-              <div className={styles.modal__leftSide__buttons}>
-                  <ButtonLogar type="submit" onClick={(e) => realizarLogin()}>ENTRAR</ButtonLogar>
-                  <ButtonLogarGoogle startIcon={<FcGoogle />}>ENTRAR COM GOOGLE</ButtonLogarGoogle>
+                <div className={styles.modal__leftSide__buttons}>
+                  <ButtonLogar type="submit" onClick={(e) => realizarLogin()}>
+                    ENTRAR
+                  </ButtonLogar>
+                  <ButtonLogarGoogle startIcon={<FcGoogle />}>
+                    ENTRAR COM GOOGLE
+                  </ButtonLogarGoogle>
                 </div>
-
               </form>
-              <div className={styles.modal__leftSide__singIn}>Não conta tem sua usuário cadastrada? <Link href='cadastro-usuario'>Cadastre-se</Link></div>
+              <div className={styles.modal__leftSide__singIn}>
+                Não conta tem sua usuário cadastrada?{" "}
+                <Link href="cadastro-usuario">Cadastre-se</Link>
+              </div>
             </div>
-            <div className={styles.modal__divImagem}>
-
-            </div>
+            <div className={styles.modal__divImagem}></div>
           </Box>
         </Fade>
       </Modal>

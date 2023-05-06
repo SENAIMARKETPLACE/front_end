@@ -1,0 +1,64 @@
+.cardBody {
+    width: 100%;
+    background-color: #fff;
+    font-size: 12px;
+    row-gap: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: grid;
+    height: 200px;
+    grid-template-columns: max-content 50% 20px;
+    grid-template-rows: repeat(7, 1fr);
+    column-gap: 10px;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 20px;
+    .cardBody__Photo {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        img{
+            max-width: 100px;
+        }
+
+    }
+
+    .cardBody__Informacoes {
+        row-gap:10px;
+        display: flex;
+        flex-direction: column;
+
+        .cardBody__Informacoes__name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .cardBody__Informacoes__public {
+            font-size: 14px;
+            color: #a5a4a4;
+        }
+
+        .cardBody__Informacoes__colors {
+            display: flex;
+            column-gap: 5px;
+        }
+
+        .cardBody__Informacoes__price {
+            font-size: 16px;
+            color: #000;
+        }
+
+    }
+
+    .cardBody__Informacoes__btnDeletar {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: all .2s ease;
+
+        &:hover {
+            color: #FF3B3B;
+            transition: all .2s ease;
+
+        }
+    }
+}
