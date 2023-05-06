@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint", 
+    "mock": "cd mock && npx json-server --watch db.json --port 5000"
   },
   "dependencies": {
     "@emotion/cache": "^11.10.8",
