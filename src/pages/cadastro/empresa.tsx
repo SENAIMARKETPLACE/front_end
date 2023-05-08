@@ -1,10 +1,6 @@
-
-import CadastroEmpresaScreen from "../../screens/CadastroEmpresaScreen";
+import CompanyRegistrationScreen from '../../screens/RegistrationScreens/CompanyRegistrationScreen';
 
 const CadastroEmpresa = () => {
-    return (
-        <CadastroEmpresaScreen />
-    )
-
-}
+  return <CompanyRegistrationScreen />;
+};
 export default CadastroEmpresa;
