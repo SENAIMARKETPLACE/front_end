@@ -9,5 +9,5 @@ export interface IProdutoGet{
     img: string
     publico: string, 
     categoria: ICategory, 
-    detalhes_dos_produtos: IDetalhesProduto  
+    detalhes_dos_produtos: IDetalhesProduto[]
 }

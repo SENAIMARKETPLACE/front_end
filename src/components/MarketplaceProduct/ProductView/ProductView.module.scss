@@ -5,23 +5,14 @@
     margin-top: 40px;
 
     .product_images {
-        display: grid;
-        gap: 10px;
-        grid-template-columns: 55px 1fr;
-
-        .aditional_imgs {
-            .product_img {
-                border-radius: 5px;
-                border: 1px solid #cecece;
-                box-shadow: rgba(228, 228, 236, 0.2) 0px 8px 24px;
-                max-height: 55px;
-                width: 100%;
-            }
-        }
-
         .main_img {
+            width: max-content;
+            height: max-content;
             .product_img {
-                width: 100%;
+                width: 40vw;
+                max-width: 40vw;
+                height: 40vw;
+                max-width: 40vw;
             }
         }
     }

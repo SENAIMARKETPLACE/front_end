@@ -1,4 +1,7 @@
-import MarketplaceProdutoScreen from "../screens/MarketplaceProdutoScreen";
+import MarketplaceProdutoScreen from "../../screens/MarketplaceProdutoScreen";
+
+
+ 
 
 const MarketplaceProduto = () => {
     return(
