@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "types": [
       "node"
     ],
@@ -24,6 +25,7 @@
     "jsx": "preserve"
   },
   "include": [
+    "src",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
