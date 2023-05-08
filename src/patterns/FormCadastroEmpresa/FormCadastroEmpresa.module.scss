@@ -1,9 +1,22 @@
-.section__FormContainer{
-    height: 90vh;
-    .section__FormButton{
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
+@import '/src/styles/brand';
 
+.section__FormContainer {
+  margin-bottom: 2.5rem;
+
+  .section__FormButton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .btn {
+      background-color: map-get($map: $colors, $key: success-dark);
+      border-radius: 30px;
+      padding: 10px 32px;
+
+      @media (max-width: 688px) {
+        font-size: 14px;
+        padding: 10px 16px;
+      }
+    }
+  }
 }

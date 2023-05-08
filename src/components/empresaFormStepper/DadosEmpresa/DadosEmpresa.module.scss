@@ -1,25 +1,88 @@
-.camposCadastros{
-   display: grid;
-   grid-area: 1/1/6/2;
-   column-gap: 15px;
-   row-gap: 18px;
-   .camposCadastros__NomeProprietario{
-    grid-area: 1/1/1/3;
-   }
-   .camposCadastros__Cnpj{
-    grid-area: 2/1/2/3;
-    p{
-        margin: 10px 0 0;
-        font-size: 12px;
-        a{
-            font-weight: bold;
-        }
+@import '/src/styles/brand';
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // grid-template-rows: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'name name'
+    'cnpj phone'
+    'companyName fantasyName'
+    'email logoSrc'
+    'password confirmPassword'
+    'message message';
+  column-gap: 15px;
+  row-gap: 18px;
+
+  @media (max-width: 688px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'name name'
+      'cnpj phone'
+      'companyName companyName'
+      'fantasyName fantasyName'
+      'email email'
+      'logoSrc logoSrc'
+      'password confirmPassword'
+      'message message';
+  }
+
+  .field {
+    &--name {
+      grid-area: name;
     }
-   }
-   .camposCadastros__RazaoSocial{
-    grid-area: 3/1/3/1;
-   }
-   .camposCadastros__NomeFantasia{
-    grid-area: 3/2/3/2;
-   }
+
+    &--cnpj {
+      grid-area: cnpj;
+    }
+
+    &--phone {
+      grid-area: phone;
+    }
+
+    &--companyName {
+      grid-area: companyName;
+    }
+
+    &--fantasyName {
+      grid-area: fantasyName;
+    }
+
+    &--message {
+      grid-area: message;
+      p {
+        color: map-get($map: $colors, $key: text-800);
+        font-size: 14px;
+        padding-top: 12px;
+
+        a {
+          color: map-get($map: $colors, $key: primary-dark);
+          font-weight: bold;
+        }
+      }
+    }
+
+    &--email {
+      grid-area: email;
+    }
+
+    &--logoSrc {
+      grid-area: logoSrc;
+    }
+
+    &--password {
+      grid-area: password;
+    }
+
+    &--confirmPassword {
+      grid-area: confirmPassword;
+    }
+  }
+
+  .camposCadastros__Cnpj {
+    grid-area: 2/1/2/3;
+  }
 }

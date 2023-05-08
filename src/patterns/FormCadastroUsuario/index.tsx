@@ -1,57 +1,57 @@
-import styled from "@emotion/styled";
-import { Button, TextField } from "@mui/material";
-import Link from "next/link";
-import React, { use, useState } from "react";
-import styles from "./FormCadastroUsuario.module.scss";
-import { IUsuario } from "../../compartilhado/IUsuario";
-import Router, { useRouter } from "next/router";
-import { httpApiMockada, httpUsuario } from "../../http";
-import axios, { AxiosResponse } from "axios";
+import styled from '@emotion/styled';
+import { Button, TextField } from '@mui/material';
+import Link from 'next/link';
+import React, { use, useState } from 'react';
+import styles from './FormCadastroUsuario.module.scss';
+import { IUsuario } from '../../compartilhado/IUsuario';
+import Router, { useRouter } from 'next/router';
+import { httpApiMockada, httpUsuario } from '../../http';
+import axios, { AxiosResponse } from 'axios';
 import {
   MdNavigateNext,
   MdNavigateBefore,
   MdDone,
   MdCheckCircle,
   MdError,
-} from "react-icons/md";
-import Agradecimento from "../../components/userFormStepper/ListaInteresses";
-import DadosPessoais from "../../components/userFormStepper/DadosPessoais/main";
-import DadosResidencial from "../../components/userFormStepper/DadosResidencial";
-import Steps from "../../components/userFormStepper/Steps";
-import { IDataUser } from "../../compartilhado/IDataUser";
-import ListaInteresses from "../../components/userFormStepper/ListaInteresses";
-import { IEndereco } from "../../compartilhado/IEndereco";
-import ModalInformacaoCadastro from "../../components/Modais/modalInformacaoCadastro";
-import { IconType } from "react-icons/lib";
+} from 'react-icons/md';
+import Agradecimento from '../../components/userFormStepper/ListaInteresses';
+import DadosPessoais from '../../components/userFormStepper/DadosPessoais/main';
+import DadosResidencial from '../../components/userFormStepper/DadosResidencial';
+import Steps from '../../components/userFormStepper/Steps';
+import { IDataUser } from '../../compartilhado/IDataUser';
+import ListaInteresses from '../../components/userFormStepper/ListaInteresses';
+import { IEndereco } from '../../compartilhado/IEndereco';
+import ModalInformacaoCadastro from '../../components/Modais/modalInformacaoCadastro';
+import { IconType } from 'react-icons/lib';
 
 const formTemplate: IDataUser = {
-  nome: "",
-  cpf: "",
-  telefone: "",
-  urlFotoPerfil: "",
-  dataNasc: "",
-  genero: "",
-  email: "",
-  senha: "",
-  confirmeSenha: "",
-  cep: "",
-  logradouro: "",
-  complemento: "",
-  numero: "",
-  cidade: "",
-  estado: "",
-  bairro: "",
-  id: "",
+  nome: '',
+  cpf: '',
+  telefone: '',
+  urlFotoPerfil: '',
+  dataNasc: '',
+  genero: '',
+  email: '',
+  senha: '',
+  confirmeSenha: '',
+  cep: '',
+  logradouro: '',
+  complemento: '',
+  numero: '',
+  cidade: '',
+  estado: '',
+  bairro: '',
+  id: '',
 };
 
 const FormCadastroUsuario = () => {
   const [data, setData] = useState(formTemplate);
   const [isDisabled, setIsDisable] = useState<boolean>(true);
   const [openModalRegister, setOpenModalRegister] = useState(false);
-  const [mensagemModal, setMensagemModal] = useState<string>("");
-  const [descricaoModal, setDescricaoModal] = useState<string>("");
-  const [legendaBotao, setLegendaBotao] = useState<string>("");
-  const [corModal, setCorModal] = useState<string>("");
+  const [mensagemModal, setMensagemModal] = useState<string>('');
+  const [descricaoModal, setDescricaoModal] = useState<string>('');
+  const [legendaBotao, setLegendaBotao] = useState<string>('');
+  const [corModal, setCorModal] = useState<string>('');
   const [iconModal, setIconModal] = useState<IconType>();
 
   const atualizarPeloFilho = (dadoFilho: boolean) => {
@@ -93,7 +93,7 @@ const FormCadastroUsuario = () => {
   };
 
   const removeSpecialCaracteres = (campoInformado: string) => {
-    return campoInformado.replace(/[,!()-.]/g, "").replaceAll(" ", "");
+    return campoInformado.replace(/[,!()-.]/g, '').replaceAll(' ', '');
   };
 
   const salvarUsuarioEEndereco = (
@@ -127,28 +127,28 @@ const FormCadastroUsuario = () => {
     //   .then((resp) => alert(`${user.nome} criado com sucesso`))
     //   .catch((err) => alert("Deu Ruim"))
     httpApiMockada
-      .post("usuarios", user)
+      .post('usuarios', user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => {
         {
           console.log(user);
           setOpenModalRegister(true);
-          setMensagemModal("CADASTRO REALIZADO COM SUCESSO!");
+          setMensagemModal('CADASTRO REALIZADO COM SUCESSO!');
           setDescricaoModal(
-            "Agora você está pronto para aproveitar nossos benefícios!"
+            'Agora você está pronto para aproveitar nossos benefícios!'
           );
-          setCorModal("#06C270");
-          setLegendaBotao("VOLTAR PARA A HOME E REALIZAR O LOGIN");
+          setCorModal('#06C270');
+          setLegendaBotao('VOLTAR PARA A HOME E REALIZAR O LOGIN');
           setIconModal(MdCheckCircle);
           console.log(openModalRegister);
         }
       })
       .catch((err) => {
         setOpenModalRegister(true);
-        setMensagemModal("FALHA A REALIZAR O CADASTRO!");
-        setCorModal("#CC3A3A");
+        setMensagemModal('FALHA A REALIZAR O CADASTRO!');
+        setCorModal('#CC3A3A');
         setIconModal(MdError);
-        setLegendaBotao("REALIZAR O CADASTRO NOVAMENTE");
+        setLegendaBotao('REALIZAR O CADASTRO NOVAMENTE');
       });
   };
 
@@ -199,9 +199,14 @@ const FormCadastroUsuario = () => {
             </div>
             <div className={styles.section__FormButtons}>
               {idPasso === 0 ? (
-                ""
+                ''
               ) : (
-                <Button variant="contained" color="success" onClick={prevStep}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={prevStep}
+                  className={styles.btn}
+                >
                   <MdNavigateBefore />
                   <span>VOLTAR</span>
                 </Button>
@@ -215,6 +220,7 @@ const FormCadastroUsuario = () => {
                   onClick={(e) => {
                     salvarUsuarioEEndereco(e, data);
                   }}
+                  className={styles.btn}
                 >
                   <span>CADASTRAR</span>
                   <MdDone />
@@ -226,6 +232,7 @@ const FormCadastroUsuario = () => {
                   type="submit"
                   onClick={nextStep}
                   disabled={isDisabled}
+                  className={styles.btn}
                 >
                   <span>PRÓXIMO</span>
                   <MdNavigateNext />
@@ -239,4 +246,3 @@ const FormCadastroUsuario = () => {
   );
 };
 export default FormCadastroUsuario;
-
