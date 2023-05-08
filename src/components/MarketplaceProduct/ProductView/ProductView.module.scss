@@ -1,0 +1,131 @@
+.product {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 40px;
+
+    .product_images {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 55px 1fr;
+
+        .aditional_imgs {
+            .product_img {
+                border-radius: 5px;
+                border: 1px solid #cecece;
+                box-shadow: rgba(228, 228, 236, 0.2) 0px 8px 24px;
+                max-height: 55px;
+                width: 100%;
+            }
+        }
+
+        .main_img {
+            .product_img {
+                width: 100%;
+            }
+        }
+    }
+
+    .product_info {
+        padding: 10px;
+        width: 100%;
+        // background-color: yellow;
+
+        .name {
+            font-family: Fira Sans;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .price {
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-size: 35px;
+            font-weight: 300;
+        }
+
+        .payment {
+            color: #3c3c3c;
+            font-size: 15px;
+        }
+
+        .payment_label {
+            margin-top: 10px;
+            color: #5f78e7;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .description {
+            margin: 20px 0;
+            text-align: justify;
+        }
+
+    
+
+        .button_buy {
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            background-color: #5f78e7;
+            border-radius: 5px;
+            border: none;
+            padding: 15px;
+            width: 100%;
+
+            &:hover {
+                background-color: #5b72dc;
+            }
+        }
+
+        .amount {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            color: #696565;
+            padding: 4px 0;
+            font-size: 14px;
+
+            // font-weight: 500;
+
+            .amount_input {
+                border: none;
+                width: 40px;
+                outline: none;
+                // background-color: ;
+            }
+        }
+
+        
+        .button_cart {
+            cursor: pointer;
+            color: #3c3c3c;
+            font-weight: 600;
+            background-color: #d1dce1;
+            border-radius: 5px;
+            border: none;
+            padding: 15px;
+            width: 100%;
+
+            &:hover {
+                background-color: #c8d3d8;
+            }
+        }
+
+        .product_details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            .title {
+                font-size: 14px;
+            }
+
+            .buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                
+            }
+        }
+    }
+}

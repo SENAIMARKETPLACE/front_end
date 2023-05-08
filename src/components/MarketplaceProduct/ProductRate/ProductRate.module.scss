@@ -1,0 +1,14 @@
+.rate {
+    display: flex;
+    font-size: 14px;
+    gap: 10px;
+    margin-top: 5px;
+
+    .star_selected {
+        color: #5f78e7;
+    }
+
+    .star_default {
+        color: #c7c7c7;
+    }
+}
