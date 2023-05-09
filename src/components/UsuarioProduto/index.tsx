@@ -3,16 +3,28 @@ import { BsHeartFill } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
 import { RiShoppingCart2Fill } from 'react-icons/ri';
 import Camiseta from '../../../public/images/Camiseta.png';
+import { useRouter } from 'next/router';
 
 interface UsuarioProdutoProps {
     image: string;
     name: string;
     price: string;
+    id:string;
 }
 
-const UsuarioProduto = ({ image, name, price }: UsuarioProdutoProps) => {
+
+
+
+
+const UsuarioProduto = ({ image, name, price, id}: UsuarioProdutoProps) => {
+    const router = useRouter(); 
+
+    function redirecionarAPaginaDoProduto(produtoId: string){
+        router.push(`/marketplace-produto/${produtoId}`)
+    }
+    
     return (
-        <div className={styles.produto}>
+        <div className={styles.produto} onClick={() => redirecionarAPaginaDoProduto(id)}>
             <span className={styles.favorite_container}>
                 <BsHeartFill className={styles.favorite_icon} />
             </span>
@@ -27,9 +39,7 @@ const UsuarioProduto = ({ image, name, price }: UsuarioProdutoProps) => {
                 </div>
                 <p className={styles.price}>R$ {price}</p>
 
-                    {/* <span className={styles.cart_container}>
-                        <RiShoppingCart2Fill className={styles.cart_icon} />
-                    </span> */}
+        
             </div>
         </div>
     )

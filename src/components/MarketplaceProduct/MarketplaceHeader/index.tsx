@@ -8,7 +8,7 @@ import { BsBag } from 'react-icons/bs';
 
 const MarketplaceHeader = () => {
     const [isCartVisible, setIsCartVisible] = useState(false);
-    const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("3")
+    const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0")
 
 
     const carrinhoRef = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ const MarketplaceHeader = () => {
 
 
     useEffect(() => {
-        setQtdProdutosCarrinho("3")
+        setQtdProdutosCarrinho("0")
     }, []);
 
     const acionarCarrinho = () => {

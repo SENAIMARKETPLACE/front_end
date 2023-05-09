@@ -8,8 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { httpApiMockada } from "../../http/index";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
-import { error } from "console";
-import { json } from "stream/consumers";
+import gifLoading from "../../../public/gifs/load.gif"
 
 const MarketplaceProdutoScreen = () => {
   const [produto, setProduto] = useState<IProdutoGet>();
@@ -35,21 +34,17 @@ const MarketplaceProdutoScreen = () => {
 
   }, [id])
 
-//   Adicionar gif de loading
-  if (!produto) {
-    return <div>Carregando...</div>;
-  }
 
 
   return (
     <div className={styles.page_container}>
       
       <div className={styles.content}>
-       
         <MenuLateralUsuario />
         <section className={styles.marketplace}>  
           <MarketplaceHeader />
-          <ProductView name={produto.nome} description={produto.descricao} price={produto.preco} image={produto.img} gender={produto.publico} colors={produto.detalhes_dos_produtos[0].cor} sizes={produto.detalhes_dos_produtos[0].tamanho}/>
+          {!produto ? <div className={styles.marketplace__loadingAnimation}><img src={gifLoading.src} alt="Loading Gif" /></div> : <ProductView name={produto.nome} description={produto.descricao} price={produto.preco} image={produto.img} gender={produto.publico} colors={produto.detalhes_dos_produtos[0].cor} sizes={produto.detalhes_dos_produtos[0].tamanho}/>  }
+           
         </section>
       </div>
       <FooterSollaris />

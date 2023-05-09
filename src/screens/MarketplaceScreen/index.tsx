@@ -19,7 +19,7 @@ import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0")
+  const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0");
   const [aberto, setAberto] = useState(false);
   const ref = useRef();
 
@@ -58,7 +58,7 @@ const MarketplaceScreen = () => {
 
   useEffect(() => {
     getProducts();
-    setQtdProdutosCarrinho("0")
+    setQtdProdutosCarrinho("0");
   }, []);
 
   const acionarCarrinho = () => {
@@ -67,9 +67,7 @@ const MarketplaceScreen = () => {
 
   return (
     <div className={styles.page_container}>
-
       <div className={styles.content}>
-
         <MenuLateralUsuario />
         <section className={styles.marketplace}>
           <MarketplaceHeader />
@@ -90,6 +88,7 @@ const MarketplaceScreen = () => {
             <section className={styles.products_list}>
               {products.map((product) => (
                 <UsuarioProduto
+                  id={product.id}
                   image={product.img}
                   name={product.nome}
                   price={product.preco}
@@ -107,6 +106,7 @@ const MarketplaceScreen = () => {
             <section className={styles.products_list}>
               {products.map((product) => (
                 <UsuarioProduto
+                  id={product.id}
                   image={product.img}
                   name={product.nome}
                   price={product.preco}
