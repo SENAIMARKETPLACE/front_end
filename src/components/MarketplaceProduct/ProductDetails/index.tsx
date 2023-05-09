@@ -1,25 +1,49 @@
-import styles from './ProductDetails.module.scss'
+import styled from "styled-components";
+import styles from "./ProductDetails.module.scss";
 
-const ProductDetails = () => {
-    return (
-        <div className={styles.details}>
-            <h3 className={styles.title}>Tamanhos:</h3>
-            <div className={styles.size_options}>
-                <span className={styles.size}>P</span>
-                <span className={styles.size}>M</span>
-                <span className={styles.size}>G</span>
-                <span className={styles.size}>GG</span>
-            </div>
-
-            <h3 className={styles.title}>Cores:</h3>
-            <div className={styles.colors}>
-                <span className={styles.color} style={{backgroundColor: 'red'}}></span>
-                <span className={styles.color} style={{backgroundColor: 'yellow'}}></span>
-                <span className={styles.color} style={{backgroundColor: 'blue'}}></span>
-                <span className={styles.color} style={{backgroundColor: 'black'}}></span>
-            </div>
-        </div>
-    )
+interface ProductDetailsProps {
+  colors: string;
+  sizes: string;
 }
 
-export default ProductDetails
+const ProductDetails = ({ colors, sizes }: ProductDetailsProps) => {
+  const arrayCores = colors.split(" ");
+
+  const DivComDuasCores = styled.span`
+        display: flex;
+        justify-content: space-between;
+        border-radius: 50px;
+        height: 25px;
+        width: 25px; 
+        background: linear-gradient(60deg, ${arrayCores[0]} 50%, ${arrayCores[1]} 50%);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+  `;
+  const DivComUmaCor = styled.span`
+        display: flex;
+        justify-content: space-between;
+        border-radius: 50px;
+        height: 25px;
+        width: 25px; 
+        background-color: ${arrayCores[0]}; 
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+  `;
+
+  return (
+    <div className={styles.details}>
+      <h3 className={styles.title}>Tamanhos:</h3>
+      <div className={styles.size_options}>
+        <span className={styles.size}>{sizes}</span>
+      </div>
+
+      <h3 className={styles.title}>Cores:</h3>
+      <div className={styles.colors}>
+        {arrayCores.length > 1? <DivComDuasCores/>: <DivComUmaCor/> }
+        
+      </div>
+    </div>
+  );
+};
+
+export default ProductDetails;

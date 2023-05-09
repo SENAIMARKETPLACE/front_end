@@ -49,7 +49,7 @@ const MarketplaceProdutoScreen = () => {
         <MenuLateralUsuario />
         <section className={styles.marketplace}>  
           <MarketplaceHeader />
-          <ProductView name={produto.nome} description={produto.descricao} price={produto.preco} image={produto.img}/>
+          <ProductView name={produto.nome} description={produto.descricao} price={produto.preco} image={produto.img} gender={produto.publico} colors={produto.detalhes_dos_produtos[0].cor} sizes={produto.detalhes_dos_produtos[0].tamanho}/>
         </section>
       </div>
       <FooterSollaris />

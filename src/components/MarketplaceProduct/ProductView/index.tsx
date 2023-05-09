@@ -8,9 +8,12 @@ interface ProductViewProps {
     name: string;
     price: string;
     description: string; 
+    gender: string;
+    colors: string, 
+    sizes: string
 }
 
-const ProductView = ({image, name, price, description}: ProductViewProps) => {
+const ProductView = ({image, name, price, description, gender, colors, sizes}: ProductViewProps) => {
 
 
     const moeda = parseInt(price).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
@@ -26,7 +29,7 @@ const ProductView = ({image, name, price, description}: ProductViewProps) => {
             </section>
             <section className={styles.product_info}>
                 <h2 className={styles.name}>{name}</h2>
-                
+                <p className={styles.gender}>{gender}</p>
                 <p className={styles.price}>{moeda}</p>
                 <p className={styles.payment_label}>Ver os meios de pagamento</p>
                 <p className={styles.description}>
@@ -34,7 +37,7 @@ const ProductView = ({image, name, price, description}: ProductViewProps) => {
                 </p>
 
                 <div className={styles.product_details}>
-                    <ProductDetails />
+                    <ProductDetails colors={colors} sizes={sizes}/>
                     <div className={styles.buttons}>
                         <button className={styles.button_buy}>Comprar agora</button>
                         <button className={styles.button_cart}>Adicionar ao carrinho</button>
