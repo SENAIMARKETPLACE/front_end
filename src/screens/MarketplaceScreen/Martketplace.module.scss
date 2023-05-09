@@ -11,8 +11,8 @@
             transition: all 0.5s;
         }
         .marketplace {
-            padding: 25px;
-            margin: 0 20px;
+            padding: 0px;
+            margin: 0px;
             padding-bottom: 80px;
 
             .header {
@@ -63,6 +63,7 @@
             }
 
             .main_content {
+                padding: 40px;
                 .section__title {
                     color: #4e4e4e;
                     margin: 35px 0px 15px;

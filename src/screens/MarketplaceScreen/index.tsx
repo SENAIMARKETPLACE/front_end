@@ -14,6 +14,7 @@ import { httpApiMockada } from "../../http";
 import { MdShoppingCart } from "react-icons/md";
 import { BsBag } from "react-icons/bs";
 import Carrinho from "../../components/Carrinho";
+import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
 
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
@@ -57,7 +58,7 @@ const MarketplaceScreen = () => {
 
   useEffect(() => {
     getProducts();
-    setQtdProdutosCarrinho("3")
+    setQtdProdutosCarrinho("0")
   }, []);
 
   const acionarCarrinho = () => {
@@ -66,33 +67,16 @@ const MarketplaceScreen = () => {
 
   return (
     <div className={styles.page_container}>
+
       <div className={styles.content}>
-        <div ref={carrinhoRef}>
-          {isCartVisible ? <Carrinho quantidadeDeProdutos={qtdProdutosCarrinho} isCartAtivado={isCartVisible} /> : ""}
-        </div>
 
         <MenuLateralUsuario />
         <section className={styles.marketplace}>
-          <header className={styles.header}>
-            <h2>
-              Olá João, <br></br> Veja o que temos para você hoje{" "}
-            </h2>
-            <div className={styles.searchbar_and_avatar}>
-              <MiniSearchBar />
-              <Avatar alt="Remy Sharp" src="" />
-              <button
-                onClick={acionarCarrinho}
-                className={styles.searchbar_and_avatar__buttonCart}
-              >
-                <BsBag />
-                <p className={styles.buttonCart__quantidadeProdutos}>{qtdProdutosCarrinho}</p>
-              </button>
-            </div>
-          </header>
+          <MarketplaceHeader />
 
-          <p className={styles.banner_text}>Encontre sua velocidade</p>
-          <EmpresaBanner image={Banner} alt="Capa da empresa" />
           <main className={styles.main_content}>
+            <p className={styles.banner_text}>Encontre sua velocidade</p>
+            <EmpresaBanner image={Banner} alt="Capa da empresa" />
             <h2 className={styles.section__title}>
               Explore Categorias Populares
             </h2>

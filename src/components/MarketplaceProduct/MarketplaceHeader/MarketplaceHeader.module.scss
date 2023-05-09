@@ -1,19 +1,45 @@
 .header {
     display: flex;
     align-items: center;
+    box-shadow: rgba(0, -4, 0, 0) 0px 5px 15px;
     justify-content: space-between;
-    border-bottom: 1px solid black;
     cursor: pointer;
-    padding-bottom: 25px;
+    padding: 20px 0;
     line-height: 1.4;
-
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 30px;
     .return_icon {
-        font-size: 40px;
+        font-size: 20px;
         color: #454545;
     }
 
     .searchbar_and_avatar {
         display: flex;
         gap: 30px;
+        .buttonCart{
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            border-radius: 20px 10px 20px 10px;
+            color: #000000;
+            display: flex;
+            position: relative;
+            z-index: 1;
+            transition: all ease 0.5s;
+            &:hover{
+                cursor: pointer;
+                background-color: #000000;
+                color: #fff;
+            }
+            .buttonCart__quantidadeProdutos{
+                
+                font-size: 14px;
+                position: absolute;
+                top: 8px; 
+                left: 15px;
+                z-index: 2;
+            }
+        }
     }
 }
