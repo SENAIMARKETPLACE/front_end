@@ -3,6 +3,8 @@ import { styled } from '@mui/styles';
 import { IDataEmpresa } from '../../../compartilhado/IDataEmpresa';
 import styles from './DadosEmpresa.module.scss';
 import masks from 'util/fieldMasks';
+import { useState } from 'react';
+import { validates } from 'util/validations';
 
 interface DadosEmpresaProps {
   data: IDataEmpresa;
@@ -14,6 +16,38 @@ const InputField = styled(TextField)({
 });
 
 const DadosEmpresa = ({ data, atualizarCampo }: DadosEmpresaProps) => {
+  const [errorName, setErrorName] = useState(false);
+
+  const validatateField = (fieldName:string, value:string) => {
+
+    const fieldElement = document.querySelector(`[data-field="${fieldName}"]`);
+    const fieldContainer = fieldElement.closest('div').parentNode;
+    let errorMsg = fieldContainer.querySelector('p');   
+
+    switch (fieldName) {    
+      case 'name':
+        let {error, msg} = validates.name(value);            
+        setErrorName(error)
+
+        error ? errorMsg.textContent = msg : errorMsg.textContent = '';
+        
+        
+        
+        
+        // Lógica para o campo "name"
+        break;
+      case 'email':
+        // Lógica para o campo "email"
+        break;
+      case 'password':
+        // Lógica para o campo "password"
+        break;
+      default:
+        // Lógica para outros campos
+        break;
+    }
+  }
+
   return (
     <section className={styles.fields}>
       <InputField
@@ -25,6 +59,10 @@ const DadosEmpresa = ({ data, atualizarCampo }: DadosEmpresaProps) => {
         onChange={(e) =>
           atualizarCampo('nome_proprietario', masks.letters(e.target.value))
         }
+        onBlur={(e) => validatateField('name', e.target.value)}
+        error={errorName}
+        helperText={' '}
+        inputProps={{ 'data-field': 'name' }}
       />
       <InputField
         className={styles['field--cnpj']}
