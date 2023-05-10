@@ -15,6 +15,10 @@ import { MdShoppingCart } from "react-icons/md";
 import { BsBag } from "react-icons/bs";
 import Carrinho from "../../components/Carrinho";
 import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
+import LayoutMainMarketPlace from "./LayoutMainMarketplace";
+import Link from "next/link";
+import { Route, Router, Routes } from "react-router-dom";
+import MarketplaceProduto from "pages/marketplace-produto/[id]";
 
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
@@ -45,20 +49,8 @@ const MarketplaceScreen = () => {
     };
   }, [isCartVisible]);
 
-  async function getProducts() {
-    try {
-      const response = await httpApiMockada.get("produto-get");
-      console.log(response);
-      setProducts(response.data);
-      console.log(products);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
-    getProducts();
-    setQtdProdutosCarrinho("0");
+    setQtdProdutosCarrinho("2");
   }, []);
 
   const acionarCarrinho = () => {
@@ -66,58 +58,14 @@ const MarketplaceScreen = () => {
   };
 
   return (
-    <div className={styles.page_container}>
-      <div className={styles.content}>
+    <>
+      <MarketplaceHeader />
+      <section className={styles.mainContent}>
         <MenuLateralUsuario />
-        <section className={styles.marketplace}>
-          <MarketplaceHeader />
-
-          <main className={styles.main_content}>
-            <p className={styles.banner_text}>Encontre sua velocidade</p>
-            <EmpresaBanner image={Banner} alt="Capa da empresa" />
-            <h2 className={styles.section__title}>
-              Explore Categorias Populares
-            </h2>
-            <div className={styles.categories}>
-              <ProdutoCategoria />
-              <ProdutoCategoria />
-              <ProdutoCategoria />
-            </div>
-
-            <h2 className={styles.section__title}>Produtos para você</h2>
-            <section className={styles.products_list}>
-              {products.map((product) => (
-                <UsuarioProduto
-                  id={product.id}
-                  image={product.img}
-                  name={product.nome}
-                  price={product.preco}
-                />
-              ))}
-            </section>
-
-            <h2 className={styles.section__title}>
-              Produtos mais visitados da semana
-            </h2>
-            <p>Em breve...</p>
-            {/* <EmblaCarousel /> */}
-
-            <h2 className={styles.section__title}>Suplementos</h2>
-            <section className={styles.products_list}>
-              {products.map((product) => (
-                <UsuarioProduto
-                  id={product.id}
-                  image={product.img}
-                  name={product.nome}
-                  price={product.preco}
-                />
-              ))}
-            </section>
-          </main>
-        </section>
-      </div>
+        <LayoutMainMarketPlace />
+      </section>
       <FooterSollaris />
-    </div>
+    </>
   );
 };
 

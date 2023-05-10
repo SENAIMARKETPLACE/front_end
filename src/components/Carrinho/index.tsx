@@ -5,7 +5,7 @@ import styles from "./Carrinho.module.scss";
 
 interface CarrinhoProps {
   isCartAtivado: boolean;
-  quantidadeDeProdutos: string;
+  quantidadeDeProdutos: number
 }
 
 const Carrinho = ({ isCartAtivado, quantidadeDeProdutos }: CarrinhoProps) => {
@@ -20,7 +20,7 @@ const Carrinho = ({ isCartAtivado, quantidadeDeProdutos }: CarrinhoProps) => {
       <div className={styles.carrinhoHead}>
         <p>Seu Carrinho ({quantidadeDeProdutos}) itens</p>
       </div>
-      {parseInt(quantidadeDeProdutos) == 0 ?
+      {quantidadeDeProdutos == 0 ?
         <div className={styles.bodyWithoutProduct}>
           <h2>Seu Carrinho Está Vazio</h2>
           <p>

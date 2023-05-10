@@ -6,9 +6,17 @@ import { useEffect, useRef, useState } from 'react';
 import Carrinho from 'components/Carrinho';
 import { BsBag } from 'react-icons/bs';
 
-const MarketplaceHeader = () => {
+
+
+interface MarketplaceHeaderProps{
+    quantidade: number
+}
+
+
+const MarketplaceHeader = ({quantidade}: MarketplaceHeaderProps) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
-    const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0")
+    const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState(0)
+
 
 
     const carrinhoRef = useRef<HTMLDivElement>(null);
@@ -35,7 +43,7 @@ const MarketplaceHeader = () => {
 
 
     useEffect(() => {
-        setQtdProdutosCarrinho("0")
+        setQtdProdutosCarrinho(quantidade)
     }, []);
 
     const acionarCarrinho = () => {
@@ -46,7 +54,7 @@ const MarketplaceHeader = () => {
     return (
         <header className={styles.header}>
             <div ref={carrinhoRef}>
-                {isCartVisible ? <Carrinho quantidadeDeProdutos={qtdProdutosCarrinho} isCartAtivado={isCartVisible} /> : ""}
+                {isCartVisible ? <Carrinho quantidadeDeProdutos={quantidade} isCartAtivado={isCartVisible} /> : ""}
             </div>
             <div className={styles.searchbar_and_avatar}>
                 <MiniSearchBar />
@@ -56,7 +64,7 @@ const MarketplaceHeader = () => {
                     className={styles.buttonCart}
                 >
                     <BsBag />
-                    <p className={styles.buttonCart__quantidadeProdutos}>{qtdProdutosCarrinho}</p>
+                    <span className={styles.buttonCart__quantidadeProdutos}>{quantidade}</span>
                 </button>
             </div>
         </header>
