@@ -59,7 +59,7 @@ const MarketplaceScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader />
+      <MarketplaceHeader quantidade={0}/>
       <section className={styles.mainContent}>
         <MenuLateralUsuario />
         <LayoutMainMarketPlace />
