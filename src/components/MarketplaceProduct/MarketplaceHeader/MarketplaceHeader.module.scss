@@ -18,6 +18,10 @@
     .searchbar_and_avatar {
         display: flex;
         gap: 30px;
+        .buttonCart__avatar{
+            height: 50px;
+            width: 50px;
+        }
 
         .buttonCart {
             border: none;

@@ -17,17 +17,28 @@ import Carrinho from "../../components/Carrinho";
 import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
 import LayoutMainMarketPlace from "./LayoutMainMarketplace";
 import Link from "next/link";
-import { Route, Router, Routes } from "react-router-dom";
 import MarketplaceProduto from "pages/marketplace-produto/[id]";
 
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0");
   const [aberto, setAberto] = useState(false);
   const ref = useRef();
+  const [quantidade, setQuantidade] = useState<number>(0);
+
+  useEffect(() => {
+    const storedQuantity = localStorage.getItem('qtdProduto');
+    if (storedQuantity) {
+      setQuantidade(Number(JSON.parse(storedQuantity)));
+    }
+  }, []);
+
+  
+
+  
 
   const carrinhoRef = useRef<HTMLDivElement>(null);
+  // let qtdProdutos = null
 
   function ClickForaCarrinho(event: MouseEvent) {
     if (
@@ -49,9 +60,7 @@ const MarketplaceScreen = () => {
     };
   }, [isCartVisible]);
 
-  useEffect(() => {
-    setQtdProdutosCarrinho("2");
-  }, []);
+ 
 
   const acionarCarrinho = () => {
     setIsCartVisible(true);
@@ -59,7 +68,7 @@ const MarketplaceScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader quantidade={0}/>
+      <MarketplaceHeader quantidade={quantidade}/>
       <section className={styles.mainContent}>
         <MenuLateralUsuario />
         <LayoutMainMarketPlace />

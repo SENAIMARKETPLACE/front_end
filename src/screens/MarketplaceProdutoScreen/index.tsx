@@ -17,11 +17,17 @@ const MarketplaceProdutoScreen = () => {
   const id = router.query.id;
 
 
-  const[quantidade, setQuantidade] = useState(0); 
+  const [quantidade, setQuantidade] = useState(() => Number(JSON.parse(localStorage.getItem('qtdProduto'))) || 0);
+
+
+
+  // useEffect(() => {
+  // }, [])
 
   const aumentarQtd = () => {
     setQuantidade(quantidade + 1)
   }
+
 
 
 
@@ -37,8 +43,11 @@ const MarketplaceProdutoScreen = () => {
     }
   };
 
+
+
   useEffect(() => {
     resgataInformacoesProduto(id);
+    localStorage.setItem('qtdProduto', `${quantidade}`)
     const timeout = setTimeout(() => {
       setShowLoading(true);
     }, 2000);
@@ -46,13 +55,13 @@ const MarketplaceProdutoScreen = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [id]);
+  }, [quantidade]);
 
   return (
     <div className={styles.page_container}>
       <div className={styles.content}>
         <section className={styles.marketplace}>
-          <MarketplaceHeader quantidade={quantidade}/>
+          <MarketplaceHeader quantidade={quantidade} />
           {!produto || !showLoading ? (
             <div className={styles.marketplace__loadingAnimation}>
               <img src={gifLoading.src} alt="Loading Gif" />

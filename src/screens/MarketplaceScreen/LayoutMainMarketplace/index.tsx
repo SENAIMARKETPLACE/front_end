@@ -10,6 +10,10 @@ import { httpApiMockada } from "../../../http/index";
 const LayoutMainMarketPlace = () => {
   const [products, setProducts] = useState([]);
 
+  // const qtdProduto = localStorage.getItem("qtdProduto")
+
+
+
   
   async function getProducts() {
     try {
@@ -23,7 +27,8 @@ const LayoutMainMarketPlace = () => {
   }
   useEffect(() => {
     getProducts()
-  })
+
+  }, [])
 
   return (
     <section className={styles.marketplace}>

@@ -8,12 +8,12 @@ import { BsBag } from 'react-icons/bs';
 
 
 
-interface MarketplaceHeaderProps{
+interface MarketplaceHeaderProps {
     quantidade: number
 }
 
 
-const MarketplaceHeader = ({quantidade}: MarketplaceHeaderProps) => {
+const MarketplaceHeader = ({ quantidade }: MarketplaceHeaderProps) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState(0)
 
@@ -42,9 +42,6 @@ const MarketplaceHeader = ({quantidade}: MarketplaceHeaderProps) => {
     }, [isCartVisible]);
 
 
-    useEffect(() => {
-        setQtdProdutosCarrinho(quantidade)
-    }, []);
 
     const acionarCarrinho = () => {
         setIsCartVisible(true);
@@ -58,7 +55,7 @@ const MarketplaceHeader = ({quantidade}: MarketplaceHeaderProps) => {
             </div>
             <div className={styles.searchbar_and_avatar}>
                 <MiniSearchBar />
-                <Avatar />
+                <Avatar className={styles.buttonCart__avatar} />
                 <button
                     onClick={acionarCarrinho}
                     className={styles.buttonCart}
