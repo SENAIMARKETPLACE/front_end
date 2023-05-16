@@ -5,15 +5,17 @@ import { IoIosArrowDropleftCircle } from 'react-icons/io';
 import { useEffect, useRef, useState } from 'react';
 import Carrinho from 'components/Carrinho';
 import { BsBag } from 'react-icons/bs';
+import { IProdutoGet } from 'compartilhado/IProdutoGet';
 
 
 
 interface MarketplaceHeaderProps {
     quantidade: number
+    produtoDesejadoNoCarrinho?: IProdutoGet;
 }
 
 
-const MarketplaceHeader = ({ quantidade }: MarketplaceHeaderProps) => {
+const MarketplaceHeader = ({ quantidade, produtoDesejadoNoCarrinho }: MarketplaceHeaderProps) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState(0)
 
@@ -51,7 +53,7 @@ const MarketplaceHeader = ({ quantidade }: MarketplaceHeaderProps) => {
     return (
         <header className={styles.header}>
             <div ref={carrinhoRef}>
-                {isCartVisible ? <Carrinho quantidadeDeProdutos={quantidade} isCartAtivado={isCartVisible} /> : ""}
+                {isCartVisible ? <Carrinho quantidadeDeProdutos={quantidade} isCartAtivado={isCartVisible} produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}/> : ""}
             </div>
             <div className={styles.searchbar_and_avatar}>
                 <MiniSearchBar />
