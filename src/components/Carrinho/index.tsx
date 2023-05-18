@@ -16,45 +16,19 @@ const Carrinho = ({
   quantidadeDeProdutos,
   produtoDesejadoNoCarrinho,
 }: CarrinhoProps) => {
-  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
-    IProdutoGet[]
-  >([
-    {
-      id: "1",
-      nome: "Tênis Nike Air Max Excee Feminino",
-      descricao:
-        "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
-      img: "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",
-      publico: "FEMININO",
-      preco: "2200.15",
-      categoria: {
-        id: "4",
-        nome: "Esportes",
-        sub_categoria: {
-          id: "22",
-          nome: "Corrida",
-        },
-      },
-      detalhes_dos_produtos: [
-        {
-          id: "1",
-          tamanho: "70cm",
-          peso: "150gr",
-          cor: "#122626",
-          quantidade: "1000",
-        },
-      ],
-    },
-  ]);
+  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<IProdutoGet[]>([]);
 
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const arrayProductsInCart = JSON.parse(
+        localStorage.getItem("productsInCart")
+      );
+      if(arrayProductsInCart){
+        setArrayProdutosDesejados([...arrayProdutosDesejados, ...arrayProductsInCart])
+      }
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if (produtoDesejadoNoCarrinho !== undefined) {
-  //     const novoArray = [...arrayProdutosDesejados]; // Cria uma cópia do array atual
-  //     novoArray.push(produtoDesejadoNoCarrinho); // Adiciona o novo produto ao novoArray
-  //     setArrayProdutosDesejados(novoArray); // Atualiza o estado com o novoArray
-  //   }
-  // }, [produtoDesejadoNoCarrinho]);
 
   return (
     <div
@@ -78,17 +52,15 @@ const Carrinho = ({
       ) : (
         <div className={styles.bodyWithProduct}>
           <div className={styles.visualizacaoProdutos}>
-            {arrayProdutosDesejados.map((produto) => {
+            {arrayProdutosDesejados.map((produto, i) => {
+              console.log(arrayProdutosDesejados)
               const produtoNoCarrinho = arrayProdutosDesejados.find(
                 (item) => item.id === produto.id
               );
 
-              let quantidade = 1 
-
-              produtoNoCarrinho ? quantidade = quantidade + 0 : 0;
 
 
-              
+
               return (
                 <CardProdutoCarrinho
                   key={produto.id}
@@ -99,7 +71,7 @@ const Carrinho = ({
                   publico={produto.publico}
                   tamanho={produto.detalhes_dos_produtos[0].tamanho}
                   color={produto.detalhes_dos_produtos[0].cor}
-                  quantidade={quantidade}
+                  
                 />
               );
             })}
