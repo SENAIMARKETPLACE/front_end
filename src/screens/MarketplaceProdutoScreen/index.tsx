@@ -12,45 +12,49 @@ import gifLoading from "../../../public/gifs/load.gif";
 
 const MarketplaceProdutoScreen = () => {
   const [produto, setProduto] = useState<IProdutoGet>();
-  const [produtoAserAdicionado, setProdutoAserAdicionado] = useState<IProdutoGet>()
+  const [produtoAserAdicionado, setProdutoAserAdicionado] = useState<
+    IProdutoGet
+  >();
   const router = useRouter();
   const [showLoading, setShowLoading] = useState(false);
   const id = router.query.id;
-
   const [quantidade, setQuantidade] = useState(0);
-  
 
-  
-  // useEffect(() => {
-  // }, [])
+  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState([]);
+
+  const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
+    if (arrayProdutosCarrinhoLS) {
+      const arrayTemp = [...arrayProdutosCarrinhoLS]; // Certifique-se de que arrayProdutosCarrinhoLS seja um array
+      setArrayProdutosCarrinhoLS([...arrayTemp, produto]);
+    }else{
+      setArrayProdutosCarrinhoLS([produto]);
+    }     
+  };
 
   const aumentarQtd = () => {
     setQuantidade(quantidade + 1);
+    enviarProdutoAoCarrinho(produto);
   };
-
-  const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
-    setProdutoAserAdicionado(produto)
-  }
 
   const resgataInformacoesProduto = (parametro: string | string[]) => {
     if (parametro) {
       httpApiMockada
         .get(`produto-get/${parametro}`)
         .then((response) => {
-          console.log(response.data);
-          setProduto(response.data);4
+          setProduto(response.data);
         })
         .catch((erro) => console.log(erro));
     }
   };
 
-  
-
-
   useEffect(() => {
     resgataInformacoesProduto(id);
     if (typeof localStorage !== "undefined") {
       const storedQuantity = localStorage.getItem("qtdProduto");
+      const storedProductsInCart = JSON.parse(localStorage.getItem("productsInCart"));
+      if (storedProductsInCart) {
+        setArrayProdutosCarrinhoLS(storedProductsInCart);
+      }
       if (storedQuantity) {
         setQuantidade(Number(JSON.parse(storedQuantity)));
       }
@@ -59,6 +63,10 @@ const MarketplaceProdutoScreen = () => {
 
   useEffect(() => {
     localStorage.setItem("qtdProduto", `${quantidade}`);
+    localStorage.setItem(
+      "productsInCart",
+      `${JSON.stringify(arrayProdutosCarrinhoLS)}`
+    );
     const timeout = setTimeout(() => {
       setShowLoading(true);
     }, 2000);
@@ -72,7 +80,12 @@ const MarketplaceProdutoScreen = () => {
     <div className={styles.page_container}>
       <div className={styles.content}>
         <section className={styles.marketplace}>
-          <MarketplaceHeader quantidade={quantidade} produtoDesejadoNoCarrinho={(produtoAserAdicionado) ? produtoAserAdicionado : undefined }/>
+          <MarketplaceHeader
+            quantidade={quantidade}
+            produtoDesejadoNoCarrinho={
+              produtoAserAdicionado ? produtoAserAdicionado : undefined
+            }
+          />
           {!produto || !showLoading ? (
             <div className={styles.marketplace__loadingAnimation}>
               <img src={gifLoading.src} alt="Loading Gif" />

@@ -47,18 +47,14 @@ const Carrinho = ({
     },
   ]);
 
-  const [
-    quantidadeProdutoEspecificoCarrinho,
-    setQuantidadeProdutoEspecificoCarrinho,
-  ] = useState(1);
 
-  useEffect(() => {
-    if (produtoDesejadoNoCarrinho !== undefined) {
-      const novoArray = [...arrayProdutosDesejados]; // Cria uma cópia do array atual
-      novoArray.push(produtoDesejadoNoCarrinho); // Adiciona o novo produto ao novoArray
-      setArrayProdutosDesejados(novoArray); // Atualiza o estado com o novoArray
-    }
-  }, [produtoDesejadoNoCarrinho]);
+  // useEffect(() => {
+  //   if (produtoDesejadoNoCarrinho !== undefined) {
+  //     const novoArray = [...arrayProdutosDesejados]; // Cria uma cópia do array atual
+  //     novoArray.push(produtoDesejadoNoCarrinho); // Adiciona o novo produto ao novoArray
+  //     setArrayProdutosDesejados(novoArray); // Atualiza o estado com o novoArray
+  //   }
+  // }, [produtoDesejadoNoCarrinho]);
 
   return (
     <div
