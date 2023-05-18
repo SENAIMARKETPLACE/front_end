@@ -49,8 +49,8 @@ const ProductView = ({
             <button
               onClick={(e) => {
                 agregarProduto(); 
+                produto.quantidadeCarrinho = 1 
                 enviarProdutoAoCarrinho(produto); 
-                console.log("Estou funcionando")
               }}
               className={styles.button_cart}
             >

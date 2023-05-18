@@ -20,15 +20,24 @@ const MarketplaceProdutoScreen = () => {
   const id = router.query.id;
   const [quantidade, setQuantidade] = useState(0);
 
-  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState([]);
+  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<IProdutoGet[]>([]);
 
   const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
+
     if (arrayProdutosCarrinhoLS) {
       const arrayTemp = [...arrayProdutosCarrinhoLS]; // Certifique-se de que arrayProdutosCarrinhoLS seja um array
-      setArrayProdutosCarrinhoLS([...arrayTemp, produto]);
-    }else{
+      const existeProduto = arrayProdutosCarrinhoLS.find(
+        (item) => item.id === produto.id
+      )
+
+      if (existeProduto) {
+        existeProduto.quantidadeCarrinho += 1;
+      } else {
+        setArrayProdutosCarrinhoLS([...arrayTemp, produto]);
+      }
+    } else {
       setArrayProdutosCarrinhoLS([produto]);
-    }     
+    }
   };
 
   const aumentarQtd = () => {

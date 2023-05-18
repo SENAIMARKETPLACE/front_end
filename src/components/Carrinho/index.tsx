@@ -32,7 +32,7 @@ const Carrinho = ({
 
 
   useEffect(() => {
-    alert(idExcluir)
+
   }, [idExcluir])
 
   const obterProdutoExcluir = (id: string) => {
@@ -71,9 +71,9 @@ const Carrinho = ({
                 (item) => item.id === produto.id
               );
 
-              let quantidade = 0 ;
+              
 
-              produtoNoCarrinho ? (quantidade = quantidade + 1) : 0;
+              produtoNoCarrinho ? (produto.quantidadeCarrinho += 1) : 0;
 
               return (
                 <CardProdutoCarrinho
@@ -85,7 +85,7 @@ const Carrinho = ({
                   publico={produto.publico}
                   tamanho={produto.detalhes_dos_produtos[0].tamanho}
                   color={produto.detalhes_dos_produtos[0].cor}
-                  quantidade={quantidade}
+                  quantidade={produto.quantidadeCarrinho}
                   obterIdExcluirProps={obterProdutoExcluir}
                   
                 />
