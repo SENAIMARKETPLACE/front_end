@@ -17,6 +17,7 @@ const Carrinho = ({
   produtoDesejadoNoCarrinho,
 }: CarrinhoProps) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<IProdutoGet[]>([]);
+  const [idExcluir, setIdExcluir] = useState("0")
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -28,6 +29,18 @@ const Carrinho = ({
       }
     }
   }, []);
+
+
+  useEffect(() => {
+    alert(idExcluir)
+  }, [idExcluir])
+
+  const obterProdutoExcluir = (id: string) => {
+   
+    setIdExcluir(id)
+  }
+ 
+  
 
 
   return (
@@ -58,8 +71,9 @@ const Carrinho = ({
                 (item) => item.id === produto.id
               );
 
+              let quantidade = 0 ;
 
-
+              produtoNoCarrinho ? (quantidade = quantidade + 1) : 0;
 
               return (
                 <CardProdutoCarrinho
@@ -71,6 +85,8 @@ const Carrinho = ({
                   publico={produto.publico}
                   tamanho={produto.detalhes_dos_produtos[0].tamanho}
                   color={produto.detalhes_dos_produtos[0].cor}
+                  quantidade={quantidade}
+                  obterIdExcluirProps={obterProdutoExcluir}
                   
                 />
               );
