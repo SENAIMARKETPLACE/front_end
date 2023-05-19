@@ -12,7 +12,7 @@ interface ProductViewProps {
 
 const ProductView = ({
   produto,
-  agregarProduto, 
+  agregarProduto,
   enviarProdutoAoCarrinho
 }: ProductViewProps) => {
   let [qtdProdutos, setQtdProdutos] = useState<number>(null);
@@ -48,9 +48,9 @@ const ProductView = ({
             <button className={styles.button_buy}>Comprar agora</button>
             <button
               onClick={(e) => {
-                agregarProduto(); 
-                produto.quantidadeCarrinho = 1 
-                enviarProdutoAoCarrinho(produto); 
+                agregarProduto();
+                produto.quantidadeCarrinho = 1;
+                enviarProdutoAoCarrinho(produto);
               }}
               className={styles.button_cart}
             >

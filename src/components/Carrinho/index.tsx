@@ -66,14 +66,8 @@ const Carrinho = ({
         <div className={styles.bodyWithProduct}>
           <div className={styles.visualizacaoProdutos}>
             {arrayProdutosDesejados.map((produto, i) => {
-              console.log(arrayProdutosDesejados)
-              const produtoNoCarrinho = arrayProdutosDesejados.find(
-                (item) => item.id === produto.id
-              );
 
-              
-
-              produtoNoCarrinho ? (produto.quantidadeCarrinho += 1) : 0;
+            
 
               return (
                 <CardProdutoCarrinho
