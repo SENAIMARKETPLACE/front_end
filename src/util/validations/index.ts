@@ -23,19 +23,9 @@ function validateName (name: string) {
   };
 
 function validateEmail (email:string) {
-    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
 
-    if (regexEmail.test(email)) {
-        return {
-            error: false,
-            msg: '',
-        }
-    } else {
-        return {
-            error: true,
-            msg: 'Digite um e-mail válido.'
-        }
-    };
+    return regexEmail.test(email);
 }
 
 function validateSimplePassword (password:string) {
