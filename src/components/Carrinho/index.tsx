@@ -66,9 +66,7 @@ const Carrinho = ({
         <div className={styles.bodyWithProduct}>
           <div className={styles.visualizacaoProdutos}>
             {arrayProdutosDesejados.map((produto, i) => {
-
-            
-
+        
               return (
                 <CardProdutoCarrinho
                   key={produto.id}

@@ -20,18 +20,25 @@ const MarketplaceProdutoScreen = () => {
   const id = router.query.id;
   const [quantidade, setQuantidade] = useState(0);
 
-  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<IProdutoGet[]>([]);
+  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<
+    IProdutoGet[]
+  >([]);
 
   const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
-
     if (arrayProdutosCarrinhoLS) {
       const arrayTemp = [...arrayProdutosCarrinhoLS]; // Certifique-se de que arrayProdutosCarrinhoLS seja um array
       const existeProduto = arrayProdutosCarrinhoLS.find(
         (item) => item.id === produto.id
-      )
+      );
 
       if (existeProduto) {
-        existeProduto.quantidadeCarrinho += 1;
+        //ESSE MAP, ACESSA DIRETAMENTE O OBJETO A SER ALTERADO CASO EXISTA ESSE PRODUTO NO CARRINHO
+        const arrayTemp = arrayProdutosCarrinhoLS.map((item) =>
+          item.id === produto.id
+            ? { ...item, quantidadeCarrinho: item.quantidadeCarrinho + 1 }
+            : item
+        );
+        setArrayProdutosCarrinhoLS(arrayTemp);
       } else {
         setArrayProdutosCarrinhoLS([...arrayTemp, produto]);
       }
@@ -60,7 +67,9 @@ const MarketplaceProdutoScreen = () => {
     resgataInformacoesProduto(id);
     if (typeof localStorage !== "undefined") {
       const storedQuantity = localStorage.getItem("qtdProduto");
-      const storedProductsInCart = JSON.parse(localStorage.getItem("productsInCart"));
+      const storedProductsInCart = JSON.parse(
+        localStorage.getItem("productsInCart")
+      );
       if (storedProductsInCart) {
         setArrayProdutosCarrinhoLS(storedProductsInCart);
       }

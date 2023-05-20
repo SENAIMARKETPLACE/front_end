@@ -22,6 +22,9 @@ const ProductView = ({
     agregarProduto()
   };
 
+  useEffect(() => {
+   produto.quantidadeCarrinho = 1  
+  })
 
   const moeda = parseInt(produto.preco).toLocaleString("pt-BR", {
     style: "currency",
@@ -49,7 +52,6 @@ const ProductView = ({
             <button
               onClick={(e) => {
                 agregarProduto();
-                produto.quantidadeCarrinho = 1;
                 enviarProdutoAoCarrinho(produto);
               }}
               className={styles.button_cart}
