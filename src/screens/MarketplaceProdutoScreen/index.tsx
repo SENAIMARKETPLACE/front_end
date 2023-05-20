@@ -20,6 +20,7 @@ const MarketplaceProdutoScreen = () => {
   const id = router.query.id;
   const [quantidade, setQuantidade] = useState(0);
 
+
   const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<
     IProdutoGet[]
   >([]);

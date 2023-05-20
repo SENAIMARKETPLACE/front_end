@@ -19,10 +19,8 @@ interface UsuarioProdutoProps {
 
 const UsuarioProduto = ({ image, name, price, id}: UsuarioProdutoProps) => {
    
-    const moeda = parseInt(price).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-    });
+    const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(price))
+
     
     return (
         <Link href={`/marketplace-produto/${id}`}>
@@ -39,7 +37,7 @@ const UsuarioProduto = ({ image, name, price, id}: UsuarioProdutoProps) => {
                         <p className={styles.rate_value}>5</p>
                         <FaStar />
                     </div>
-                    <p className={styles.price}>{moeda}</p>
+                    <p className={styles.price}>{precoFormatado}</p>
             
                 </div>
             </div>

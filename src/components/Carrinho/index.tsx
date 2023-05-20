@@ -18,25 +18,60 @@ const Carrinho = ({
 }: CarrinhoProps) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<IProdutoGet[]>([]);
   const [idExcluir, setIdExcluir] = useState("0")
+  const [valorTotal, setValorTotal] = useState<string>("")
+
+  const calcularOValorTotal = () => {
+    let somaTotal = 0.0;
+    let valorFormatado = "" 
+    arrayProdutosDesejados.forEach((produto) => {
+      const preco = Number(produto.preco);
+      const quantidade = produto.quantidadeCarrinho;
+      const subtotal = preco * quantidade;
+      somaTotal += subtotal;
+      valorFormatado = (somaTotal).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    
+    })
+
+    return valorFormatado;
+  }
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const arrayProductsInCart = JSON.parse(
-        localStorage.getItem("productsInCart")
+        localStorage.getItem("productsInCart"), 
       );
       if(arrayProductsInCart){
         setArrayProdutosDesejados([...arrayProdutosDesejados, ...arrayProductsInCart])
+
       }
     }
   }, []);
 
 
+
   useEffect(() => {
+    if(parseInt(idExcluir) != 0){
+      const carrinhoAtualizado = arrayProdutosDesejados.filter((produto) => produto.id != idExcluir)
+      setArrayProdutosDesejados(carrinhoAtualizado)
+      const carrinhoString = JSON.stringify(carrinhoAtualizado); 
+      localStorage.setItem('productsInCart', carrinhoString)
+    }
 
-  }, [idExcluir])
+  }, [[], idExcluir])
 
+
+
+  useEffect(() => {
+    const novoValor = calcularOValorTotal(); 
+    setValorTotal(novoValor);  
+     
+  }, [arrayProdutosDesejados])
+
+  
   const obterProdutoExcluir = (id: string) => {
-   
     setIdExcluir(id)
   }
  
@@ -89,7 +124,7 @@ const Carrinho = ({
               Subtotal:{" "}
             </p>
             <p className={styles.bodyWithProduct__visualizacaoPreco__preco}>
-              R$ 540,00
+              {valorTotal}
             </p>
           </div>
           <div className={styles.visualizacoesButtons}>
