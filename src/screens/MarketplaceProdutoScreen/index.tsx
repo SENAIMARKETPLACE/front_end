@@ -110,7 +110,7 @@ const MarketplaceProdutoScreen = () => {
 
   return (
     <div className={styles.page_container}>
-      <div className={styles.setarQuantidadecontent}>
+      <div className={styles.content}>
         <section className={styles.marketplace}>
           <MarketplaceHeader
             quantidade={quantidade}
