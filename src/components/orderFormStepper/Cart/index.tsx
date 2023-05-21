@@ -1,8 +1,12 @@
-import { Container, Table } from '@mantine/core';
+import { Table, Group, Button } from '@mantine/core';
 import CartItem from './CartItem';
 import styles from './Cart.module.scss';
 
-const Cart = () => {
+interface props {
+  nextStep: any;
+}
+
+const Cart = ({ nextStep }: props) => {
   const products = [
     {
       id: 1,
@@ -51,6 +55,12 @@ const Cart = () => {
           </tr>
         </tbody>
       </Table>
+
+      <Group position="right" mt="xl">
+        <Button onClick={nextStep} radius="xl">
+          Continuar
+        </Button>
+      </Group>
     </>
   );
 };

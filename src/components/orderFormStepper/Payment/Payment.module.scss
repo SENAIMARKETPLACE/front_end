@@ -1,0 +1,38 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr;
+  justify-content: center;
+  gap: 32px;
+
+  @media (max-width: 1150px) {
+    display: block;
+  }
+
+  &__products {
+    display: block;
+  }
+
+  .payment {
+    display: block;
+
+    h4 {
+      padding: 10px 0;
+    }
+
+    .terms {
+      padding: 15px 0;
+    }
+
+    &__resumeList {
+      li {
+        font-size: 14px;
+        padding: 10px 0;
+        border-top: 1px solid rgb(221, 221, 221);
+      }
+    }
+
+    &__types {
+      width: min-content !important;
+    }
+  }
+}

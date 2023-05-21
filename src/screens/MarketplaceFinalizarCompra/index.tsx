@@ -12,7 +12,7 @@ const MarketplaceFinalizarCompraScreen = () => {
   const [aberto, setAberto] = useState(false);
   const ref = useRef();
   const [quantidade, setQuantidade] = useState<number>(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 700);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const storedQuantity = localStorage.getItem('qtdProduto');
@@ -25,6 +25,8 @@ const MarketplaceFinalizarCompraScreen = () => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 880);
     };
+
+    handleResize(); // Define o estado inicial
 
     window.addEventListener('resize', handleResize);
     return () => {

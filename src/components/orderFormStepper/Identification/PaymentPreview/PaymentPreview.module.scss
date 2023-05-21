@@ -1,0 +1,35 @@
+.overlay {
+  @media (max-width: 1150px) {
+    display: none;
+  }
+}
+
+.payment {
+  display: block !important;
+
+  &__label {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px 0;
+  }
+
+  h4 {
+    padding: 10px 0;
+  }
+
+  .terms {
+    padding: 10px 0;
+  }
+
+  &__resumeList {
+    li {
+      font-size: 14px;
+      padding: 10px 0;
+      border-top: 1px solid rgb(221, 221, 221);
+    }
+  }
+
+  &__types {
+    width: min-content !important;
+  }
+}

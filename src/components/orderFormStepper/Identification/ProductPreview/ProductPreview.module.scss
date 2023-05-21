@@ -1,0 +1,40 @@
+.overlay {
+  @media (max-width: 1150px) {
+    display: none !important;
+  }
+}
+
+.products {
+  display: block !important;
+
+  @media (max-width: 1150px) {
+    display: none !important;
+  }
+
+  &__label {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px 0;
+  }
+
+  .table {
+    td {
+      font-size: 13px !important;
+      padding: 10px 40px 10px 10px !important;
+      vertical-align: middle;
+
+      @media (max-width: 880px) {
+        padding: 10px 20px 10px 10px !important;
+      }
+
+      &.td__img {
+        padding-right: 10px !important;
+
+        img {
+          max-width: 75px;
+          max-height: 75px;
+        }
+      }
+    }
+  }
+}

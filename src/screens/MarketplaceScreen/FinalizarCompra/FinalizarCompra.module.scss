@@ -34,42 +34,10 @@
     .products {
       display: flex;
     }
-
-    .payment {
-      display: block;
-
-      h4 {
-        padding: 10px 0;
-      }
-
-      .terms {
-        padding: 15px 0;
-      }
-
-      &__resumeList {
-        li {
-          font-size: 14px;
-          padding: 10px 0;
-          border-top: 1px solid rgb(221, 221, 221);
-        }
-      }
-
-      &__types {
-        width: min-content !important;
-      }
-
-      // button[data-active='true'] {
-      //   border: 2px solid black;
-      // }
-    }
   }
 }
 
 .identification {
-  background-color: rgb(245, 245, 245);
-  border-top: 2px solid black;
-  padding: 20px 15px;
-
   &__title {
     font-size: 20px;
     font-weight: 400;
@@ -79,19 +47,6 @@
   &__description {
     font-size: 18px;
     padding-bottom: 10px;
-  }
-
-  .profile {
-    margin-bottom: 20px;
-
-    &__item {
-      margin-top: 20px;
-      line-height: 1.3;
-
-      label {
-        color: rgb(141, 141, 141);
-      }
-    }
   }
 
   .adress {
