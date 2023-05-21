@@ -12,14 +12,13 @@ import { IProdutoGet } from 'compartilhado/IProdutoGet';
 interface MarketplaceHeaderProps {
     quantidade: number
     produtoDesejadoNoCarrinho?: IProdutoGet;
-    setarListaProdutos: (novoArray: IProdutoGet[]) => void
-    setarQuantidade: (novaQuantidade: number) => void
+    setarListaProdutos?: (novoArray: IProdutoGet[]) => void
+    setarQuantidade?: (novaQuantidade: number) => void
 }
 
 
 const MarketplaceHeader = ({ quantidade, produtoDesejadoNoCarrinho, setarListaProdutos, setarQuantidade}: MarketplaceHeaderProps) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
-    const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState(0)
     
 
 

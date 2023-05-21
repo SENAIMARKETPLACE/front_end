@@ -9,98 +9,95 @@ interface CarrinhoProps {
   isCartAtivado: boolean;
   quantidadeDeProdutos: number;
   produtoDesejadoNoCarrinho?: IProdutoGet;
-  setarListaProdutos: (novoArray?: IProdutoGet[]) => void
-  setarQuantidade: (novaQuantidade: number) => void
+  setarListaProdutos: (novoArray: IProdutoGet[]) => void;
+  setarQuantidade: (novaQuantidade: number) => void;
 }
 
 const Carrinho = ({
   isCartAtivado,
   quantidadeDeProdutos,
   produtoDesejadoNoCarrinho,
-  setarListaProdutos, 
-  setarQuantidade
-
+  setarListaProdutos,
+  setarQuantidade,
 }: CarrinhoProps) => {
-  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<IProdutoGet[]>([]);
-  const [idExcluir, setIdExcluir] = useState("0")
-  const [valorTotal, setValorTotal] = useState<string>("")
-  const [quantidade, setQuantidade] = useState(0)
+  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
+    IProdutoGet[]
+  >([]);
+  const [idExcluir, setIdExcluir] = useState("0");
+  const [valorTotal, setValorTotal] = useState<string>("");
+  const [quantidade, setQuantidade] = useState(0);
 
   const calcularOValorTotal = () => {
     let somaTotal = 0.0;
-    let valorFormatado = "" 
+    let valorFormatado = "";
     arrayProdutosDesejados.forEach((produto) => {
       const preco = Number(produto.preco);
       const quantidade = produto.quantidadeCarrinho;
       const subtotal = preco * quantidade;
       somaTotal += subtotal;
-      valorFormatado = (somaTotal).toLocaleString("pt-BR", {
+      valorFormatado = somaTotal.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       });
-    
-    })
+    });
 
     return valorFormatado;
-  }
-
+  };
 
   const recalcularQuantidade = () => {
-    let quantidadeTemp = 0; 
+    let quantidadeTemp = 0;
     arrayProdutosDesejados.forEach((produto) => {
-      quantidadeTemp += produto.quantidadeCarrinho
-    })
-    
+      quantidadeTemp += produto.quantidadeCarrinho;
+    });
+
     return quantidadeTemp;
-  }
+  };
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const arrayProductsInCart = JSON.parse(
-        localStorage.getItem("productsInCart"), 
+        localStorage.getItem("productsInCart")
       );
-      if(arrayProductsInCart){
-        setArrayProdutosDesejados([...arrayProdutosDesejados, ...arrayProductsInCart])
-
+      if (arrayProductsInCart) {
+        setArrayProdutosDesejados([
+          ...arrayProdutosDesejados,
+          ...arrayProductsInCart,
+        ]);
       }
     }
   }, []);
 
-
-
   useEffect(() => {
-    if(idExcluir != "0"){
-      const carrinhoAtualizado = arrayProdutosDesejados.filter((produto) => produto.id != idExcluir)
-      setArrayProdutosDesejados(carrinhoAtualizado)
-      const carrinhoString = JSON.stringify(carrinhoAtualizado); 
-      localStorage.setItem('productsInCart', carrinhoString)
+    if (idExcluir != "0") {
+      const carrinhoAtualizado = arrayProdutosDesejados.filter(
+        (produto) => produto.id != idExcluir
+      );
+      setArrayProdutosDesejados(carrinhoAtualizado);
+
+      const carrinhoString = JSON.stringify(carrinhoAtualizado);
+      localStorage.setItem("productsInCart", carrinhoString);
     }
-
-  }, [idExcluir])
-
-  useEffect(() => {
-    setarListaProdutos(arrayProdutosDesejados)
-
-  }, [arrayProdutosDesejados])
-
-
+  }, [idExcluir]);
 
   useEffect(() => {
-    const novoValor = calcularOValorTotal(); 
-    const novaQuantidade = recalcularQuantidade()
-    setarQuantidade(novaQuantidade)
+    if (typeof setarListaProdutos === "function") {
+      setarListaProdutos(arrayProdutosDesejados);
+    }
+  }, [arrayProdutosDesejados, setarListaProdutos]);
+
+  useEffect(() => {
+    const novoValor = calcularOValorTotal();
+    const novaQuantidade = recalcularQuantidade();
+    if (typeof setarQuantidade === "function") {
+      setarQuantidade(novaQuantidade);
+    }
     setValorTotal(novoValor);
-    setQuantidade(novaQuantidade);  
-     
-  }, [arrayProdutosDesejados])
+    setQuantidade(novaQuantidade);
+  }, [arrayProdutosDesejados]);
 
-  
   const obterProdutoExcluir = (id: string) => {
-    setIdExcluir(id)
-  }
- 
-  
-
+    setIdExcluir(id);
+  };
 
   return (
     <div
@@ -125,7 +122,6 @@ const Carrinho = ({
         <div className={styles.bodyWithProduct}>
           <div className={styles.visualizacaoProdutos}>
             {arrayProdutosDesejados.map((produto, i) => {
-        
               return (
                 <CardProdutoCarrinho
                   key={produto.id}
@@ -138,7 +134,6 @@ const Carrinho = ({
                   color={produto.detalhes_dos_produtos[0].cor}
                   quantidade={produto.quantidadeCarrinho}
                   obterIdExcluirProps={obterProdutoExcluir}
-                  
                 />
               );
             })}

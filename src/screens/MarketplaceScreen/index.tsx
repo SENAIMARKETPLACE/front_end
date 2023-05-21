@@ -61,6 +61,16 @@ const MarketplaceScreen = () => {
   }, [isCartVisible]);
 
  
+ 
+  // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
+  const setarQuantidadeFuncao = (novaQuantidade: number) => {
+    setQuantidade(novaQuantidade)
+    
+  }
+
+  useEffect(() => {
+    localStorage.setItem("qtdProduto", `${quantidade}`);
+  }, [quantidade])
 
   const acionarCarrinho = () => {
     setIsCartVisible(true);
@@ -68,7 +78,7 @@ const MarketplaceScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader quantidade={quantidade}/>
+      <MarketplaceHeader quantidade={quantidade} setarQuantidade={setarQuantidadeFuncao}/>
       <section className={styles.mainContent}>
         <MenuLateralUsuario />
         <LayoutMainMarketPlace />

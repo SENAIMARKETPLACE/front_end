@@ -32,7 +32,7 @@ const MarketplaceProdutoScreen = () => {
   };
 
   // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
-  const setarQuantidade = (novaQuantidade: number) => {
+  const setarQuantidadeFuncao = (novaQuantidade: number) => {
     setQuantidade(novaQuantidade)
   }
 
@@ -117,7 +117,7 @@ const MarketplaceProdutoScreen = () => {
             produtoDesejadoNoCarrinho={
               produtoAserAdicionado ? produtoAserAdicionado : undefined
             }
-            setarQuantidade={setarQuantidade}
+            setarQuantidade={setarQuantidadeFuncao}
             setarListaProdutos={setarNovoArrayProdutos}
           />
           {!produto || !showLoading ? (
