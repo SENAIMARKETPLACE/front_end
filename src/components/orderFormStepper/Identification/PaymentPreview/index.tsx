@@ -11,12 +11,13 @@ import {
   Group,
   Image,
   Text,
+  Button,
 } from '@mantine/core';
 import styles from './PaymentPreview.module.scss';
 import {
-  IconPhoto,
-  IconMessageCircle,
-  IconSettings,
+  IconCreditCard,
+  IconQrcode,
+  IconScan,
   IconCopy,
   IconCheck,
 } from '@tabler/icons-react';
@@ -35,10 +36,19 @@ function Demo() {
   );
 }
 
-const PaymentPreview = () => {
+interface props {
+  prevStep: any;
+  nextStep: any;
+  overlay: boolean;
+}
+
+const PaymentPreview = ({ prevStep, nextStep, overlay }: props) => {
   return (
     <>
-      <AspectRatio ratio={720 / 1080} className={styles.overlay}>
+      <AspectRatio
+        ratio={720 / 1080}
+        className={`${styles.radio} ${!overlay && styles.overlay}`}
+      >
         <section className={styles.payment}>
           <h4 className={styles.payment__label}>Método de Pagamento</h4>
 
@@ -50,13 +60,13 @@ const PaymentPreview = () => {
             mb="lg"
           >
             <Tabs.List>
-              <Tabs.Tab value="credito" icon={<IconPhoto size="0.8rem" />}>
+              <Tabs.Tab value="credito" icon={<IconCreditCard size="0.8rem" />}>
                 Crédito
               </Tabs.Tab>
-              <Tabs.Tab value="pix" icon={<IconMessageCircle size="0.8rem" />}>
+              <Tabs.Tab value="pix" icon={<IconQrcode size="0.8rem" />}>
                 Pix
               </Tabs.Tab>
-              <Tabs.Tab value="boleto" icon={<IconSettings size="0.8rem" />}>
+              <Tabs.Tab value="boleto" icon={<IconScan size="0.8rem" />}>
                 Boleto
               </Tabs.Tab>
             </Tabs.List>
@@ -154,8 +164,17 @@ const PaymentPreview = () => {
               Total: <span>R$ {'1479,55'}</span>
             </li>
           </ul>
+          <Group position="apart" mt={'xl'}>
+            <Button variant="default" onClick={prevStep} radius="xl">
+              Voltar
+            </Button>
+            <Button onClick={nextStep} radius="xl">
+              Finalizar Compra
+            </Button>
+          </Group>
         </section>
-        {/* {<Overlay color="#ffffff" opacity={0.75} />} */}
+
+        {overlay && <Overlay color="#ffffff" opacity={0.75} />}
       </AspectRatio>
     </>
   );

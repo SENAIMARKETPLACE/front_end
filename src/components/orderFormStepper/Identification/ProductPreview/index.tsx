@@ -66,7 +66,7 @@ const ProductPreview = () => {
             </tbody>
           </Table>
         </section>
-        {<Overlay color="#ffffff" opacity={0.15} />}
+        {<Overlay color="#ffffff" opacity={0.35} />}
       </AspectRatio>
     </>
   );

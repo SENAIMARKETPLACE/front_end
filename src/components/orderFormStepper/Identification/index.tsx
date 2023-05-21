@@ -12,8 +12,12 @@ const Identification = ({ prevStep, nextStep }: props) => {
   return (
     <div className={styles.container}>
       <ProductPreview />
-      <IdentificationPreview prevStep={prevStep} nextStep={nextStep} />
-      <PaymentPreview />
+      <IdentificationPreview
+        prevStep={prevStep}
+        nextStep={nextStep}
+        overlay={false}
+      />
+      <PaymentPreview prevStep={prevStep} nextStep={nextStep} overlay={true} />
     </div>
   );
 };

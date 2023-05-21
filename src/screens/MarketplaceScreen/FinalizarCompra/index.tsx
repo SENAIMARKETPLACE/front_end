@@ -21,13 +21,13 @@ import {
 import { useForm } from '@mantine/form';
 import {
   IconShoppingCart,
-  IconPhoto,
-  IconMessageCircle,
-  IconSettings,
+  IconBrandCashapp,
+  IconId,
 } from '@tabler/icons-react';
 import Link from 'next/link';
 import Cart from 'components/orderFormStepper/Cart';
 import Identification from 'components/orderFormStepper/Identification';
+import Payment from 'components/orderFormStepper/Payment';
 
 export default function FinalizarCompra() {
   const [active, setActive] = useState(0);
@@ -62,26 +62,22 @@ export default function FinalizarCompra() {
         </Stepper.Step>
 
         {/* ETAPA 2 - IDENTIFICAÇÃO */}
-        <Stepper.Step label="Identificação" mr="xl">
+        <Stepper.Step
+          icon={<IconId size="1.1rem" />}
+          label="Identificação"
+          mr="xl"
+        >
           <Identification prevStep={prevStep} nextStep={nextStep} />
         </Stepper.Step>
 
         {/* ETAPA 3 - PAGAMENTO */}
-        <Stepper.Step label="Pagamento">
-          <div className={styles.step}>
-            <section className={styles.identification}>
-              <Checkbox label="Aceito a Política de Trocas e Devoluções" />
-            </section>
-          </div>
-          <Group position="apart">
-            <Button variant="default" onClick={prevStep} radius="xl">
-              Voltar
-            </Button>
-            <Button onClick={nextStep} radius="xl">
-              Finalizar Compra
-            </Button>
-          </Group>
+        <Stepper.Step
+          icon={<IconBrandCashapp size="1.1rem" />}
+          label="Pagamento"
+        >
+          <Payment prevStep={prevStep} nextStep={nextStep} />
         </Stepper.Step>
+
         <Stepper.Completed>
           Compra realizada! Talvez adicionar um efeito loading...
         </Stepper.Completed>

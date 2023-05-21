@@ -5,12 +5,15 @@ import Link from 'next/link';
 interface props {
   prevStep: any;
   nextStep: any;
+  overlay: boolean;
 }
 
-const IdentificationPreview = ({ prevStep, nextStep }: props) => {
+const IdentificationPreview = ({ prevStep, nextStep, overlay }: props) => {
   return (
     <>
-      <section className={styles.identification}>
+      <section
+        className={`${styles.identification} ${overlay && styles.overlay}`}
+      >
         <h4 className={styles.identification__label}>Identificação</h4>
 
         <div className={styles.profile}>
