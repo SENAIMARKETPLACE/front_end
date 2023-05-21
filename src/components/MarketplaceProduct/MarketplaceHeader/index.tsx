@@ -12,13 +12,15 @@ import { IProdutoGet } from 'compartilhado/IProdutoGet';
 interface MarketplaceHeaderProps {
     quantidade: number
     produtoDesejadoNoCarrinho?: IProdutoGet;
+    setarListaProdutos: (novoArray: IProdutoGet[]) => void
+    setarQuantidade: (novaQuantidade: number) => void
 }
 
 
-const MarketplaceHeader = ({ quantidade, produtoDesejadoNoCarrinho }: MarketplaceHeaderProps) => {
+const MarketplaceHeader = ({ quantidade, produtoDesejadoNoCarrinho, setarListaProdutos, setarQuantidade}: MarketplaceHeaderProps) => {
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState(0)
-
+    
 
 
     const carrinhoRef = useRef<HTMLDivElement>(null);
@@ -53,7 +55,7 @@ const MarketplaceHeader = ({ quantidade, produtoDesejadoNoCarrinho }: Marketplac
     return (
         <header className={styles.header}>
             <div ref={carrinhoRef}>
-                {isCartVisible ? <Carrinho quantidadeDeProdutos={quantidade} isCartAtivado={isCartVisible} produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}/> : ""}
+                {isCartVisible ? <Carrinho setarQuantidade={setarQuantidade} setarListaProdutos={setarListaProdutos} quantidadeDeProdutos={quantidade} isCartAtivado={isCartVisible} produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}/> : ""}
             </div>
             <div className={styles.searchbar_and_avatar}>
                 <MiniSearchBar />

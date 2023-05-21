@@ -25,9 +25,23 @@ const MarketplaceProdutoScreen = () => {
     IProdutoGet[]
   >([]);
 
+
+  //ATUALIZAR ESSE STATE APÓS DELETAR UM PRODUTO DO CARRINHO
+  const setarNovoArrayProdutos = (novoArray: IProdutoGet[]) => {
+    setArrayProdutosCarrinhoLS(novoArray);
+  };
+
+  // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
+  const setarQuantidade = (novaQuantidade: number) => {
+    setQuantidade(novaQuantidade)
+  }
+
+  
+
   const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
     if (arrayProdutosCarrinhoLS) {
       const arrayTemp = [...arrayProdutosCarrinhoLS]; // Certifique-se de que arrayProdutosCarrinhoLS seja um array
+      console.log(arrayTemp)
       const existeProduto = arrayProdutosCarrinhoLS.find(
         (item) => item.id === produto.id
       );
@@ -50,7 +64,6 @@ const MarketplaceProdutoScreen = () => {
 
   const aumentarQtd = () => {
     setQuantidade(quantidade + 1);
-    enviarProdutoAoCarrinho(produto);
   };
 
   const resgataInformacoesProduto = (parametro: string | string[]) => {
@@ -97,13 +110,15 @@ const MarketplaceProdutoScreen = () => {
 
   return (
     <div className={styles.page_container}>
-      <div className={styles.content}>
+      <div className={styles.setarQuantidadecontent}>
         <section className={styles.marketplace}>
           <MarketplaceHeader
             quantidade={quantidade}
             produtoDesejadoNoCarrinho={
               produtoAserAdicionado ? produtoAserAdicionado : undefined
             }
+            setarQuantidade={setarQuantidade}
+            setarListaProdutos={setarNovoArrayProdutos}
           />
           {!produto || !showLoading ? (
             <div className={styles.marketplace__loadingAnimation}>

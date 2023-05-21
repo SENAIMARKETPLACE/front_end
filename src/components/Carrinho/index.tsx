@@ -9,16 +9,22 @@ interface CarrinhoProps {
   isCartAtivado: boolean;
   quantidadeDeProdutos: number;
   produtoDesejadoNoCarrinho?: IProdutoGet;
+  setarListaProdutos: (novoArray?: IProdutoGet[]) => void
+  setarQuantidade: (novaQuantidade: number) => void
 }
 
 const Carrinho = ({
   isCartAtivado,
   quantidadeDeProdutos,
   produtoDesejadoNoCarrinho,
+  setarListaProdutos, 
+  setarQuantidade
+
 }: CarrinhoProps) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<IProdutoGet[]>([]);
   const [idExcluir, setIdExcluir] = useState("0")
   const [valorTotal, setValorTotal] = useState<string>("")
+  const [quantidade, setQuantidade] = useState(0)
 
   const calcularOValorTotal = () => {
     let somaTotal = 0.0;
@@ -38,6 +44,16 @@ const Carrinho = ({
     return valorFormatado;
   }
 
+
+  const recalcularQuantidade = () => {
+    let quantidadeTemp = 0; 
+    arrayProdutosDesejados.forEach((produto) => {
+      quantidadeTemp += produto.quantidadeCarrinho
+    })
+    
+    return quantidadeTemp;
+  }
+
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
       const arrayProductsInCart = JSON.parse(
@@ -53,20 +69,28 @@ const Carrinho = ({
 
 
   useEffect(() => {
-    if(parseInt(idExcluir) != 0){
+    if(idExcluir != "0"){
       const carrinhoAtualizado = arrayProdutosDesejados.filter((produto) => produto.id != idExcluir)
       setArrayProdutosDesejados(carrinhoAtualizado)
       const carrinhoString = JSON.stringify(carrinhoAtualizado); 
       localStorage.setItem('productsInCart', carrinhoString)
     }
 
-  }, [[], idExcluir])
+  }, [idExcluir])
+
+  useEffect(() => {
+    setarListaProdutos(arrayProdutosDesejados)
+
+  }, [arrayProdutosDesejados])
 
 
 
   useEffect(() => {
     const novoValor = calcularOValorTotal(); 
-    setValorTotal(novoValor);  
+    const novaQuantidade = recalcularQuantidade()
+    setarQuantidade(novaQuantidade)
+    setValorTotal(novoValor);
+    setQuantidade(novaQuantidade);  
      
   }, [arrayProdutosDesejados])
 
@@ -87,9 +111,9 @@ const Carrinho = ({
       }
     >
       <div className={styles.carrinhoHead}>
-        <p>Seu Carrinho ({quantidadeDeProdutos}) itens</p>
+        <p>Seu Carrinho ({quantidade}) itens</p>
       </div>
-      {quantidadeDeProdutos == 0 ? (
+      {quantidade == 0 ? (
         <div className={styles.bodyWithoutProduct}>
           <h2>Seu Carrinho Está Vazio</h2>
           <p>
