@@ -5,6 +5,7 @@ export interface IProdutoGet{
     id?: string,
     nome: string,
     descricao: string, 
+    quantidadeCarrinho?: number,
     preco: string, 
     img: string
     publico: string, 

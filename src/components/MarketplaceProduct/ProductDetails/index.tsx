@@ -9,26 +9,17 @@ interface ProductDetailsProps {
 const ProductDetails = ({ colors, sizes }: ProductDetailsProps) => {
   const arrayCores = colors.split(" ");
 
-  const DivComDuasCores = styled.span`
+  const DivCores = styled.span`
         display: flex;
         justify-content: space-between;
         border-radius: 50px;
         height: 25px;
         width: 25px; 
-        background: linear-gradient(60deg, ${arrayCores[0]} 50%, ${arrayCores[1]} 50%);
+        background: ${arrayCores.length === 1 ? `${arrayCores[0]};`: `linear-gradient(60deg, ${arrayCores[0]} 50%, ${arrayCores[1]} 50%); ` }
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
   `;
-  const DivComUmaCor = styled.span`
-        display: flex;
-        justify-content: space-between;
-        border-radius: 50px;
-        height: 25px;
-        width: 25px; 
-        background-color: ${arrayCores[0]}; 
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    }
-  `;
+
 
   return (
     <div className={styles.details}>
@@ -39,7 +30,8 @@ const ProductDetails = ({ colors, sizes }: ProductDetailsProps) => {
 
       <h3 className={styles.title}>Cores:</h3>
       <div className={styles.colors}>
-        {arrayCores.length > 1? <DivComDuasCores/>: <DivComUmaCor/> }
+        <DivCores/>
+        
         
       </div>
     </div>

@@ -183,7 +183,7 @@
           "id": 1,
           "tamanho": "70cm",
           "peso": "150gr",
-          "cor": "#902626",
+          "cor": "#122626",
           "quantidade": "1000"
         }
       ]
@@ -240,10 +240,10 @@
     },
     {
       "id": 4,
-      "nome": "Nike Camiseta 4",
-      "descricao": "Melhor camiseta do mundo",
-      "preco": 2400.5,
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
+      "nome": "CAMISA ICON REAL MADRID",
+      "descricao": "O Real Madrid por pouco não viu a era adidas Equipment. Esta camisa de futebol reimagina o visual que o time poderia ter tido em meados dos anos 90. As Três Listras grandes e diagonais e o escudo central do time chamam a atenção. A modelagem folgada garante que ela seja tão autêntica quanto aparenta.",
+      "preco": 349.00,
+      "img": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f6ce8e46e6414600a3daaf4f0147e08e_9366/Camisa_Icon_Real_Madrid_Branco_HT6456_21_model.jpg",
       "publico": "MASCULINO",
       "categoria": {
         "id": 4,
@@ -258,7 +258,7 @@
           "id": 1,
           "tamanho": "70cm",
           "peso": "150gr",
-          "cor": "#902626 #ffffff",
+          "cor": "#0F1 #f45fff",
           "quantidade": "1000"
         }
       ]
@@ -334,6 +334,31 @@
           "tamanho": "70cm",
           "peso": "150gr",
           "cor": "#902626 #ffffff",
+          "quantidade": "1000"
+        }
+      ]
+    }, 
+    {
+      "id": 8,
+      "nome": "Tênis Nike Air Max Excee Feminino",
+      "descricao": "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
+      "img": "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",
+      "publico": "FEMININO",
+      "preco": 2200.15,
+      "categoria": {
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
+        }
+      },
+      "detalhes_dos_produtos": [
+        {
+          "id": 1,
+          "tamanho": "70cm",
+          "peso": "150gr",
+          "cor": "#582",
           "quantidade": "1000"
         }
       ]

@@ -10,7 +10,12 @@
         .marketplace {
             width: 100%;
             padding-bottom: 80px;
-
+            .marketplace__loadingAnimation{
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
             .main_content {
                 .section__title {
                     color: #4e4e4e;

@@ -15,15 +15,30 @@ import { MdShoppingCart } from "react-icons/md";
 import { BsBag } from "react-icons/bs";
 import Carrinho from "../../components/Carrinho";
 import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
+import LayoutMainMarketPlace from "./LayoutMainMarketplace";
+import Link from "next/link";
+import MarketplaceProduto from "pages/marketplace-produto/[id]";
 
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  const [qtdProdutosCarrinho, setQtdProdutosCarrinho] = useState("0")
   const [aberto, setAberto] = useState(false);
   const ref = useRef();
+  const [quantidade, setQuantidade] = useState<number>(0);
+
+  useEffect(() => {
+    const storedQuantity = localStorage.getItem('qtdProduto');
+    if (storedQuantity) {
+      setQuantidade(Number(JSON.parse(storedQuantity)));
+    }
+  }, []);
+
+  
+
+  
 
   const carrinhoRef = useRef<HTMLDivElement>(null);
+  // let qtdProdutos = null
 
   function ClickForaCarrinho(event: MouseEvent) {
     if (
@@ -45,79 +60,31 @@ const MarketplaceScreen = () => {
     };
   }, [isCartVisible]);
 
-  async function getProducts() {
-    try {
-      const response = await httpApiMockada.get("produto-get");
-      console.log(response);
-      setProducts(response.data);
-      console.log(products);
-    } catch (error) {
-      console.error(error);
-    }
+ 
+ 
+  // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
+  const setarQuantidadeFuncao = (novaQuantidade: number) => {
+    setQuantidade(novaQuantidade)
+    
   }
 
   useEffect(() => {
-    getProducts();
-    setQtdProdutosCarrinho("0")
-  }, []);
+    localStorage.setItem("qtdProduto", `${quantidade}`);
+  }, [quantidade])
 
   const acionarCarrinho = () => {
     setIsCartVisible(true);
   };
 
   return (
-    <div className={styles.page_container}>
-
-      <div className={styles.content}>
-
+    <>
+      <MarketplaceHeader quantidade={quantidade} setarQuantidade={setarQuantidadeFuncao}/>
+      <section className={styles.mainContent}>
         <MenuLateralUsuario />
-        <section className={styles.marketplace}>
-          <MarketplaceHeader />
-
-          <main className={styles.main_content}>
-            <p className={styles.banner_text}>Encontre sua velocidade</p>
-            <EmpresaBanner image={Banner} alt="Capa da empresa" />
-            <h2 className={styles.section__title}>
-              Explore Categorias Populares
-            </h2>
-            <div className={styles.categories}>
-              <ProdutoCategoria />
-              <ProdutoCategoria />
-              <ProdutoCategoria />
-            </div>
-
-            <h2 className={styles.section__title}>Produtos para você</h2>
-            <section className={styles.products_list}>
-              {products.map((product) => (
-                <UsuarioProduto
-                  image={product.img}
-                  name={product.nome}
-                  price={product.preco}
-                />
-              ))}
-            </section>
-
-            <h2 className={styles.section__title}>
-              Produtos mais visitados da semana
-            </h2>
-            <p>Em breve...</p>
-            {/* <EmblaCarousel /> */}
-
-            <h2 className={styles.section__title}>Suplementos</h2>
-            <section className={styles.products_list}>
-              {products.map((product) => (
-                <UsuarioProduto
-                  image={product.img}
-                  name={product.nome}
-                  price={product.preco}
-                />
-              ))}
-            </section>
-          </main>
-        </section>
-      </div>
+        <LayoutMainMarketPlace />
+      </section>
       <FooterSollaris />
-    </div>
+    </>
   );
 };
 
