@@ -109,16 +109,18 @@ export default function ModalLoginEmpresa() {
                   <Checkbox label="Lembrar minha senha" />
                   <p onClick={() => showAlert()}>Esqueceu a senha?</p>
                 </div>
-                <div className={styles.modal__leftSide__buttons}>
-                  <Button
-                    type="submit"
-                    mt="sm"
-                    size="lg"
-                    disabled={isFormValid}
-                  >
-                    ENTRAR
-                  </Button>
-                </div>
+                <Link href="/empresa-produtos">
+                  <div className={styles.modal__leftSide__buttons}>
+                    <Button
+                      type="submit"
+                      mt="sm"
+                      size="lg"
+                      disabled={isFormValid}
+                    >
+                      ENTRAR
+                    </Button>
+                  </div>
+                </Link>
               </form>
               <div className={styles.modal__leftSide__signIn}>
                 <p>Ainda não tem conta cadastrada? </p>

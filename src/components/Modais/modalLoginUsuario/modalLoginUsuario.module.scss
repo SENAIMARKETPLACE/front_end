@@ -13,6 +13,9 @@
   border: 1px solid #000000a9;
   color: #000;
   transition: all ease-in 500ms;
+  a{
+    width: 100%;
+  }
   &:hover {
     background-color: #000;
     border-color: #000;
