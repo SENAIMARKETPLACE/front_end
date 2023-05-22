@@ -1,5 +1,8 @@
+import { IProdutoGet } from 'compartilhado/IProdutoGet';
 import styles from './ProductPreview.module.scss';
 import { AspectRatio, Overlay, Table } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const products = [
   {
@@ -23,6 +26,51 @@ const products = [
 ];
 
 const ProductPreview = () => {
+  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
+    IProdutoGet[]
+  >([]);
+
+ 
+  
+
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const arrayProductsInCart = JSON.parse(
+        localStorage.getItem("productsInCart")
+      );
+      if (arrayProductsInCart) {
+        setArrayProdutosDesejados([
+          ...arrayProdutosDesejados,
+          ...arrayProductsInCart,
+        ]);
+      }
+    }
+  }, []);
+  
+
+  const calcularOValorTotal = () => {
+    let somaTotal = 0.0;
+    let valorFormatado = "";
+    arrayProdutosDesejados.forEach((produto) => {
+      const preco = Number(produto.preco);
+      const quantidade = produto.quantidadeCarrinho;
+      const subtotal = preco * quantidade;
+      somaTotal += subtotal;
+      valorFormatado = somaTotal.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    });
+
+    return valorFormatado;
+  };
+  
+
+  
+  
+
+
   return (
     <>
       <AspectRatio ratio={720 / 1080} className={styles.overlay}>
@@ -35,24 +83,21 @@ const ProductPreview = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {arrayProdutosDesejados.map((product) => (
                 <tr key={product.id}>
                   <td className={styles.td__img}>
                     <img
-                      src={product.url}
+                      src={product.img}
                       alt={`Imagem ilustrativa do produto "${product.nome}"`}
                     />
                   </td>
                   <td>
                     <p>{product.nome}</p>
                     <p>
-                      Cor: <span>{product.cor}</span>
+                      Tamanho: <span>{product.detalhes_dos_produtos[0].tamanho}</span>
                     </p>
                     <p>
-                      Tamanho: <span>{product.tamanho}</span>
-                    </p>
-                    <p>
-                      Quantidade: <span>1</span>
+                      Quantidade: <span>{product.quantidadeCarrinho}</span>
                     </p>
                   </td>
                 </tr>
@@ -60,7 +105,7 @@ const ProductPreview = () => {
               <tr className={styles.tr__price}>
                 <td className={styles.td__price}>Total:</td>
                 <td className={styles.td__price__value}>
-                  R$ <span>5000,98</span>
+                  {calcularOValorTotal()}
                 </td>
               </tr>
             </tbody>
