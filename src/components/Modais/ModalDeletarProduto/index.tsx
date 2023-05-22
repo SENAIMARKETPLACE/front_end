@@ -37,31 +37,32 @@ const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSna
 
 
   function regastarListaProdutos(){
-    // httpProduto.get('/api/products')
-    // .then((response) => {setarLista(response.data.content)})
-    // .catch((error) => console.error)
-    httpApiMockada.get('produto-get')
-    .then((response) => {setarLista(response.data)})
+    httpProduto.get('/api/products')
+    .then((response) => {setarLista(response.data.content)})
     .catch((error) => console.error)
+    // httpApiMockada.get('produto-get')
+    // .then((response) => {setarLista(response.data)})
+    // .catch((error) => console.error)
   }
 
   const deletarProduto = () => {
-    // httpProduto
-    //   .delete(`/api/products/${idExcluir}`)
+    httpProduto
+      .delete(`/api/products/${idExcluir}`)
+      .then((resp) => {
+        regastarListaProdutos(); 
+        setSnackbarDeleteOpen(true)
+        setOpen(false);
+      })
+      .catch((err) => console.error(err));
+    // httpApiMockada
+    //   .delete(`produto-get/${idExcluir}`)
     //   .then((resp) => {
     //     regastarListaProdutos()
     //     setOpen(false);
+    //     setSnackbarDeleteOpen(true)
+        
     //   })
     //   .catch((err) => console.error(err));
-    httpApiMockada
-      .delete(`produto-get/${idExcluir}`)
-      .then((resp) => {
-        regastarListaProdutos()
-        setOpen(false);
-        setSnackbarDeleteOpen(true)
-        
-      })
-      .catch((err) => console.error(err));
   };
 
   return (

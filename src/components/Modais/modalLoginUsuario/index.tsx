@@ -1,137 +1,66 @@
-import * as React from "react";
-import styles from "./modalLoginUsuario.module.scss";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/styles";
-import { TextField, Checkbox } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
-import Link from "next/link";
-import logo from "../../../../public/images/logo_sollaris.png";
-import { ILogin } from "../../../compartilhado/ILogin";
-import { httpUsuario } from "../../../http";
+import styles from './modalLoginUsuario.module.scss';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Link from 'next/link';
+import logo from '../../../../public/images/Logo.svg';
+import { validates } from 'util/validations';
+import { useForm } from '@mantine/form';
+import { TextInput, Button, Checkbox, Text, Grid } from '@mantine/core';
+import { PasswordInput } from '@mantine/core';
+import { IconLock, IconAt } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
 
 const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "80%",
-  height: "700px",
-  bgcolor: "background.paper",
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  height: '90vh',
+  bgcolor: 'background.paper',
   boxShadow: 24,
-  display: "flex",
+  display: 'flex',
 };
 
-const ButtonLogarGoogle = styled(Button)({
-  boxShadow: "none",
-  textTransform: "none",
-  fontSize: 16,
-  padding: "0px 10px",
-  border: "1px solid",
-  height: "50px",
-  lineHeight: 1.5,
-  fontWeight: "400",
-  borderSize: "2",
-  borderColor: "#000",
-  backgroundColor: "#fff",
-  color: "#000",
-  "&:hover": {
-    backgroundColor: "#fff",
-    borderColor: "#000",
-    boxShadow: "none",
-    color: "#000",
-  },
-  "&:active": {
-    boxShadow: "none",
-    backgroundColor: "#fff",
-    borderColor: "#000",
-  },
-});
-
-const InputField = styled(TextField)({
-  width: "100%",
-  margin: "10px 0",
-});
-
-const ButtonLogar = styled(Button)({
-  boxShadow: "none",
-  textTransform: "none",
-  fontSize: 16,
-  padding: "0px 10px",
-  border: "1px solid",
-  height: "50px",
-  lineHeight: 1.5,
-  fontWeight: "400",
-  borderSize: "2",
-  borderColor: "#000",
-  backgroundColor: "#000",
-  color: "#FFF",
-  "&:hover": {
-    backgroundColor: "#000",
-    borderColor: "#000",
-    boxShadow: "none",
-    color: "#fff",
-  },
-  "&:active": {
-    boxShadow: "none",
-    backgroundColor: "#000",
-    borderColor: "#000",
-  },
-});
-
-
-
-
-interface DivMensagemErroProps {
-  isBadRequest: boolean 
-}
-
-
-
-export default function ModalLoginUsuario() {
-  const [open, setOpen] = React.useState(false);
-  const [login, setLogin] = React.useState<ILogin>({ email: "", password: "" });
-  const [email, setEmail] = React.useState<string>("");
-  const [password, setPassWord] = React.useState<string>("");
-  const [keepPassword, setKeepPassword] = React.useState<boolean>(false);
-  const [isBadRequest, setIsBadRequest] = React.useState<boolean>(false);
-
-
-
-  const mensagemErroRef = React.useRef(null);
-
+export default function ModalLoginEmpresa() {
+  // Modal Settings
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  function setarObjectLogin() {
-    setLogin({ email: email, password: password });
-  }
+  // Form Settings
+  const [isFormValid, setIsFormValid] = useState(false);
 
-  const gatilhoFuncoesLogin = () => {
-    setarObjectLogin();
-    console.log(login);
+  const form = useForm({
+    validateInputOnBlur: true,
+    initialValues: { email: '', password: '' },
+
+    // functions will be used to validate values at corresponding key
+    validate: {
+      email: (value) => (validates.email(value) ? null : 'E-mail inválido'),
+      password: (value) =>
+        value.length < 8 ? 'A senha deve conter no mínimo 8 caracteres.' : null,
+    },
+  });
+
+  useEffect(() => {
+    setIsFormValid(!form.isValid());
+  }, [form.isValid]);
+
+  const showAlert = () => {
+    alert(
+      'Entre em contato com o administrador para recuperá-la. \nTelefone: (11) 4002-8922 \nE-mail: suport@sollaris.com'
+    );
   };
-
-  const realizarLogin = () => {
-    setarObjectLogin();
-
-
-    setarObjectLogin()
-
-    httpUsuario.post('/api/users/login', login)
-    .then((resp) => console.log(resp))
-    .catch((err) => console.log(err))
-  }
 
   return (
     <div>
-      <Button className={styles.buttonLogin} onClick={handleOpen}>Login Usuário</Button>
+      <Button className={styles.buttonLogin} onClick={handleOpen}>
+        Login Usuário
+      </Button>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
+        aria-labelledby="Modal para cadastro de empresa"
         open={open}
         onClose={handleClose}
         closeAfterTransition
@@ -143,54 +72,57 @@ export default function ModalLoginUsuario() {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
+          <Box sx={style} className={styles.modal}>
             <div className={styles.modal__leftSide}>
-              <div>
+              <div className={styles.modal__leftSide__image}>
                 <img src={logo.src} alt="" />
               </div>
               <div className={styles.modal__leftSide__textoModal}>
-                <h2>SEJA BEM VINDO</h2>
+                <h2>SEJA BEM-VINDO!</h2>
                 <p>
                   Esperamos que você aproveite ao máximo a sua experiência
-                  conosco e que encontre aqui um espaço para se conectar e se
-                  inspirar para viver uma vida mais saudável e ativa.
+                  conosco e que encontre aqui um espaço para se inspirar para
+                  viver uma vida mais saudável e ativa.
                 </p>
               </div>
-              <form onSubmit={(e) => e.preventDefault()}>
-                <InputField
+              <form>
+                <TextInput
                   label="Email"
-                  type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
+                  placeholder="E-mail"
+                  icon={<IconAt size="1rem" />}
+                  size="lg"
+                  withAsterisk={false}
+                  required
+                  {...form.getInputProps('email')}
                 />
-                <InputField
+                <PasswordInput
                   label="Senha"
-                  type="password"
-                  onChange={(e) => setPassWord(e.target.value)}
-                  value={password}
+                  placeholder="Senha"
+                  icon={<IconLock size="1rem" />}
+                  size="lg"
+                  mt="sm"
+                  withAsterisk={false}
+                  required
+                  {...form.getInputProps('password')}
                 />
-              
-                <div className={styles.modal__leftSide__ganchos}>
-                  <div className={styles.modal__leftSide__checkbox}>
-                    <Checkbox />
-                    <p>Lembrar Senha</p>
-                  </div>
-                  <div>
-                    <p>Esqueceu a Senha?</p>
-                  </div>
+                <div className={styles.modal__leftSide__options}>
+                  <Checkbox label="Lembrar minha senha" />
+                  <p onClick={() => showAlert()}>Esqueceu a senha?</p>
                 </div>
                 <div className={styles.modal__leftSide__buttons}>
-                  <ButtonLogar type="submit" onClick={(e) => realizarLogin()}>
+                  <Button
+                    type="submit"
+                    mt="sm"
+                    size="lg"
+                    disabled={isFormValid}
+                  >
                     ENTRAR
-                  </ButtonLogar>
-                  <ButtonLogarGoogle startIcon={<FcGoogle />}>
-                    ENTRAR COM GOOGLE
-                  </ButtonLogarGoogle>
+                  </Button>
                 </div>
               </form>
-              <div className={styles.modal__leftSide__singIn}>
-                Não conta tem sua usuário cadastrada?{" "}
-                <Link href="cadastro-usuario">Cadastre-se</Link>
+              <div className={styles.modal__leftSide__signIn}>
+                <p>Ainda não tem conta cadastrada? </p>
+                <Link href="/cadastro/usuario">Cadastre-se agora!</Link>
               </div>
             </div>
             <div className={styles.modal__divImagem}></div>

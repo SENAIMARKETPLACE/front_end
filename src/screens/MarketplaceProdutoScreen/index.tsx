@@ -20,18 +20,40 @@ const MarketplaceProdutoScreen = () => {
   const id = router.query.id;
   const [quantidade, setQuantidade] = useState(0);
 
-  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<IProdutoGet[]>([]);
+
+  const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<
+    IProdutoGet[]
+  >([]);
+
+
+  //ATUALIZAR ESSE STATE APÓS DELETAR UM PRODUTO DO CARRINHO
+  const setarNovoArrayProdutos = (novoArray: IProdutoGet[]) => {
+    setArrayProdutosCarrinhoLS(novoArray);
+  };
+
+  // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
+  const setarQuantidadeFuncao = (novaQuantidade: number) => {
+    setQuantidade(novaQuantidade)
+  }
+
+  
 
   const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
-
     if (arrayProdutosCarrinhoLS) {
       const arrayTemp = [...arrayProdutosCarrinhoLS]; // Certifique-se de que arrayProdutosCarrinhoLS seja um array
+      console.log(arrayTemp)
       const existeProduto = arrayProdutosCarrinhoLS.find(
         (item) => item.id === produto.id
-      )
+      );
 
       if (existeProduto) {
-        existeProduto.quantidadeCarrinho += 1;
+        //ESSE MAP, ACESSA DIRETAMENTE O OBJETO A SER ALTERADO CASO EXISTA ESSE PRODUTO NO CARRINHO
+        const arrayTemp = arrayProdutosCarrinhoLS.map((item) =>
+          item.id === produto.id
+            ? { ...item, quantidadeCarrinho: item.quantidadeCarrinho + 1 }
+            : item
+        );
+        setArrayProdutosCarrinhoLS(arrayTemp);
       } else {
         setArrayProdutosCarrinhoLS([...arrayTemp, produto]);
       }
@@ -42,7 +64,6 @@ const MarketplaceProdutoScreen = () => {
 
   const aumentarQtd = () => {
     setQuantidade(quantidade + 1);
-    enviarProdutoAoCarrinho(produto);
   };
 
   const resgataInformacoesProduto = (parametro: string | string[]) => {
@@ -60,7 +81,9 @@ const MarketplaceProdutoScreen = () => {
     resgataInformacoesProduto(id);
     if (typeof localStorage !== "undefined") {
       const storedQuantity = localStorage.getItem("qtdProduto");
-      const storedProductsInCart = JSON.parse(localStorage.getItem("productsInCart"));
+      const storedProductsInCart = JSON.parse(
+        localStorage.getItem("productsInCart")
+      );
       if (storedProductsInCart) {
         setArrayProdutosCarrinhoLS(storedProductsInCart);
       }
@@ -94,6 +117,8 @@ const MarketplaceProdutoScreen = () => {
             produtoDesejadoNoCarrinho={
               produtoAserAdicionado ? produtoAserAdicionado : undefined
             }
+            setarQuantidade={setarQuantidadeFuncao}
+            setarListaProdutos={setarNovoArrayProdutos}
           />
           {!produto || !showLoading ? (
             <div className={styles.marketplace__loadingAnimation}>

@@ -47,10 +47,8 @@ const CardProdutoCarrinho = ({
     }
   `;
 
-  const moeda = parseInt(preco).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(preco))
 
   return (
     <div className={styles.cardBody}>
@@ -60,7 +58,7 @@ const CardProdutoCarrinho = ({
       <div className={styles.cardBody__Informacoes}>
         <p className={styles.cardBody__Informacoes__name}>{titulo}</p>
         <p className={styles.cardBody__Informacoes__public}>{publico}</p>
-        <p className={styles.cardBody__Informacoes__price}>{moeda}</p>
+        <p className={styles.cardBody__Informacoes__price}>{precoFormatado}</p>
         <div className={styles.cardBody__Informacoes__colors}>
           <p>Cor:</p>
           <DivCores />

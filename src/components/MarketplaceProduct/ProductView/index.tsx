@@ -22,11 +22,14 @@ const ProductView = ({
     agregarProduto()
   };
 
+  useEffect(() => {
+   produto.quantidadeCarrinho = 1  
+  })
 
-  const moeda = parseInt(produto.preco).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
+  
+
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(produto.preco))
+
 
   return (
     <main className={styles.product}>
@@ -38,7 +41,7 @@ const ProductView = ({
       <section className={styles.product_info}>
         <h2 className={styles.name}>{produto.nome}</h2>
         <p className={styles.gender}>{produto.publico}</p>
-        <p className={styles.price}>{moeda}</p>
+        <p className={styles.price}>{precoFormatado}</p>
         <p className={styles.payment_label}>Ver os meios de pagamento</p>
         <p className={styles.description}>{produto.descricao}</p>
 
@@ -49,7 +52,6 @@ const ProductView = ({
             <button
               onClick={(e) => {
                 agregarProduto();
-                produto.quantidadeCarrinho = 1;
                 enviarProdutoAoCarrinho(produto);
               }}
               className={styles.button_cart}
