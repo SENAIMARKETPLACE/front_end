@@ -23,6 +23,7 @@ import FormControl from '@mui/material/FormControl';
 interface DadosPessoaisProps {
   data: IDataUser;
   atualizarCampo: (key: string, value: string) => void;
+  onData: (data: boolean) => void;
 }
 
 const InputField = styled(TextField)({
@@ -60,7 +61,7 @@ const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
 const DadosPessoais: FC<DadosPessoaisProps> = ({
   data,
   atualizarCampo,
-
+  onData,
 }: DadosPessoaisProps) => {
   const [errorCPF, setErrorCPF] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -105,7 +106,6 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
       errorFotoPerfil,
       errorData,
     ];
-
     if (erros.includes(true)) {
       console.table(erros);
       onData(true);
@@ -118,14 +118,6 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
   useEffect(() => {
     checkItem();
   }, []);
-
- 
-  };
-
-
-
-
-
 
   const validarNome = (nomeDigitado: string) => {
     const regexNome = /\D{10,50}$/;
