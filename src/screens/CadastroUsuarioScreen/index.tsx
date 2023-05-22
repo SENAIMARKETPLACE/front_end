@@ -1,6 +1,6 @@
-import FormCadastroUsuario from '../../patterns/FormCadastroUsuario';
 import styles from './CadastroUsuarioScreen.module.scss';
 import LogoMain from '../../../public/images/logo_sollaris.png';
+import FormCadastroUsuario from 'patterns/FormCadastroUsuario';
 
 const CadastroUsuarioScreen = () => {
   return (

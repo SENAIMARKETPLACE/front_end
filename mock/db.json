@@ -10,12 +10,12 @@
       "email": "",
       "img": "",
       "endereco": {
-        "cep": "",
-        "logradouro": "",
+        "cep": "05881030",
+        "logradouro": "Rua Antônio Justino de Godói",
         "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
+        "bairro": "Jardim São Bento Novo",
+        "cidade": "São Paulo",
+        "estado": "SP",
         "complemento": ""
       },
       "id": 1
@@ -30,1055 +30,32 @@
       "email": "",
       "img": "",
       "endereco": {
-        "cep": "",
-        "logradouro": "",
+        "cep": "05881020",
+        "logradouro": "Rua Abílio César",
         "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
+        "bairro": "Jardim Soraia",
+        "cidade": "São Paulo",
+        "estado": "SP",
         "complemento": ""
       },
       "id": 2
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 3
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 4
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 5
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 6
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 7
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 8
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 9
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 10
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 11
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 12
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 13
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 14
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 15
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 16
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 17
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 18
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 19
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 20
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 21
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 22
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 23
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 24
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 25
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 26
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 27
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 28
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 29
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 30
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 31
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 32
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 33
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 34
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 35
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 36
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 37
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 38
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 39
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 40
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "img": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 41
-    },
-    {
-      "nome": "João",
-      "cpf": "53950516867",
-      "dt_nascimento": "02/03/2004",
-      "senha": "S@ntos2004",
-      "telefone": "11940333175",
-      "genero": "MASCULINO",
-      "email": "jasnjasjdasdasd",
-      "grupos_interesses": [
-        "esportes"
-      ],
-      "img": "jijijijjijijijjjj",
-      "endereco": {
-        "cep": "05881-020",
-        "logradouro": "Rua Abílio César",
-        "numero": "28",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": "Casa1"
-      },
-      "id": 42
-    },
-    {
-      "nome": "Joao",
-      "cpf": "11221321312",
-      "dt_nascimento": "02/03/2004",
-      "senha": "1'",
-      "telefone": "12 312312312",
-      "genero": "MASCULINO",
-      "email": "jvabreusousa12@gmail.com",
-      "grupos_interesses": [
-        "acessorios",
-        "esportes",
-        "calcados"
-      ],
-      "img": "213123123123",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "23",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": "Casa1"
-      },
-      "id": 43
-    },
-    {
-      "nome": "djiadiadijasida",
-      "cpf": "53950516867",
-      "dt_nascimento": "02/03/2004",
-      "senha": "123",
-      "telefone": "12312123123",
-      "genero": "MASCULINO",
-      "email": "jvabreusousa12@gmail.com",
-      "grupos_interesses": [
-        "acessorios",
-        "esportes"
-      ],
-      "img": "05881020",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": ""
-      },
-      "id": 44
-    },
-    {
-      "nome": "djiadiadijasida",
-      "cpf": "53950516867",
-      "dt_nascimento": "02/03/2004",
-      "senha": "123",
-      "telefone": "12312123123",
-      "genero": "MASCULINO",
-      "email": "jvabreusousa12@gmail.com",
-      "grupos_interesses": [
-        "acessorios",
-        "esportes"
-      ],
-      "img": "05881020",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": ""
-      },
-      "id": 45
-    },
-    {
-      "nome": "João Vitor de Abreu",
-      "cpf": "01231231231",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "11111111111",
-      "genero": "",
-      "email": "",
-      "grupos_interesses": [
-        "acessorios"
-      ],
-      "img": "",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": ""
-      },
-      "id": 46
-    },
-    {
-      "nome": "",
-      "cpf": "",
-      "dt_nascimento": "Invalid Date",
-      "senha": "",
-      "telefone": "",
-      "genero": "",
-      "email": "",
-      "grupos_interesses": [],
-      "img": "",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": ""
-      },
-      "id": 47
-    }
-  ],
-  "enderecos": [],
-  "empresas": [
-    {
-      "nome_proprietario": "123123",
-      "nome_fantasia": "1231231",
-      "razao_social": "1231231",
-      "cnpj": "213123",
-      "telefone": "12312312",
-      "email": "123123",
-      "url_logo": "123123",
-      "senha": "123123",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "28",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": "Casa1"
-      },
-      "id": 1
-    },
-    {
-      "nome_proprietario": "",
-      "nome_fantasia": "",
-      "razao_social": "",
-      "cnpj": "",
-      "telefone": "",
-      "email": "",
-      "url_logo": "",
-      "senha": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 2
-    },
-    {
-      "nome_proprietario": "",
-      "nome_fantasia": "",
-      "razao_social": "",
-      "cnpj": "",
-      "telefone": "",
-      "email": "",
-      "url_logo": "",
-      "senha": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 3
-    },
-    {
-      "nome_proprietario": "",
-      "nome_fantasia": "",
-      "razao_social": "",
-      "cnpj": "",
-      "telefone": "",
-      "email": "",
-      "url_logo": "",
-      "senha": "",
-      "endereco": {
-        "cep": "",
-        "logradouro": "",
-        "numero": "",
-        "bairro": "",
-        "cidade": "",
-        "estado": "",
-        "complemento": ""
-      },
-      "id": 4
-    },
-    {
-      "nome_proprietario": "",
-      "nome_fantasia": "",
-      "razao_social": "",
-      "cnpj": "",
-      "telefone": "",
-      "email": "",
-      "url_logo": "",
-      "senha": "",
-      "endereco": {
-        "cep": "05881020",
-        "logradouro": "Rua Abílio César",
-        "numero": "1090",
-        "bairro": "Jardim Soraia",
-        "cidade": "São Paulo",
-        "estado": "SP",
-        "complemento": "Casa4"
-      },
-      "id": 5
     }
   ],
   "produtos-post": [
     {
-      "nome": "Nike Camiseta",
-      "descricao": "Melhor camiseta do mundo",
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
-      "publico": "MASCULINO",
-      "categoria_id": 4,
-      "sub_categoria_id": 22,
-      "preco": 225.15,
+      "nome": "Tênis Nike Air Max Excee Feminino",
+      "descricao": "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
+      "img": "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",
+      "publico": "FEMININO",
+      "categoria_id": 3,
+      "sub_categoria_id": 11,
+      "preco": 2200.15,
       "detalhes_do_produto": {
         "id": 1,
         "tamanho": "70cm",
         "quantidade": "1000",
         "peso": "150gr",
-        "cor": "#902626 #ffffff"
+        "cor": "#902626"
       },
       "id": 1
     },
@@ -1187,11 +164,11 @@
   ],
   "produto-get": [
     {
-      "id": 2,
-      "nome": "Nike Camiseta",
-      "descricao": "Melhor camiseta do mundo",
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
-      "publico": "MASCULINO",
+      "id": 1,
+      "nome": "Tênis Nike Air Max Excee Feminino",
+      "descricao": "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
+      "img": "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",
+      "publico": "FEMININO",
       "preco": 2200.15,
       "categoria": {
         "id": 4,
@@ -1206,14 +183,39 @@
           "id": 1,
           "tamanho": "70cm",
           "peso": "150gr",
-          "cor": "#902626 #ffffff",
+          "cor": "#122626",
+          "quantidade": "1000"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "CAMISA SANTOS II 23/24 ",
+      "descricao": "Nascer, viver e no Santos morrer é um orgulho que nem todos podem ter! Apoie o Peixe dentro ou fora da Vila Belmiro com a nova Camisa Masculina Santos da Umbro. Semelhante ao modelo que os atletas usam nas partidas em casa, o manto reserva versão torcedor da temporada 22/23 é produzido com tecido leve, que prioriza a liberdade de movimentos e que proporciona melhor absorção de suor. Seguindo a tradição, a Camisa do Santos II segue listrada em branco e preto, com gola V e brasão bordado na altura do peito. Aproveite a oportunidade, garanta já o seu manto alvinegro praiano e marque esse golaço! ",
+      "preco": 215.15,
+      "img": "https://static.netshoes.com.br/produtos/camisa-santos-ii-2223-sn-torcedor-umbro-masculina/26/2IA-2585-026/2IA-2585-026_zoom1.jpg?ts=1652897837&ims=544x",
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
+        }
+      },
+      "detalhes_dos_produtos": [
+        {
+          "id": 1,
+          "tamanho": "GG",
+          "peso": "50g",
+          "cor": "#000 #ffffff",
           "quantidade": "1000"
         }
       ]
     },
     {
       "id": 3,
-      "nome": "Nike Camiseta",
+      "nome": "Nike Camiseta 3",
       "descricao": "Melhor camiseta do mundo",
       "preco": 215.15,
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
@@ -1237,8 +239,33 @@
       ]
     },
     {
-      "id": 3,
-      "nome": "Nike Camiseta",
+      "id": 4,
+      "nome": "CAMISA ICON REAL MADRID",
+      "descricao": "O Real Madrid por pouco não viu a era adidas Equipment. Esta camisa de futebol reimagina o visual que o time poderia ter tido em meados dos anos 90. As Três Listras grandes e diagonais e o escudo central do time chamam a atenção. A modelagem folgada garante que ela seja tão autêntica quanto aparenta.",
+      "preco": 349.00,
+      "img": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f6ce8e46e6414600a3daaf4f0147e08e_9366/Camisa_Icon_Real_Madrid_Branco_HT6456_21_model.jpg",
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
+        }
+      },
+      "detalhes_dos_produtos": [
+        {
+          "id": 1,
+          "tamanho": "70cm",
+          "peso": "150gr",
+          "cor": "#0F1 #f45fff",
+          "quantidade": "1000"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Nike Camiseta 5",
       "descricao": "Melhor camiseta do mundo",
       "preco": 215.15,
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
@@ -1262,33 +289,8 @@
       ]
     },
     {
-      "id": 3,
-      "nome": "Nike Camiseta",
-      "descricao": "Melhor camiseta do mundo",
-      "preco": 2400.5,
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
-      "publico": "MASCULINO",
-      "categoria": {
-        "id": 4,
-        "nome": "Esportes",
-        "sub_categoria": {
-          "id": 22,
-          "nome": "Corrida"
-        }
-      },
-      "detalhes_dos_produtos": [
-        {
-          "id": 1,
-          "tamanho": "70cm",
-          "peso": "150gr",
-          "cor": "#902626 #ffffff",
-          "quantidade": "1000"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "nome": "Nike Camiseta",
+      "id": 6,
+      "nome": "Nike Camiseta 6",
       "descricao": "Melhor camiseta do mundo",
       "preco": 215.15,
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
@@ -1312,8 +314,8 @@
       ]
     },
     {
-      "id": 3,
-      "nome": "Nike Camiseta",
+      "id": 7,
+      "nome": "Nike Camiseta 7",
       "descricao": "Melhor camiseta do mundo",
       "preco": 215.15,
       "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
@@ -1335,14 +337,14 @@
           "quantidade": "1000"
         }
       ]
-    },
+    }, 
     {
-      "id": 3,
-      "nome": "Nike Camiseta",
-      "descricao": "Melhor camiseta do mundo",
-      "preco": 215.15,
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
-      "publico": "MASCULINO",
+      "id": 8,
+      "nome": "Tênis Nike Air Max Excee Feminino",
+      "descricao": "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
+      "img": "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",
+      "publico": "FEMININO",
+      "preco": 2200.15,
       "categoria": {
         "id": 4,
         "nome": "Esportes",
@@ -1356,7 +358,7 @@
           "id": 1,
           "tamanho": "70cm",
           "peso": "150gr",
-          "cor": "#902626 #ffffff",
+          "cor": "#582",
           "quantidade": "1000"
         }
       ]

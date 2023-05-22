@@ -1,0 +1,105 @@
+@import '/src/styles/brand';
+
+// Local Variables
+$page-margin: 32px;
+
+// Rules
+.template {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__wrap {
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    margin: $page-margin;
+    width: 100%;
+    max-width: 1450px;
+    box-sizing: border-box;
+
+    border-top-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 1100px) {
+      grid-template-columns: 1fr;
+      margin: ($page-margin * 0.5);
+    }
+
+    @media (max-width: 688px) {
+      border-radius: 0;
+      margin: 0;
+    }
+
+    .cover {
+      width: 100%;
+      @media (max-width: 1100px) {
+        max-height: 800px;
+      }
+      &__image {
+        border-bottom-left-radius: 32px;
+        width: 100%;
+        height: 100%;
+
+        @media (max-width: 1100px) {
+          border-radius: 0;
+        }
+      }
+    }
+
+    .form {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 0 32px;
+
+      @media (max-width: 688px) {
+        padding: 0 20px;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        padding: 3rem 0 2rem;
+
+        @media (max-width: 688px) {
+          flex-direction: column;
+        }
+
+        &__title {
+          color: map-get($map: $colors, $key: text-800);
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 1.5rem;
+          text-align: center;
+
+          @media (max-width: 1200px) {
+            font-size: 18px;
+          }
+
+          @media (max-width: 688px) {
+            font-size: 16px;
+          }
+
+          :first-child {
+            font-weight: 500;
+            color: map-get($map: $colors, $key: tertiary);
+          }
+
+          :last-child {
+            display: inline-block;
+            color: map-get($map: $colors, $key: text-900);
+            font-weight: 500;
+            font-size: inherit;
+            margin-top: 12px;
+          }
+        }
+
+        &__logo {
+          width: 100px;
+        }
+      }
+    }
+  }
+}

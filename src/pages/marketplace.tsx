@@ -1,4 +1,4 @@
-import MarketplaceScreen from "../screens/Marketplace";
+import MarketplaceScreen from "../screens/MarketplaceScreen";
 
 const Marketplace = () => {
     return(

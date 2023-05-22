@@ -1,0 +1,27 @@
+@import "../../styles/Breakpoints.scss";
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700&display=swap");
+
+.page_container {
+    background-color: #f7f8fa;
+
+    .content {
+        display: flex;
+
+        .marketplace {
+            width: 100%;
+            padding-bottom: 80px;
+            .marketplace__loadingAnimation{
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .main_content {
+                .section__title {
+                    color: #4e4e4e;
+                    margin: 35px 0px 15px;
+                }
+            }
+        }
+    }
+}

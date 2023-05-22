@@ -124,11 +124,6 @@ export default function ModalAddProduto({
 
 
 
-  
-
-
-
-
   const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
     setColorPrimary(newValue);
   };

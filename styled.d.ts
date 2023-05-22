@@ -13,5 +13,7 @@ declare module 'styled-components' {
     PrimaryColor?: string 
     SecondColor?: string 
     ColorProduct?: string
+    DivComDuasCores?: string
+    LadoDireito?: string
 }
 }

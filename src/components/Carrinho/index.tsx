@@ -1,14 +1,104 @@
-// Caligrafia Téncina | Tipos de Linhas caracteristicas e funções | Perspectivas | Cotas | 
+// Caligrafia Téncina | Tipos de Linhas caracteristicas e funções | Perspectivas | Cotas |
 
+import { useEffect, useState } from "react";
 import CardProdutoCarrinho from "./CardProdutoCarrinho";
 import styles from "./Carrinho.module.scss";
+import { IProdutoGet } from "compartilhado/IProdutoGet";
 
 interface CarrinhoProps {
   isCartAtivado: boolean;
-  quantidadeDeProdutos: string;
+  quantidadeDeProdutos: number;
+  produtoDesejadoNoCarrinho?: IProdutoGet;
+  setarListaProdutos: (novoArray: IProdutoGet[]) => void;
+  setarQuantidade: (novaQuantidade: number) => void;
 }
 
-const Carrinho = ({ isCartAtivado, quantidadeDeProdutos }: CarrinhoProps) => {
+const Carrinho = ({
+  isCartAtivado,
+  quantidadeDeProdutos,
+  produtoDesejadoNoCarrinho,
+  setarListaProdutos,
+  setarQuantidade,
+}: CarrinhoProps) => {
+  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
+    IProdutoGet[]
+  >([]);
+  const [idExcluir, setIdExcluir] = useState("0");
+  const [valorTotal, setValorTotal] = useState<string>("");
+  const [quantidade, setQuantidade] = useState(0);
+
+  const calcularOValorTotal = () => {
+    let somaTotal = 0.0;
+    let valorFormatado = "";
+    arrayProdutosDesejados.forEach((produto) => {
+      const preco = Number(produto.preco);
+      const quantidade = produto.quantidadeCarrinho;
+      const subtotal = preco * quantidade;
+      somaTotal += subtotal;
+      valorFormatado = somaTotal.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    });
+
+    return valorFormatado;
+  };
+
+  const recalcularQuantidade = () => {
+    let quantidadeTemp = 0;
+    arrayProdutosDesejados.forEach((produto) => {
+      quantidadeTemp += produto.quantidadeCarrinho;
+    });
+
+    return quantidadeTemp;
+  };
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const arrayProductsInCart = JSON.parse(
+        localStorage.getItem("productsInCart")
+      );
+      if (arrayProductsInCart) {
+        setArrayProdutosDesejados([
+          ...arrayProdutosDesejados,
+          ...arrayProductsInCart,
+        ]);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (idExcluir != "0") {
+      const carrinhoAtualizado = arrayProdutosDesejados.filter(
+        (produto) => produto.id != idExcluir
+      );
+      setArrayProdutosDesejados(carrinhoAtualizado);
+
+      const carrinhoString = JSON.stringify(carrinhoAtualizado);
+      localStorage.setItem("productsInCart", carrinhoString);
+    }
+  }, [idExcluir]);
+
+  useEffect(() => {
+    if (typeof setarListaProdutos === "function") {
+      setarListaProdutos(arrayProdutosDesejados);
+    }
+  }, [arrayProdutosDesejados, setarListaProdutos]);
+
+  useEffect(() => {
+    const novoValor = calcularOValorTotal();
+    const novaQuantidade = recalcularQuantidade();
+    if (typeof setarQuantidade === "function") {
+      setarQuantidade(novaQuantidade);
+    }
+    setValorTotal(novoValor);
+    setQuantidade(novaQuantidade);
+  }, [arrayProdutosDesejados]);
+
+  const obterProdutoExcluir = (id: string) => {
+    setIdExcluir(id);
+  };
+
   return (
     <div
       className={
@@ -18,39 +108,54 @@ const Carrinho = ({ isCartAtivado, quantidadeDeProdutos }: CarrinhoProps) => {
       }
     >
       <div className={styles.carrinhoHead}>
-        <p>Seu Carrinho ({quantidadeDeProdutos}) itens</p>
+        <p>Seu Carrinho ({quantidade}) itens</p>
       </div>
-      {parseInt(quantidadeDeProdutos) === 0 && (
+      {quantidade == 0 ? (
         <div className={styles.bodyWithoutProduct}>
           <h2>Seu Carrinho Está Vazio</h2>
           <p>
             Navegue pelas categorias da loja ou faça uma busca pelo seu produto.
           </p>
-          <button className={styles.buttonOne}>
-            Continuar Comprando
-          </button>
+          <button className={styles.buttonOne}>Continuar Comprando</button>
+        </div>
+      ) : (
+        <div className={styles.bodyWithProduct}>
+          <div className={styles.visualizacaoProdutos}>
+            {arrayProdutosDesejados.map((produto, i) => {
+              return (
+                <CardProdutoCarrinho
+                  key={produto.id}
+                  id={produto.id}
+                  img={produto.img}
+                  titulo={produto.nome}
+                  preco={produto.preco}
+                  publico={produto.publico}
+                  tamanho={produto.detalhes_dos_produtos[0].tamanho}
+                  color={produto.detalhes_dos_produtos[0].cor}
+                  quantidade={produto.quantidadeCarrinho}
+                  obterIdExcluirProps={obterProdutoExcluir}
+                />
+              );
+            })}
+          </div>
+          <div className={styles.bodyWithProduct__visualizacaoPreco}>
+            <p className={styles.bodyWithProduct__visualizacaoPreco__titulo}>
+              Subtotal:{" "}
+            </p>
+            <p className={styles.bodyWithProduct__visualizacaoPreco__preco}>
+              {valorTotal}
+            </p>
+          </div>
+          <div className={styles.visualizacoesButtons}>
+            <button className={styles.visualizacoesButtons__primaryButton}>
+              Continuar Comprando
+            </button>
+            <button className={styles.visualizacoesButtons__secondButton}>
+              Finalizar Compra
+            </button>
+          </div>
         </div>
       )}
-      <div className={styles.bodyWithProduct}>
-        <div className={styles.visualizacaoProdutos}>
-            <CardProdutoCarrinho  img="https://imgnike-a.akamaihd.net/120x120/001589ID.jpg" titulo="Boné Nike Court AeroBill Rafa Nadal Heritage86" preco="189,99" publico="Unissex" tamanho="ÚNICO" color="#000"/>
-            <CardProdutoCarrinho  img="https://imgnike-a.akamaihd.net/250x250/0228340L.jpg" titulo="Camisa Nike Brasil I 2022/24 Torcedor Pro Masculina" preco="349,99" publico="Masculino" tamanho="GG" color="#F6F54D"/>
-            <CardProdutoCarrinho  img="https://imgnike-a.akamaihd.net/250x250/0228340L.jpg" titulo="Camisa Nike Brasil I 2022/24 Torcedor Pro Masculina" preco="349,99" publico="Masculino" tamanho="GG" color="#F6F54D"/>
-
-        </div>
-        <div className={styles.bodyWithProduct__visualizacaoPreco}>
-          <p className={styles.bodyWithProduct__visualizacaoPreco__titulo}>Subtotal: </p>
-          <p className={styles.bodyWithProduct__visualizacaoPreco__preco}>R$ 540,00</p>
-        </div>
-        <div className={styles.visualizacoesButtons}>
-          <button className={styles.visualizacoesButtons__primaryButton}>
-            Continuar Comprando
-          </button>
-          <button className={styles.visualizacoesButtons__secondButton}>
-            Finalizar Compra
-          </button>
-        </div>
-      </div>
     </div>
   );
 };

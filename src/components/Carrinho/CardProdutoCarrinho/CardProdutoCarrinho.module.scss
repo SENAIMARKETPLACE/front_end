@@ -3,12 +3,12 @@
     background-color: #fff;
     font-size: 12px;
     row-gap: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: grid;
     height: 200px;
     grid-template-columns: max-content 50% 20px;
     grid-template-rows: repeat(7, 1fr);
-    column-gap: 10px;
+    column-gap: 20px;
     flex-direction: column;
     padding: 10px;
     margin-bottom: 20px;
@@ -23,9 +23,9 @@
     }
 
     .cardBody__Informacoes {
-        row-gap:10px;
         display: flex;
         flex-direction: column;
+        row-gap: 5px;
 
         .cardBody__Informacoes__name {
             font-size: 16px;
