@@ -8,32 +8,32 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-} from "@mui/material";
-import styled from "@emotion/styled";
-import { IDataUser } from "../../../compartilhado/IDataUser";
-import React, { FC, useEffect, useState } from "react";
-import { IMaskInput, useIMask } from "react-imask";
-import styles from "./DadosPessoais.module.scss";
-import { height } from "@mui/system";
-import { InputMask } from "imask";
-import { useMask } from "react-mask-field";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import FormControl from "@mui/material/FormControl";
+} from '@mui/material';
+import styled from '@emotion/styled';
+import { IDataUser } from '../../../compartilhado/IDataUser';
+import React, { FC, useEffect, useState } from 'react';
+import { IMaskInput, useIMask } from 'react-imask';
+import styles from './DadosPessoais.module.scss';
+import { height } from '@mui/system';
+import { InputMask } from 'imask';
+import { useMask } from 'react-mask-field';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import FormControl from '@mui/material/FormControl';
 interface DadosPessoaisProps {
   data: IDataUser;
   atualizarCampo: (key: string, value: string) => void;
 }
 
 const InputField = styled(TextField)({
-  width: "100%",
-  margin: "5px 0",
+  width: '100%',
+  margin: '5px 0',
 });
 
 const SelectField = styled(Select)({
-  width: "100%",
-  height: "55px",
-  margin: "5px 0",
+  width: '100%',
+  height: '55px',
+  margin: '5px 0',
 });
 
 interface CustomProps {
@@ -93,9 +93,6 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
     }
   };
 
-
-
-
   const checkItem = () => {
     const erros = [
       errorCPF,
@@ -108,6 +105,20 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
       errorFotoPerfil,
       errorData,
     ];
+
+    if (erros.includes(true)) {
+      console.table(erros);
+      onData(true);
+    } else {
+      console.table(erros);
+      onData(false);
+    }
+  };
+
+  useEffect(() => {
+    checkItem();
+  }, []);
+
  
   };
 
@@ -127,15 +138,15 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
   };
 
   const maskOnlyLetters = (value: string) => {
-    return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "");
+    return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, '');
   };
 
   const validarGenero = (generoDigitado: string) => {
-    if (data.genero === "") {
+    if (data.genero === '') {
       //ERRO GENERO
       setErrorGenero(true);
     } else {
-      if (data.genero === "Gênero") {
+      if (data.genero === 'Gênero') {
         //ERRO GENERO
         setErrorGenero(true);
       } else {
@@ -146,19 +157,19 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
 
   const maskCPF = (cpfDigitado: string) => {
     return cpfDigitado
-      .replace(/\D/g, "")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d)/, "$1.$2")
-      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-      .replace(/(-\d{2})\d+?$/, "$1");
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1');
   };
 
   const maskPhone = (value: string) => {
     return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d)/, "($1) $2")
-      .replace(/(\d{5})(\d)/, "$1-$2")
-      .replace(/(-\d{4})(\d+?)$/, "$1");
+      .replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{4})(\d+?)$/, '$1');
   };
   /* 
     ^: início da string
@@ -171,7 +182,8 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
   */
 
   const validarCampoSenha = (senhaDigitada: string) => {
-    const regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,16}$/;
+    const regexSenha =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,16}$/;
     if (regexSenha.test(senhaDigitada)) {
       setErrorPassword(false);
     } else {
@@ -198,15 +210,14 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
 
   const validarTelefone = (telefoneDigitado: string) => {
     telefoneDigitado = telefoneDigitado
-      .replace(/[,!()-.]/g, "")
-      .replaceAll(" ", "");
+      .replace(/[,!()-.]/g, '')
+      .replaceAll(' ', '');
     if (telefoneDigitado.length === 11) {
       setErrorTelefone(false);
     } else {
       setErrorTelefone(true);
     }
   };
-
 
   function has18Years(field: string): boolean {
     const dateOfBirth = new Date(field);
@@ -222,7 +233,7 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
   }
 
   const validarData = (dataEscolhida: string) => {
-    if (dataEscolhida === "") {
+    if (dataEscolhida === '') {
       setErrorData(true);
     } else {
       if (!has18Years(dataEscolhida)) {
@@ -233,11 +244,8 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
     }
   };
 
-
- 
-
   const validarCampoCpf = (cpfDigitado: string) => {
-    cpfDigitado = cpfDigitado.replace(/[,!()-.]/g, "").replaceAll(" ", "");
+    cpfDigitado = cpfDigitado.replace(/[,!()-.]/g, '').replaceAll(' ', '');
 
     if (cpfDigitado.length !== 11) {
       setErrorCPF(true);
@@ -278,14 +286,14 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         label="Nome"
         InputLabelProps={{ shrink: true }}
         required
-        value={data.nome || ""}
+        value={data.nome || ''}
         error={errorNome}
         onBlur={(e) => {
           validarNome(data.nome);
         }}
         onMouseUp={(e) => checkItem()}
         onChange={(e) => {
-          atualizarCampo("nome", maskOnlyLetters(e.target.value));
+          atualizarCampo('nome', maskOnlyLetters(e.target.value));
         }}
         className={styles.camposCadastro__nome}
       ></InputField>
@@ -296,9 +304,9 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         InputLabelProps={{ shrink: true }}
         required
         onMouseUp={(e) => checkItem()}
-        value={data.cpf || ""}
+        value={data.cpf || ''}
         onChange={(e) => {
-          atualizarCampo("cpf", maskCPF(e.target.value));
+          atualizarCampo('cpf', maskCPF(e.target.value));
         }}
         onBlur={(e) => {
           validarCampoCpf(data.cpf);
@@ -315,8 +323,8 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         onBlur={(e) => {
           validarFoto(data.urlFotoPerfil);
         }}
-        value={data.urlFotoPerfil || ""}
-        onChange={(e) => atualizarCampo("urlFotoPerfil", e.target.value)}
+        value={data.urlFotoPerfil || ''}
+        onChange={(e) => atualizarCampo('urlFotoPerfil', e.target.value)}
         className={styles.campoCadastro__urlPerfil}
       ></InputField>
       <InputField
@@ -328,8 +336,8 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
           validarTelefone(data.telefone);
         }}
         onMouseUp={(e) => checkItem()}
-        value={data.telefone || ""}
-        onChange={(e) => atualizarCampo("telefone", maskPhone(e.target.value))}
+        value={data.telefone || ''}
+        onChange={(e) => atualizarCampo('telefone', maskPhone(e.target.value))}
         className={styles.camposCadastro__telefone}
       ></InputField>
       <InputField
@@ -337,19 +345,19 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         type="date"
         InputLabelProps={{ shrink: true }}
         required
-        value={data.dataNasc || ""}
+        value={data.dataNasc || ''}
         error={errorData}
         onBlur={(e) => {
           validarData(e.target.value);
         }}
         onMouseUp={(e) => checkItem()}
-        onChange={(e) => atualizarCampo("dataNasc", e.target.value)}
+        onChange={(e) => atualizarCampo('dataNasc', e.target.value)}
         className={styles.camposCadastro__dtNasc}
       ></InputField>
       <SelectField
-        value={data.genero || ""}
+        value={data.genero || ''}
         onChange={(e: SelectChangeEvent) =>
-          atualizarCampo("genero", e.target.value)
+          atualizarCampo('genero', e.target.value)
         }
         displayEmpty
         error={errorGenero}
@@ -371,10 +379,10 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         label="E-mail"
         InputLabelProps={{ shrink: true }}
         required
-        value={data.email || ""}
-        onChange={(e) => atualizarCampo("email", e.target.value)}
+        value={data.email || ''}
+        onChange={(e) => atualizarCampo('email', e.target.value)}
         onBlur={(e) => {
-          validarEmail(data.email)
+          validarEmail(data.email);
         }}
         onMouseUp={(e) => checkItem()}
         error={errorEmail}
@@ -412,12 +420,12 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           required
           error={errorPassword}
-          value={data.senha || ""}
+          value={data.senha || ''}
           onChange={(e) => {
-            atualizarCampo("senha", e.target.value),
+            atualizarCampo('senha', e.target.value),
               validarCampoConfirmarSenha(data.confirmeSenha);
           }}
           onMouseUp={(e) => checkItem()}
@@ -445,12 +453,12 @@ const DadosPessoais: FC<DadosPessoaisProps> = ({
         </InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           required
           error={errorConfirmPassword}
-          value={data.confirmeSenha || ""}
+          value={data.confirmeSenha || ''}
           onChange={(e) => {
-            atualizarCampo("confirmeSenha", e.target.value);
+            atualizarCampo('confirmeSenha', e.target.value);
           }}
           onMouseUp={(e) => checkItem()}
           onBlur={(e) => validarCampoConfirmarSenha(data.confirmeSenha)}

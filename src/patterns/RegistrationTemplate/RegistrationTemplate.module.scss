@@ -1,3 +1,4 @@
+
 @import '/src/styles/brand';
 
 // Local Variables
@@ -61,7 +62,7 @@ $page-margin: 32px;
         align-items: center;
         justify-content: center;
         gap: 24px;
-        padding: 3rem 0 2rem;
+        padding: 3rem 0;
 
         @media (max-width: 688px) {
           flex-direction: column;
@@ -97,7 +98,7 @@ $page-margin: 32px;
         }
 
         &__logo {
-          width: 100px;
+          width: 90px;
         }
       }
     }
