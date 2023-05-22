@@ -1,32 +1,50 @@
-import { Table, Group, Button } from '@mantine/core';
-import CartItem from './CartItem';
-import styles from './Cart.module.scss';
+import { Table, Group, Button } from "@mantine/core";
+import CartItem from "./CartItem";
+import styles from "./Cart.module.scss";
+import { useEffect, useState } from "react";
+import { IProdutoGet } from "compartilhado/IProdutoGet";
 
 interface props {
   nextStep: any;
 }
 
 const Cart = ({ nextStep }: props) => {
-  const products = [
-    {
-      id: 1,
-      nome: 'Camiseta Nike Comum',
-      url: 'https://m.media-amazon.com/images/I/412BRS3YzZL._AC_SY500_.jpg',
-      cor: 'Preta',
-      peso: '100g',
-      tamanho: 'M',
-      price: '199.99',
-    },
-    {
-      id: 2,
-      nome: 'Kit Whey, BCAA e Creatina Integral Médica',
-      url: 'https://cdn.awsli.com.br/800x800/157/157421/produto/43753862/2ab068446a.jpg',
-      cor: 'Vermelha',
-      peso: '1kg',
-      tamanho: 'M',
-      price: '199.99',
-    },
-  ];
+  const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
+    IProdutoGet[]
+  >([]);
+
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const arrayProductsInCart = JSON.parse(
+        localStorage.getItem("productsInCart")
+      );
+      if (arrayProductsInCart) {
+        setArrayProdutosDesejados([
+          ...arrayProdutosDesejados,
+          ...arrayProductsInCart,
+        ]);
+      }
+    }
+  }, []);
+
+
+  const calcularOValorTotal = () => {
+    let somaTotal = 0.0;
+    let valorFormatado = "";
+    arrayProdutosDesejados.forEach((produto) => {
+      const preco = Number(produto.preco);
+      const quantidade = produto.quantidadeCarrinho;
+      const subtotal = preco * quantidade;
+      somaTotal += subtotal;
+      valorFormatado = somaTotal.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    });
+
+    return valorFormatado;
+  };
+
   return (
     <>
       <Table mt="xl" className={styles.table}>
@@ -41,7 +59,7 @@ const Cart = ({ nextStep }: props) => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {arrayProdutosDesejados.map((product) => (
             <CartItem key={product.id} product={product} />
           ))}
 
@@ -50,7 +68,7 @@ const Cart = ({ nextStep }: props) => {
               Total:
             </td>
             <td className={styles.total__price} colSpan={2}>
-              R$ <span>0,00</span>
+              {calcularOValorTotal()}
             </td>
           </tr>
         </tbody>

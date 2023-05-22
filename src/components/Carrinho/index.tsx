@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CardProdutoCarrinho from "./CardProdutoCarrinho";
 import styles from "./Carrinho.module.scss";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
+import Link from "next/link";
 
 interface CarrinhoProps {
   isCartAtivado: boolean;
@@ -150,9 +151,11 @@ const Carrinho = ({
             <button className={styles.visualizacoesButtons__primaryButton}>
               Continuar Comprando
             </button>
-            <button className={styles.visualizacoesButtons__secondButton}>
-              Finalizar Compra
-            </button>
+            <Link href="/marketplace-compra">
+              <button className={styles.visualizacoesButtons__secondButton}>
+                Finalizar Compra
+              </button>
+            </Link>
           </div>
         </div>
       )}

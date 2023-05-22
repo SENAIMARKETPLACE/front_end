@@ -16,6 +16,12 @@
       }
     }
 
+    .cardItem__cor {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+    }
+
     &.td__amount,
     &.td__price {
       @media (max-width: 560px) {
@@ -26,6 +32,10 @@
     .deleteIcon {
       cursor: pointer;
       font-size: 16px;
+      transition: color 1s ease-in ;
+      &:hover{
+        color: red;
+      }
     }
   }
 }

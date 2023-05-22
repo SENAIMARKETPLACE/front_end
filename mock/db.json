@@ -39,6 +39,26 @@
         "complemento": ""
       },
       "id": 2
+    },
+    {
+      "nome": "",
+      "cpf": "",
+      "dt_nascimento": "Invalid Date",
+      "senha": "",
+      "telefone": "",
+      "genero": "",
+      "email": "",
+      "img": "",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "numero": "",
+        "bairro": "",
+        "cidade": "",
+        "estado": "",
+        "complemento": ""
+      },
+      "id": 3
     }
   ],
   "produtos-post": [
@@ -242,7 +262,7 @@
       "id": 4,
       "nome": "CAMISA ICON REAL MADRID",
       "descricao": "O Real Madrid por pouco não viu a era adidas Equipment. Esta camisa de futebol reimagina o visual que o time poderia ter tido em meados dos anos 90. As Três Listras grandes e diagonais e o escudo central do time chamam a atenção. A modelagem folgada garante que ela seja tão autêntica quanto aparenta.",
-      "preco": 349.00,
+      "preco": 349,
       "img": "https://assets.adidas.com/images/w_600,f_auto,q_auto/f6ce8e46e6414600a3daaf4f0147e08e_9366/Camisa_Icon_Real_Madrid_Branco_HT6456_21_model.jpg",
       "publico": "MASCULINO",
       "categoria": {
@@ -337,7 +357,7 @@
           "quantidade": "1000"
         }
       ]
-    }, 
+    },
     {
       "id": 8,
       "nome": "Tênis Nike Air Max Excee Feminino",

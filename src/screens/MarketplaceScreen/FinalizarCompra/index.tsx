@@ -31,6 +31,7 @@ import Payment from 'components/orderFormStepper/Payment';
 
 export default function FinalizarCompra() {
   const [active, setActive] = useState(0);
+  
 
   const form = useForm({
     initialValues: {
