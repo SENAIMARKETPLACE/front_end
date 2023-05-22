@@ -1,0 +1,22 @@
+.table {
+  .th__amount,
+  .th__price {
+    @media (max-width: 560px) {
+      display: none;
+    }
+  }
+
+  .total {
+    &__label {
+      font-size: 20px;
+      font-weight: 700;
+      text-align: right;
+      padding-top: 28px;
+    }
+
+    &__price {
+      font-size: 18px;
+      padding-top: 20px;
+    }
+  }
+}
