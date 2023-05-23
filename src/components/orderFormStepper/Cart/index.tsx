@@ -6,12 +6,15 @@ import { IProdutoGet } from "compartilhado/IProdutoGet";
 
 interface props {
   nextStep: any;
+  setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void
 }
 
-const Cart = ({ nextStep }: props) => {
+const Cart = ({ nextStep, setarQuantidadeAoExcluirProps }: props) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
   >([]);
+  const [idAExcluir, setIdAExcluir] = useState("0");
+
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -28,6 +31,43 @@ const Cart = ({ nextStep }: props) => {
   }, []);
 
 
+  const recalcularQuantidade = () => {
+    let quantidadeTemp = 0;
+    arrayProdutosDesejados.forEach((produto) => {
+      quantidadeTemp += produto.quantidadeCarrinho;
+    });
+
+    return quantidadeTemp;
+  };
+
+  useEffect(() => {
+    const novoValor = recalcularQuantidade(); 
+    setarQuantidadeAoExcluirProps(novoValor)
+    
+  }, [arrayProdutosDesejados])
+
+
+  // ARROW FUNCTION PARA RESGATAR ID_PRODUTO A SER EXCLUIDO DO LOCALSTORAGE PELO COMPONENTE FILHO
+  const recuperarIdDoProdutoASerExcluido = (id: string) => {
+    setIdAExcluir(id)
+  }
+
+  // USEEFFECT PARA SER GATILHO EM TODAS AS VEZES QUE A VARIÁVEL "idAExcluir" FOR ALTERADA. 
+
+  useEffect(() => {
+    if (idAExcluir != "0") {
+      const carrinhoAtualizado = arrayProdutosDesejados.filter(
+        (produto) => produto.id != idAExcluir
+      );
+      setArrayProdutosDesejados(carrinhoAtualizado);
+
+      const carrinhoString = JSON.stringify(carrinhoAtualizado);
+      localStorage.setItem("productsInCart", carrinhoString);
+    }
+  }, [idAExcluir])
+
+
+  // CALCULA O VALOR E EXIBE AUTOMATICAMENTE FORMATADO
   const calcularOValorTotal = () => {
     let somaTotal = 0.0;
     let valorFormatado = "";
@@ -60,7 +100,7 @@ const Cart = ({ nextStep }: props) => {
         </thead>
         <tbody>
           {arrayProdutosDesejados.map((product) => (
-            <CartItem key={product.id} product={product} />
+            <CartItem recuperarIdDoProdutoASerExcluidProps={recuperarIdDoProdutoASerExcluido} key={product.id} product={product} />
           ))}
 
           <tr className={styles.table__total}>

@@ -17,9 +17,10 @@ type Product = {
 
 type CartItemProps = {
   product: IProdutoGet;
+  recuperarIdDoProdutoASerExcluidProps: (id: string) => void
 };
 
-export default function CartItem({ product }: CartItemProps) {
+export default function CartItem({ product, recuperarIdDoProdutoASerExcluidProps }: CartItemProps) {
   const [quantity, setQuantity] = useState(product.quantidadeCarrinho);
   const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(product.preco))
 
@@ -41,6 +42,9 @@ export default function CartItem({ product }: CartItemProps) {
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
   `;
+
+
+
 
   
 
@@ -72,6 +76,8 @@ export default function CartItem({ product }: CartItemProps) {
           Tamanho: <span>{product.detalhes_dos_produtos[0].tamanho}</span>
         </p>
       </td>
+
+      {/* AQUI ESTÁ O PONTO DE ATENÇÃO E ONDE EU VOU FOCAR NESSA 1ª PARTE */}
       <td className={styles.td__amount}>
         <Group spacing={0}>
           <ActionIcon size={36} variant="light" onClick={handleDecrease}>
@@ -104,7 +110,7 @@ export default function CartItem({ product }: CartItemProps) {
       <td>
         <RiDeleteBinLine
           className={styles.deleteIcon}
-          onClick={() => alert('#EuConfio')}
+          onClick={(e) => recuperarIdDoProdutoASerExcluidProps(product.id)}
         />
       </td>
     </tr>

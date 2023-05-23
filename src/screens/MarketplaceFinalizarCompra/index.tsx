@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import styles from './MarketplaceFinalizarCompra.module.scss';
-import MarketplaceHeader from 'components/MarketplaceProduct/MarketplaceHeader';
-import LayoutMainMarketPlace from 'screens/MarketplaceScreen/LayoutMainMarketplace';
-import FooterSollaris from 'layout/Footer';
-import FinalizarCompra from 'screens/MarketplaceScreen/FinalizarCompra';
-import MenuLateralUsuario from 'patterns/MenuLateralUsuario';
+import { useEffect, useRef, useState } from "react";
+import styles from "./MarketplaceFinalizarCompra.module.scss";
+import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
+import LayoutMainMarketPlace from "screens/MarketplaceScreen/LayoutMainMarketplace";
+import FooterSollaris from "layout/Footer";
+import FinalizarCompra from "screens/MarketplaceScreen/FinalizarCompra";
+import MenuLateralUsuario from "patterns/MenuLateralUsuario";
 
 const MarketplaceFinalizarCompraScreen = () => {
   const [products, setProducts] = useState([]);
@@ -15,7 +15,7 @@ const MarketplaceFinalizarCompraScreen = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    const storedQuantity = localStorage.getItem('qtdProduto');
+    const storedQuantity = localStorage.getItem("qtdProduto");
     if (storedQuantity) {
       setQuantidade(Number(JSON.parse(storedQuantity)));
     }
@@ -28,9 +28,9 @@ const MarketplaceFinalizarCompraScreen = () => {
 
     handleResize(); // Define o estado inicial
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -47,12 +47,12 @@ const MarketplaceFinalizarCompraScreen = () => {
 
   useEffect(() => {
     if (isCartVisible) {
-      document.addEventListener('mousedown', ClickForaCarrinho);
+      document.addEventListener("mousedown", ClickForaCarrinho);
     } else {
-      document.removeEventListener('mousedown', ClickForaCarrinho);
+      document.removeEventListener("mousedown", ClickForaCarrinho);
     }
     return () => {
-      document.removeEventListener('mousedown', ClickForaCarrinho);
+      document.removeEventListener("mousedown", ClickForaCarrinho);
     };
   }, [isCartVisible]);
 
@@ -60,12 +60,25 @@ const MarketplaceFinalizarCompraScreen = () => {
     setIsCartVisible(true);
   };
 
+
+  const setarQuantidadeAoExcluir = (novaQuantidade: number) => {
+    setQuantidade(novaQuantidade);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("qtdProduto", `${quantidade}`);
+  }, [quantidade]);
+
   return (
     <>
-      <MarketplaceHeader quantidade={quantidade} />
+      <MarketplaceHeader
+        quantidade={quantidade}
+      />
       <section className={styles.mainContent}>
         {!isSmallScreen && <MenuLateralUsuario />}
-        <FinalizarCompra />
+        <FinalizarCompra
+          setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
+        />
       </section>
       <FooterSollaris />
     </>

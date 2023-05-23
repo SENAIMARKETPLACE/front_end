@@ -29,7 +29,14 @@ import Cart from 'components/orderFormStepper/Cart';
 import Identification from 'components/orderFormStepper/Identification';
 import Payment from 'components/orderFormStepper/Payment';
 
-export default function FinalizarCompra() {
+
+interface FinalizarCompraProps {
+  setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void
+}
+
+
+
+export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: FinalizarCompraProps) {
   const [active, setActive] = useState(0);
   
 
@@ -59,7 +66,7 @@ export default function FinalizarCompra() {
           label="Carrinho"
           mr="xl"
         >
-          <Cart nextStep={nextStep} />
+          <Cart setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps} nextStep={nextStep} />
         </Stepper.Step>
 
         {/* ETAPA 2 - IDENTIFICAÇÃO */}
