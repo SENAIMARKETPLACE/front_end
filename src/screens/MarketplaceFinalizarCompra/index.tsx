@@ -60,7 +60,6 @@ const MarketplaceFinalizarCompraScreen = () => {
     setIsCartVisible(true);
   };
 
-
   const setarQuantidadeAoExcluir = (novaQuantidade: number) => {
     setQuantidade(novaQuantidade);
   };
@@ -71,11 +70,8 @@ const MarketplaceFinalizarCompraScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader
-        quantidade={quantidade}
-      />
+      <MarketplaceHeader quantidade={quantidade} />
       <section className={styles.mainContent}>
-        {!isSmallScreen && <MenuLateralUsuario />}
         <FinalizarCompra
           setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
         />

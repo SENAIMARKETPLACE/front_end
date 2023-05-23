@@ -1,5 +1,5 @@
 import styles from './FinalizarCompra.module.scss';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Stepper,
   Button,
@@ -28,6 +28,7 @@ import Link from 'next/link';
 import Cart from 'components/orderFormStepper/Cart';
 import Identification from 'components/orderFormStepper/Identification';
 import Payment from 'components/orderFormStepper/Payment';
+import LoadingGif from 'layout/LoadingGif';
 
 
 interface FinalizarCompraProps {
@@ -38,7 +39,21 @@ interface FinalizarCompraProps {
 
 export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: FinalizarCompraProps) {
   const [active, setActive] = useState(0);
-  
+  const [isLoadingPage, setIsLoadingPage] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isLoadingPage]);
+
+  const exibirLoadingPage = (estado: boolean) => {
+    setIsLoadingPage(estado)
+  }  
 
   const form = useForm({
     initialValues: {
@@ -59,14 +74,15 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
 
   return (
     <section className={styles.main}>
-      <Stepper active={active} breakpoint="sm">
+      {isLoadingPage && <LoadingGif/>}
+       <Stepper active={active} breakpoint="sm">
         {/* ETAPA 1 - CARRINHO */}
         <Stepper.Step
           icon={<IconShoppingCart size="1.1rem" />}
           label="Carrinho"
           mr="xl"
         >
-          <Cart setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps} nextStep={nextStep} />
+          <Cart exibirLoadingPageProps={exibirLoadingPage} setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps} nextStep={nextStep} />
         </Stepper.Step>
 
         {/* ETAPA 2 - IDENTIFICAÇÃO */}
@@ -89,7 +105,7 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
         <Stepper.Completed>
           Compra realizada! Talvez adicionar um efeito loading...
         </Stepper.Completed>
-      </Stepper>
+      </Stepper> 
     </section>
   );
 }

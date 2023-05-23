@@ -19,10 +19,11 @@ type CartItemProps = {
   product: IProdutoGet;
   recuperarIdDoProdutoASerExcluidProps: (id: string) => void
   recuperarIdDoProdutoAAlterarProps: (id: string, novaQuantidade: number) => void
+  exibirLoadingPageProps: (estado: boolean) => void
 
 };
 
-export default function CartItem({ product, recuperarIdDoProdutoASerExcluidProps, recuperarIdDoProdutoAAlterarProps }: CartItemProps) {
+export default function CartItem({ product, recuperarIdDoProdutoASerExcluidProps, recuperarIdDoProdutoAAlterarProps, exibirLoadingPageProps}: CartItemProps) {
   const [quantity, setQuantity] = useState(product.quantidadeCarrinho);
   const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(product.preco))
 
