@@ -6,7 +6,7 @@ import MarketplaceHeader from "../../components/MarketplaceProduct/MarketplaceHe
 import ProductView from "../../components/MarketplaceProduct/ProductView";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { httpApiMockada } from "../../http/index";
+import { httpApiMockada, httpProduto } from "../../http/index";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
 import gifLoading from "../../../public/gifs/load.gif";
 
@@ -68,8 +68,8 @@ const MarketplaceProdutoScreen = () => {
 
   const resgataInformacoesProduto = (parametro: string | string[]) => {
     if (parametro) {
-      httpApiMockada
-        .get(`produto-get/${parametro}`)
+      httpProduto
+        .get(`api/products/${parametro}`)
         .then((response) => {
           setProduto(response.data);
         })

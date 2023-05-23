@@ -126,8 +126,8 @@ const FormCadastroUsuario = () => {
     //   // MULTIPLAS REQUISIÇÕES -> POS
     //   .then((resp) => alert(`${user.nome} criado com sucesso`))
     //   .catch((err) => alert("Deu Ruim"))
-    httpApiMockada
-      .post('usuarios', user)
+    httpUsuario
+      .post('/api/users', user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => {
         {
@@ -231,7 +231,6 @@ const FormCadastroUsuario = () => {
                   color="success"
                   type="submit"
                   onClick={nextStep}
-                  disabled={isDisabled}
                   className={styles.btn}
                 >
                   <span>PRÓXIMO</span>

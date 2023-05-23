@@ -79,6 +79,11 @@ const FormCadastroEmpresa = () => {
     }
   };
 
+  
+  const removeSpecialCaracteres = (campoInformado: string) => {
+    return campoInformado.replace(/[,!()-./]/g, '').replaceAll(' ', '');
+  };
+
   // Está sendo usado?
   // const exibirDadosCapturados = (e: React.MouseEvent<HTMLButtonElement>): void => {
   //   e.preventDefault();
@@ -105,13 +110,13 @@ const FormCadastroEmpresa = () => {
       nome_proprietario: dados.nome_proprietario,
       nome_fantasia: dados.nome_fantasia,
       razao_social: dados.razao_social,
-      cnpj: dados.cnpj,
-      telefone: dados.telefone,
+      cnpj: removeSpecialCaracteres(dados.cnpj),
+      telefone: removeSpecialCaracteres(dados.telefone),
       email: dados.email,
       url_logo: dados.url_logo,
       senha: dados.senha,
       endereco: {
-        cep: dados.cep,
+        cep: removeSpecialCaracteres(dados.cep),
         logradouro: dados.logradouro,
         numero: dados.numero,
         bairro: dados.bairro,
@@ -121,12 +126,8 @@ const FormCadastroEmpresa = () => {
       },
     };
 
-    // Está sendo usado?
-    // httpEmpresa.post('/api/business', empresa)
-    // .then((resp) => alert(`${empresa.nome_fantasia} cadastrada com sucesso!`))
-    // .catch((error) => alert("Deu Ruim"))
-    httpApiMockada
-      .post('empresas', empresa)
+    httpEmpresa
+      .post('/api/business', empresa)
       .then((resp) => {
         setOpenModalRegister(true);
         setMensagemModal('CADASTRO REALIZADO COM SUCESSO!');

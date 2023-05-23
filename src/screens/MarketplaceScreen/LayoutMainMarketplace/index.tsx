@@ -4,7 +4,7 @@ import styles from "./LayoutMainMarketplace.module.scss";
 import UsuarioProduto from "components/UsuarioProduto";
 import { useEffect, useState } from "react";
 import Banner from "../../../../public/images/banner_user.png";
-import { httpApiMockada } from "../../../http/index";
+import { httpApiMockada, httpProduto } from "../../../http/index";
 
 
 const LayoutMainMarketPlace = () => {
@@ -17,9 +17,9 @@ const LayoutMainMarketPlace = () => {
   
   async function getProducts() {
     try {
-      const response = await httpApiMockada.get("produto-get");
+      const response = await httpProduto.get("/api/products");
       console.log(response);
-      setProducts(response.data);
+      setProducts(response.data.content);
       console.log(products);
     } catch (error) {
       console.error(error);
