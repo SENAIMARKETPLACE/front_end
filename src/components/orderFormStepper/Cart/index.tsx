@@ -1,7 +1,7 @@
 import { Table, Group, Button } from "@mantine/core";
 import CartItem from "./CartItem";
 import styles from "./Cart.module.scss";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
 
 interface props {
@@ -14,6 +14,8 @@ const Cart = ({ nextStep, setarQuantidadeAoExcluirProps }: props) => {
     IProdutoGet[]
   >([]);
   const [idAExcluir, setIdAExcluir] = useState("0");
+  const [idAAlterar, setIdAAlterar] = useState("0"); 
+  const [novaQuantidade, setNovaQuantidade] = useState(0);
 
 
   useEffect(() => {
@@ -52,7 +54,38 @@ const Cart = ({ nextStep, setarQuantidadeAoExcluirProps }: props) => {
     setIdAExcluir(id)
   }
 
+
+
+
+  // ARROW FUNCTION PARA RESGATAR ID DO PRODUTO QUE TERÁ A PROPRIEDADE QUANTIDADE ALTERADA
+  const recuperarIdDoProdutoAAlterar = (id: string, novaQuantidade: number) => {
+    setIdAAlterar(id)
+    setNovaQuantidade(novaQuantidade)
+  }
+
+
+  // USEEFFECT PARA SER GATILHO EM TODAS AS VEZES QUE A VARIÁVEL "idAAlterar" e  "novaQuantidade" FOR ALTERADA.
+  
+
+  useEffect(() => {
+    if(idAAlterar != "0"){
+      const carrinhoAtualizado = arrayProdutosDesejados.map(obj => {
+        if(obj.id === idAAlterar){
+          return { ...obj, quantidadeCarrinho: novaQuantidade}
+        }
+        return obj
+      })
+      setArrayProdutosDesejados(carrinhoAtualizado)
+
+      const carrinhoString = JSON.stringify(carrinhoAtualizado); 
+      localStorage.setItem("productsInCart", carrinhoString)
+    }
+  }, [idAAlterar, novaQuantidade])
+
+
+
   // USEEFFECT PARA SER GATILHO EM TODAS AS VEZES QUE A VARIÁVEL "idAExcluir" FOR ALTERADA. 
+  
 
   useEffect(() => {
     if (idAExcluir != "0") {
@@ -60,7 +93,6 @@ const Cart = ({ nextStep, setarQuantidadeAoExcluirProps }: props) => {
         (produto) => produto.id != idAExcluir
       );
       setArrayProdutosDesejados(carrinhoAtualizado);
-
       const carrinhoString = JSON.stringify(carrinhoAtualizado);
       localStorage.setItem("productsInCart", carrinhoString);
     }
@@ -100,7 +132,7 @@ const Cart = ({ nextStep, setarQuantidadeAoExcluirProps }: props) => {
         </thead>
         <tbody>
           {arrayProdutosDesejados.map((product) => (
-            <CartItem recuperarIdDoProdutoASerExcluidProps={recuperarIdDoProdutoASerExcluido} key={product.id} product={product} />
+            <CartItem recuperarIdDoProdutoAAlterarProps={recuperarIdDoProdutoAAlterar} recuperarIdDoProdutoASerExcluidProps={recuperarIdDoProdutoASerExcluido} key={product.id} product={product} />
           ))}
 
           <tr className={styles.table__total}>

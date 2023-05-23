@@ -1,6 +1,6 @@
 import { ActionIcon, Group, NumberInput, rem } from '@mantine/core';
 import styles from './CartItem.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IProdutoGet } from 'compartilhado/IProdutoGet';
 import styled from 'styled-components';
@@ -18,9 +18,11 @@ type Product = {
 type CartItemProps = {
   product: IProdutoGet;
   recuperarIdDoProdutoASerExcluidProps: (id: string) => void
+  recuperarIdDoProdutoAAlterarProps: (id: string, novaQuantidade: number) => void
+
 };
 
-export default function CartItem({ product, recuperarIdDoProdutoASerExcluidProps }: CartItemProps) {
+export default function CartItem({ product, recuperarIdDoProdutoASerExcluidProps, recuperarIdDoProdutoAAlterarProps }: CartItemProps) {
   const [quantity, setQuantity] = useState(product.quantidadeCarrinho);
   const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(product.preco))
 
@@ -43,21 +45,28 @@ export default function CartItem({ product, recuperarIdDoProdutoASerExcluidProps
     }
   `;
 
-
-
-
-  
-
-
+  // SUBTRAIR QUANTIDADE
   const handleDecrease = () => {
     if (quantity > 0) {
-      setQuantity(quantity - 1);
+      setQuantity(prevQuantity => prevQuantity - 1);
     }
+
   };
 
+
+  //ACRESCENTAR QUANTIDADE
   const handleIncrease = () => {
-    setQuantity(quantity + 1);
+    setQuantity(prevQuantity => prevQuantity + 1);
   };
+
+
+  useEffect(() => {
+    recuperarIdDoProdutoAAlterarProps(product.id, quantity)
+    if(quantity == 0){
+      recuperarIdDoProdutoASerExcluidProps(product.id)
+    }
+
+  }, [quantity])
 
   return (
     <tr key={product.id} className={styles.product}>
