@@ -1,17 +1,26 @@
 import { Table, Group, Button } from "@mantine/core";
 import CartItem from "./CartItem";
 import styles from "./Cart.module.scss";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
 
 interface props {
   nextStep: any;
+  setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
+  exibirLoadingPageProps: (estado: boolean) => void;
 }
 
-const Cart = ({ nextStep }: props) => {
+const Cart = ({
+  nextStep,
+  setarQuantidadeAoExcluirProps,
+  exibirLoadingPageProps,
+}: props) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
   >([]);
+  const [idAExcluir, setIdAExcluir] = useState("0");
+  const [idAAlterar, setIdAAlterar] = useState("0");
+  const [novaQuantidade, setNovaQuantidade] = useState(0);
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -27,7 +36,64 @@ const Cart = ({ nextStep }: props) => {
     }
   }, []);
 
+  const recalcularQuantidade = () => {
+    let quantidadeTemp = 0;
+    arrayProdutosDesejados.forEach((produto) => {
+      quantidadeTemp += produto.quantidadeCarrinho;
+    });
 
+    return quantidadeTemp;
+  };
+
+  useEffect(() => {
+    const novoValor = recalcularQuantidade();
+    setarQuantidadeAoExcluirProps(novoValor);
+  }, [arrayProdutosDesejados]);
+
+  // ARROW FUNCTION PARA RESGATAR ID_PRODUTO A SER EXCLUIDO DO LOCALSTORAGE PELO COMPONENTE FILHO
+  const recuperarIdDoProdutoASerExcluido = (id: string) => {
+    exibirLoadingPageProps(true);
+    setIdAExcluir(id);
+  };
+
+  // ARROW FUNCTION PARA RESGATAR ID DO PRODUTO QUE TERÁ A PROPRIEDADE QUANTIDADE ALTERADA
+  const recuperarIdDoProdutoAAlterar = (id: string, novaQuantidade: number) => {
+    exibirLoadingPageProps(true);
+    setIdAAlterar(id);
+    setNovaQuantidade(novaQuantidade);
+  };
+
+  // USEEFFECT PARA SER GATILHO EM TODAS AS VEZES QUE A VARIÁVEL "idAAlterar" e  "novaQuantidade" FOR ALTERADA.
+
+  useEffect(() => {
+    if (idAAlterar != "0") {
+      exibirLoadingPageProps(true);
+      const carrinhoAtualizado = arrayProdutosDesejados.map((obj) => {
+        if (obj.id === idAAlterar) {
+          return { ...obj, quantidadeCarrinho: novaQuantidade };
+        }
+        return obj;
+      });
+      setArrayProdutosDesejados(carrinhoAtualizado);
+      const carrinhoString = JSON.stringify(carrinhoAtualizado);
+      localStorage.setItem("productsInCart", carrinhoString);
+    }
+  }, [idAAlterar, novaQuantidade]);
+
+  // USEEFFECT PARA SER GATILHO EM TODAS AS VEZES QUE A VARIÁVEL "idAExcluir" FOR ALTERADA.
+
+  useEffect(() => {
+    if (idAExcluir != "0") {
+      const carrinhoAtualizado = arrayProdutosDesejados.filter(
+        (produto) => produto.id != idAExcluir
+      );
+      setArrayProdutosDesejados(carrinhoAtualizado);
+      const carrinhoString = JSON.stringify(carrinhoAtualizado);
+      localStorage.setItem("productsInCart", carrinhoString);
+    }
+  }, [idAExcluir]);
+
+  // CALCULA O VALOR E EXIBE AUTOMATICAMENTE FORMATADO
   const calcularOValorTotal = () => {
     let somaTotal = 0.0;
     let valorFormatado = "";
@@ -54,18 +120,26 @@ const Cart = ({ nextStep }: props) => {
             <th></th>
             <th className={styles.th__amount}>Quantidade</th>
             <th className={styles.th__price}>Valor Unitário</th>
-            <th>Valor Total</th>
+            <th>Valor Total: </th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {arrayProdutosDesejados.map((product) => (
-            <CartItem key={product.id} product={product} />
+            <CartItem
+              exibirLoadingPageProps={exibirLoadingPageProps}
+              recuperarIdDoProdutoAAlterarProps={recuperarIdDoProdutoAAlterar}
+              recuperarIdDoProdutoASerExcluidProps={
+                recuperarIdDoProdutoASerExcluido
+              }
+              key={product.id}
+              product={product}
+            />
           ))}
 
           <tr className={styles.table__total}>
             <td className={styles.total__label} colSpan={4}>
-              Total:
+              Subtotal:
             </td>
             <td className={styles.total__price} colSpan={2}>
               {calcularOValorTotal()}
