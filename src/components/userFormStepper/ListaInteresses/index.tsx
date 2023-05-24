@@ -55,14 +55,14 @@ const ListaInteresses = ({ data }: ListaInteressesProps) => {
     <div className={styles.camposCadastro}>
       <InteressesButton
         value="5"
-        id="acessorios"
+        id="5"
         className={styles.camposCadastro__acessorios}
         onClick={(e) => ativarButton(e)}
       >
         Acessórios
       </InteressesButton>
       <InteressesButton
-        id="suplementos"
+        id="3"
         className={
           styles.camposCadastro__suplementos +
           " " +
@@ -77,7 +77,7 @@ const ListaInteresses = ({ data }: ListaInteressesProps) => {
         className={
           styles.camposCadastro__esportes + " " + styles.camposCadastro__butons
         }
-        id="esportes"
+        id="4"
         value="4"  
         onClick={(e) => ativarButton(e)}
       >
@@ -86,7 +86,7 @@ const ListaInteresses = ({ data }: ListaInteressesProps) => {
       <InteressesButton
         className={styles.camposCadastro__roupas}
         value="1"
-        id="roupas"
+        id="1"
         onClick={(e) => ativarButton(e)}
       >
         Roupas
@@ -94,7 +94,7 @@ const ListaInteresses = ({ data }: ListaInteressesProps) => {
       <InteressesButton
         className={styles.camposCadastro__calcados}
         value="2"
-        id="calcados"
+        id="2"
         onClick={(e) => ativarButton(e)}
       >
         Calçados

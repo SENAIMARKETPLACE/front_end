@@ -122,7 +122,7 @@ const MarketplaceProdutoScreen = () => {
           />
           {!produto || !showLoading ? (
             <div className={styles.marketplace__loadingAnimation}>
-              <img src={gifLoading.src} alt="Loading Gif" />
+              <img src={gifLoading.src} alt="Loading Gif"/>
             </div>
           ) : (
             <ProductView

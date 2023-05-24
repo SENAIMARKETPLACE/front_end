@@ -44,7 +44,7 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoadingPage(false);
-    }, 3000);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
