@@ -68,8 +68,8 @@ const MarketplaceProdutoScreen = () => {
 
   const resgataInformacoesProduto = (parametro: string | string[]) => {
     if (parametro) {
-      httpProduto
-        .get(`api/products/${parametro}`)
+    httpApiMockada
+        .get(`produto-get/${parametro}`)
         .then((response) => {
           setProduto(response.data);
         })

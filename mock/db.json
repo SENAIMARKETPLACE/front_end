@@ -360,6 +360,31 @@
     },
     {
       "id": 8,
+      "nome": "CAMISA 2 CR FLAMENGO 23/24",
+      "descricao": "NÃO APLICA TROCAS, DEVOLUÇÕES E DESCONTOS Se este item for personalizado, não se aplica à nossa política de troca e devolução. Além disso este produto não está apto para nenhum tipo de promoção.",
+      "preco": 349.99,
+      "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6b10d618a7a647cf9747afbb00af1bb0_9366/Camisa_2_CR_Flamengo_23-24_Branco_HS5193_21_model.jpg",
+      "publico": "MASCULINO",
+      "categoria": {
+        "id": 4,
+        "nome": "Esportes",
+        "sub_categoria": {
+          "id": 22,
+          "nome": "Corrida"
+        }
+      },
+      "detalhes_dos_produtos": [
+        {
+          "id": 1,
+          "tamanho": "70cm",
+          "peso": "150gr",
+          "cor": "#902626 #ffffff",
+          "quantidade": "1000"
+        }
+      ]
+    },
+    {
+      "id": 8,
       "nome": "Tênis Nike Air Max Excee Feminino",
       "descricao": "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
       "img": "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",

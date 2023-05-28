@@ -8,12 +8,15 @@ interface props {
   nextStep: any;
   setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
   exibirLoadingPageProps: (estado: boolean) => void;
+  setarValorTotalCompraProps: (valorTotal: string) => void;
 }
 
 const Cart = ({
   nextStep,
   setarQuantidadeAoExcluirProps,
   exibirLoadingPageProps,
+  setarValorTotalCompraProps
+
 }: props) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
@@ -106,6 +109,8 @@ const Cart = ({
         style: "currency",
         currency: "BRL",
       });
+      let valor = valorFormatado
+      setarValorTotalCompraProps(valor)
     });
 
     return valorFormatado;

@@ -29,6 +29,7 @@ import Cart from 'components/orderFormStepper/Cart';
 import Identification from 'components/orderFormStepper/Identification';
 import Payment from 'components/orderFormStepper/Payment';
 import LoadingGif from 'layout/LoadingGif';
+import CartFinish from 'components/orderFormStepper/Cart/CartFinish';
 
 
 interface FinalizarCompraProps {
@@ -41,10 +42,22 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
   const [active, setActive] = useState(0);
   const [isLoadingPage, setIsLoadingPage] = useState(true);
 
+
+
+
+  const [precoTotal, setPrecoTotal] = useState("0.0");
+
+
+  const setarPrecoTotal = (valorTotal: string) => {
+    setPrecoTotal(valorTotal)
+  }
+
+
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoadingPage(false);
-    }, 500);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
@@ -82,7 +95,7 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
           label="Carrinho"
           mr="xl"
         >
-          <Cart exibirLoadingPageProps={exibirLoadingPage} setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps} nextStep={nextStep} />
+          <Cart setarValorTotalCompraProps={setarPrecoTotal} exibirLoadingPageProps={exibirLoadingPage} setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps} nextStep={nextStep} />
         </Stepper.Step>
 
         {/* ETAPA 2 - IDENTIFICAÇÃO */}
@@ -91,7 +104,7 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
           label="Identificação"
           mr="xl"
         >
-          <Identification prevStep={prevStep} nextStep={nextStep} />
+          <Identification valorTotal={precoTotal} prevStep={prevStep} nextStep={nextStep} />
         </Stepper.Step>
 
         {/* ETAPA 3 - PAGAMENTO */}
@@ -99,11 +112,11 @@ export default function FinalizarCompra({setarQuantidadeAoExcluirProps}: Finaliz
           icon={<IconBrandCashapp size="1.1rem" />}
           label="Pagamento"
         >
-          <Payment prevStep={prevStep} nextStep={nextStep} />
+          <Payment valorTotal={precoTotal}  prevStep={prevStep} nextStep={nextStep} />
         </Stepper.Step>
 
         <Stepper.Completed>
-          Compra realizada! Talvez adicionar um efeito loading...
+          <CartFinish/>
         </Stepper.Completed>
       </Stepper> 
     </section>
