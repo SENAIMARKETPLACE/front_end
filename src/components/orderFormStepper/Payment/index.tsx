@@ -6,9 +6,10 @@ import PaymentPreview from '../Identification/PaymentPreview';
 interface props {
   prevStep: any;
   nextStep: any;
+  valorTotal: string
 }
 
-const Payment = ({ prevStep, nextStep }: props) => {
+const Payment = ({ prevStep, nextStep, valorTotal }: props) => {
   return (
     <div className={styles.container}>
       <ProductPreview />
@@ -17,7 +18,7 @@ const Payment = ({ prevStep, nextStep }: props) => {
         nextStep={nextStep}
         overlay={true}
       />
-      <PaymentPreview prevStep={prevStep} nextStep={nextStep} overlay={false} />
+      <PaymentPreview valorTotal={valorTotal} prevStep={prevStep} nextStep={nextStep} overlay={false} />
     </div>
   );
 };

@@ -40,9 +40,11 @@ interface props {
   prevStep: any;
   nextStep: any;
   overlay: boolean;
+  valorTotal: string;
+
 }
 
-const PaymentPreview = ({ prevStep, nextStep, overlay }: props) => {
+const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal }: props) => {
   return (
     <>
       <AspectRatio
@@ -152,16 +154,16 @@ const PaymentPreview = ({ prevStep, nextStep, overlay }: props) => {
           <h4>Resumo</h4>
           <ul className={styles.payment__resumeList}>
             <li>
-              Valor dos produtos <span>RS {'1479,55'}</span>
+              Valor dos produtos: {valorTotal}
             </li>
             <li>
               Frete: <span>Grátis</span>
             </li>
             <li>
-              Desconto: <span>R$ {'0,00'}</span>
+              Desconto: -
             </li>
             <li>
-              Total: <span>R$ {'1479,55'}</span>
+              Total: {valorTotal}
             </li>
           </ul>
           <Group position="apart" mt={'xl'}>

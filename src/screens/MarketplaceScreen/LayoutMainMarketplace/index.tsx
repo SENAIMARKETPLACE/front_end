@@ -17,9 +17,9 @@ const LayoutMainMarketPlace = () => {
   
   async function getProducts() {
     try {
-      const response = await httpProduto.get("/api/products");
+      const response = await httpApiMockada.get("produto-get");
       console.log(response);
-      setProducts(response.data.content);
+      setProducts(response.data);
       console.log(products);
     } catch (error) {
       console.error(error);
