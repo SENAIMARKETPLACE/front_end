@@ -1,15 +1,30 @@
-import { Avatar } from "@mui/material";
-import MiniSearchBar from "../../MiniSearchBar";
-import styles from "./MarketplaceHeader.module.scss";
-import { IoIosArrowDropleftCircle } from "react-icons/io";
-import { useEffect, useRef, useState } from "react";
-import Carrinho from "components/Carrinho";
-import { BsBag } from "react-icons/bs";
-import { IProdutoGet } from "compartilhado/IProdutoGet";
-import { useRouter } from "next/router";
-import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { Avatar } from '@mui/material';
+import MiniSearchBar from '../../MiniSearchBar';
+import styles from './MarketplaceHeader.module.scss';
+import { IoIosArrowDropleftCircle } from 'react-icons/io';
+import { useEffect, useRef, useState } from 'react';
+import Carrinho from 'components/Carrinho';
+import { BsBag } from 'react-icons/bs';
+import { IProdutoGet } from 'compartilhado/IProdutoGet';
+import { useRouter } from 'next/router';
+import { MdOutlineArrowBackIosNew } from 'react-icons/md';
+import { useDisclosure } from '@mantine/hooks';
+import { Burger } from '@mantine/core';
+import AvatarIcon from 'components/Avatar';
+import {
+  IconHome2,
+  IconGauge,
+  IconDeviceDesktopAnalytics,
+  IconFingerprint,
+  IconCalendarStats,
+  IconUser,
+  IconSettings,
+  IconLogout,
+  IconHeart,
+} from '@tabler/icons-react';
 
 interface MarketplaceHeaderProps {
+  isLogged: boolean;
   quantidade: number;
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos?: (novoArray: IProdutoGet[]) => void;
@@ -21,10 +36,14 @@ const MarketplaceHeader = ({
   produtoDesejadoNoCarrinho,
   setarListaProdutos,
   setarQuantidade,
+  isLogged,
 }: MarketplaceHeaderProps) => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const router = useRouter();
   const { id } = router.query;
+
+  const [opened, { toggle }] = useDisclosure(false);
+  const label = opened ? 'Close navigation' : 'Open navigation';
 
   const voltarPaginaAnterior = () => {
     router.back();
@@ -47,12 +66,12 @@ const MarketplaceHeader = ({
 
   useEffect(() => {
     if (isCartVisible) {
-      document.addEventListener("mousedown", ClickForaCarrinho);
+      document.addEventListener('mousedown', ClickForaCarrinho);
     } else {
-      document.removeEventListener("mousedown", ClickForaCarrinho);
+      document.removeEventListener('mousedown', ClickForaCarrinho);
     }
     return () => {
-      document.removeEventListener("mousedown", ClickForaCarrinho);
+      document.removeEventListener('mousedown', ClickForaCarrinho);
     };
   }, [isCartVisible]);
 
@@ -62,9 +81,15 @@ const MarketplaceHeader = ({
 
   return (
     <header className={styles.header}>
-      {id && (
-        <button onClick={voltarPaginaAnterior} className={styles.buttonCart__returnAPage}><MdOutlineArrowBackIosNew/></button>
-      )}
+      <div className={styles.header__rightIcons}>
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          aria-label={label}
+          size={'sm'}
+          color="#5f78e7"
+        />
+      </div>
       <div ref={carrinhoRef}>
         {isCartVisible ? (
           <Carrinho
@@ -75,12 +100,12 @@ const MarketplaceHeader = ({
             produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
           />
         ) : (
-          ""
+          ''
         )}
       </div>
       <div className={styles.searchbar_and_avatar}>
         <MiniSearchBar />
-        <Avatar className={styles.buttonCart__avatar} />
+        <AvatarIcon isLogged={isLogged} />
         <button onClick={acionarCarrinho} className={styles.buttonCart}>
           <BsBag />
           <span className={styles.buttonCart__quantidadeProdutos}>

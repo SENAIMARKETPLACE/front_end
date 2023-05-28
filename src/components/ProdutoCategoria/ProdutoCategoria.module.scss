@@ -1,22 +1,28 @@
+@import '/src/styles/brand';
+
 .category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  padding: 16px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 10px;
+  background-color: #7889d8;
+  cursor: pointer;
+
+  .avatars,
+  .text {
+    padding: 10px;
+  }
+
+  .avatars {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: max-content;
-    padding: 16px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: 10px;
+  }
 
-    .avatars, .text {
-        padding: 10px;
-    }
-
-    .avatars {
-        display: flex;
-        border-right: 2px solid black;
-    }
-    
-    .text {
-        font-size: 13px
-    }
+  .text {
+    color: white;
+    border-left: 2px solid white;
+    font-size: 13px;
+  }
 }
