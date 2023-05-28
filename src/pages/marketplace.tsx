@@ -1,8 +1,6 @@
-import MarketplaceScreen from "../screens/MarketplaceScreen";
+import MarketplaceScreen from '../screens/MarketplaceScreen';
 
 const Marketplace = () => {
-    return(
-        <MarketplaceScreen />
-    )
-}
-export default Marketplace; 
+  return <MarketplaceScreen />;
+};
+export default Marketplace;

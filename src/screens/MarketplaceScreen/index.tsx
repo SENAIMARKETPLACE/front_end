@@ -15,9 +15,10 @@ import { MdShoppingCart } from 'react-icons/md';
 import { BsBag } from 'react-icons/bs';
 import Carrinho from '../../components/Carrinho';
 import MarketplaceHeader from 'components/MarketplaceProduct/MarketplaceHeader';
-import LayoutMainMarketPlace from './LayoutMainMarketplace';
 import Link from 'next/link';
 import MarketplaceProduto from 'pages/marketplace-produto/[id]';
+import LayoutMarketplace from 'layout/LayoutMarketplace';
+import MarketplaceHome from 'screens/MarketplaceHome';
 
 const MarketplaceScreen = () => {
   const [products, setProducts] = useState([]);
@@ -56,19 +57,14 @@ const MarketplaceScreen = () => {
     };
   }, [isCartVisible]);
 
-
- 
- 
   // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
   const setarQuantidadeFuncao = (novaQuantidade: number) => {
-    setQuantidade(novaQuantidade)
-    
-  }
+    setQuantidade(novaQuantidade);
+  };
 
   useEffect(() => {
-    localStorage.setItem("qtdProduto", `${quantidade}`);
-  }, [quantidade])
-
+    localStorage.setItem('qtdProduto', `${quantidade}`);
+  }, [quantidade]);
 
   const acionarCarrinho = () => {
     setIsCartVisible(true);
@@ -76,13 +72,18 @@ const MarketplaceScreen = () => {
 
   return (
     <>
-
-      <MarketplaceHeader quantidade={quantidade} setarQuantidade={setarQuantidadeFuncao}/>
+      <LayoutMarketplace>
+        <MarketplaceHome />
+      </LayoutMarketplace>
+      {/* <MarketplaceHeader
+        quantidade={quantidade}
+        setarQuantidade={setarQuantidadeFuncao}
+      />
       <section className={styles.mainContent}>
         <MenuLateralUsuario />
         <LayoutMainMarketPlace />
       </section>
-      <FooterSollaris />
+      <FooterSollaris /> */}
     </>
   );
 };

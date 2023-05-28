@@ -1,0 +1,22 @@
+@import '/src/styles/brand';
+
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  width: 84px;
+  padding: 28px 14px;
+
+  @media (max-width: 850px) {
+    display: none;
+  }
+  // background-color: map-get($map: $colors, $key: gray-100);
+
+  &__logo {
+    // padding-top: 30px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}

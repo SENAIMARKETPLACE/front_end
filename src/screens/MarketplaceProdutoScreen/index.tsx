@@ -1,30 +1,28 @@
-import MenuLateralUsuario from "../../patterns/MenuLateralUsuario";
-import styles from "./MartketplaceProduto.module.scss";
-import "swiper/css";
-import FooterSollaris from "../../layout/Footer";
-import MarketplaceHeader from "../../components/MarketplaceProduct/MarketplaceHeader";
-import ProductView from "../../components/MarketplaceProduct/ProductView";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { httpApiMockada, httpProduto } from "../../http/index";
-import { IProdutoGet } from "compartilhado/IProdutoGet";
-import gifLoading from "../../../public/gifs/load.gif";
+import MenuLateralUsuario from '../../patterns/MenuLateralUsuario';
+import styles from './MartketplaceProduto.module.scss';
+import 'swiper/css';
+import FooterSollaris from '../../layout/Footer';
+import MarketplaceHeader from '../../components/MarketplaceProduct/MarketplaceHeader';
+import ProductView from '../../components/MarketplaceProduct/ProductView';
+import { useEffect, useState } from 'react';
+import { httpApiMockada, httpProduto } from '../../http/index';
+import { IProdutoGet } from 'compartilhado/IProdutoGet';
+import gifLoading from '../../../public/gifs/load.gif';
+import { MdOutlineArrowBackIosNew } from 'react-icons/md';
+import { useRouter } from 'next/router';
 
 const MarketplaceProdutoScreen = () => {
   const [produto, setProduto] = useState<IProdutoGet>();
-  const [produtoAserAdicionado, setProdutoAserAdicionado] = useState<
-    IProdutoGet
-  >();
+  const [produtoAserAdicionado, setProdutoAserAdicionado] =
+    useState<IProdutoGet>();
   const router = useRouter();
   const [showLoading, setShowLoading] = useState(false);
   const id = router.query.id;
   const [quantidade, setQuantidade] = useState(0);
 
-
   const [arrayProdutosCarrinhoLS, setArrayProdutosCarrinhoLS] = useState<
     IProdutoGet[]
   >([]);
-
 
   //ATUALIZAR ESSE STATE APÓS DELETAR UM PRODUTO DO CARRINHO
   const setarNovoArrayProdutos = (novoArray: IProdutoGet[]) => {
@@ -33,15 +31,13 @@ const MarketplaceProdutoScreen = () => {
 
   // RECALCULAR QUANTIDADE AO EXCLUIR DO CARRINHO
   const setarQuantidadeFuncao = (novaQuantidade: number) => {
-    setQuantidade(novaQuantidade)
-  }
-
-  
+    setQuantidade(novaQuantidade);
+  };
 
   const enviarProdutoAoCarrinho = (produto: IProdutoGet) => {
     if (arrayProdutosCarrinhoLS) {
       const arrayTemp = [...arrayProdutosCarrinhoLS]; // Certifique-se de que arrayProdutosCarrinhoLS seja um array
-      console.log(arrayTemp)
+      console.log(arrayTemp);
       const existeProduto = arrayProdutosCarrinhoLS.find(
         (item) => item.id === produto.id
       );
@@ -68,8 +64,8 @@ const MarketplaceProdutoScreen = () => {
 
   const resgataInformacoesProduto = (parametro: string | string[]) => {
     if (parametro) {
-      httpProduto
-        .get(`api/products/${parametro}`)
+      httpApiMockada
+        .get(`/produto-get/${parametro}`)
         .then((response) => {
           setProduto(response.data);
         })
@@ -79,10 +75,10 @@ const MarketplaceProdutoScreen = () => {
 
   useEffect(() => {
     resgataInformacoesProduto(id);
-    if (typeof localStorage !== "undefined") {
-      const storedQuantity = localStorage.getItem("qtdProduto");
+    if (typeof localStorage !== 'undefined') {
+      const storedQuantity = localStorage.getItem('qtdProduto');
       const storedProductsInCart = JSON.parse(
-        localStorage.getItem("productsInCart")
+        localStorage.getItem('productsInCart')
       );
       if (storedProductsInCart) {
         setArrayProdutosCarrinhoLS(storedProductsInCart);
@@ -94,9 +90,9 @@ const MarketplaceProdutoScreen = () => {
   }, [id]);
 
   useEffect(() => {
-    localStorage.setItem("qtdProduto", `${quantidade}`);
+    localStorage.setItem('qtdProduto', `${quantidade}`);
     localStorage.setItem(
-      "productsInCart",
+      'productsInCart',
       `${JSON.stringify(arrayProdutosCarrinhoLS)}`
     );
     const timeout = setTimeout(() => {
@@ -107,6 +103,10 @@ const MarketplaceProdutoScreen = () => {
       clearTimeout(timeout);
     };
   }, [quantidade]);
+
+  const voltarPaginaAnterior = () => {
+    router.back();
+  };
 
   return (
     <div className={styles.page_container}>
@@ -120,9 +120,16 @@ const MarketplaceProdutoScreen = () => {
             setarQuantidade={setarQuantidadeFuncao}
             setarListaProdutos={setarNovoArrayProdutos}
           />
+          <div className={styles.marketplace__return}>
+            <MdOutlineArrowBackIosNew
+              size={30}
+              onClick={voltarPaginaAnterior}
+              className={styles.marketplace__returnBtn}
+            />
+          </div>
           {!produto || !showLoading ? (
             <div className={styles.marketplace__loadingAnimation}>
-              <img src={gifLoading.src} alt="Loading Gif"/>
+              <img src={gifLoading.src} alt="Loading Gif" />
             </div>
           ) : (
             <ProductView

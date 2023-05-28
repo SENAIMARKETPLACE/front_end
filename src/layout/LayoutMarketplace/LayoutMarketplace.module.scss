@@ -1,3 +1,16 @@
-.mainContent{
-    display: flex;
+@import '/src/styles/brand';
+
+.layout {
+  display: flex;
+  background-color: map-get($map: $colors, $key: gray-100);
+
+  &__content {
+    margin-left: 84px;
+    width: 100%;
+
+    @media (max-width: 850px) {
+      margin-left: 0;
+    }
+    // background-color: red;
+  }
 }
