@@ -19,7 +19,9 @@ const LayoutMarketplace = ({ children }: LayoutMarketplaceProps) => {
         <Sidebar />
         <div className={styles.layout__content}>
           <MarketplaceHeader quantidade={0} isLogged={isLogged} />
-          {children}
+          <section className={styles['layout__content--children']}>
+            {children}
+          </section>
         </div>
       </div>
 

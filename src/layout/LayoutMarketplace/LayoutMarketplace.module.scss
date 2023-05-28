@@ -12,6 +12,10 @@
     @media (max-width: 850px) {
       margin-left: 0;
     }
+
+    &--children {
+      padding: 50px 40px 100px;
+    }
     // background-color: red;
   }
 }
