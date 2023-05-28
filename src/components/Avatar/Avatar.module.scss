@@ -1,0 +1,9 @@
+.avatar {
+  cursor: pointer;
+
+  &__list {
+    a {
+      color: inherit;
+    }
+  }
+}

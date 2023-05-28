@@ -1,26 +1,26 @@
-import styles from "./modalLoginUsuario.module.scss";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Link from "next/link";
-import logo from "../../../../public/images/Logo.svg";
-import { validates } from "util/validations";
-import { useForm } from "@mantine/form";
-import { TextInput, Button, Checkbox, Text, Grid } from "@mantine/core";
-import { PasswordInput } from "@mantine/core";
-import { IconLock, IconAt } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import styles from './modalLoginUsuario.module.scss';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Link from 'next/link';
+import logo from '../../../../public/images/Logo.svg';
+import { validates } from 'util/validations';
+import { useForm } from '@mantine/form';
+import { TextInput, Button, Checkbox, Text, Grid } from '@mantine/core';
+import { PasswordInput } from '@mantine/core';
+import { IconLock, IconAt } from '@tabler/icons-react';
+import { useEffect, useState } from 'react';
 
 const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  height: "90vh",
-  bgcolor: "background.paper",
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  height: '90vh',
+  bgcolor: 'background.paper',
   boxShadow: 24,
-  display: "flex",
+  display: 'flex',
 };
 
 export default function ModalLoginEmpresa() {
@@ -34,13 +34,13 @@ export default function ModalLoginEmpresa() {
 
   const form = useForm({
     validateInputOnBlur: true,
-    initialValues: { email: "", password: "" },
+    initialValues: { email: '', password: '' },
 
     // functions will be used to validate values at corresponding key
     validate: {
-      email: (value) => (validates.email(value) ? null : "E-mail inválido"),
+      email: (value) => (validates.email(value) ? null : 'E-mail inválido'),
       password: (value) =>
-        value.length < 8 ? "A senha deve conter no mínimo 8 caracteres." : null,
+        value.length < 8 ? 'A senha deve conter no mínimo 8 caracteres.' : null,
     },
   });
 
@@ -50,7 +50,7 @@ export default function ModalLoginEmpresa() {
 
   const showAlert = () => {
     alert(
-      "Entre em contato com o administrador para recuperá-la. \nTelefone: (11) 4002-8922 \nE-mail: suport@sollaris.com"
+      'Entre em contato com o administrador para recuperá-la. \nTelefone: (11) 4002-8922 \nE-mail: suport@sollaris.com'
     );
   };
 
@@ -93,7 +93,7 @@ export default function ModalLoginEmpresa() {
                   size="lg"
                   withAsterisk={false}
                   required
-                  {...form.getInputProps("email")}
+                  {...form.getInputProps('email')}
                 />
                 <PasswordInput
                   label="Senha"
@@ -103,7 +103,7 @@ export default function ModalLoginEmpresa() {
                   mt="sm"
                   withAsterisk={false}
                   required
-                  {...form.getInputProps("password")}
+                  {...form.getInputProps('password')}
                 />
                 <div className={styles.modal__leftSide__options}>
                   <Checkbox label="Lembrar minha senha" />

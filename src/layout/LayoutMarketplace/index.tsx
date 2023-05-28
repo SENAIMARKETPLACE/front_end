@@ -1,22 +1,30 @@
-import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
-import FooterSollaris from "layout/Footer";
-import MenuLateralUsuario from "patterns/MenuLateralUsuario";
-import { ReactNode, useMemo } from "react";
-import styles from "./LayoutMarketplace.module.scss";
+import MarketplaceHeader from 'components/MarketplaceProduct/MarketplaceHeader';
+import FooterSollaris from 'layout/Footer';
+import MenuLateralUsuario from 'patterns/MenuLateralUsuario';
+import { ReactNode, useMemo, useState } from 'react';
+import styles from './LayoutMarketplace.module.scss';
+import { AppShell, Navbar, Header } from '@mantine/core';
+import { Sidebar } from 'layout/Sidebar';
 
 interface LayoutMarketplaceProps {
   children: ReactNode;
 }
 
 const LayoutMarketplace = ({ children }: LayoutMarketplaceProps) => {
+  const [isLogged, setIsLogged] = useState(true);
 
   return (
     <>
-      <MarketplaceHeader quantidade={0}/>
-      <section className={styles.mainContent}>
-        <MenuLateralUsuario />
-        {children}
-      </section>
+      <div className={styles.layout}>
+        <Sidebar />
+        <div className={styles.layout__content}>
+          <MarketplaceHeader quantidade={0} isLogged={isLogged} />
+          <section className={styles['layout__content--children']}>
+            {children}
+          </section>
+        </div>
+      </div>
+
       <FooterSollaris />
     </>
   );
