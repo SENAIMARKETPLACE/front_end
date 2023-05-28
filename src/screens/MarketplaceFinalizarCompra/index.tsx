@@ -13,7 +13,7 @@ const MarketplaceFinalizarCompraScreen = () => {
   const ref = useRef();
   const [quantidade, setQuantidade] = useState<number>(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  
   useEffect(() => {
     const storedQuantity = localStorage.getItem("qtdProduto");
     if (storedQuantity) {
@@ -70,7 +70,7 @@ const MarketplaceFinalizarCompraScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader quantidade={quantidade} />
+      <MarketplaceHeader isLogged={true} quantidade={quantidade} />
       <section className={styles.mainContent}>
         <FinalizarCompra
           setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
