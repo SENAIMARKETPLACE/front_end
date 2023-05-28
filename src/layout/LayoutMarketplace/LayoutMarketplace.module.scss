@@ -3,6 +3,7 @@
 .layout {
   display: flex;
   background-color: map-get($map: $colors, $key: gray-100);
+  min-height: calc(100vh - 210px);
 
   &__content {
     margin-left: 84px;
