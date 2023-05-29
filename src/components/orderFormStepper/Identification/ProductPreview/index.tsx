@@ -4,35 +4,14 @@ import { AspectRatio, Overlay, Table } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const products = [
-  {
-    id: 1,
-    nome: 'Camiseta Nike Comum',
-    url: 'https://m.media-amazon.com/images/I/412BRS3YzZL._AC_SY500_.jpg',
-    cor: 'Preta',
-    peso: '100g',
-    tamanho: 'M',
-    price: '199.99',
-  },
-  {
-    id: 2,
-    nome: 'Kit Whey, BCAA e Creatina Integral Médica',
-    url: 'https://cdn.awsli.com.br/800x800/157/157421/produto/43753862/2ab068446a.jpg',
-    cor: 'Vermelha',
-    peso: '1kg',
-    tamanho: 'M',
-    price: '199.99',
-  },
-];
 
 const ProductPreview = () => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
   >([]);
 
- 
-  
 
+  // AQUI VAI TER QUE SER ONDE A LÓGICA DE RESGATAR OS PRODUTOS FICA
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {

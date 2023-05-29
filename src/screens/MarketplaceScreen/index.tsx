@@ -72,7 +72,7 @@ const MarketplaceScreen = () => {
 
   return (
     <>
-      <LayoutMarketplace>
+      <LayoutMarketplace quantidade={quantidade}>
         <MarketplaceHome />
       </LayoutMarketplace>
       {/* <MarketplaceHeader

@@ -7,13 +7,10 @@ import FinalizarCompra from "screens/MarketplaceScreen/FinalizarCompra";
 import MenuLateralUsuario from "patterns/MenuLateralUsuario";
 
 const MarketplaceFinalizarCompraScreen = () => {
-  const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  const [aberto, setAberto] = useState(false);
-  const ref = useRef();
   const [quantidade, setQuantidade] = useState<number>(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  
   useEffect(() => {
     const storedQuantity = localStorage.getItem("qtdProduto");
     if (storedQuantity) {
@@ -45,6 +42,11 @@ const MarketplaceFinalizarCompraScreen = () => {
     }
   }
 
+
+  const setarQuantidadade = (novarQuantidade: number) => {
+    setQuantidade(novarQuantidade);
+  } 
+
   useEffect(() => {
     if (isCartVisible) {
       document.addEventListener("mousedown", ClickForaCarrinho);
@@ -70,9 +72,10 @@ const MarketplaceFinalizarCompraScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader quantidade={quantidade} />
+      <MarketplaceHeader isLogged={true} quantidade={quantidade} />
       <section className={styles.mainContent}>
         <FinalizarCompra
+          
           setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
         />
       </section>

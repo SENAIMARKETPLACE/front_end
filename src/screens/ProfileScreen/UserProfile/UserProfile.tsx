@@ -1,4 +1,6 @@
+
 import UserProfileForm from 'components/ProfileForm/UserProfileForm';
+
 import styles from './UserProfile.module.scss';
 
 const UserProfile = () => {
@@ -6,6 +8,7 @@ const UserProfile = () => {
     <>
       <h1 className={styles.title}>Perfil</h1>
       <UserProfileForm />
+
     </>
   );
 };

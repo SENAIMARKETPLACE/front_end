@@ -9,14 +9,15 @@ interface props {
   setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
   exibirLoadingPageProps: (estado: boolean) => void;
   setarValorTotalCompraProps: (valorTotal: string) => void;
+  atualizarCampoProps: (key: string, value: any) => void;
 }
 
 const Cart = ({
   nextStep,
   setarQuantidadeAoExcluirProps,
   exibirLoadingPageProps,
-  setarValorTotalCompraProps
-
+  setarValorTotalCompraProps,
+  atualizarCampoProps,
 }: props) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
@@ -24,6 +25,7 @@ const Cart = ({
   const [idAExcluir, setIdAExcluir] = useState("0");
   const [idAAlterar, setIdAAlterar] = useState("0");
   const [novaQuantidade, setNovaQuantidade] = useState(0);
+  const [produtosDetalhes, setProdutoDetalhes] = useState<IPedidoProduto[]>([]);
 
   useEffect(() => {
     if (typeof localStorage !== "undefined") {
@@ -38,6 +40,8 @@ const Cart = ({
       }
     }
   }, []);
+
+
 
   const recalcularQuantidade = () => {
     let quantidadeTemp = 0;
@@ -65,6 +69,7 @@ const Cart = ({
     setIdAAlterar(id);
     setNovaQuantidade(novaQuantidade);
   };
+
 
   // USEEFFECT PARA SER GATILHO EM TODAS AS VEZES QUE A VARIÁVEL "idAAlterar" e  "novaQuantidade" FOR ALTERADA.
 
@@ -109,8 +114,8 @@ const Cart = ({
         style: "currency",
         currency: "BRL",
       });
-      let valor = valorFormatado
-      setarValorTotalCompraProps(valor)
+      let valor = valorFormatado;
+      setarValorTotalCompraProps(valor);
     });
 
     return valorFormatado;

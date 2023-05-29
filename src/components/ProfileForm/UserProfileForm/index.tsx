@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import styles from './UserProfileForm.module.scss';
 import { useForm } from '@mantine/form';
@@ -74,6 +75,7 @@ const UserProfileForm = () => {
       </Tabs.Panel>
     </Tabs>
   );
+
 };
 
 export default UserProfileForm;

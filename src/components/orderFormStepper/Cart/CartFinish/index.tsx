@@ -1,12 +1,19 @@
+import LoadingGif from "layout/LoadingGif";
 import styles from "./CartFinish.module.scss";
 import FailedMessage from "./FailedMessage";
 import SucessMessage from "./SucessMessage";
-const CartFinish = () => {
-  const isPurchaseDone = false;
+  
+
+interface CartFinishProps  {
+  isOrderFinished: number; 
+}
+
+
+const CartFinish = ({isOrderFinished}: CartFinishProps) => {
 
   return (
     <div className={styles.mensagemStatus}>
-      {isPurchaseDone ? <SucessMessage /> : <FailedMessage/>}
+      {(isOrderFinished == 0) ? <LoadingGif/> : (isOrderFinished == 1) ? <SucessMessage/> : <FailedMessage/>}
     </div>
   );
 };
