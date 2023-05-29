@@ -1,25 +1,22 @@
-
-
 {
   "login": [],
   "usuarios-get": [
     {
       "id": 1,
-      "data_requisicao":"2023-04-30T20:29:44.2979262",
-      "nome":"Luiz",
-      "genero":"MASCULINO",
-      "img":"https://github.com/joaoabreu004.png",
-      "enderecos":[
-      {
-        "id":2,
-        "cep": "12345668",
-        "logradouro":"Rua Perecleres Filho",
-        "numero":"323x",
-        "estado":"RJ",
-        "bairro":"RJ",
-        "cidade":"Rio de Janeiro"
+      "data_requisicao": "2023-04-30T20:29:44.2979262",
+      "nome": "Luiz",
+      "genero": "MASCULINO",
+      "img": "https://github.com/joaoabreu004.png",
+      "enderecos": [
+        {
+          "id": 2,
+          "cep": "12345668",
+          "logradouro": "Rua Perecleres Filho",
+          "numero": "323x",
+          "estado": "RJ",
+          "bairro": "RJ",
+          "cidade": "Rio de Janeiro"
         }
-
       ]
     }
   ],
@@ -204,6 +201,18 @@
         }
       ],
       "id": 17
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [
+        {
+          "produto_detalhe_id": 4,
+          "quantidade": 2
+        }
+      ],
+      "id": 18
     }
   ],
   "pedidos-get": [],
