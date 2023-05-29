@@ -25,7 +25,7 @@ import {
 
 interface MarketplaceHeaderProps {
   isLogged: boolean;
-  quantidade: number;
+  quantidade?: number;
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos?: (novoArray: IProdutoGet[]) => void;
   setarQuantidade?: (novaQuantidade: number) => void;

@@ -113,6 +113,7 @@ const MarketplaceProdutoScreen = () => {
       <div className={styles.content}>
         <section className={styles.marketplace}>
           <MarketplaceHeader
+            isLogged={true}
             quantidade={quantidade}
             produtoDesejadoNoCarrinho={
               produtoAserAdicionado ? produtoAserAdicionado : undefined

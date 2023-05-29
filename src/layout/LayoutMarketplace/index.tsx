@@ -8,7 +8,7 @@ import { Sidebar } from "layout/Sidebar";
 
 interface LayoutMarketplaceProps {
   children: ReactNode;
-  quantidade: number;
+  quantidade?: number;
 }
 
 const LayoutMarketplace = ({

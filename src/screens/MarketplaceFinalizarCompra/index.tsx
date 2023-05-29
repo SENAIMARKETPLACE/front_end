@@ -45,6 +45,11 @@ const MarketplaceFinalizarCompraScreen = () => {
     }
   }
 
+
+  const setarQuantidadade = (novarQuantidade: number) => {
+    setQuantidade(novarQuantidade);
+  } 
+
   useEffect(() => {
     if (isCartVisible) {
       document.addEventListener("mousedown", ClickForaCarrinho);
@@ -73,6 +78,7 @@ const MarketplaceFinalizarCompraScreen = () => {
       <MarketplaceHeader isLogged={true} quantidade={quantidade} />
       <section className={styles.mainContent}>
         <FinalizarCompra
+          
           setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
         />
       </section>

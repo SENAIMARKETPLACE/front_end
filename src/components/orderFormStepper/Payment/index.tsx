@@ -7,9 +7,10 @@ interface props {
   prevStep: any;
   nextStep: any;
   valorTotal: string
+  setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
 }
 
-const Payment = ({ prevStep, nextStep, valorTotal }: props) => {
+const Payment = ({ prevStep, nextStep, valorTotal, setarQuantidadeAoExcluirProps}: props) => {
   return (
     <div className={styles.container}>
       <ProductPreview />
@@ -18,7 +19,7 @@ const Payment = ({ prevStep, nextStep, valorTotal }: props) => {
         nextStep={nextStep}
         overlay={true}
       />
-      <PaymentPreview valorTotal={valorTotal} prevStep={prevStep} nextStep={nextStep} overlay={false} />
+      <PaymentPreview setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps} valorTotal={valorTotal} prevStep={prevStep} nextStep={nextStep} overlay={false} />
     </div>
   );
 };
