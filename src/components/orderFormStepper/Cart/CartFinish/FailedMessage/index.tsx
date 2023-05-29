@@ -1,5 +1,6 @@
 import styles from "./FailedMessage.module.scss";
 import imageFailed from "../../../../../../public/images/purchaseNotFinished.png";
+import Link from "next/link";
 
 const FailedMessage = () => {
   return (
@@ -20,13 +21,15 @@ const FailedMessage = () => {
       </div>
 
       <div className={styles.mensagemPedido__buttons}>
-        <button
-          className={
-            styles.mensagemPedido__buttons__voltarCompra + " " + styles.buttons
-          }
-        >
-          PÁGINA PRINCIPAL
-        </button>
+        <Link href="/marketplace">
+          <button
+            className={
+              styles.mensagemPedido__buttons__voltarCompra + " " + styles.buttons
+            }
+          >
+            PÁGINA PRINCIPAL
+          </button>
+        </Link>
       </div>
     </div>
   );

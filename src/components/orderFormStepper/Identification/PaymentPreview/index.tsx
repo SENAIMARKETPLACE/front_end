@@ -94,7 +94,6 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
   const cadastrarPedido = (pedidoAPostar: IPedidoPost) => {
     httpApiMockada
       .post("/pedidos-post", pedidoAPostar)
-      .then((response) => alert("PEDIDO CADASTRADO"))
       .then((response) => alterarLocalStorageAposCadastrarPedido())
       .catch((error) => alterIsOrderFinishedProps(2));
   };

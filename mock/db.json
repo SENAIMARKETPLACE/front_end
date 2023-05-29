@@ -116,6 +116,46 @@
       "pagamento_id": "0",
       "produtos_selecionados": [],
       "id": 10
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [],
+      "id": 11
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [],
+      "id": 12
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [],
+      "id": 13
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [],
+      "id": 14
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [
+        {
+          "produto_detalhe_id": 4,
+          "quantidade": 3
+        }
+      ],
+      "id": 15
     }
   ],
   "pedidos-get": [],
