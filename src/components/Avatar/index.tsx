@@ -25,7 +25,10 @@ function Connected() {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <Avatar className={styles.avatar} />
+        <Avatar
+          src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60"
+          className={styles.avatar}
+        />
       </Menu.Target>
 
       <Menu.Dropdown className={styles.avatar__list}>
