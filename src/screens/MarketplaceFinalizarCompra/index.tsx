@@ -7,10 +7,7 @@ import FinalizarCompra from "screens/MarketplaceScreen/FinalizarCompra";
 import MenuLateralUsuario from "patterns/MenuLateralUsuario";
 
 const MarketplaceFinalizarCompraScreen = () => {
-  const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
-  const [aberto, setAberto] = useState(false);
-  const ref = useRef();
   const [quantidade, setQuantidade] = useState<number>(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   

@@ -1,12 +1,18 @@
 import styles from "./CartFinish.module.scss";
 import FailedMessage from "./FailedMessage";
 import SucessMessage from "./SucessMessage";
-const CartFinish = () => {
-  const isPurchaseDone = true;
+  
+
+interface CartFinishProps  {
+  isOrderFinished: number; 
+}
+
+
+const CartFinish = ({isOrderFinished}: CartFinishProps) => {
 
   return (
     <div className={styles.mensagemStatus}>
-      {isPurchaseDone ? <SucessMessage /> : <FailedMessage/>}
+      {(isOrderFinished == 0) ? "" : (isOrderFinished == 1) ? <SucessMessage/> : <FailedMessage/>}
     </div>
   );
 };

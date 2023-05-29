@@ -46,9 +46,10 @@ interface props {
   overlay: boolean;
   valorTotal: string;
   setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
+  alterIsOrderFinishedProps: (newValue: number) => void;
 }
 
-const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantidadeAoExcluirProps}: props) => {
+const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantidadeAoExcluirProps, alterIsOrderFinishedProps}: props) => {
   const [produtosDetalhes, setProdutoDetalhes] = useState<IPedidoProduto[]>([]);
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
@@ -87,14 +88,15 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
     localStorage.removeItem("productsInCart")
     localStorage.setItem("qtdProduto", "0")
     setarQuantidadeAoExcluirProps(0)
+    alterIsOrderFinishedProps(1)
   }
 
   const cadastrarPedido = (pedidoAPostar: IPedidoPost) => {
     httpApiMockada
       .post("/pedidos-post", pedidoAPostar)
-      .then((response) => alert("PRODUTO CADASTRADO"))
+      .then((response) => alert("PEDIDO CADASTRADO"))
       .then((response) => alterarLocalStorageAposCadastrarPedido())
-      .catch((error) => alert("ERRO AO CADASTRAR"));
+      .catch((error) => alterIsOrderFinishedProps(2));
   };
 
   return (

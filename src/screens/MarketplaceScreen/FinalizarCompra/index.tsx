@@ -53,13 +53,17 @@ export default function FinalizarCompra({
   const [active, setActive] = useState(0);
   const [prepararPedido, setPrepararPedido] = useState(pedidoTemplate);
   const [isLoadingPage, setIsLoadingPage] = useState(true);
-  const [pedido, setPedido] = useState<IPedidoPost>();
+  const [isOrderFinished, setIsOrderFinished] = useState(0);
 
   const [precoTotal, setPrecoTotal] = useState("0.0");
 
   const setarPrecoTotal = (valorTotal: string) => {
     setPrecoTotal(valorTotal);
   };
+
+  const alterIsOrderFinished = (newValorTotal: number) => {
+    setIsOrderFinished(newValorTotal);
+  }
 
   useEffect(() => {
     console.log(pedidoTemplate)
@@ -143,6 +147,7 @@ export default function FinalizarCompra({
           label="Pagamento"
         >
           <Payment
+            alterIsOrderFinishedProps={alterIsOrderFinished}
             setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluirProps}
             valorTotal={precoTotal}
             prevStep={prevStep}
@@ -151,7 +156,7 @@ export default function FinalizarCompra({
         </Stepper.Step>
 
         <Stepper.Completed>
-          <CartFinish />
+          <CartFinish isOrderFinished={isOrderFinished}/>
         </Stepper.Completed>
       </Stepper>
     </section>
