@@ -93,7 +93,7 @@ export function Sidebar() {
   const [active, setActive] = useState(0);
 
   const links = mockdata.map((link, index) => (
-    <Link href={link.path}>
+    <Link href={link.path} key={link.label}>
       <NavbarLink
         {...link}
         key={link.label}
