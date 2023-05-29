@@ -31,7 +31,6 @@ const CardProdutoCarrinho = ({
 
 
 
-
   const DivCores = styled.span`
         display: flex;
         justify-content: space-between;

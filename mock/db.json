@@ -1,4 +1,28 @@
+
+
 {
+  "login": [],
+  "usuarios-get": [
+    {
+      "id": 1,
+      "data_requisicao":"2023-04-30T20:29:44.2979262",
+      "nome":"Luiz",
+      "genero":"MASCULINO",
+      "img":"https://github.com/joaoabreu004.png",
+      "enderecos":[
+      {
+        "id":2,
+        "cep": "12345668",
+        "logradouro":"Rua Perecleres Filho",
+        "numero":"323x",
+        "estado":"RJ",
+        "bairro":"RJ",
+        "cidade":"Rio de Janeiro"
+        }
+
+      ]
+    }
+  ],
   "pedidos-post": [
     {
       "usuario_id": "1",
@@ -156,6 +180,30 @@
         }
       ],
       "id": 15
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "0",
+      "produtos_selecionados": [
+        {
+          "produto_detalhe_id": 2,
+          "quantidade": 2
+        }
+      ],
+      "id": 16
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "2",
+      "produtos_selecionados": [
+        {
+          "produto_detalhe_id": 4,
+          "quantidade": 3
+        }
+      ],
+      "id": 17
     }
   ],
   "pedidos-get": [],
