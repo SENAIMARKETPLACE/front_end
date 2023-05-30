@@ -8,9 +8,11 @@ import { BsBag } from 'react-icons/bs';
 import { IProdutoGet } from 'compartilhado/IProdutoGet';
 import { useRouter } from 'next/router';
 import { MdOutlineArrowBackIosNew } from 'react-icons/md';
+import { Burger, Center } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Burger } from '@mantine/core';
+import { Drawer, Group, Button } from '@mantine/core';
 import AvatarIcon from 'components/Avatar';
+import LogoSollaris from '/public/images/logo.svg';
 import {
   IconHome2,
   IconGauge,
@@ -22,6 +24,7 @@ import {
   IconLogout,
   IconHeart,
 } from '@tabler/icons-react';
+import Link from 'next/link';
 
 interface MarketplaceHeaderProps {
   isLogged: boolean;
@@ -31,27 +34,16 @@ interface MarketplaceHeaderProps {
   setarQuantidade?: (novaQuantidade: number) => void;
 }
 
-const MarketplaceHeader = ({
+const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   quantidade,
   produtoDesejadoNoCarrinho,
   setarListaProdutos,
   setarQuantidade,
   isLogged,
-}: MarketplaceHeaderProps) => {
+}) => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-
-  const [opened, { toggle }] = useDisclosure(false);
-  const label = opened ? 'Close navigation' : 'Open navigation';
-
-  const voltarPaginaAnterior = () => {
-    router.back();
-  };
-
-  const acionarCarrinhoPorOutroComponente = (novoEstado: boolean) => {
-    setIsCartVisible(novoEstado);
-  };
 
   const carrinhoRef = useRef<HTMLDivElement>(null);
 
@@ -79,19 +71,28 @@ const MarketplaceHeader = ({
     setIsCartVisible(true);
   };
 
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    setWindowWidth(window.innerWidth);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.header__rightIcons}>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          aria-label={label}
-          size={'sm'}
-          color="#5f78e7"
-        />
+      {windowWidth < 850 && <ResponsiveSideBar />}
       </div>
       <div ref={carrinhoRef}>
-        {isCartVisible ? (
+        {isCartVisible && (
           <Carrinho
             setarQuantidade={setarQuantidade}
             setarListaProdutos={setarListaProdutos}
@@ -99,12 +100,10 @@ const MarketplaceHeader = ({
             isCartAtivado={isCartVisible}
             produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
           />
-        ) : (
-          ''
         )}
       </div>
       <div className={styles.searchbar_and_avatar}>
-        <MiniSearchBar />
+        {windowWidth > 600 && <MiniSearchBar />}
         <AvatarIcon isLogged={isLogged} />
         <button onClick={acionarCarrinho} className={styles.buttonCart}>
           <BsBag />
@@ -118,3 +117,49 @@ const MarketplaceHeader = ({
 };
 
 export default MarketplaceHeader;
+
+
+
+function ResponsiveSideBar() {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const [openedBurguer, { toggle }] = useDisclosure(false);
+  const label = opened ? 'Close navigation' : 'Open navigation';
+
+  const mockdata = [
+    { icon: IconHome2, label: 'Início', path: '/marketplace' },
+    { icon: IconCalendarStats, label: 'Pedidos', path: '/pedidos' },
+    { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
+    { icon: IconUser, label: 'Perfil', path: '/perfil' },
+  ];
+
+  return (
+    <>
+      <Drawer size="90%" opened={opened} onClose={close} className={styles.drawer}>
+        <img src={LogoSollaris.src} alt="Logo do Sollaris" />
+        <Center mt={40}>
+          <MiniSearchBar />
+        </Center>
+
+        <ul className={styles.drawer__list}>
+          {mockdata.map((link, index) =>
+            <Link href={link.path} key={link.label}>
+              <li key={link.label} onClick={close}>
+                {link.label}
+              </li>
+
+            </Link>
+          )}
+        </ul>
+      </Drawer>
+
+      <Burger
+        opened={opened}
+        onClick={open}
+        aria-label={label}
+        size={'sm'}
+        color="#5f78e7"
+      />
+    </>
+  );
+}
