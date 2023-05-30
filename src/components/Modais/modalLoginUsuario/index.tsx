@@ -52,12 +52,12 @@ export default function ModalLoginEmpresa() {
 
   const form = useForm({
     validateInputOnBlur: true,
-    initialValues: { email: "", password: "" },
+    initialValues: { email: "", senha: "" },
 
     // functions will be used to validate values at corresponding key
     validate: {
       email: (value) => (validates.email(value) ? null : "E-mail inválido"),
-      password: (value) =>
+      senha: (value) =>
         value.length < 8 ? "A senha deve conter no mínimo 8 caracteres." : null,
     },
   });
@@ -65,21 +65,22 @@ export default function ModalLoginEmpresa() {
   // ESSA VAI SER A FUNÇÃO de login
   const realizarOLogin = (event: FormEvent<HTMLFormElement>, formValues: UseFormReturnType<{
     email: string;
-    password: string;
+    senha: string;
   }, (values: {
     email: string;
-    password: string;
+    senha: string;
   }) => {
     email: string;
-    password: string;
+    senha: string;
   }>) => {
 
-    // alert(JSON.stringify(formValues.values))
-    httpUsuario.post("api/users/login", formValues)
-      .then((resp) => { resp })
-      .catch((erro) => {setBadLogin(true)})
+    alert(JSON.stringify(formValues.values))
+    httpUsuario.post("api/users/login", formValues.values)
+      .then((resp) => { console.log(resp) })
+      .then((resp) => router.push("/marketplace"))
+      .catch((erro) => { setBadLogin(true) })
     event.preventDefault();
-    // router.push("/marketplace");
+
   };
 
 
@@ -150,7 +151,7 @@ export default function ModalLoginEmpresa() {
                   onChange={(e) => setPassword(e.currentTarget.value)}
                   withAsterisk={false}
                   required
-                  {...form.getInputProps("password")}
+                  {...form.getInputProps("senha")}
                 />
                 <div className={styles.modal__leftSide__options}>
                   <Checkbox label="Lembrar minha senha" />
