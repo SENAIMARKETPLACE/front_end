@@ -31,9 +31,9 @@ const MarketplaceHome = () => {
   return (
     <section className={styles.marketplace}>
       <main className={styles.main_content}>
-        <p className={styles.banner_text}>Encontre sua velocidade</p>
+        {/* <p className={styles.banner_text}>Encontre sua velocidade</p> */}
         <BannerCarousel />
-        <EmpresaBanner image={Banner} alt="Capa da empresa" />
+        {/* <EmpresaBanner image={Banner} alt="Capa da empresa" /> */}
 
         <h2 className={styles.section__title}>Explore Categorias Populares</h2>
         <div className={styles.categories}>
