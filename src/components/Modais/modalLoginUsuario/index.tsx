@@ -77,7 +77,7 @@ export default function ModalLoginEmpresa() {
     // alert(JSON.stringify(formValues.values))
     httpUsuario.post("api/users/login", formValues)
       .then((resp) => { resp })
-      .catch((erro) => { erro })
+      .catch((erro) => {setBadLogin(true)})
     event.preventDefault();
     // router.push("/marketplace");
   };
