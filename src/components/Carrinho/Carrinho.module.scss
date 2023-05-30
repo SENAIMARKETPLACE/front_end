@@ -1,6 +1,7 @@
 .carrinho {
     background-color: rgb(249, 249, 249);
     width: 30vw;
+    min-width: 325px;
     height: 100%;
     position: fixed;
     z-index: 2;
@@ -148,4 +149,12 @@
         }
     }
 
+}
+
+.closeBtn {
+    cursor: pointer;
+    color: white !important;
+    position: absolute;
+    top: 20px !important;
+    left: 20px;
 }

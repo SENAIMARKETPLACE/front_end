@@ -5,6 +5,7 @@ import CardProdutoCarrinho from "./CardProdutoCarrinho";
 import styles from "./Carrinho.module.scss";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
 import Link from "next/link";
+import { IoMdCloseCircle } from 'react-icons/io';
 
 interface CarrinhoProps {
   isCartAtivado: boolean;
@@ -108,6 +109,7 @@ const Carrinho = ({
         `{${isCartAtivado ? styles.carrinhoAtivado : ""}}`
       }
     >
+      <IoMdCloseCircle size={22} onClick={() => alert('Fechar')} className={styles.closeBtn}/>
       <div className={styles.carrinhoHead}>
         <p>Seu Carrinho ({quantidade}) itens</p>
       </div>

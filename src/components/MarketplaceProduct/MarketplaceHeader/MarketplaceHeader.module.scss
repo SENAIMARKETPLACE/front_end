@@ -59,6 +59,11 @@
     //   width: 50px;
     // }
 
+    .searchBarContainer {
+      width: 100%;
+      max-width: 650px;
+    }
+
     .buttonCart {
       border: none;
       width: 50px;
@@ -87,6 +92,26 @@
         transform: translate(-50%, -50%);
         font-size: 10px;
       }
+    }
+  }
+}
+
+.drawer {
+  position: relative;
+  img {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    z-index: 1000;
+    width: 60px;
+    height: 60px;
+  }
+  &__list {
+    margin-top: 32px;
+    text-align: center;
+    li {
+      padding: 20px 0;
+      color: map-get($map: $colors, $key: text-700);
     }
   }
 }

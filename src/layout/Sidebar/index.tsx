@@ -1,4 +1,5 @@
 import styles from './Sidebar.module.scss';
+import Link from 'next/link';
 import { useState } from 'react';
 import {
   Navbar,
@@ -22,7 +23,6 @@ import {
 } from '@tabler/icons-react';
 import LogoSollaris from '/public/images/logo.svg';
 import { Avatar } from '@mui/material';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
@@ -106,7 +106,10 @@ export function Sidebar() {
   return (
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
+        <Link href={'/marketplace'}>
         <img src={LogoSollaris.src} alt="Logo do Sollaris" />
+
+        </Link>
       </Center>
       <Navbar.Section grow mt={50}>
         <Stack justify="center" spacing={0}>
