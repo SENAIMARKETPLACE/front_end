@@ -93,7 +93,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
 
   const cadastrarPedido = (pedidoAPostar: IPedidoPost) => {
     httpApiMockada
-      .post("/pedidos-post", pedidoAPostar)
+      .post("/pedidos-pst", pedidoAPostar)
       .then((response) => alterarLocalStorageAposCadastrarPedido())
       .catch((error) => alterIsOrderFinishedProps(2));
   };

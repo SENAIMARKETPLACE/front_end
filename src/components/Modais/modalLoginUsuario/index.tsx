@@ -6,13 +6,16 @@ import Fade from "@mui/material/Fade";
 import Link from "next/link";
 import logo from "../../../../public/images/Logo.svg";
 import { validates } from "util/validations";
-import { useForm } from "@mantine/form";
+import { UseFormReturnType, useForm } from "@mantine/form";
 import { TextInput, Button, Checkbox, Text, Grid } from "@mantine/core";
 import { PasswordInput } from "@mantine/core";
 import { IconLock, IconAt } from "@tabler/icons-react";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { ILoginBody } from "compartilhado/ILoginBody";
+import { httpUsuario } from "../../../http";
+
 
 const style = {
   position: "absolute" as "absolute",
@@ -25,6 +28,8 @@ const style = {
   display: "flex",
 };
 
+
+
 export default function ModalLoginEmpresa() {
   // Modal Settings
   const [open, setOpen] = useState(false);
@@ -32,6 +37,8 @@ export default function ModalLoginEmpresa() {
   const handleClose = () => setOpen(false);
   const [badLogin, setBadLogin] = useState(false);
   const router = useRouter();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const MensagemBadRequest = styled.div`
     color: #cc3a3a;
@@ -55,11 +62,27 @@ export default function ModalLoginEmpresa() {
     },
   });
 
-  // ESSA VAI SER A FUNÇÃO
-  const realizarOLogin = (event: FormEvent<HTMLFormElement>) => {
+  // ESSA VAI SER A FUNÇÃO de login
+  const realizarOLogin = (event: FormEvent<HTMLFormElement>, formValues: UseFormReturnType<{
+    email: string;
+    password: string;
+  }, (values: {
+    email: string;
+    password: string;
+  }) => {
+    email: string;
+    password: string;
+  }>) => {
+
+    // alert(JSON.stringify(formValues.values))
+    httpUsuario.post("api/users/login", formValues)
+      .then((resp) => { resp })
+      .catch((erro) => { erro })
     event.preventDefault();
-    router.push("/marketplace");
+    // router.push("/marketplace");
   };
+
+
 
   useEffect(() => {
     setIsFormValid(!form.isValid());
@@ -102,22 +125,29 @@ export default function ModalLoginEmpresa() {
                   viver uma vida mais saudável e ativa.
                 </p>
               </div>
-              <form onSubmit={realizarOLogin}>
+              <form onSubmit={(e) =>
+                realizarOLogin(e, form)
+              }>
                 <TextInput
                   label="Email"
                   placeholder="E-mail"
+                  value={form.values.email}
                   icon={<IconAt size="1rem" />}
                   size="lg"
                   withAsterisk={false}
                   required
+                  onChange={(e) => setEmail(e.currentTarget.value)}
+                  type="text"
                   {...form.getInputProps("email")}
                 />
                 <PasswordInput
                   label="Senha"
+                  value={password}
                   placeholder="Senha"
                   icon={<IconLock size="1rem" />}
                   size="lg"
                   mt="sm"
+                  onChange={(e) => setPassword(e.currentTarget.value)}
                   withAsterisk={false}
                   required
                   {...form.getInputProps("password")}

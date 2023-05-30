@@ -10,7 +10,7 @@ interface CartFinishProps  {
 
 
 const CartFinish = ({isOrderFinished}: CartFinishProps) => {
-
+  
   return (
     <div className={styles.mensagemStatus}>
       {(isOrderFinished == 0) ? <LoadingGif/> : (isOrderFinished == 1) ? <SucessMessage/> : <FailedMessage/>}

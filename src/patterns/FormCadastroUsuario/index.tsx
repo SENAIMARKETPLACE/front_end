@@ -126,11 +126,13 @@ const FormCadastroUsuario = () => {
     //   // MULTIPLAS REQUISIÇÕES -> POS
     //   .then((resp) => alert(`${user.nome} criado com sucesso`))
     //   .catch((err) => alert("Deu Ruim"))
-    httpUsuario
-      .post('/api/users', user)
+    httpApiMockada
+      .post('usuarios', user)
       // MULTIPLAS REQUISIÇÕES -> POS
       .then((resp) => {
         {
+
+
           console.log(user);
           setOpenModalRegister(true);
           setMensagemModal('CADASTRO REALIZADO COM SUCESSO!');
