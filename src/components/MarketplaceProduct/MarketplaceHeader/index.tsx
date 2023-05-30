@@ -89,7 +89,7 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   return (
     <header className={styles.header}>
       <div className={styles.header__rightIcons}>
-      {windowWidth < 850 && <ResponsiveSideBar />}
+        {windowWidth < 850 && <ResponsiveSideBar />}
       </div>
       <div ref={carrinhoRef}>
         {isCartVisible && (
@@ -118,8 +118,6 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
 
 export default MarketplaceHeader;
 
-
-
 function ResponsiveSideBar() {
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -135,21 +133,27 @@ function ResponsiveSideBar() {
 
   return (
     <>
-      <Drawer size="90%" opened={opened} onClose={close} className={styles.drawer}>
-        <img src={LogoSollaris.src} alt="Logo do Sollaris" />
+      <Drawer
+        size="320px"
+        opened={opened}
+        onClose={close}
+        className={styles.drawer}
+      >
+        <Center>
+          <Link href={'/marketplace'}>
+            <img src={LogoSollaris.src} alt="Logo do Sollaris" />
+          </Link>
+        </Center>
         <Center mt={40}>
           <MiniSearchBar />
         </Center>
 
         <ul className={styles.drawer__list}>
-          {mockdata.map((link, index) =>
+          {mockdata.map((link) => (
             <Link href={link.path} key={link.label}>
-              <li key={link.label} onClick={close}>
-                {link.label}
-              </li>
-
+              <li key={link.label}>{link.label}</li>
             </Link>
-          )}
+          ))}
         </ul>
       </Drawer>
 
