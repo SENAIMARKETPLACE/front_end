@@ -337,15 +337,15 @@
       "descricao": "Correr é um ritual diário, cada passo aproxima você da sua meta pessoal. Deixe o Nike Air Zoom Pegasus 39 levar você a um novo patamar com um design intuitivo, seja para o treino ou para a corrida. Mais leve na parte de cima do que o Pegasus 38 e ideal para todas as estações, ele tem uma sensação de suporte para ajudar a manter os pés firmes, enquanto o amortecimento debaixo do pé e as unidades Zoom Air duplas (uma a mais que o Peg 38) deixam seus passos mais rápidos.",
       "img": "https://imgnike-a.akamaihd.net/768x768/024098MT.jpg",
       "publico": "FEMININO",
-      "categoria_id": 3,
-      "sub_categoria_id": 11,
-      "preco": 2200.15,
+      "categoria_id": 4,
+      "sub_categoria_id": 22,
+      "preco": "500,00",
       "detalhes_do_produto": {
         "id": 1,
         "tamanho": "70cm",
         "quantidade": "1000",
         "peso": "150gr",
-        "cor": "#902626"
+        "cor": "#122626 "
       },
       "id": 1
     },

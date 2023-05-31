@@ -29,7 +29,7 @@ const EmpresaProdutosScreen = () => {
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [catchCategorias, setCatchCategorias] = useState<ICategory[]>([]);
-  const [isButtonListAtivo, setIsButtonListAtivo] = useState(true);
+  const [isButtonListAtivo, setIsButtonListAtivo] = useState(false);
   const [modoLista, setModoLista] = useState(true);
 
 

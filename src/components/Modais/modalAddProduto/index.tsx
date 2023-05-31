@@ -22,6 +22,7 @@ import {
 import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
 import { FaLessThanEqual } from "react-icons/fa";
 import { ICategory } from "compartilhado/ICategory";
+import { Select } from "@mantine/core";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -48,26 +49,25 @@ export default function ModalAddProduto({
     setDescricao("");
     setUrlImagem("");
     setPublico("");
-    setCategoria("");
+    setCategoriaMantine("");
     setQuantidade("");
-    setSubCategoria("");
+    setSubCategoriaMantine("");
     setPreco("");
-    setPeso("")
+    setPeso("");
     setColorPrimary("");
     setColorSecondary("");
     setIsSubCategoriaDisable(true);
-    setErroNomeProduto(true)
-    setErroDescricao(true)
-    setErroUrlImagem(true)
-    setErroPublico(true)
-    setErroCategoria(true)
-    setErroSubCategoria(true)
-    setErroPreco(true)
-    setErroPeso(true)
-    setErroPrimaryColor(true)
-    setErroQuantidade(true)
-    setErroTamanho(true)
-  
+    setErroNomeProduto(true);
+    setErroDescricao(true);
+    setErroUrlImagem(true);
+    setErroPublico(true);
+    setErroCategoria(true);
+    setErroSubCategoria(true);
+    setErroPreco(true);
+    setErroPeso(true);
+    setErroPrimaryColor(true);
+    setErroQuantidade(true);
+    setErroTamanho(true);
   };
 
   // STATES PARA CAPTURA DE CAMPOS
@@ -91,6 +91,10 @@ export default function ModalAddProduto({
 
   const [secondColorField, setColorSecondColorField] = useState(true);
   const [index, setIndex] = useState(0);
+
+  //TESTES SELECT
+  const [optionsCategories, setOptionsCategories] = useState([]);
+  const [optionsSubCategories, setOptionsSubCategories] = useState([]);
 
   // ERROS
   const [erroNomeProduto, setErroNomeProduto] = useState(true);
@@ -123,16 +127,12 @@ export default function ModalAddProduto({
     p: 4,
   };
 
-
-
   const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
     setColorPrimary(newValue);
   };
   const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
     setColorSecondary(newValue);
   };
-
-
 
   const targetAudienceList = [
     {
@@ -158,18 +158,7 @@ export default function ModalAddProduto({
   ));
 
 
-  const setarSub = (idCategorieSelected: string) => {
-    const categorias = categoriesAndSubCategories.filter(
-      (c) => c.id === idCategorieSelected
-    );
-    let subCategoriasLista = categorias[0].sub_categorias.map((option) => (
-      <MenuItem key={option.id} value={option.id}>
-        {option.nome}
-      </MenuItem>
-    ));
-
-    setSubCategoriasTeste(subCategoriasLista);
-  };
+  
 
   const resgatarListaProdutos = () => {
     httpProduto
@@ -201,8 +190,8 @@ export default function ModalAddProduto({
       descricao: descricao,
       img: urlImagem,
       publico,
-      categoria_id: categoria,
-      sub_categoria_id: subCategoria,
+      categoria_id: categoriaMantine,
+      sub_categoria_id: subCategoriaMantine,
       preco: preco.replace(/,/g, "."),
       detalhes_do_produto: detalhes_produto,
     };
@@ -222,9 +211,9 @@ export default function ModalAddProduto({
         setDescricao("");
         setUrlImagem("");
         setPublico("");
-        setCategoria("");
+        setCategoriaMantine("");
         setQuantidade("");
-        setSubCategoria("");
+        setSubCategoriaMantine("");
         setPreco("");
         setTamanho("");
         setPeso("");
@@ -232,22 +221,21 @@ export default function ModalAddProduto({
         setColorSecondary("");
         setIsSubCategoriaDisable(true);
         setIsSubCategoriaDisable(true);
-        setErroNomeProduto(true)
-        setErroDescricao(true)
-        setErroUrlImagem(true)
-        setErroPublico(true)
-        setErroCategoria(true)
-        setErroSubCategoria(true)
-        setErroPreco(true)
-        setErroPeso(true)
-        setErroPrimaryColor(true)
-        setErroQuantidade(true)
-        setErroTamanho(true)
+        setErroNomeProduto(true);
+        setErroDescricao(true);
+        setErroUrlImagem(true);
+        setErroPublico(true);
+        setErroCategoria(true);
+        setErroSubCategoria(true);
+        setErroPreco(true);
+        setErroPeso(true);
+        setErroPrimaryColor(true);
+        setErroQuantidade(true);
+        setErroTamanho(true);
       })
       .catch((erro: any) => console.log(erro));
     setIsSubCategoriaDisable(true);
   };
-
 
   const validarSomenteTamanho = (
     nomeDigitado: string,
@@ -258,10 +246,10 @@ export default function ModalAddProduto({
     const regexNome = new RegExp(`^.{${minimo},${maximo}}$`);
     if (regexNome.test(nomeDigitado)) {
       funcaoSetar(false);
-      return(false)
+      return false;
     } else {
       funcaoSetar(true);
-      return(true)
+      return true;
     }
   };
 
@@ -269,7 +257,7 @@ export default function ModalAddProduto({
     const regexFoto = /https?:\/\/.*\.(jpe?g|png)/;
     if (regexFoto.test(fotoDigitada)) {
       setErroUrlImagem(false);
-      return false
+      return false;
     } else {
       setErroUrlImagem(true);
       return true;
@@ -282,7 +270,7 @@ export default function ModalAddProduto({
   ): boolean => {
     if (opcaoEscolhida != "") {
       funcaoSetar(false);
-      return false
+      return false;
     } else {
       funcaoSetar(true);
       return true;
@@ -290,25 +278,72 @@ export default function ModalAddProduto({
   };
 
   const validarQuantidade = (quantidadeEscolhida: string): boolean => {
-    if(quantidadeEscolhida != ""){
-      if(parseInt(quantidadeEscolhida) <= 0) {
-        setErroQuantidade(true)
-        return true
-      }else{
-        setErroQuantidade(false)
-        return false
+    if (quantidadeEscolhida != "") {
+      if (parseInt(quantidadeEscolhida) <= 0) {
+        setErroQuantidade(true);
+        return true;
+      } else {
+        setErroQuantidade(false);
+        return false;
       }
     } else {
-      setErroQuantidade(true)
-      return true
+      setErroQuantidade(true);
+      return true;
     }
-
-  }
-
+  };
 
   React.useEffect(() => {
-    setIsFormValid(!erroNomeProduto && !erroDescricao && !erroUrlImagem && !erroPublico && !erroCategoria && !erroSubCategoria && !erroPeso && !erroTamanho && !erroPrimaryColor && !erroQuantidade && !erroPreco )
-  }, [erroNomeProduto, erroDescricao, erroUrlImagem, erroPublico, erroCategoria, erroSubCategoria, erroPreco, erroPeso, erroTamanho, erroQuantidade, erroPrimaryColor ]);
+    setIsFormValid(
+      !erroNomeProduto &&
+        !erroDescricao &&
+        !erroUrlImagem &&
+        !erroPublico &&
+        !erroCategoria &&
+        !erroSubCategoria &&
+        !erroPeso &&
+        !erroTamanho &&
+        !erroPrimaryColor &&
+        !erroQuantidade &&
+        !erroPreco
+    );
+  }, [
+    erroNomeProduto,
+    erroDescricao,
+    erroUrlImagem,
+    erroPublico,
+    erroCategoria,
+    erroSubCategoria,
+    erroPreco,
+    erroPeso,
+    erroTamanho,
+    erroQuantidade,
+    erroPrimaryColor,
+  ]);
+
+  React.useEffect(() => {
+    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
+      value: categoria.id,
+      label: categoria.nome,
+    }));
+
+    setOptionsCategories(transformarDados);
+  },);
+
+  const [categoriaMantine, setCategoriaMantine] = useState("");
+  const [subCategoriaMantine, setSubCategoriaMantine] = useState("");
+
+  const setarSubTeste = (idCategorieSelected: string) => {
+    setSubCategoriaMantine("")
+    const categorias = categoriesAndSubCategories.filter(
+      (c) => c.id === idCategorieSelected
+    );
+    let subCategoriasLista = categorias[0].sub_categorias.map((option) => ({
+      value: option.id,
+      label: option.nome,
+    }));
+
+    setOptionsSubCategories(subCategoriasLista);
+  };
 
   return (
     <div>
@@ -349,7 +384,12 @@ export default function ModalAddProduto({
                   setDescricao(e.target.value);
                 }}
                 onBlur={(e) =>
-                  validarSomenteTamanho(descricao, "10", "500", setErroDescricao)
+                  validarSomenteTamanho(
+                    descricao,
+                    "10",
+                    "500",
+                    setErroDescricao
+                  )
                 }
                 error={erroDescricao}
                 multiline
@@ -379,47 +419,27 @@ export default function ModalAddProduto({
               >
                 {targetAudienceList}
               </TextField>
-              <TextField
-                select
-                label="Categoria"
+              <Select
+                value={categoriaMantine}
                 className={styles.category}
-                onChange={(e) => {
-                  setCategoria(e.target.value), setIsSubCategoriaDisable(false);
-                }}
-                onBlur={(e) => {
-                  validarField(categoria, setErroCategoria);
-                  {
-                    categoria != ""
-                      ? setarSub(categoria)
-                      : setErroCategoria(true);
+                label="Categoria"
+                placeholder="Selecione uma categoria"
+                data={optionsCategories}
+                onChange={(value) => setCategoriaMantine(value)}
+                onBlur={() => {
+                  if (categoriaMantine !== "") {
+                    setarSubTeste(categoriaMantine);
                   }
-                  setErroSubCategoria(true);
                 }}
-                value={categoria}
-                error={erroCategoria}
-              >
-                {categoriesAndSubCategories.map((categoria) => (
-                    <MenuItem key={categoria.id} value={categoria.id}>
-                      {categoria.nome}
-                    </MenuItem>))
-                    }
-              </TextField>
-              <TextField
-                select
-                disabled={isSubCategoriaDisable}
-                label="Sub-categoria"
+              />
+              <Select
+                value={subCategoriaMantine}
                 className={styles.subcategory}
-                onChange={(e) => {
-                  setSubCategoria(e.target.value);
-                }}
-                onBlur={(e) => {
-                  validarField(subCategoria, setErroSubCategoria);
-                }}
-                value={subCategoria}
-                error={erroSubCategoria}
-              >
-                {subCategoriasTeste}
-              </TextField>
+                label="Sub-Categoria"
+                data={optionsSubCategories}
+                placeholder="Selecione uma sub-categoria"
+                onChange={(value) => setSubCategoriaMantine(value)}
+              />
               <TextField
                 type="number"
                 label="Quantidade"
