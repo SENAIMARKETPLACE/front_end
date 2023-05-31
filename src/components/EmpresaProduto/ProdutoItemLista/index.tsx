@@ -17,7 +17,7 @@ interface ProductItemListProps {
   setSnackbarEditOpen: (open: boolean) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
-  categoriesAndSubCategories: string[];
+  categoriesAndSubCategories: ICategory[];
 }
 
 function enviaId(id: string) {

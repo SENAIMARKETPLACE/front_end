@@ -25,6 +25,7 @@ import {
   MuiColorInputColors,
   MuiColorInputFormat,
 } from "mui-color-input";
+import { ICategory } from "compartilhado/ICategory";
 
 
 interface modalEditarProps {
@@ -32,7 +33,7 @@ interface modalEditarProps {
   setarLista: (listaAtualizada: string[]) => void;
   snackbarOpenEdit: boolean;
   setSnackbarEditOpen: (open: boolean) => void;
-  categoriesAndSubCategories: string[];
+  categoriesAndSubCategories: ICategory[];
 }
 
 const ModalEditarProduto = ({
@@ -60,7 +61,7 @@ const ModalEditarProduto = ({
   const [empresaid, setEmpresaId] = useState("1");
   const [peso, setPeso] = useState<string>("");
   const [tamanho, setTamanho] = useState("");
-  const [subCategoriasTeste, setSubCategoriasTeste] = useState("");
+  const [subCategoriasTeste, setSubCategoriasTeste] = useState<JSX.Element[]>();
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(false);
   const [subCategoriaAtual, setSubCategoriaAtual] = useState("");
   const [idDetalhesProduto, setIdDetalhesProdutos] = useState("");
@@ -127,7 +128,7 @@ const ModalEditarProduto = ({
     let categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
     );
-    const subCategoriasLista = categorias[0].subCategorias.map((option) => (
+    let subCategoriasLista = categorias[0].sub_categorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>
@@ -140,8 +141,8 @@ const ModalEditarProduto = ({
   const regastarInformacoesProdutoSelecionado = () => {
     // httpProduto
     //   .get<IProduto>(`/api/products/${idSelecionado}`)
-    httpProduto
-    .get(`/api/products/${idSelecionado}`)
+    httpApiMockada
+    .get(`produto-get/${idSelecionado}`)
       .then((resp) => {
         const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ')
         console.log(arrayCores)
@@ -173,12 +174,12 @@ const ModalEditarProduto = ({
   
 
   function regastarListaProdutos() {
-    httpProduto
-      .get("/api/products")
-      // httpApiMockada
-      //   .get('produtos')
+    // httpProduto
+    //   .get("/api/products")
+      httpApiMockada
+        .get('produtos-get')
       .then((response) => {
-        setarLista(response.data.content);
+        setarLista(response.data);
       })
       .catch((error) => console.error);
     }
@@ -209,8 +210,8 @@ const ModalEditarProduto = ({
     //     regastarListaProdutos();
     //   })
     //   .catch((err) => console.log(err));
-    httpProduto
-      .put(`api/products/${idSelecionado}`, produtoAtualizado)
+    httpApiMockada
+      .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
       .then((resp) => {
         regastarListaProdutos();

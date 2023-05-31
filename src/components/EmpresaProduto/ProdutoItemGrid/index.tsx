@@ -1,3 +1,4 @@
+import { ICategory } from "compartilhado/ICategory";
 import ModalDeletarProduto from "../../Modais/ModalDeletarProduto";
 import ModalEditarProduto from "../../Modais/modalEditProduto";
 import styles from "./ProdutoItemGrid.module.scss";
@@ -15,7 +16,7 @@ interface ProdutoItemGridProps {
   setSnackbarEditOpen: (open: boolean) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
-  categoriesAndSubCategories: string[];
+  categoriesAndSubCategories: ICategory[];
 }
 
 function enviaId(id: string) {

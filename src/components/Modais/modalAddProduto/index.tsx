@@ -157,11 +157,6 @@ export default function ModalAddProduto({
     </MenuItem>
   ));
 
-  const categoriasLista = categoriesAndSubCategories.map((option) => (
-    <MenuItem key={option.id} value={option.id}>
-      {option.nome}
-    </MenuItem>
-  ));
 
   const setarSub = (idCategorieSelected: string) => {
     const categorias = categoriesAndSubCategories.filter(
@@ -403,7 +398,11 @@ export default function ModalAddProduto({
                 value={categoria}
                 error={erroCategoria}
               >
-                {categoriasLista}
+                {categoriesAndSubCategories.map((categoria) => (
+                    <MenuItem key={categoria.id} value={categoria.id}>
+                      {categoria.nome}
+                    </MenuItem>))
+                    }
               </TextField>
               <TextField
                 select
