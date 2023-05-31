@@ -21,6 +21,7 @@ import {
 // Modern or es5 bundle (pay attention to the note below!)
 import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
 import { FaLessThanEqual } from "react-icons/fa";
+import { ICategory } from "compartilhado/ICategory";
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -30,7 +31,7 @@ interface modalAddProductProp {
   ) => void;
   snackbarOpen: boolean;
   setSnackbarOpen: (open: boolean) => void;
-  categoriesAndSubCategories: string[];
+  categoriesAndSubCategories: ICategory[];
 }
 export default function ModalAddProduto({
   setarLista,
@@ -84,7 +85,7 @@ export default function ModalAddProduto({
   const [colorPrimary, setColorPrimary] = useState("");
   const [colorSecondary, setColorSecondary] = useState("");
 
-  let [subCategoriasTeste, setSubCategoriasTeste] = useState("");
+  let [subCategoriasTeste, setSubCategoriasTeste] = useState<JSX.Element[]>([]);
 
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
 

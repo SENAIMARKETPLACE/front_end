@@ -19,6 +19,7 @@ import { MdGridOn, MdGridView, MdOutlineList } from "react-icons/md";
 import ProductItemList from "../../patterns/Products/List";
 import ProdutoItemLista from "../../components/EmpresaProduto/ProdutoItemLista";
 import ProdutoItemGrid from "../../components/EmpresaProduto/ProdutoItemGrid";
+import { ISubcategory } from "compartilhado/ISubcategory";
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,7 @@ const EmpresaProdutosScreen = () => {
   const [snackbarEditOpen, setSnackbarEditOpen] = useState(false);
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
   const [mensagem, setMensagem] = useState("");
-  const [catchCategorias, setCatchCategorias] = useState<string[]>([]);
+  const [catchCategorias, setCatchCategorias] = useState<ICategory[]>([]);
   const [isButtonListAtivo, setIsButtonListAtivo] = useState(true);
   const [modoLista, setModoLista] = useState(true);
 
@@ -90,15 +91,22 @@ const EmpresaProdutosScreen = () => {
   }
 
 
-  async function getCategoriesAndSubs(){
-    try{
-      const response = await httpApiMockada.get("/categoriasSubcategorias"); 
-      setCatchCategorias(response.data);
-      console.log(response.data)
-    } catch (error){
-      console.log(error)
+  async function getCategoriesAndSubs(): Promise<void> {
+    try {
+      const response = await httpApiMockada.get("/categoriasSubcategorias");
+      const categories: ICategory[] = response.data.map((categoryData: any) => {
+        const { sub_categorias, ...category } = categoryData;
+        const subcategories: ISubcategory[] = sub_categorias.map((subcategoryData: any) => ({
+          id: subcategoryData.id,
+          nome: subcategoryData.nome
+        }));
+        return { ...category, sub_categorias: subcategories };
+      });
+      
+      setCatchCategorias(categories);
+    } catch (error) {
+      console.log(error);
     }
-
   }
 
   // useEffect(() => {
