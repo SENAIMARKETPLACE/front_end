@@ -211,42 +211,44 @@ const EmpresaProdutosScreen = () => {
               <StatusAlert isOpen={isOpen} mensagem={mensagem} />
             </div>
 
-            <ul className={`${isButtonListAtivo? styles.products__list : styles.products__grid }`}>
-              {products.map((product) =>
-                isButtonListAtivo ? (
-                  <ProdutoItemLista
-                    categoriesAndSubCategories={catchCategorias}
-                    snackbarOpenEdit={snackbarEditOpen}
-                    setSnackbarEditOpen={setSnackbarEditOpen}
-                    snackbarDeleteOpen={snackbarDeleteOpen}
-                    setSnackbarDeleteOpen={setSnackbarDeleteOpen}
-                    setarLista={atualizarListaProdutos}
-                    id={product.id}
-                    key={product.id}
-                    photo={product.img}
-                    name={product.nome}
-                    price={product.preco}
-                    amount={product.detalhes_dos_produtos[0].quantidade}
-                  />
-                ) : (
-                  <ProdutoItemGrid
-                    categoriesAndSubCategories={catchCategorias}
-                    snackbarOpenEdit={snackbarEditOpen}
-                    setSnackbarEditOpen={setSnackbarEditOpen}
-                    snackbarDeleteOpen={snackbarDeleteOpen}
-                    setSnackbarDeleteOpen={setSnackbarDeleteOpen}
-                    setarLista={atualizarListaProdutos}
-                    id={product.id}
-                    key={product.id}
-                    photo={product.img}
-                    name={product.nome}
-                    subcategoria={product.categoria.sub_categoria.nome}
-                    price={product.preco}
-                    amount={product.detalhes_dos_produtos[0].quantidade}
-                  />
-                )
-              )}
-            </ul>
+            <div className={`${isButtonListAtivo ? "": styles.containerProdutuct}` }>
+              <ul className={`${isButtonListAtivo? styles.products__list : styles.products__grid }`}>
+                {products.map((product) =>
+                  isButtonListAtivo ? (
+                    <ProdutoItemLista
+                      categoriesAndSubCategories={catchCategorias}
+                      snackbarOpenEdit={snackbarEditOpen}
+                      setSnackbarEditOpen={setSnackbarEditOpen}
+                      snackbarDeleteOpen={snackbarDeleteOpen}
+                      setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                      setarLista={atualizarListaProdutos}
+                      id={product.id}
+                      key={product.id}
+                      photo={product.img}
+                      name={product.nome}
+                      price={product.preco}
+                      amount={product.detalhes_dos_produtos[0].quantidade}
+                    />
+                  ) : (
+                    <ProdutoItemGrid
+                      categoriesAndSubCategories={catchCategorias}
+                      snackbarOpenEdit={snackbarEditOpen}
+                      setSnackbarEditOpen={setSnackbarEditOpen}
+                      snackbarDeleteOpen={snackbarDeleteOpen}
+                      setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                      setarLista={atualizarListaProdutos}
+                      id={product.id}
+                      key={product.id}
+                      photo={product.img}
+                      name={product.nome}
+                      subcategoria={product.categoria.sub_categoria.nome}
+                      price={product.preco}
+                      amount={product.detalhes_dos_produtos[0].quantidade}
+                    />
+                  )
+                )}
+              </ul>
+            </div>
           </main>
         </section>
       </div>

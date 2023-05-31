@@ -124,6 +124,7 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
   
+  // Fix a ts bug about Categories's request
   const setarSub = (idCategorieSelected: string) => {
     let categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
