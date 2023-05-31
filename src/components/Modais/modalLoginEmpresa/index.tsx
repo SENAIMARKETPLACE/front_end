@@ -68,7 +68,7 @@ export default function ModalLoginEmpresa() {
   // ESSA VAI SER A FUNÇÃO
   const realizarOLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push("/marketplace");
+    router.push("/empresa/produtos");
   };
 
   return (

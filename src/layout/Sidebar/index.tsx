@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.scss';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Navbar,
   Center,
@@ -20,6 +20,8 @@ import {
   IconSettings,
   IconLogout,
   IconHeart,
+  IconBuildingStore,
+  IconTag,
 } from '@tabler/icons-react';
 import LogoSollaris from '/public/images/logo.svg';
 import { Avatar } from '@mui/material';
@@ -81,14 +83,31 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 
 const mockdata = [
   { icon: IconHome2, label: 'Início', path: '/marketplace' },
-  { icon: IconCalendarStats, label: 'Pedidos', path: '/pedidos' },
-  { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
-  { icon: IconUser, label: 'Perfil', path: '/perfil' },
+  { icon: IconCalendarStats, label: 'Pedidos', path: '/marketplace/pedidos' },
+  { icon: IconHeart, label: 'Favoritos', path: '/marketplace/favoritos' },
+  { icon: IconUser, label: 'Perfil', path: '/marketplace/perfil' },
 ];
+
+const mockDataBusiness = [
+  {icon: IconBuildingStore, label: "Minha Loja", path: "/empresa/minha-loja" },
+  {icon: IconTag, label: "Meus Produtos", path: "/empresa/produtos" }
+]
+
 
 export function Sidebar() {
   const router = useRouter();
   const { pathname } = router;
+  const [isUser, setIsUser] =useState(false)
+
+
+
+  useEffect(() => {
+    if(pathname == "marketplace"){
+      
+    }
+  })
+
+
 
   const [active, setActive] = useState(0);
 
@@ -106,9 +125,8 @@ export function Sidebar() {
   return (
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
-        <Link href={'/marketplace'}>
+        <Link href={'minha-loja'}>
         <img src={LogoSollaris.src} alt="Logo do Sollaris" />
-
         </Link>
       </Center>
       <Navbar.Section grow mt={50}>

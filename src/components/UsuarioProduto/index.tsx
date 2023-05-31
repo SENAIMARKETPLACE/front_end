@@ -23,7 +23,7 @@ const UsuarioProduto = ({ image, name, price, id}: UsuarioProdutoProps) => {
 
     
     return (
-        <Link href={`/marketplace-produto/${id}`}>
+        <Link href={`/marketplace/produto/${id}`}>
             <div className={styles.produto}>
                 <span className={styles.favorite_container}>
                     <BsHeartFill className={styles.favorite_icon} />

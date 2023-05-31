@@ -10,7 +10,7 @@ const MarketplaceFinalizarCompraScreen = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [quantidade, setQuantidade] = useState<number>(0);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  
+
   useEffect(() => {
     const storedQuantity = localStorage.getItem("qtdProduto");
     if (storedQuantity) {
@@ -45,7 +45,7 @@ const MarketplaceFinalizarCompraScreen = () => {
 
   const setarQuantidadade = (novarQuantidade: number) => {
     setQuantidade(novarQuantidade);
-  } 
+  }
 
   useEffect(() => {
     if (isCartVisible) {
@@ -72,14 +72,12 @@ const MarketplaceFinalizarCompraScreen = () => {
 
   return (
     <>
-      <MarketplaceHeader isLogged={true} quantidade={quantidade} />
-      <section className={styles.mainContent}>
-        <FinalizarCompra
-          
-          setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
-        />
-      </section>
-      <FooterSollaris />
+
+      <FinalizarCompra
+
+        setarQuantidadeAoExcluirProps={setarQuantidadeAoExcluir}
+      />
+
     </>
   );
 };
