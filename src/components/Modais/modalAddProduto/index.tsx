@@ -166,7 +166,7 @@ export default function ModalAddProduto({
     const categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
     );
-    let subCategoriasLista = categorias[0].subCategorias.map((option) => (
+    let subCategoriasLista = categorias[0].sub_categorias.map((option) => (
       <MenuItem key={option.id} value={option.id}>
         {option.nome}
       </MenuItem>

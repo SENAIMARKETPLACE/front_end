@@ -82,8 +82,8 @@ const EmpresaProdutosScreen = () => {
     try {
       // const response = await httpProduto.get("/api/products");
       // /api/products/my_products/{id}
-      const response = await httpProduto.get("/api/products");
-      setProducts(response.data.content);
+      const response = await httpApiMockada.get("/produto-get");
+      setProducts(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -92,9 +92,9 @@ const EmpresaProdutosScreen = () => {
 
   async function getCategoriesAndSubs(){
     try{
-      const response = await httpCategoria.get("/api/categories"); 
-      setCatchCategorias(response.data.content);
-      console.log(response.data.content)
+      const response = await httpApiMockada.get("/categoriasSubcategorias"); 
+      setCatchCategorias(response.data);
+      console.log(response.data)
     } catch (error){
       console.log(error)
     }
