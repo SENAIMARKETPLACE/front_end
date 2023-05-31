@@ -8,6 +8,7 @@ import { httpApiMockada, httpProduto } from '../../http';
 import BannerCarousel from 'components/Carousel/BannerCarousel';
 import CategoriesCarousel from 'components/Carousel/CategoriesCarousel';
 import { Blockquote } from '@mantine/core';
+import ProductsForYouCarousel from 'components/Carousel/ProductsForYouCarousel';
 
 const MarketplaceHome = () => {
   const [products, setProducts] = useState([]);
@@ -43,7 +44,8 @@ const MarketplaceHome = () => {
         </div>
 
         <h2 className={styles.section__title}>Produtos para você</h2>
-        <section className={styles.products_list}>
+        <ProductsForYouCarousel />
+        {/* <section className={styles.products_list}>
           {products.map((product) => (
             <UsuarioProduto
               id={product.id}
@@ -52,7 +54,7 @@ const MarketplaceHome = () => {
               price={product.preco}
             />
           ))}
-        </section>
+        </section> */}
 
         <h2 className={styles.section__title}>Inspire-se</h2>
         <Blockquote cite="– Aristóteles" mt={'md'}>
