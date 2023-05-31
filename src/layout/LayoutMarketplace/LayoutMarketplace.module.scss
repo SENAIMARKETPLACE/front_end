@@ -7,14 +7,20 @@
 
   &__content {
     margin-left: 84px;
-    width: 100%;
+    width: calc(100% - 84px);
 
     @media (max-width: 850px) {
       margin-left: 0;
+      width: 100%;
     }
 
     &--children {
+      width: 100%;
       padding: 50px 40px 100px;
+
+      @media (max-width: 850px) {
+        padding: 50px 25px 100px;
+      }
     }
     // background-color: red;
   }

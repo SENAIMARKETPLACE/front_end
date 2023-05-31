@@ -1,78 +1,80 @@
+@import '/src/styles/brand';
 .produto {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    width: 100%;
-    height: 270px;
-    max-width: 210px;
-    padding: 35px 20px 20px;
-    position: relative;
-    cursor: pointer;
-    .favorite_container {
-        display: flex;
-        align-items: center;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        // padding: 6px;
-        border-radius: 50%;
-        background-color: #9a9a9a;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 100%;
+  height: 270px;
+  max-width: 210px;
+  padding: 35px 20px 20px;
+  position: relative;
+  cursor: pointer;
+  .favorite_container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: #9a9a9a;
+    background-color: map-get($map: $colors, $key: gray-200);
 
-        .favorite_icon {
-            color: white;
-        }
+    .favorite_icon {
+      color: white;
     }
+  }
 
-    .photo_container {
-        display: flex;
-        justify-content: center;
-        margin-top: 6px;
-    }
+  .photo_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+  }
 
-    .photo {
-        height: 120px;
-        margin-bottom: 15px;
-    }
+  .photo {
+    height: 120px;
+    margin-bottom: 15px;
+  }
 
-    .name, .price {
-        padding-bottom: 5px;
-        color: #000;
+  .name,
+  .price {
+    padding-bottom: 5px;
+    color: #000;
+  }
 
-    }
+  .name {
+    height: 40px;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
 
-    .name {
-        height: 40px;
-        font-size: 13px;
-        margin-bottom: 5px;
-    }
+  .price {
+    font-size: 14px;
+    font-weight: 700;
+  }
 
-    .price {
+  .icons_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .rate {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #eac223;
+
+      .rate_value {
         font-size: 14px;
-        font-weight: 700;
+      }
     }
+  }
 
-    .icons_container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .rate {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #EAC223;
-
-            .rate_value {
-                font-size: 14px;
-            }
-        }
-    }
-
-    .cart_container {
-        display: flex;
-        // padding: 8px;
-        border-radius: 50%;
-        background-color: #399CCE;
-        color: white;
-    }
+  .cart_container {
+    display: flex;
+    // padding: 8px;
+    border-radius: 50%;
+    background-color: #399cce;
+    color: white;
+  }
 }

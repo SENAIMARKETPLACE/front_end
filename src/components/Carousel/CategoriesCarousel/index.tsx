@@ -2,19 +2,94 @@ import { Carousel } from '@mantine/carousel';
 import styles from './CategoriesCarousel.module.scss';
 import ProdutoCategoria from 'components/ProdutoCategoria';
 
+const categories = [
+  {
+    id: 1,
+    name: 'Treino e Academia',
+    subCategories: [
+      {
+        id: 1,
+        name: 'Subcategoria 1',
+      },
+      {
+        id: 2,
+        name: 'Subcategoria 2',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Treino e Academia',
+    subCategories: [
+      {
+        id: 1,
+        name: 'Subcategoria 1',
+      },
+      {
+        id: 2,
+        name: 'Subcategoria 2',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Treino e Academia',
+    subCategories: [
+      {
+        id: 1,
+        name: 'Subcategoria 1',
+      },
+      {
+        id: 2,
+        name: 'Subcategoria 2',
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Treino e Academia',
+    subCategories: [
+      {
+        id: 1,
+        name: 'Subcategoria 1',
+      },
+      {
+        id: 2,
+        name: 'Subcategoria 2',
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Treino e Academia',
+    subCategories: [
+      {
+        id: 1,
+        name: 'Subcategoria 1',
+      },
+      {
+        id: 2,
+        name: 'Subcategoria 2',
+      },
+    ],
+  },
+];
+
 export default function CategoriesCarousel() {
   return (
     <Carousel
-      slideSize="80%"
-      slideGap="md"
+      slideSize="225px"
+      slideGap={'md'}
+      loop
       align="start"
+      dragFree
       className={styles.carousel}
     >
-      <Carousel.Slide className={styles.carousel__slide}>
-        <ProdutoCategoria />
-      </Carousel.Slide>
-      <Carousel.Slide>2</Carousel.Slide>
-      <Carousel.Slide>3</Carousel.Slide>
+      {categories.map((category) => (
+        <Carousel.Slide pb={20}>
+          <ProdutoCategoria categories={categories} />
+        </Carousel.Slide>
+      ))}
     </Carousel>
   );
 }
