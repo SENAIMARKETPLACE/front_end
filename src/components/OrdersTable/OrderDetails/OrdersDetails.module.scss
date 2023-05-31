@@ -1,0 +1,29 @@
+@import '/src/styles/brand';
+
+td.td__productDetails {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+}
+
+td.td__image {
+  text-align: center;
+
+  @media (max-width: 800px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.productDetails__total {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: map-get($map: $colors, $key: text-700);
+  text-align: right;
+}
