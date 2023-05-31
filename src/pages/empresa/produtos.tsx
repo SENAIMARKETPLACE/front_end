@@ -1,11 +1,15 @@
-import LayoutBussines from 'layout/LayoutBusiness';
+
+
+import LayoutBusiness from 'layout/LayoutBusiness';
 import EmpresaProdutosScreen from '../../screens/EmpresaProdutosScreen';
 
 const EmpresaProdutos = () => {
   return (
-    <LayoutBussines>
+    <LayoutBusiness>
       <EmpresaProdutosScreen />
-    </LayoutBussines>
+    </LayoutBusiness>
+    
+    
   );
 };
 export default EmpresaProdutos;

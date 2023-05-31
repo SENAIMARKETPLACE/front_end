@@ -102,16 +102,20 @@ export function Sidebar() {
 
 
   useEffect(() => {
-    if(pathname == "marketplace"){
-      
+    if(pathname.includes("marketplace")){
+      setIsUser(true)
+    }else{
+      setIsUser(false)
     }
+      
+  
   })
 
 
 
   const [active, setActive] = useState(0);
 
-  const links = mockdata.map((link, index) => (
+  const linksEmpresa = mockDataBusiness.map((link, index) => (
     <Link href={link.path} key={link.label}>
       <NavbarLink
         {...link}
@@ -122,6 +126,17 @@ export function Sidebar() {
     </Link>
   ));
 
+  const linksMarketplace = mockdata.map((link, index) => (
+    <Link href={link.path} key={link.label}>
+      <NavbarLink
+        {...link}
+        key={link.label}
+        active={pathname === link.path}
+        onClick={() => setActive(index)}
+      />
+    </Link>
+  ))
+
   return (
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
@@ -131,7 +146,7 @@ export function Sidebar() {
       </Center>
       <Navbar.Section grow mt={50}>
         <Stack justify="center" spacing={0}>
-          {links}
+          {isUser ? linksMarketplace : linksEmpresa}
         </Stack>
       </Navbar.Section>
       <Navbar.Section>

@@ -6,15 +6,15 @@ import styles from "./LayoutBusiness.module.scss";
 import { AppShell, Navbar, Header } from "@mantine/core";
 import { Sidebar } from "layout/Sidebar";
 
-interface LayoutBussinesProps {
+interface LayoutBusinessProps {
   children: ReactNode;
   quantidade?: number;
 }
 
-const LayoutBussines = ({
+const LayoutBusiness = ({
   children,
   quantidade,
-}: LayoutBussinesProps) => {
+}: LayoutBusinessProps) => {
   const [isLogged, setIsLogged] = useState(true);
 
   return (
@@ -32,4 +32,4 @@ const LayoutBussines = ({
     </>
   );
 };
-export default LayoutBussines;
+export default LayoutBusiness;
