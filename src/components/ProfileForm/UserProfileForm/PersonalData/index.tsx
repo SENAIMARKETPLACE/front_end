@@ -9,12 +9,16 @@ import {
   TextInput,
   Modal,
   Group,
+  SimpleGrid,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { DateInput } from '@mantine/dates';
 import 'dayjs/locale/ru';
 import { IconEdit } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
+import { validates } from 'util/validations';
+import masks from 'util/fieldMasks';
+import { useState } from 'react';
 
 interface PersonalDataProps {
   inputProps: object;
@@ -32,7 +36,7 @@ const data = [
 ];
 
 const genresData = [
-  { value: 'male', label: 'Masculino' },
+  { value: 'Masculino', label: 'Masculino' },
   { value: 'ng', label: 'Angular' },
   { value: 'svelte', label: 'Svelte' },
   { value: 'vue', label: 'Vue' },
@@ -41,21 +45,70 @@ const genresData = [
 const PersonalData = ({ inputProps }: PersonalDataProps) => {
   const [opened, { open, close }] = useDisclosure(false);
 
+  const [name, setName] = useState('');
+
   const form = useForm({
-    initialValues: { name: '', email: '', age: 0 },
+    initialValues: { name: '', phone: '', cpf: '', birthDate: '', genre: '', interests: '' },
 
     // functions will be used to validate values at corresponding key
     validate: {
       name: (value) =>
-        value.length < 2 ? 'Name must have at least 2 letters' : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      age: (value) =>
-        value < 18 ? 'You must be at least 18 to register' : null,
-    },
+        (validates.name(value) ? null : 'O nome deve conter no mínimo 6 letras.'),
+      phone: (value) =>
+        value.length < 14 ? null : 'O número de telefone deve ter ao menos 12 dígitos.'
+    
+      },
   });
 
+  const [formFields, setFormFields] = useState({
+    name: masks.letters('João'),
+    phone: masks.phone('(11) 91234-5678'),
+    email: 'example@example.com',
+    cpf: masks.cpf('33546058046'),
+    genre: 'Masculino',
+    interests: ['react', 'ng']
+    // cpf: masks.cpf()
+    // Outros campos do formulário e valores iniciais
+  });
+
+  const handleFieldChange = (fieldName: string) => (event: any) => {
+    const inputValue = event.target.value;
+    let maskedValue: any;
+
+    // Aplica a função de máscara correspondente ao campo
+    switch (fieldName) {
+      case 'name':
+        maskedValue = masks.letters(inputValue);
+        break;
+      case 'phone':
+        maskedValue = masks.phone(inputValue);
+        break;
+      case 'email':
+        maskedValue = inputValue;
+        break;
+      case 'cpf':
+        maskedValue = masks.cpf(inputValue);
+        break;
+      // case 'genre':
+      //   maskedValue = inputValue;
+      //   break;
+      case 'interests':
+        maskedValue = inputValue;
+        break;
+      default:
+        // Tratar outras condições ou valores padrão
+        break;
+    }
+    // Adicione mais blocos else if para outros campos e funções de máscara
+
+    setFormFields((prevFields) => ({
+      ...prevFields,
+      [fieldName]: maskedValue,
+    }));
+  };
+
   return (
-    <form onSubmit={form.onSubmit(console.log)}>
+    <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
       <Center maw={400} h={100} mx="auto">
         <Avatar.Group spacing="sm">
           <Avatar
@@ -107,46 +160,62 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
         placeholder="Nome"
         {...inputProps}
         {...form.getInputProps('name')}
-        value={'João'}
+        value={formFields.name}
+        onChange={handleFieldChange('name')}
       />
-      <TextInput
-        label="Telefone"
-        placeholder="Telefone"
-        {...inputProps}
-        {...form.getInputProps('phone')}
-        value={'11952553102'}
-      />
-      <TextInput
-        label="CPF"
-        placeholder="CPF"
-        {...inputProps}
-        {...form.getInputProps('cpf')}
-        value={'18656306081'}
-      />
-      <DateInput
-        label="Data de Nascimento"
-        placeholder="Data de nascimento"
-        {...inputProps}
-        valueFormat="DD/MM/YYYY"
-        {...form.getInputProps('birthDate')}
-        locale={'pt-BR'}
-        value={new Date(1999, 6, 1)}
-      />
-      <Select
-        label="Gênero"
-        placeholder="Escolha uma opção"
-        data={genresData}
-        {...inputProps}
-        {...form.getInputProps('genre')}
-        value={'male'}
-      />
+      <SimpleGrid cols={2}
+        breakpoints={[
+          { maxWidth: '500', cols: 1, verticalSpacing: "0" },
+        ]}>
+        <TextInput
+          label="Telefone"
+          placeholder="Telefone"
+          {...inputProps}
+          {...form.getInputProps('phone')}
+          value={formFields.phone}
+          onChange={handleFieldChange('phone')}
+        />
+        <TextInput
+          label="CPF"
+          placeholder="CPF"
+          {...inputProps}
+          {...form.getInputProps('cpf')}
+          value={formFields.cpf}
+          onChange={handleFieldChange('cpf')}
+        />
+      </SimpleGrid>
+      <SimpleGrid cols={2}
+        breakpoints={[
+          { maxWidth: '500', cols: 1, verticalSpacing: "0" },
+        ]}>
+        <DateInput
+          label="Data de Nascimento"
+          placeholder="Data de nascimento"
+          {...inputProps}
+          valueFormat="DD/MM/YYYY"
+          {...form.getInputProps('birthDate')}
+          locale={'pt-BR'}
+          value={new Date(1999, 6, 1)}
+        />
+        <Select
+          label="Gênero"
+          placeholder="Escolha uma opção"
+          data={genresData}
+          {...inputProps}
+          {...form.getInputProps('genre')}
+          value={formFields.genre}
+          onChange={handleFieldChange('genre')}
+
+        />
+      </SimpleGrid>
       <MultiSelect
         data={data}
         label="Lista de interesses"
         placeholder="Pick all that you like"
         {...inputProps}
         {...form.getInputProps('interests')}
-        value={['react', 'ng']}
+        value={formFields.interests}
+        onChange={handleFieldChange('interests')}
       />
       <Center>
         <Button type="submit" mt="xl" radius="xl">

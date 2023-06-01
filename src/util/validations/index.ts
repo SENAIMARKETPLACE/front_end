@@ -3,32 +3,22 @@ export const validates = {
     email: validateEmail,
     simplePassword: validateSimplePassword,
     safePassword: validateSafePassword,
-  }
+}
 
 
-function validateName (name: string) {
-    const length = /\D{8,50}$/;
+function validateName(name: string) {
+    const regexEmail = /\D{6,50}$/;
 
-    if (length.test(name)) {
-        return {
-            error: false,
-            msg: '',
-        }
-    } else {
-        return {
-            error: true,
-            msg: 'O nome deve conter de 8 a 50 letras.'
-        }
-    }    
-  };
+    return regexEmail.test(name);
+};
 
-function validateEmail (email:string) {
+function validateEmail(email: string) {
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
 
     return regexEmail.test(email);
 }
 
-function validateSimplePassword (password:string) {
+function validateSimplePassword(password: string) {
     const length = /^[0-9a-zA-Z$*&@#]{8,16}$/;
 
     if (!length.test(password)) {
@@ -44,7 +34,7 @@ function validateSimplePassword (password:string) {
     };
 }
 
-function  validateSafePassword(password:string) {
+function validateSafePassword(password: string) {
     const includeNumber = /^(?=.*\d)/;
     const includeLowercase = /^(?=.*[a-z])/;
     const includeUppercase = /^(?=.*[A-Z])/;
