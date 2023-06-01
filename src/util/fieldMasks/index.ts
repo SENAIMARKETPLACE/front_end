@@ -41,8 +41,8 @@ function maskCNPJ (value: string) {
     .replace(/(-\d{2})\d+?$/, "$1");
 };
 
-function onlyLetters (value: string) {
-  return value.replace(/\d/g, "")
+function onlyLetters(value: string) {
+  return value.replace(/\d+/g, "");
 }
 
 function onlyNumbers (value: string) {

@@ -4,11 +4,9 @@ import {
   Button,
   Center,
   MultiSelect,
-  NumberInput,
   Select,
   TextInput,
   Modal,
-  Group,
   SimpleGrid,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -18,7 +16,6 @@ import { IconEdit } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { validates } from 'util/validations';
 import masks from 'util/fieldMasks';
-import { useState } from 'react';
 
 interface PersonalDataProps {
   inputProps: object;
@@ -45,67 +42,47 @@ const genresData = [
 const PersonalData = ({ inputProps }: PersonalDataProps) => {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const [name, setName] = useState('');
-
   const form = useForm({
-    initialValues: { name: '', phone: '', cpf: '', birthDate: '', genre: '', interests: '' },
+    initialValues: {
+      name: 'João Abreu',
+      email: 'sollaris@gmail.com',
+      phone: `${masks.phone('11111111111')}`,
+      cpf: `${masks.cpf('52543043080')}`,
+      birthDate: new Date(1999, 6, 1),
+      genre: 'Masculino',
+      interests: ['react', 'ng'],
+    },
 
-    // functions will be used to validate values at corresponding key
+    // Funções que serão usadas para validar os valores nos respectivos campos
     validate: {
       name: (value) =>
-        (validates.name(value) ? null : 'O nome deve conter no mínimo 6 letras.'),
+        validates.name(value) ? null : 'O nome deve ter ao menos 6 letras.',
+      email: (value) => (validates.email(value) ? null : 'E-mail inválido.'),
       phone: (value) =>
-        value.length < 14 ? null : 'O número de telefone deve ter ao menos 12 dígitos.'
-    
+        value.length >= 14 ? null : 'O telefone deve conter DDD e 9 dígitos.',
+      cpf: (value) => {
+        const errors: Array<string> = [];
+
+        value.length === 14
+          ? null
+          : errors.push('O CPF informado deve ter 11 dígitos.');
+
+        validates.cpf(value) ? null : errors.push('CPF inválido.');
+
+        return errors.length > 0 ? errors[0] : null;
       },
+      interests: (value) =>
+        value.length > 0 ? null : 'Você deve selecionar ao menos uma opção',
+    },
   });
 
-  const [formFields, setFormFields] = useState({
-    name: masks.letters('João'),
-    phone: masks.phone('(11) 91234-5678'),
-    email: 'example@example.com',
-    cpf: masks.cpf('33546058046'),
-    genre: 'Masculino',
-    interests: ['react', 'ng']
-    // cpf: masks.cpf()
-    // Outros campos do formulário e valores iniciais
-  });
-
-  const handleFieldChange = (fieldName: string) => (event: any) => {
-    const inputValue = event.target.value;
-    let maskedValue: any;
-
-    // Aplica a função de máscara correspondente ao campo
-    switch (fieldName) {
-      case 'name':
-        maskedValue = masks.letters(inputValue);
-        break;
-      case 'phone':
-        maskedValue = masks.phone(inputValue);
-        break;
-      case 'email':
-        maskedValue = inputValue;
-        break;
-      case 'cpf':
-        maskedValue = masks.cpf(inputValue);
-        break;
-      // case 'genre':
-      //   maskedValue = inputValue;
-      //   break;
-      case 'interests':
-        maskedValue = inputValue;
-        break;
-      default:
-        // Tratar outras condições ou valores padrão
-        break;
-    }
-    // Adicione mais blocos else if para outros campos e funções de máscara
-
-    setFormFields((prevFields) => ({
-      ...prevFields,
-      [fieldName]: maskedValue,
-    }));
-  };
+  const handleInputChange =
+    (fieldName: string, maskFunction?: Function) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = event.target.value;
+      const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
+      form.setFieldValue(fieldName, maskedValue);
+    };
 
   return (
     <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
@@ -160,42 +137,44 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
         placeholder="Nome"
         {...inputProps}
         {...form.getInputProps('name')}
-        value={formFields.name}
-        onChange={handleFieldChange('name')}
+        onChange={handleInputChange('name', masks.letters)}
       />
-      <SimpleGrid cols={2}
-        breakpoints={[
-          { maxWidth: '500', cols: 1, verticalSpacing: "0" },
-        ]}>
+      <TextInput
+        label="E-mail"
+        placeholder="E-mail"
+        {...inputProps}
+        {...form.getInputProps('email')}
+        onChange={handleInputChange('email')}
+      />
+      <SimpleGrid
+        cols={2}
+        breakpoints={[{ maxWidth: '500', cols: 1, verticalSpacing: '0' }]}
+      >
         <TextInput
           label="Telefone"
           placeholder="Telefone"
           {...inputProps}
           {...form.getInputProps('phone')}
-          value={formFields.phone}
-          onChange={handleFieldChange('phone')}
+          onChange={handleInputChange('phone', masks.phone)}
         />
         <TextInput
           label="CPF"
           placeholder="CPF"
           {...inputProps}
           {...form.getInputProps('cpf')}
-          value={formFields.cpf}
-          onChange={handleFieldChange('cpf')}
+          onChange={handleInputChange('cpf', masks.cpf)}
         />
       </SimpleGrid>
-      <SimpleGrid cols={2}
-        breakpoints={[
-          { maxWidth: '500', cols: 1, verticalSpacing: "0" },
-        ]}>
+      <SimpleGrid
+        cols={2}
+        breakpoints={[{ maxWidth: '500', cols: 1, verticalSpacing: '0' }]}
+      >
         <DateInput
           label="Data de Nascimento"
           placeholder="Data de nascimento"
           {...inputProps}
           valueFormat="DD/MM/YYYY"
           {...form.getInputProps('birthDate')}
-          locale={'pt-BR'}
-          value={new Date(1999, 6, 1)}
         />
         <Select
           label="Gênero"
@@ -203,19 +182,14 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
           data={genresData}
           {...inputProps}
           {...form.getInputProps('genre')}
-          value={formFields.genre}
-          onChange={handleFieldChange('genre')}
-
         />
       </SimpleGrid>
       <MultiSelect
         data={data}
         label="Lista de interesses"
-        placeholder="Pick all that you like"
+        placeholder="Escolha suas categorias de interesse."
         {...inputProps}
         {...form.getInputProps('interests')}
-        value={formFields.interests}
-        onChange={handleFieldChange('interests')}
       />
       <Center>
         <Button type="submit" mt="xl" radius="xl">
