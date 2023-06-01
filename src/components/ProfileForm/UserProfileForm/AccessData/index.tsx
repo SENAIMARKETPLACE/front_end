@@ -2,6 +2,7 @@ import { Button, Center, PasswordInput, SimpleGrid } from '@mantine/core';
 import styles from './AccessData.module.scss';
 import { useForm } from '@mantine/form';
 import { validates } from 'util/validations';
+import StrongPassword from 'components/StrongPassword';
 
 interface AccessDataProps {
   inputProps: object;
@@ -10,7 +11,7 @@ interface AccessDataProps {
 const AccessData = ({ inputProps }: AccessDataProps) => {
   const form = useForm({
     initialValues: {
-      password: 'admin',
+      password: '',
       newPassword: '',
       confirmNewPassword: '',
     },
@@ -38,22 +39,20 @@ const AccessData = ({ inputProps }: AccessDataProps) => {
           placeholder="Senha atual"
           {...inputProps}
           {...form.getInputProps('password')}
-          required={false}
         />
+        <StrongPassword />
         <SimpleGrid cols={2}>
           <PasswordInput
             label="Nova Senha"
-            placeholder="Email"
+            placeholder="Digite a nova senha"
             {...inputProps}
             // {...form.getInputProps('email')}
-            required={false}
           />
           <PasswordInput
             label="Confirme a nova senha"
-            placeholder="Email"
+            placeholder="Confirme a nova senha"
             {...inputProps}
             // {...form.getInputProps('email')}
-            required={false}
           />
         </SimpleGrid>
 
