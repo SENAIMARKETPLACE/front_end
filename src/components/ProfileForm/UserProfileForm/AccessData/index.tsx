@@ -9,16 +9,47 @@ interface AccessDataProps {
 }
 
 const AccessData = ({ inputProps }: AccessDataProps) => {
-  const form = useForm({
+  const form: any = useForm({
     initialValues: {
       password: '',
       newPassword: '',
-      confirmNewPassword: '',
+      confirmPassword: '',
     },
 
     // functions will be used to validate values at corresponding key
     validate: {
-      password: (value) => (value.length > 0 ? null : 'Digite sua senha'),
+      password: (value) => {
+        const errors: Array<string> = [];
+
+        value.length > 0 ? null : errors.push('Digite sua senha.');
+
+        value === 'admin' ? null : errors.push('Senha incorreta.');
+
+        return errors.length > 0 ? errors[0] : null;
+      },
+      newPassword: (value) => {
+        const errors: Array<string> = [];
+
+        /[0-9]/.test(value) ? null : errors.push('Includes number');
+
+        /[a-z]/.test(value) ? null : errors.push('Includes lowercase letter');
+
+        /[A-Z]/.test(value) ? null : errors.push('Includes uppercase letter');
+
+        /[$&+,:;=?@#|'<>.^*()%!-]/.test(value)
+          ? null
+          : errors.push('Includes special symbol');
+
+        value.length >= 8
+          ? null
+          : errors.push('A senha deve ter no mínimo 8 caracteres.');
+
+        return errors.length > 0 ? errors[0] : null;
+      },
+      confirmPassword: (value) =>
+        form.values.newPassword === form.values.confirmPassword
+          ? null
+          : 'As senhas digitadas são diferentes.',
     },
   });
 
@@ -40,18 +71,27 @@ const AccessData = ({ inputProps }: AccessDataProps) => {
           {...inputProps}
           {...form.getInputProps('password')}
         />
-        <StrongPassword />
+
         <SimpleGrid cols={2}>
+          {/* <StrongPassword
+            label={'Digite sua nova senha'}
+            placeholder={'Confirme sua senha'}
+            props={inputProps}
+            form={form}
+            name={'newPassword'}
+          /> */}
           <PasswordInput
             label="Nova Senha"
             placeholder="Digite a nova senha"
             {...inputProps}
-            // {...form.getInputProps('email')}
+            {...form.getInputProps('newPassword')}
           />
           <PasswordInput
             label="Confirme a nova senha"
             placeholder="Confirme a nova senha"
             {...inputProps}
+            {...form.getInputProps('confirmPassword')}
+
             // {...form.getInputProps('email')}
           />
         </SimpleGrid>

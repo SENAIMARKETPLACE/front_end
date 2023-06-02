@@ -12,10 +12,10 @@ import {
 import { useForm } from '@mantine/form';
 import { DateInput } from '@mantine/dates';
 import 'dayjs/locale/ru';
-import { IconEdit } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { validates } from 'util/validations';
 import masks from 'util/fieldMasks';
+import ModalPhotoProfile from 'components/Modais/ModalPhotoProfile';
 
 interface PersonalDataProps {
   inputProps: object;
@@ -32,6 +32,7 @@ const data = [
   { value: 'blitz', label: 'Blitz.js' },
 ];
 
+// Simulando gêneros
 const genresData = [
   { value: 'Masculino', label: 'Masculino' },
   { value: 'ng', label: 'Angular' },
@@ -39,10 +40,13 @@ const genresData = [
   { value: 'vue', label: 'Vue' },
 ];
 
-const PersonalData = ({ inputProps }: PersonalDataProps) => {
-  const [opened, { open, close }] = useDisclosure(false);
+// Simulando foto de perfil
+const currentPhoto: string =
+  'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60';
 
+const PersonalData = ({ inputProps }: PersonalDataProps) => {
   const form = useForm({
+    // Valores que serão substituídos pelo GET. Mantenha as máscaras.
     initialValues: {
       name: 'João Abreu',
       email: 'sollaris@gmail.com',
@@ -53,7 +57,7 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
       interests: ['react', 'ng'],
     },
 
-    // Funções que serão usadas para validar os valores nos respectivos campos
+    // Validações dos campos
     validate: {
       name: (value) =>
         validates.name(value) ? null : 'O nome deve ter ao menos 6 letras.',
@@ -76,6 +80,7 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
     },
   });
 
+  // Função genérica que atualiza valor do Input que o chama, substituindo useState.
   const handleInputChange =
     (fieldName: string, maskFunction?: Function) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,15 +90,10 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
     };
 
   return (
-    <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
-      <Center maw={400} h={100} mx="auto">
+    <section>
+      <Center maw={400} h={100} mx="auto" mt={'xs'}>
         <Avatar.Group spacing="sm">
-          <Avatar
-            src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60"
-            size={100}
-            radius={'50%'}
-            mb={20}
-          />
+          <Avatar src={currentPhoto} size={100} radius={'50%'} mb={20} />
           <Avatar
             color="dark"
             radius="xl"
@@ -102,101 +102,80 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
             right={16}
             style={{ cursor: 'pointer' }}
           >
-            <Modal opened={opened} onClose={close} title="Pré-visualização">
-              <Center maw={400} h={100} mx="auto">
-                <Avatar
-                  src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60"
-                  size={100}
-                  radius={'50%'}
-                  mb={20}
-                  mt={20}
-                />
-              </Center>
-              <TextInput
-                data-autofocus
-                label="Insira a URL da imagem"
-                placeholder="URL"
-                mt="md"
-                value={
-                  'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60'
-                }
-              />
-              <Center mx="auto" mt={'xl'}>
-                <Button onClick={close} radius={'xl'}>
-                  Salvar
-                </Button>
-              </Center>
-            </Modal>
-
-            <IconEdit onClick={open} />
+            <ModalPhotoProfile
+              inputProps={inputProps}
+              currentPhoto={currentPhoto}
+            />
           </Avatar>
         </Avatar.Group>
       </Center>
-      <TextInput
-        label="Nome"
-        placeholder="Nome"
-        {...inputProps}
-        {...form.getInputProps('name')}
-        onChange={handleInputChange('name', masks.letters)}
-      />
-      <TextInput
-        label="E-mail"
-        placeholder="E-mail"
-        {...inputProps}
-        {...form.getInputProps('email')}
-        onChange={handleInputChange('email')}
-      />
-      <SimpleGrid
-        cols={2}
-        breakpoints={[{ maxWidth: '500', cols: 1, verticalSpacing: '0' }]}
-      >
+      <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
         <TextInput
-          label="Telefone"
-          placeholder="Telefone"
+          label="Nome"
+          placeholder="Nome"
           {...inputProps}
-          {...form.getInputProps('phone')}
-          onChange={handleInputChange('phone', masks.phone)}
+          {...form.getInputProps('name')}
+          onChange={handleInputChange('name', masks.letters)}
         />
         <TextInput
-          label="CPF"
-          placeholder="CPF"
+          label="E-mail"
+          placeholder="E-mail"
           {...inputProps}
-          {...form.getInputProps('cpf')}
-          onChange={handleInputChange('cpf', masks.cpf)}
+          {...form.getInputProps('email')}
+          onChange={handleInputChange('email')}
         />
-      </SimpleGrid>
-      <SimpleGrid
-        cols={2}
-        breakpoints={[{ maxWidth: '500', cols: 1, verticalSpacing: '0' }]}
-      >
-        <DateInput
-          label="Data de Nascimento"
-          placeholder="Data de nascimento"
+        <SimpleGrid
+          cols={2}
+          breakpoints={[{ maxWidth: '500', cols: 1, verticalSpacing: '0' }]}
+        >
+          <TextInput
+            label="Telefone"
+            placeholder="Telefone"
+            {...inputProps}
+            {...form.getInputProps('phone')}
+            onChange={handleInputChange('phone', masks.phone)}
+          />
+          <TextInput
+            label="CPF"
+            placeholder="CPF"
+            {...inputProps}
+            {...form.getInputProps('cpf')}
+            onChange={handleInputChange('cpf', masks.cpf)}
+          />
+        </SimpleGrid>
+        <SimpleGrid
+          cols={2}
+          breakpoints={[{ maxWidth: '500', cols: 1, verticalSpacing: '0' }]}
+        >
+          <DateInput
+            label="Data de Nascimento"
+            placeholder="Data de nascimento"
+            {...inputProps}
+            valueFormat="DD/MM/YYYY"
+            {...form.getInputProps('birthDate')}
+          />
+          <Select
+            label="Gênero"
+            placeholder="Escolha uma opção"
+            data={genresData}
+            {...inputProps}
+            {...form.getInputProps('genre')}
+          />
+        </SimpleGrid>
+        <MultiSelect
+          data={data}
+          label="Lista de interesses"
+          placeholder="Escolha suas categorias de interesse."
           {...inputProps}
-          valueFormat="DD/MM/YYYY"
-          {...form.getInputProps('birthDate')}
+          {...form.getInputProps('interests')}
         />
-        <Select
-          label="Gênero"
-          placeholder="Escolha uma opção"
-          data={genresData}
-          {...inputProps}
-          {...form.getInputProps('genre')}
-        />
-      </SimpleGrid>
-      <MultiSelect
-        data={data}
-        label="Lista de interesses"
-        placeholder="Escolha suas categorias de interesse."
-        {...inputProps}
-        {...form.getInputProps('interests')}
-      />
-      <Center>
-        <Button type="submit" mt="xl" radius="xl">
-          Salvar
-        </Button>
-      </Center>
-    </form>
+        <Center>
+          <Button type="submit" mt="xl" radius="xl">
+            Salvar
+          </Button>
+        </Center>
+      </form>
+    </section>
   );
 };
 

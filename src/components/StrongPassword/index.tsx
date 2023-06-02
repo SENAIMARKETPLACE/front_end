@@ -3,6 +3,14 @@ import { useState } from 'react';
 import { IconX, IconCheck } from '@tabler/icons-react';
 import { PasswordInput, Progress, Text, Popover, Box } from '@mantine/core';
 
+interface StrongPasswordProps {
+  name: string;
+  label: string;
+  placeholder: string;
+  props: any;
+  form: any;
+}
+
 function PasswordRequirement({
   meets,
   label,
@@ -42,7 +50,13 @@ function getStrength(password: string) {
   return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
 }
 
-export default function StrongPassword() {
+export default function StrongPassword({
+  name,
+  label,
+  placeholder,
+  props,
+  form,
+}: StrongPasswordProps) {
   const [popoverOpened, setPopoverOpened] = useState(false);
   const [value, setValue] = useState('');
   const checks = requirements.map((requirement, index) => (
@@ -57,7 +71,7 @@ export default function StrongPassword() {
   const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
 
   return (
-    <Box maw={340} mx="auto">
+    <Box>
       <Popover
         opened={popoverOpened}
         position="bottom"
@@ -71,8 +85,10 @@ export default function StrongPassword() {
           >
             <PasswordInput
               withAsterisk
-              label="Your password"
-              placeholder="Your password"
+              label={`${label}`}
+              placeholder={`${placeholder}`}
+              {...props}
+              {...form.getInputProps(`${name}`)}
               value={value}
               onChange={(event) => setValue(event.currentTarget.value)}
             />

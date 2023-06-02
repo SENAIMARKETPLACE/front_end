@@ -156,6 +156,18 @@
         }
       ],
       "id": 15
+    },
+    {
+      "usuario_id": "1",
+      "endereco_id": "1",
+      "pagamento_id": "3",
+      "produtos_selecionados": [
+        {
+          "produto_detalhe_id": 1,
+          "quantidade": 4
+        }
+      ],
+      "id": 16
     }
   ],
   "pedidos-get": [],
