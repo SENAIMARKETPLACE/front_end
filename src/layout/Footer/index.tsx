@@ -1,6 +1,9 @@
-import styles from "./Footer.module.scss";
-import logo from "../../../public/images/logoprincipal.png";
-import { FaInstagram, FaRegEnvelope, FaWhatsapp } from "react-icons/fa";
+import styles from './Footer.module.scss';
+import logo from '../../../public/images/Logo.svg';
+import { FaInstagram, FaRegEnvelope, FaWhatsapp } from 'react-icons/fa';
+
+const comingSoonMsg = () => alert('Em breve! Aguardem! ;)');
+
 const FooterSollaris = () => {
   return (
     <footer className={styles.sectionFooter}>
@@ -9,13 +12,13 @@ const FooterSollaris = () => {
       </div>
       <ul className={styles.sectionFooter__listaContatos}>
         <li>
-          <FaInstagram />
+          <FaInstagram onClick={comingSoonMsg} />
         </li>
         <li>
-          <FaRegEnvelope />
+          <FaRegEnvelope onClick={comingSoonMsg} />
         </li>
         <li>
-          <FaWhatsapp />
+          <FaWhatsapp onClick={comingSoonMsg} />
         </li>
       </ul>
 
