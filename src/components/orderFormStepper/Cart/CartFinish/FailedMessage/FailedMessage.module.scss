@@ -1,3 +1,5 @@
+@import '/src/styles/brand';
+
 .mensagemPedido {
     height: 50vh;
     display: flex;
@@ -23,6 +25,11 @@
     }
     .mensagemPedido__falha__descricao{
         text-align: center;
+        p{
+            color: map-get($map: $colors, $key: text-900);
+            font-size: larger;
+            text-transform: capitalize;
+        }
     }
     
 

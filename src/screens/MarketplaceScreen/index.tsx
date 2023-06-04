@@ -16,7 +16,6 @@ import { BsBag } from 'react-icons/bs';
 import Carrinho from '../../components/Carrinho';
 import MarketplaceHeader from 'components/MarketplaceProduct/MarketplaceHeader';
 import Link from 'next/link';
-import MarketplaceProduto from 'pages/marketplace-produto/[id]';
 import LayoutMarketplace from 'layout/LayoutMarketplace';
 import MarketplaceHome from 'screens/MarketplaceHome';
 

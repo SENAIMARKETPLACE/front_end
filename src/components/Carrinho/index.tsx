@@ -153,7 +153,7 @@ const Carrinho = ({
             <button className={styles.visualizacoesButtons__primaryButton}>
               Continuar Comprando
             </button>
-            <Link href="/marketplace-compra">
+            <Link href="/marketplace/finalizar-compra">
               <button className={styles.visualizacoesButtons__secondButton}>
                 Finalizar Compra
               </button>

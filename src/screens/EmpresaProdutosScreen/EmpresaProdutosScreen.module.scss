@@ -2,10 +2,10 @@
 
 .page_container {
   display: flex;
-  background-color: #f7f8fa;
   padding-bottom: 20px;
+
   .main_content {
-    padding: 40px;
+
 
     .title_container {
       display: flex;
@@ -62,14 +62,21 @@
       margin: 20px 0;
     }
 
-    .products__grid {
+    .containerProdutuct {
       display: flex;
-      align-items: center;
-      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
       flex-wrap: wrap;
-      row-gap: 50px;
-      column-gap: 30px;
+      gap: 30px;
       margin: 0 10px;
+
+      .products__grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        column-gap: 90px;
+        padding: 0;
+      }
     }
 
     .products__options {

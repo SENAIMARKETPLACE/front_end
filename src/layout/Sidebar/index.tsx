@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.scss';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Navbar,
   Center,
@@ -20,6 +20,8 @@ import {
   IconSettings,
   IconLogout,
   IconHeart,
+  IconBuildingStore,
+  IconTag,
 } from '@tabler/icons-react';
 import LogoSollaris from '/public/images/logo.svg';
 import { Avatar } from '@mui/material';
@@ -81,18 +83,39 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 
 const mockdata = [
   { icon: IconHome2, label: 'Início', path: '/marketplace' },
-  { icon: IconCalendarStats, label: 'Pedidos', path: '/pedidos' },
-  { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
-  { icon: IconUser, label: 'Perfil', path: '/perfil' },
+  { icon: IconCalendarStats, label: 'Pedidos', path: '/marketplace/pedidos' },
+  { icon: IconHeart, label: 'Favoritos', path: '/marketplace/favoritos' },
+  { icon: IconUser, label: 'Perfil', path: '/marketplace/perfil' },
 ];
+
+const mockDataBusiness = [
+  {icon: IconBuildingStore, label: "Minha Loja", path: "/empresa/minha-loja" },
+  {icon: IconTag, label: "Meus Produtos", path: "/empresa/produtos" }
+]
+
 
 export function Sidebar() {
   const router = useRouter();
   const { pathname } = router;
+  const [isUser, setIsUser] =useState(false)
+
+
+
+  useEffect(() => {
+    if(pathname.includes("marketplace")){
+      setIsUser(true)
+    }else{
+      setIsUser(false)
+    }
+      
+  
+  })
+
+
 
   const [active, setActive] = useState(0);
 
-  const links = mockdata.map((link, index) => (
+  const linksEmpresa = mockDataBusiness.map((link, index) => (
     <Link href={link.path} key={link.label}>
       <NavbarLink
         {...link}
@@ -103,17 +126,27 @@ export function Sidebar() {
     </Link>
   ));
 
+  const linksMarketplace = mockdata.map((link, index) => (
+    <Link href={link.path} key={link.label}>
+      <NavbarLink
+        {...link}
+        key={link.label}
+        active={pathname === link.path}
+        onClick={() => setActive(index)}
+      />
+    </Link>
+  ))
+
   return (
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
-        <Link href={'/marketplace'}>
+        <Link href={'minha-loja'}>
         <img src={LogoSollaris.src} alt="Logo do Sollaris" />
-
         </Link>
       </Center>
       <Navbar.Section grow mt={50}>
         <Stack justify="center" spacing={0}>
-          {links}
+          {isUser ? linksMarketplace : linksEmpresa}
         </Stack>
       </Navbar.Section>
       <Navbar.Section>

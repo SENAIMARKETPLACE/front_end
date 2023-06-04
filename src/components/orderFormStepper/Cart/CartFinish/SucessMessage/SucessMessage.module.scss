@@ -1,3 +1,6 @@
+
+@import '/src/styles/brand';
+
 .mensagemPedido__sucesso {
     height: 50vh;
     display: flex;
@@ -20,8 +23,11 @@
         color: #06C270
     }
 
-    .descricao__concluido{
+    .descricao__concluido {
         margin-top: 50px;
+        color: map-get($map: $colors, $key: text-900);
+        font-size: larger;
+        text-transform: capitalize;
     }
 
     .mensagemPedido__buttons {
@@ -30,7 +36,7 @@
         column-gap: 20px;
 
         .buttons {
-            width:400px;
+            width: 400px;
             padding: 10px;
             cursor: pointer;
             border: none;

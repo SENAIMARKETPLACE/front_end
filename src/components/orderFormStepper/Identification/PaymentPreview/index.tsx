@@ -45,8 +45,8 @@ interface props {
   nextStep: any;
   overlay: boolean;
   valorTotal: string;
-  setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
-  alterIsOrderFinishedProps: (newValue: number) => void;
+  setarQuantidadeAoExcluirProps?: (novaQuantidade: number) => void;
+  alterIsOrderFinishedProps?: (newValue: number) => void;
 }
 
 const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantidadeAoExcluirProps, alterIsOrderFinishedProps}: props) => {
@@ -93,7 +93,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
 
   const cadastrarPedido = (pedidoAPostar: IPedidoPost) => {
     httpApiMockada
-      .post("/pedidos-post", pedidoAPostar)
+      .post("/pedidos-pst", pedidoAPostar)
       .then((response) => alterarLocalStorageAposCadastrarPedido())
       .catch((error) => alterIsOrderFinishedProps(2));
   };
@@ -116,18 +116,18 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
             onTabChange={(value) => setPagamentoSelecionado(value)}
           >
             <Tabs.List>
-              <Tabs.Tab value="1" icon={<IconCreditCard size="0.8rem" />}>
+              <Tabs.Tab value="3" icon={<IconCreditCard size="0.8rem" />}>
                 Crédito
               </Tabs.Tab>
-              <Tabs.Tab value="2" icon={<IconQrcode size="0.8rem" />}>
+              <Tabs.Tab value="1" icon={<IconQrcode size="0.8rem" />}>
                 Pix
               </Tabs.Tab>
-              <Tabs.Tab value="3" icon={<IconScan size="0.8rem" />}>
+              <Tabs.Tab value="4" icon={<IconScan size="0.8rem" />}>
                 Boleto
               </Tabs.Tab>
             </Tabs.List>
 
-            <Tabs.Panel value="1" pt="xs">
+            <Tabs.Panel value="3" pt="xs">
               <TextInput
                 label="Dados do cartão"
                 placeholder="Número do cartão"
@@ -160,7 +160,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
               />
             </Tabs.Panel>
 
-            <Tabs.Panel value="2" pt="xs">
+            <Tabs.Panel value="1" pt="xs">
               <Group>
                 <TextInput
                   label="Chave PIX"
@@ -180,7 +180,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
               />
             </Tabs.Panel>
 
-            <Tabs.Panel value="3" pt="xs">
+            <Tabs.Panel value="4" pt="xs">
               <Group>
                 <TextInput
                   label="Código de Barras:"

@@ -19,6 +19,7 @@ import { MdGridOn, MdGridView, MdOutlineList } from "react-icons/md";
 import ProductItemList from "../../patterns/Products/List";
 import ProdutoItemLista from "../../components/EmpresaProduto/ProdutoItemLista";
 import ProdutoItemGrid from "../../components/EmpresaProduto/ProdutoItemGrid";
+import { ISubcategory } from "compartilhado/ISubcategory";
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
@@ -27,8 +28,8 @@ const EmpresaProdutosScreen = () => {
   const [snackbarEditOpen, setSnackbarEditOpen] = useState(false);
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
   const [mensagem, setMensagem] = useState("");
-  const [catchCategorias, setCatchCategorias] = useState<string[]>([]);
-  const [isButtonListAtivo, setIsButtonListAtivo] = useState(true);
+  const [catchCategorias, setCatchCategorias] = useState<ICategory[]>([]);
+  const [isButtonListAtivo, setIsButtonListAtivo] = useState(false);
   const [modoLista, setModoLista] = useState(true);
 
 
@@ -82,23 +83,30 @@ const EmpresaProdutosScreen = () => {
     try {
       // const response = await httpProduto.get("/api/products");
       // /api/products/my_products/{id}
-      const response = await httpProduto.get("/api/products");
-      setProducts(response.data.content);
+      const response = await httpApiMockada.get("/produto-get");
+      setProducts(response.data);
     } catch (error) {
       console.error(error);
     }
   }
 
 
-  async function getCategoriesAndSubs(){
-    try{
-      const response = await httpCategoria.get("/api/categories"); 
-      setCatchCategorias(response.data.content);
-      console.log(response.data.content)
-    } catch (error){
-      console.log(error)
+  async function getCategoriesAndSubs(): Promise<void> {
+    try {
+      const response = await httpApiMockada.get("/categoriasSubcategorias");
+      const categories: ICategory[] = response.data.map((categoryData: any) => {
+        const { sub_categorias, ...category } = categoryData;
+        const subcategories: ISubcategory[] = sub_categorias.map((subcategoryData: any) => ({
+          id: subcategoryData.id,
+          nome: subcategoryData.nome
+        }));
+        return { ...category, sub_categorias: subcategories };
+      });
+      
+      setCatchCategorias(categories);
+    } catch (error) {
+      console.log(error);
     }
-
   }
 
   // useEffect(() => {
@@ -166,7 +174,7 @@ const EmpresaProdutosScreen = () => {
       </Stack>
 
       <div className={styles.page_container}>
-        <MenuLateralEmpresa />
+    
         <section className={styles.sectionViewProducts}>
           <EmpresaBanner image={Banner} alt="Capa da empresa" />
           <main className={styles.main_content}>
@@ -203,42 +211,44 @@ const EmpresaProdutosScreen = () => {
               <StatusAlert isOpen={isOpen} mensagem={mensagem} />
             </div>
 
-            <ul className={`${isButtonListAtivo? styles.products__list : styles.products__grid }`}>
-              {products.map((product) =>
-                isButtonListAtivo ? (
-                  <ProdutoItemLista
-                    categoriesAndSubCategories={catchCategorias}
-                    snackbarOpenEdit={snackbarEditOpen}
-                    setSnackbarEditOpen={setSnackbarEditOpen}
-                    snackbarDeleteOpen={snackbarDeleteOpen}
-                    setSnackbarDeleteOpen={setSnackbarDeleteOpen}
-                    setarLista={atualizarListaProdutos}
-                    id={product.id}
-                    key={product.id}
-                    photo={product.img}
-                    name={product.nome}
-                    price={product.preco}
-                    amount={product.detalhes_dos_produtos[0].quantidade}
-                  />
-                ) : (
-                  <ProdutoItemGrid
-                    categoriesAndSubCategories={catchCategorias}
-                    snackbarOpenEdit={snackbarEditOpen}
-                    setSnackbarEditOpen={setSnackbarEditOpen}
-                    snackbarDeleteOpen={snackbarDeleteOpen}
-                    setSnackbarDeleteOpen={setSnackbarDeleteOpen}
-                    setarLista={atualizarListaProdutos}
-                    id={product.id}
-                    key={product.id}
-                    photo={product.img}
-                    name={product.nome}
-                    subcategoria={product.categoria.sub_categoria.nome}
-                    price={product.preco}
-                    amount={product.detalhes_dos_produtos[0].quantidade}
-                  />
-                )
-              )}
-            </ul>
+            <div className={`${isButtonListAtivo ? "": styles.containerProdutuct}` }>
+              <ul className={`${isButtonListAtivo? styles.products__list : styles.products__grid }`}>
+                {products.map((product) =>
+                  isButtonListAtivo ? (
+                    <ProdutoItemLista
+                      categoriesAndSubCategories={catchCategorias}
+                      snackbarOpenEdit={snackbarEditOpen}
+                      setSnackbarEditOpen={setSnackbarEditOpen}
+                      snackbarDeleteOpen={snackbarDeleteOpen}
+                      setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                      setarLista={atualizarListaProdutos}
+                      id={product.id}
+                      key={product.id}
+                      photo={product.img}
+                      name={product.nome}
+                      price={product.preco}
+                      amount={product.detalhes_dos_produtos[0].quantidade}
+                    />
+                  ) : (
+                    <ProdutoItemGrid
+                      categoriesAndSubCategories={catchCategorias}
+                      snackbarOpenEdit={snackbarEditOpen}
+                      setSnackbarEditOpen={setSnackbarEditOpen}
+                      snackbarDeleteOpen={snackbarDeleteOpen}
+                      setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                      setarLista={atualizarListaProdutos}
+                      id={product.id}
+                      key={product.id}
+                      photo={product.img}
+                      name={product.nome}
+                      subcategoria={product.categoria.sub_categoria.nome}
+                      price={product.preco}
+                      amount={product.detalhes_dos_produtos[0].quantidade}
+                    />
+                  )
+                )}
+              </ul>
+            </div>
           </main>
         </section>
       </div>
