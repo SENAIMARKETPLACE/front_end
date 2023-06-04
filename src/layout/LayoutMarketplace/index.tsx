@@ -15,7 +15,7 @@ const LayoutMarketplace = ({
   children,
   quantidade,
 }: LayoutMarketplaceProps) => {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
 
   return (
     <>

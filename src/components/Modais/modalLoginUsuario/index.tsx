@@ -16,7 +16,6 @@ import styled from "styled-components";
 import { ILoginBody } from "compartilhado/ILoginBody";
 import { httpUsuario } from "../../../http";
 
-
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -28,8 +27,6 @@ const style = {
   display: "flex",
 };
 
-
-
 export default function ModalLoginEmpresa() {
   // Modal Settings
   const [open, setOpen] = useState(false);
@@ -37,8 +34,8 @@ export default function ModalLoginEmpresa() {
   const handleClose = () => setOpen(false);
   const [badLogin, setBadLogin] = useState(false);
   const router = useRouter();
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const MensagemBadRequest = styled.div`
     color: #cc3a3a;
@@ -63,27 +60,34 @@ export default function ModalLoginEmpresa() {
   });
 
   // ESSA VAI SER A FUNÇÃO de login
-  const realizarOLogin = (event: FormEvent<HTMLFormElement>, formValues: UseFormReturnType<{
-    email: string;
-    senha: string;
-  }, (values: {
-    email: string;
-    senha: string;
-  }) => {
-    email: string;
-    senha: string;
-  }>) => {
-
-    alert(JSON.stringify(formValues.values))
-    httpUsuario.post("api/users/login", formValues.values)
-      .then((resp) => { console.log(resp) })
+  const realizarOLogin = (
+    event: FormEvent<HTMLFormElement>,
+    formValues: UseFormReturnType<
+      {
+        email: string;
+        senha: string;
+      },
+      (values: {
+        email: string;
+        senha: string;
+      }) => {
+        email: string;
+        senha: string;
+      }
+    >
+  ) => {
+    alert(JSON.stringify(formValues.values));
+    httpUsuario
+      .post("api/users/login", formValues.values)
       .then((resp) => router.push("/marketplace"))
-      .catch((erro) => { setBadLogin(true) })
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => {
+        setBadLogin(true);
+      });
     event.preventDefault();
-
   };
-
-
 
   useEffect(() => {
     setIsFormValid(!form.isValid());
@@ -97,9 +101,7 @@ export default function ModalLoginEmpresa() {
 
   return (
     <div>
-      <Button className={styles.buttonLogin} onClick={handleOpen}>
-        Login Usuário
-      </Button>
+      <p onClick={handleOpen}>Usuário</p>
       <Modal
         aria-labelledby="Modal para cadastro de empresa"
         open={open}
@@ -126,9 +128,7 @@ export default function ModalLoginEmpresa() {
                   viver uma vida mais saudável e ativa.
                 </p>
               </div>
-              <form onSubmit={(e) =>
-                realizarOLogin(e, form)
-              }>
+              <form onSubmit={(e) => realizarOLogin(e, form)}>
                 <TextInput
                   label="Email"
                   placeholder="E-mail"
@@ -159,11 +159,14 @@ export default function ModalLoginEmpresa() {
                 </div>
 
                 <div className={styles.modal__leftSide__spaceToBadRequest}>
-                  {badLogin ? <MensagemBadRequest>
-                    Atleta, o login não foi bem-sucedido. Por favor, verifique suas
-                    informações de acesso e tente novamente.
-                  </MensagemBadRequest> : ""
-                  }
+                  {badLogin ? (
+                    <MensagemBadRequest>
+                      Atleta, o login não foi bem-sucedido. Por favor, verifique
+                      suas informações de acesso e tente novamente.
+                    </MensagemBadRequest>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className={styles.modal__leftSide__buttons}>
                   <Button

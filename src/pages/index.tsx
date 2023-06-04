@@ -1,11 +1,13 @@
 
-import React from 'react';
-import HomeScreen from '../screens/HomeScreen';
+import React, { useEffect } from 'react';
 import styles from '../styles/Home.module.scss'; 
+import { useRouter } from 'next/router';
 
 const Home= () => {
-    return(
-        <HomeScreen/>
-    )
+    const router = useRouter();
+    useEffect(() => {
+      router.push("/marketplace");
+    }, []);
+    return <></>;
 }
 export default Home;

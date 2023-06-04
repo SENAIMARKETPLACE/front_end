@@ -58,7 +58,7 @@ function Connected() {
 
 function Disconnected() {
   return (
-    <Menu shadow="md" width={200}>
+    <Menu shadow="md" width={200} closeOnItemClick={false} closeOnClickOutside={false}>
       <Menu.Target>
         {/* <Button leftIcon={<IconLogin />}>Entrar</Button> */}
         <Avatar className={styles.avatar} />
@@ -66,14 +66,14 @@ function Disconnected() {
 
       <Menu.Dropdown className={styles.avatar__list}>
         <Menu.Label>Como desejar acessar?</Menu.Label>
-        <Menu.Item icon={<IconCalendarStats size={14} />}>Empresa</Menu.Item>
-        <Menu.Item icon={<IconUser size={14} />}>Cliente</Menu.Item>
-        {/* <Menu.Item icon={<IconUser size={14} />}>
-          <ModalLoginEmpresa />
-        </Menu.Item>
+        {/* <Menu.Item icon={<IconCalendarStats size={14} />}>Empresa</Menu.Item>
+        <Menu.Item icon={<IconUser size={14} />}>Cliente</Menu.Item> */}
         <Menu.Item icon={<IconUser size={14} />}>
           <ModalLoginUsuario />
-        </Menu.Item> */}
+        </Menu.Item>
+        <Menu.Item icon={<IconCalendarStats size={14} />}>
+          <ModalLoginEmpresa />
+        </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   );

@@ -73,9 +73,9 @@ export default function ModalLoginEmpresa() {
 
   return (
     <div>
-      <Button className={styles.buttonLogin} onClick={handleOpen}>
-        Login Empresa
-      </Button>
+      <p onClick={handleOpen}>
+        Empresa
+      </p>
       <Modal
         aria-labelledby="Modal para cadastro de empresa"
         open={open}
