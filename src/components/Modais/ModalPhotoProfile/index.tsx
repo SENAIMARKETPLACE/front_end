@@ -3,27 +3,43 @@ import styles from './ModalPhotoProfile.module.scss';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
 import { IconEdit } from '@tabler/icons-react';
+import { useState } from 'react';
 
 interface ModalPhotoProfileProps {
   inputProps: object;
   currentPhoto: string;
+  updateProfilePhoto: Function;
 }
 
 const ModalPhotoProfile = ({
   inputProps,
   currentPhoto,
+  updateProfilePhoto,
 }: ModalPhotoProfileProps) => {
   const [opened, { open, close }] = useDisclosure(false);
+  const [previewPhoto, setPreviewPhoto] = useState(currentPhoto);
 
   const formPhoto = useForm({
     initialValues: {
-      url: currentPhoto,
+      url: '',
     },
     validate: {
-      url: (value: string) =>
-        value.length > 2
+      url: (value: string) => {
+        const errors: Array<string> = [];
+
+        /^(http|https):\/\//.test(value)
           ? null
-          : 'Certifique-se de que a url inicia com http:// ou https://',
+          : errors.push(
+              'Certifique-se de que a url inicie com http:// ou https://'
+            );
+        /\.(jpg|jpeg|png|gif|bmp)$/i.test(value)
+          ? null
+          : errors.push(
+              'A url deve terminar com um tipo válido de imagem (jpeg, jpg ou png)'
+            );
+
+        return errors.length > 0 ? errors[0] : null;
+      },
     },
   });
   return (
@@ -31,7 +47,7 @@ const ModalPhotoProfile = ({
       <Modal opened={opened} onClose={close} title="Pré-visualização">
         <Center maw={400} h={100} mx="auto">
           <Avatar
-            src={currentPhoto}
+            src={previewPhoto}
             size={100}
             radius={'50%'}
             mb={20}
@@ -41,14 +57,34 @@ const ModalPhotoProfile = ({
         <form onSubmit={formPhoto.onSubmit(console.log)}>
           <TextInput
             data-autofocus
-            label="Insira a URL da imagem"
-            placeholder="URL"
+            label="URL da imagem"
+            placeholder="Insira o link da imagem aqui"
             mt="md"
             {...inputProps}
             {...formPhoto.getInputProps('url')}
+            onBlur={() => {
+              formPhoto.values.url
+                ? setPreviewPhoto(formPhoto.values.url)
+                : null;
+              formPhoto.isValid()
+                ? alert(
+                    'Quando houver url inserida, adicionar um gif de carregamento.'
+                  )
+                : null;
+            }}
           />
           <Center mx="auto" mt={'xl'}>
-            <Button radius={'xl'} type="submit">
+            <Button
+              radius={'xl'}
+              type="submit"
+              onClick={() => {
+                if (formPhoto.isValid()) {
+                  alert('Exibir uma mensagem de salvo com sucesso!');
+                  updateProfilePhoto(formPhoto.values.url);
+                  close();
+                }
+              }}
+            >
               Salvar
             </Button>
           </Center>

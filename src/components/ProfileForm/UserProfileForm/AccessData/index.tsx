@@ -63,8 +63,8 @@ const AccessData = ({ inputProps }: AccessDataProps) => {
 
   return (
     <>
-      <h3 className={styles.title}>Altere seus dados de acesso:</h3>
       <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
+        <h3 className={styles.title}>Altere seus dados de acesso:</h3>
         <PasswordInput
           label="Senha Atual"
           placeholder="Senha atual"

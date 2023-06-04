@@ -16,6 +16,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { validates } from 'util/validations';
 import masks from 'util/fieldMasks';
 import ModalPhotoProfile from 'components/Modais/ModalPhotoProfile';
+import { useState } from 'react';
 
 interface PersonalDataProps {
   inputProps: object;
@@ -40,11 +41,16 @@ const genresData = [
   { value: 'vue', label: 'Vue' },
 ];
 
-// Simulando foto de perfil
-const currentPhoto: string =
-  'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60';
-
 const PersonalData = ({ inputProps }: PersonalDataProps) => {
+  // A URL de perfil deve vir no State abaixo
+  const [profilePhoto, setProfilePhoto] = useState(
+    'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg'
+  );
+
+  const updateProfilePhoto = (url: string) => {
+    setProfilePhoto(url);
+  };
+
   const form = useForm({
     // Valores que serão substituídos pelo GET. Mantenha as máscaras.
     initialValues: {
@@ -75,6 +81,22 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
 
         return errors.length > 0 ? errors[0] : null;
       },
+      birthDate: (value) => {
+        const dateOfBirth = new Date(value);
+        const currentDate = new Date();
+
+        let yearsDiff =
+          currentDate.getUTCFullYear() - dateOfBirth.getUTCFullYear();
+        const monthsDiff =
+          currentDate.getUTCMonth() - dateOfBirth.getUTCMonth();
+        const daysDiff = currentDate.getUTCDate() - dateOfBirth.getUTCDate();
+
+        if (monthsDiff < 0 || daysDiff < 0) yearsDiff--;
+
+        return yearsDiff >= 16
+          ? null
+          : 'Você deve ter no mínimo 16 anos de idade.';
+      },
       interests: (value) =>
         value.length > 0 ? null : 'Você deve selecionar ao menos uma opção',
     },
@@ -93,7 +115,7 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
     <section>
       <Center maw={400} h={100} mx="auto" mt={'xs'}>
         <Avatar.Group spacing="sm">
-          <Avatar src={currentPhoto} size={100} radius={'50%'} mb={20} />
+          <Avatar src={profilePhoto} size={100} radius={'50%'} mb={20} />
           <Avatar
             color="dark"
             radius="xl"
@@ -104,7 +126,8 @@ const PersonalData = ({ inputProps }: PersonalDataProps) => {
           >
             <ModalPhotoProfile
               inputProps={inputProps}
-              currentPhoto={currentPhoto}
+              currentPhoto={profilePhoto}
+              updateProfilePhoto={setProfilePhoto}
             />
           </Avatar>
         </Avatar.Group>
