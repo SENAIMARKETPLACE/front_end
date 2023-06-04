@@ -151,14 +151,7 @@ export default function ModalAddProduto({
       value: "CRIANÇA",
       label: "Criança",
     },
-  ].map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ));
-
-
-  
+  ].map((option) => ({ value: option.value, label: option.label }));
 
   const resgatarListaProdutos = () => {
     httpProduto
@@ -327,13 +320,14 @@ export default function ModalAddProduto({
     }));
 
     setOptionsCategories(transformarDados);
-  },);
+  });
 
   const [categoriaMantine, setCategoriaMantine] = useState("");
   const [subCategoriaMantine, setSubCategoriaMantine] = useState("");
+  const [genreMantine, genreCategoriaMantine] = useState("");
 
   const setarSubTeste = (idCategorieSelected: string) => {
-    setSubCategoriaMantine("")
+    setSubCategoriaMantine("");
     const categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
     );
@@ -406,7 +400,7 @@ export default function ModalAddProduto({
                 onBlur={(e) => validarFoto(urlImagem)}
                 error={erroUrlImagem}
               />
-              <TextField
+              {/* <TextField
                 select
                 label="Público"
                 className={styles.genre}
@@ -418,7 +412,15 @@ export default function ModalAddProduto({
                 error={erroPublico}
               >
                 {targetAudienceList}
-              </TextField>
+              </TextField> */}
+              <Select
+                value={genreMantine}
+                className={styles.genre}
+                label="Público"
+                placeholder="Selecione o público alvo "
+                data={targetAudienceList}
+                onChange={(value) => genreCategoriaMantine(value)}
+              />
               <Select
                 value={categoriaMantine}
                 className={styles.category}

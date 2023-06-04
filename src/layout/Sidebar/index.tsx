@@ -114,11 +114,12 @@ export function Sidebar() {
       setActive(activeIndex);
     } else {
       setIsUser(false);
-      const activeIndex = mockDataBusiness.findIndex((link) => link.path === pathname);
+      const activeIndex = mockDataBusiness.findIndex(
+        (link) => link.path === pathname
+      );
       setActive(activeIndex);
     }
   }, [pathname]);
-
 
   const linksMarketplace = mockdata.map((link, index) => (
     <Link href={link.path} key={link.label}>
@@ -151,8 +152,7 @@ export function Sidebar() {
       </Center>
       <Navbar.Section grow mt={50}>
         <Stack justify="center" spacing={0}>
-          {/* {isUser ? linksMarketplace : linksEmpresa} */}
-          {linksEmpresa}
+          {isUser ? linksMarketplace : linksEmpresa}
         </Stack>
       </Navbar.Section>
       <Navbar.Section>
