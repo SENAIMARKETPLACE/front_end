@@ -18,8 +18,9 @@ export default function ProductsCarousel({ products }: ProductsCarouselProps) {
       className={styles.carousel}
     >
       {products.map((product: { img: string; nome: string; preco: string }) => (
-        <Carousel.Slide pb={20}>
+        <Carousel.Slide key={product.nome} pb={20}>
           <UsuarioProduto
+            key={product.nome}
             id={'1'}
             image={product.img}
             name={product.nome}

@@ -86,8 +86,8 @@ export default function CategoriesCarousel() {
       className={styles.carousel}
     >
       {categories.map((category) => (
-        <Carousel.Slide pb={20}>
-          <ProdutoCategoria categories={categories} />
+        <Carousel.Slide key={category.id} pb={20}>
+          <ProdutoCategoria key={category.id} categories={categories} />
         </Carousel.Slide>
       ))}
     </Carousel>
