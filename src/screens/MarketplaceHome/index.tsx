@@ -7,7 +7,11 @@ import Banner from '../../../public/images/banner_user.png';
 import { httpApiMockada, httpProduto } from '../../http';
 import BannerCarousel from 'components/Carousel/BannerCarousel';
 import CategoriesCarousel from 'components/Carousel/CategoriesCarousel';
-import { Blockquote } from '@mantine/core';
+import { Blockquote, Center } from '@mantine/core';
+import ProductsCarousel from 'components/Carousel/ProductsCarousel';
+// import { Button } from '@mui/material';
+import { Button } from '@mui/material';
+//
 
 const MarketplaceHome = () => {
   const [products, setProducts] = useState([]);
@@ -31,45 +35,47 @@ const MarketplaceHome = () => {
   return (
     <section className={styles.marketplace}>
       <main className={styles.main_content}>
-        {/* <p className={styles.banner_text}>Encontre sua velocidade</p> */}
         <BannerCarousel />
-        {/* <EmpresaBanner image={Banner} alt="Capa da empresa" /> */}
 
-        <h2 className={styles.section__title}>Explore Categorias Populares</h2>
-        <div className={styles.categories}>
-          <ProdutoCategoria />
-          <ProdutoCategoria />
-          <ProdutoCategoria />
-        </div>
-
-        <h2 className={styles.section__title}>Produtos para você</h2>
-        <section className={styles.products_list}>
-          {products.map((product) => (
-            <UsuarioProduto
-              id={product.id}
-              image={product.img}
-              name={product.nome}
-              price={product.preco}
-            />
-          ))}
+        {/* Filtro por categorias */}
+        <section>
+          <h2 className={styles.section__title}>
+            Explore Categorias Populares
+          </h2>
+          <CategoriesCarousel />
         </section>
 
-        <h2 className={styles.section__title}>Inspire-se</h2>
-        <Blockquote cite="– Aristóteles" mt={'md'}>
-          A felicidade e a saúde são incompatíveis com a ociosidade.
-        </Blockquote>
-
-        <h2 className={styles.section__title}>Suplementos</h2>
-        <section className={styles.products_list}>
-          {products.map((product) => (
-            <UsuarioProduto
-              id={product.id}
-              image={product.img}
-              name={product.nome}
-              price={product.preco}
-            />
-          ))}
+        {/* Produtos com base na lista de interesses */}
+        <section>
+          <h2 className={styles.section__title}>Produtos para você</h2>
+          <ProductsCarousel products={products} />
         </section>
+
+        <section>
+          <h2 className={styles.section__title}>Inspire-se</h2>
+          <Blockquote cite="– Aristóteles" mt={'md'}>
+            A felicidade e a saúde são incompatíveis com a ociosidade.
+          </Blockquote>
+        </section>
+
+        {/* Produtos de categorias não selecionadas */}
+        <section>
+          <h2 className={styles.section__title}>Produtos em alta</h2>
+          <ProductsCarousel products={products} />
+        </section>
+
+        <Center mt={'md'}>
+          <Button
+            size="large"
+            onClick={() =>
+              alert(
+                'Ir para a página de filtro, mas sem nenhum filtro aplicado. A intenção é listar mais produtos.'
+              )
+            }
+          >
+            Veja mais!
+          </Button>
+        </Center>
       </main>
     </section>
   );

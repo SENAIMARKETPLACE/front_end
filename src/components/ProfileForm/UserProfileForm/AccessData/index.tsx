@@ -1,53 +1,100 @@
-import { Button, Center, TextInput } from '@mantine/core';
+import { Button, Center, PasswordInput, SimpleGrid } from '@mantine/core';
 import styles from './AccessData.module.scss';
 import { useForm } from '@mantine/form';
+import { validates } from 'util/validations';
+import StrongPassword from 'components/StrongPassword';
 
 interface AccessDataProps {
   inputProps: object;
 }
 
 const AccessData = ({ inputProps }: AccessDataProps) => {
-  const form = useForm({
-    initialValues: { name: '', email: '', age: 0 },
+  const form: any = useForm({
+    initialValues: {
+      password: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
 
     // functions will be used to validate values at corresponding key
     validate: {
-      name: (value) =>
-        value.length < 2 ? 'Name must have at least 2 letters' : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      age: (value) =>
-        value < 18 ? 'You must be at least 18 to register' : null,
+      password: (value) => {
+        const errors: Array<string> = [];
+
+        value.length > 0 ? null : errors.push('Digite sua senha.');
+
+        value === 'admin' ? null : errors.push('Senha incorreta.');
+
+        return errors.length > 0 ? errors[0] : null;
+      },
+      newPassword: (value) => {
+        const errors: Array<string> = [];
+
+        /[0-9]/.test(value) ? null : errors.push('Includes number');
+
+        /[a-z]/.test(value) ? null : errors.push('Includes lowercase letter');
+
+        /[A-Z]/.test(value) ? null : errors.push('Includes uppercase letter');
+
+        /[$&+,:;=?@#|'<>.^*()%!-]/.test(value)
+          ? null
+          : errors.push('Includes special symbol');
+
+        value.length >= 8
+          ? null
+          : errors.push('A senha deve ter no mínimo 8 caracteres.');
+
+        return errors.length > 0 ? errors[0] : null;
+      },
+      confirmPassword: (value) =>
+        form.values.newPassword === form.values.confirmPassword
+          ? null
+          : 'As senhas digitadas são diferentes.',
     },
   });
 
+  const handleInputChange =
+    (fieldName: string, maskFunction?: Function) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = event.target.value;
+      const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
+      form.setFieldValue(fieldName, maskedValue);
+    };
+
   return (
     <>
-      <h3 className={styles.title}>Altere seus dados de acesso:</h3>
-      <form onSubmit={form.onSubmit(console.log)}>
-        <TextInput
-          label="Email"
-          placeholder="Email"
-          {...inputProps}
-          {...form.getInputProps('email')}
-        />
-        <TextInput
+      <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
+        <h3 className={styles.title}>Altere seus dados de acesso:</h3>
+        <PasswordInput
           label="Senha Atual"
-          placeholder="Email"
+          placeholder="Senha atual"
           {...inputProps}
-          {...form.getInputProps('email')}
+          {...form.getInputProps('password')}
         />
-        <TextInput
-          label="Nova Senha"
-          placeholder="Email"
-          {...inputProps}
-          {...form.getInputProps('email')}
-        />
-        <TextInput
-          label="Confirme a nova senha"
-          placeholder="Email"
-          {...inputProps}
-          {...form.getInputProps('email')}
-        />
+
+        <SimpleGrid cols={2}>
+          {/* <StrongPassword
+            label={'Digite sua nova senha'}
+            placeholder={'Confirme sua senha'}
+            props={inputProps}
+            form={form}
+            name={'newPassword'}
+          /> */}
+          <PasswordInput
+            label="Nova Senha"
+            placeholder="Digite a nova senha"
+            {...inputProps}
+            {...form.getInputProps('newPassword')}
+          />
+          <PasswordInput
+            label="Confirme a nova senha"
+            placeholder="Confirme a nova senha"
+            {...inputProps}
+            {...form.getInputProps('confirmPassword')}
+
+            // {...form.getInputProps('email')}
+          />
+        </SimpleGrid>
 
         <Center>
           <Button type="submit" mt="xl" radius="xl">

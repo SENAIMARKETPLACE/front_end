@@ -1,27 +1,11 @@
-// import { Avatar } from '@mui/material';
 import { Avatar, Tooltip } from '@mantine/core';
 import styles from './ProdutoCategoria.module.scss';
 
-const brandsLogo = [
-  {
-    name: 'Nike',
-    url: '',
-  },
-  {
-    name: 'Nike',
-    url: '',
-  },
-  {
-    name: 'Nike',
-    url: '',
-  },
-  {
-    name: 'Nike',
-    url: '',
-  },
-];
+interface ProdutoCategoriaProps {
+  categories: object;
+}
 
-const ProdutoCategoria = () => {
+const ProdutoCategoria = ({ categories }: ProdutoCategoriaProps) => {
   return (
     <div
       className={styles.category}

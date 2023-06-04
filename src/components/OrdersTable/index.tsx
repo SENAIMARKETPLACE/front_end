@@ -1,22 +1,10 @@
 import styles from './OrdersTable.module.scss';
 import { useState } from 'react';
-import {
-  Accordion,
-  Table,
-  Paper,
-  Text,
-  Avatar,
-  Tooltip,
-  Button,
-} from '@mantine/core';
+import { Table, Avatar, Tooltip, Button } from '@mantine/core';
 import React from 'react';
 import emptyCart from '../../../public/images/empty_cart_co35.svg';
-import login from '../../../public/images/login.svg';
 import Link from 'next/link';
-
-interface OrdersTableProps {
-  isLogged: boolean;
-}
+import OrderDetails from './OrderDetails';
 
 const orders = [
   {
@@ -95,32 +83,18 @@ const orders = [
   },
 ];
 
-const OrdersTable = ({ isLogged }: OrdersTableProps) => {
+const OrdersTable = () => {
   // Criar lógica para quando o cara estiver logado, talvez ler do localStorage.
-  return isLogged ? (
-    orders.length > 0 ? (
-      <Orders />
-    ) : (
-      <div>
-        <p>Hmm, parece que você ainda não fez nenhuma compra.</p>
-        <div className={styles.pageMessage}>
-          <img src={emptyCart.src} width={'300px'}></img>
-          <Link href={'/marketplace'}>
-            <Button radius="xl" size="md">
-              Continue Comprando
-            </Button>
-          </Link>
-        </div>
-      </div>
-    )
+  return orders.length > 0 ? (
+    <Orders />
   ) : (
     <div>
-      <p>Faça o login para visualizar seus pedidos.</p>
+      <p>Hmm, parece que você ainda não fez nenhuma compra.</p>
       <div className={styles.pageMessage}>
-        <img src={login.src} width={'300px'}></img>
+        <img src={emptyCart.src} width={'300px'}></img>
         <Link href={'/marketplace'}>
           <Button radius="xl" size="md">
-            Entrar
+            Continue Comprando
           </Button>
         </Link>
       </div>
@@ -209,44 +183,7 @@ function Orders() {
               {openItem === index && (
                 <tr>
                   <td colSpan={7}>
-                    <Accordion>
-                      <Accordion.Item
-                        value="Detalhes"
-                        className={styles.accordion}
-                      >
-                        <Table verticalSpacing="md" className={styles.table}>
-                          <tbody>
-                            {order.products.map((product, productIndex) => (
-                              <tr key={productIndex}>
-                                <td className={styles.td__image}>
-                                  <img src={product.img} alt="" />
-                                </td>
-                                <td className={styles.td__productDetails}>
-                                  <div>
-                                    <b>{product.nome}</b>
-                                    <p>Cor: {product.cor}</p>
-                                    <p>Valor unitário: R$ {product.preco}</p>
-                                    <p>Quantidade: {product.quantidade}</p>
-                                  </div>
-                                  <div className={styles.productDetails__total}>
-                                    <p>
-                                      Sub total: R${' '}
-                                      {(
-                                        product.preco * product.quantidade
-                                      ).toFixed(2)}
-                                    </p>
-                                  </div>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </Table>
-                        <Text>Entregue em:</Text>
-                        <Text>
-                          Rua dos Alfeneiros, nº 04. Mundo da Magia, Hogwarts.
-                        </Text>
-                      </Accordion.Item>
-                    </Accordion>
+                    <OrderDetails order={order} />
                   </td>
                 </tr>
               )}

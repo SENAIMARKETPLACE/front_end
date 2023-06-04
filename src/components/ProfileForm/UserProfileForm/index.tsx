@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import styles from './UserProfileForm.module.scss';
 import { useForm } from '@mantine/form';
@@ -23,18 +22,6 @@ const inputProps = {
 
 const UserProfileForm = () => {
   const [windowWidth, setWindowWidth] = useState(null);
-  const form = useForm({
-    initialValues: { name: '', email: '', age: 0 },
-
-    // functions will be used to validate values at corresponding key
-    validate: {
-      name: (value) =>
-        value.length < 2 ? 'Name must have at least 2 letters' : null,
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      age: (value) =>
-        value < 18 ? 'You must be at least 18 to register' : null,
-    },
-  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -60,8 +47,8 @@ const UserProfileForm = () => {
     <Tabs defaultValue="personalData" orientation={orientation}>
       <Tabs.List>
         <Tabs.Tab value="personalData">Dados pessoais</Tabs.Tab>
-        <Tabs.Tab value="accessData">Dados de acesso</Tabs.Tab>
         <Tabs.Tab value="address">Endereço</Tabs.Tab>
+        <Tabs.Tab value="accessData">Alterar a senha</Tabs.Tab>
       </Tabs.List>
 
       <Tabs.Panel value="personalData" p="lg">
@@ -75,7 +62,6 @@ const UserProfileForm = () => {
       </Tabs.Panel>
     </Tabs>
   );
-
 };
 
 export default UserProfileForm;

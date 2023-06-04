@@ -181,6 +181,14 @@
     {
       "usuario_id": "1",
       "endereco_id": "1",
+      "pagamento_id": "3",
+      "produtos_selecionados": [
+        {
+          "produto_detalhe_id": 1,
+          "quantidade": 4
+        }
+      ],
+      "id": 16
       "pagamento_id": "0",
       "produtos_selecionados": [
         {
@@ -241,6 +249,7 @@
         }
       ],
       "id": 20
+
     }
   ],
   "pedidos-get": [],
