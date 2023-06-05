@@ -219,7 +219,6 @@ export default function ModalAddProduto({
 
   const form = useForm({
     validateInputOnBlur: true,
-    // Valores que serão substituídos pelo GET. Mantenha as máscaras.
     initialValues: {
       name: '',
       description: '',
