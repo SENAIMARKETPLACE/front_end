@@ -89,8 +89,8 @@ const mockdata = [
 ];
 
 const mockDataBusiness = [
-  { icon: IconBuildingStore, label: "Minha Loja", path: "/empresa/minha-loja" },
-  { icon: IconTag, label: "Meus Produtos", path: "/empresa/produtos" },
+  { icon: IconBuildingStore, label: "Minha Loja", path: "http://localhost:3000/empresa/minha-loja" },
+  { icon: IconTag, label: "Meus Produtos", path: "http://localhost:3000/empresa/produtos" },
 ];
 
 export function Sidebar() {
@@ -146,9 +146,15 @@ export function Sidebar() {
   return (
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
-        <Link href={"minha-loja"}>
-          <img src={LogoSollaris.src} alt="Logo do Sollaris" />
-        </Link>
+        {isUser ? (
+          <Link href={"/#"}>
+            <img src={LogoSollaris.src} alt="Logo do Sollaris" />
+          </Link>
+        ) : (
+          <Link href={"http://localhost:3000/empresa/produtos"}>
+            <img src={LogoSollaris.src} alt="Logo do Sollaris" />
+          </Link>
+        )}
       </Center>
       <Navbar.Section grow mt={50}>
         <Stack justify="center" spacing={0}>

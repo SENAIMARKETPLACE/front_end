@@ -13,6 +13,7 @@ interface CarrinhoProps {
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos: (novoArray: IProdutoGet[]) => void;
   setarQuantidade: (novaQuantidade: number) => void;
+  fecharCarrinho: () => void
 }
 
 const Carrinho = ({
@@ -21,6 +22,7 @@ const Carrinho = ({
   produtoDesejadoNoCarrinho,
   setarListaProdutos,
   setarQuantidade,
+  fecharCarrinho
 }: CarrinhoProps) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
@@ -101,6 +103,10 @@ const Carrinho = ({
     setIdExcluir(id);
   };
 
+
+
+
+  
   return (
     <div
       className={
@@ -109,7 +115,7 @@ const Carrinho = ({
         `{${isCartAtivado ? styles.carrinhoAtivado : ""}}`
       }
     >
-      <IoMdCloseCircle size={22} onClick={() => alert('Fechar')} className={styles.closeBtn}/>
+      <IoMdCloseCircle size={22} onClick={() => fecharCarrinho()} className={styles.closeBtn}/>
       <div className={styles.carrinhoHead}>
         <p>Seu Carrinho ({quantidade}) itens</p>
       </div>
@@ -150,7 +156,7 @@ const Carrinho = ({
             </p>
           </div>
           <div className={styles.visualizacoesButtons}>
-            <button className={styles.visualizacoesButtons__primaryButton}>
+            <button className={styles.visualizacoesButtons__primaryButton} onClick={() => fecharCarrinho()} >
               Continuar Comprando
             </button>
             <Link href="/marketplace/finalizar-compra">

@@ -16,13 +16,17 @@ const LayoutMarketplace = ({
   quantidade,
 }: LayoutMarketplaceProps) => {
   const [isLogged, setIsLogged] = useState(false);
+  const [quantidadeCarrinho, setQuantidadeCarrinho] = useState(1);
+
+
+
 
   return (
     <>
       <div className={styles.layout}>
         <Sidebar />
         <div className={styles.layout__content}>
-          <MarketplaceHeader quantidade={quantidade} isLogged={isLogged} />
+          <MarketplaceHeader quantidade={quantidadeCarrinho} isLogged={isLogged} />
           <section className={styles["layout__content--children"]}>
             {children}
           </section>

@@ -8,7 +8,6 @@ import LayoutMarketplace from "layout/LayoutMarketplace";
 const MarketplaceProduto = () => {
     return (
         <LayoutMarketplace>
-
             <MarketplaceProdutoScreen />
         </LayoutMarketplace>
     )
