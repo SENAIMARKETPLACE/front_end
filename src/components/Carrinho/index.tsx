@@ -5,7 +5,7 @@ import CardProdutoCarrinho from "./CardProdutoCarrinho";
 import styles from "./Carrinho.module.scss";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
 import Link from "next/link";
-import { IoMdCloseCircle } from 'react-icons/io';
+import { IoMdCloseCircle } from "react-icons/io";
 
 interface CarrinhoProps {
   isCartAtivado: boolean;
@@ -13,7 +13,7 @@ interface CarrinhoProps {
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos: (novoArray: IProdutoGet[]) => void;
   setarQuantidade: (novaQuantidade: number) => void;
-  fecharCarrinho: () => void
+  fecharCarrinho: () => void;
 }
 
 const Carrinho = ({
@@ -22,7 +22,7 @@ const Carrinho = ({
   produtoDesejadoNoCarrinho,
   setarListaProdutos,
   setarQuantidade,
-  fecharCarrinho
+  fecharCarrinho,
 }: CarrinhoProps) => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
@@ -77,7 +77,6 @@ const Carrinho = ({
         (produto) => produto.id != idExcluir
       );
       setArrayProdutosDesejados(carrinhoAtualizado);
-
       const carrinhoString = JSON.stringify(carrinhoAtualizado);
       localStorage.setItem("productsInCart", carrinhoString);
     }
@@ -103,71 +102,78 @@ const Carrinho = ({
     setIdExcluir(id);
   };
 
-
-
-
-  
   return (
-    <div
-      className={
-        styles.carrinho +
-        " " +
-        `{${isCartAtivado ? styles.carrinhoAtivado : ""}}`
-      }
-    >
-      <IoMdCloseCircle size={22} onClick={() => fecharCarrinho()} className={styles.closeBtn}/>
-      <div className={styles.carrinhoHead}>
-        <p>Seu Carrinho ({quantidade}) itens</p>
-      </div>
-      {quantidade == 0 ? (
-        <div className={styles.bodyWithoutProduct}>
-          <h2>Seu Carrinho Está Vazio</h2>
-          <p>
-            Navegue pelas categorias da loja ou faça uma busca pelo seu produto.
-          </p>
-          <button className={styles.buttonOne}>Continuar Comprando</button>
+    <section>
+      {isCartAtivado && <div className={styles.sombreamento}></div>}
+      <div
+        className={
+          styles.carrinho +
+          " " +
+          `{${isCartAtivado ? styles.carrinhoAtivado : ""}}`
+        }
+      >
+        <IoMdCloseCircle
+          size={22}
+          onClick={() => fecharCarrinho()}
+          className={styles.closeBtn}
+        />
+        <div className={styles.carrinhoHead}>
+          <p>Seu Carrinho ({quantidade}) itens</p>
         </div>
-      ) : (
-        <div className={styles.bodyWithProduct}>
-          <div className={styles.visualizacaoProdutos}>
-            {arrayProdutosDesejados.map((produto, i) => {
-              return (
-                <CardProdutoCarrinho
-                  key={produto.id}
-                  id={produto.id}
-                  img={produto.img}
-                  titulo={produto.nome}
-                  preco={produto.preco}
-                  publico={produto.publico}
-                  tamanho={produto.detalhes_dos_produtos[0].tamanho}
-                  color={produto.detalhes_dos_produtos[0].cor}
-                  quantidade={produto.quantidadeCarrinho}
-                  obterIdExcluirProps={obterProdutoExcluir}
-                />
-              );
-            })}
-          </div>
-          <div className={styles.bodyWithProduct__visualizacaoPreco}>
-            <p className={styles.bodyWithProduct__visualizacaoPreco__titulo}>
-              Subtotal:{" "}
+        {quantidade == 0 ? (
+          <div className={styles.bodyWithoutProduct}>
+            <h2>Seu Carrinho Está Vazio</h2>
+            <p>
+              Navegue pelas categorias da loja ou faça uma busca pelo seu
+              produto.
             </p>
-            <p className={styles.bodyWithProduct__visualizacaoPreco__preco}>
-              {valorTotal}
-            </p>
+            <button className={styles.buttonOne}>Continuar Comprando</button>
           </div>
-          <div className={styles.visualizacoesButtons}>
-            <button className={styles.visualizacoesButtons__primaryButton} onClick={() => fecharCarrinho()} >
-              Continuar Comprando
-            </button>
-            <Link href="/marketplace/finalizar-compra">
-              <button className={styles.visualizacoesButtons__secondButton}>
-                Finalizar Compra
+        ) : (
+          <div className={styles.bodyWithProduct}>
+            <div className={styles.visualizacaoProdutos}>
+              {arrayProdutosDesejados.map((produto, i) => {
+                return (
+                  <CardProdutoCarrinho
+                    key={produto.id}
+                    id={produto.id}
+                    img={produto.img}
+                    titulo={produto.nome}
+                    preco={produto.preco}
+                    publico={produto.publico}
+                    tamanho={produto.detalhes_dos_produtos[0].tamanho}
+                    color={produto.detalhes_dos_produtos[0].cor}
+                    quantidade={produto.quantidadeCarrinho}
+                    obterIdExcluirProps={obterProdutoExcluir}
+                  />
+                );
+              })}
+            </div>
+            <div className={styles.bodyWithProduct__visualizacaoPreco}>
+              <p className={styles.bodyWithProduct__visualizacaoPreco__titulo}>
+                Subtotal:{" "}
+              </p>
+              <p className={styles.bodyWithProduct__visualizacaoPreco__preco}>
+                {valorTotal}
+              </p>
+            </div>
+            <div className={styles.visualizacoesButtons}>
+              <button
+                className={styles.visualizacoesButtons__primaryButton}
+                onClick={() => fecharCarrinho()}
+              >
+                Continuar Comprando
               </button>
-            </Link>
+              <Link href="/marketplace/finalizar-compra">
+                <button className={styles.visualizacoesButtons__secondButton}>
+                  Finalizar Compra
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </section>
   );
 };
 export default Carrinho;
