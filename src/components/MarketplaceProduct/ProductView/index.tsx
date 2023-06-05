@@ -8,12 +8,14 @@ interface ProductViewProps {
   produto: IProdutoGet;
   agregarProduto: () => void;
   enviarProdutoAoCarrinho: (produto: IProdutoGet) => void;
+  arrayProdutosAtual: IProdutoGet[]; 
 }
 
 const ProductView = ({
   produto,
   agregarProduto,
-  enviarProdutoAoCarrinho
+  enviarProdutoAoCarrinho,
+  arrayProdutosAtual,
 }: ProductViewProps) => {
   let [qtdProdutos, setQtdProdutos] = useState<number>(null);
 
@@ -53,6 +55,7 @@ const ProductView = ({
               onClick={(e) => {
                 agregarProduto();
                 enviarProdutoAoCarrinho(produto);
+                console.log(arrayProdutosAtual)
               }}
               className={styles.button_cart}
             >
