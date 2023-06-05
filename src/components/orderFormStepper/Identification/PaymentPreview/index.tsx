@@ -12,26 +12,26 @@ import {
   Image,
   Text,
   Button,
-} from "@mantine/core";
-import styles from "./PaymentPreview.module.scss";
+} from '@mantine/core';
+import styles from './PaymentPreview.module.scss';
 import {
   IconCreditCard,
   IconQrcode,
   IconScan,
   IconCopy,
   IconCheck,
-} from "@tabler/icons-react";
-import { IPedidoPost } from "compartilhado/IPedidoPost";
-import { useEffect, useState } from "react";
-import { IProdutoGet } from "compartilhado/IProdutoGet";
-import { httpApiMockada } from "../../../../http";
+} from '@tabler/icons-react';
+import { IPedidoPost } from 'compartilhado/IPedidoPost';
+import { useEffect, useState } from 'react';
+import { IProdutoGet } from 'compartilhado/IProdutoGet';
+import { httpApiMockada } from '../../../../http';
 
 function Demo() {
   return (
     <CopyButton value="DDPAK102M4S0M1DMIAJSKM121" timeout={2000}>
       {({ copied, copy }) => (
-        <Tooltip label={copied ? "Copied" : "Copy"} withArrow position="right">
-          <ActionIcon mt={"md"} color={copied ? "teal" : "gray"} onClick={copy}>
+        <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
+          <ActionIcon mt={'md'} color={copied ? 'teal' : 'gray'} onClick={copy}>
             {copied ? <IconCheck size="1rem" /> : <IconCopy size="1rem" />}
           </ActionIcon>
         </Tooltip>
@@ -49,21 +49,28 @@ interface props {
   alterIsOrderFinishedProps?: (newValue: number) => void;
 }
 
-const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantidadeAoExcluirProps, alterIsOrderFinishedProps}: props) => {
+const PaymentPreview = ({
+  prevStep,
+  nextStep,
+  overlay,
+  valorTotal,
+  setarQuantidadeAoExcluirProps,
+  alterIsOrderFinishedProps,
+}: props) => {
   const [produtosDetalhes, setProdutoDetalhes] = useState<IPedidoProduto[]>([]);
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
   >([]);
-  const [pagamentoSelecionado, setPagamentoSelecionado] = useState<string>("0"); // Estado para controlar a opção de pagamento selecionada
+  const [pagamentoSelecionado, setPagamentoSelecionado] = useState<string>('0'); // Estado para controlar a opção de pagamento selecionada
 
   const pedidoTemplate: IPedidoPost = {
-    usuario_id: "1",
-    endereco_id: "1",
+    usuario_id: '1',
+    endereco_id: '1',
     pagamento_id: pagamentoSelecionado,
     produtos_selecionados: [],
   };
 
-  const produtosLocalStorage = localStorage.getItem("productsInCart");
+  const produtosLocalStorage = localStorage.getItem('productsInCart');
   let produtos: IProdutoGet[] = [];
   if (produtosLocalStorage) {
     produtos = JSON.parse(produtosLocalStorage);
@@ -72,7 +79,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
   const produtosSelecionados: IPedidoProduto[] = produtos.map(
     (produto: IProdutoGet) => {
       return {
-        produto_detalhe_id: produto.id || "",
+        produto_detalhe_id: produto.id || '',
         quantidade: produto.quantidadeCarrinho || 0,
       };
     }
@@ -85,15 +92,15 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
   }, [pedidoTemplate]);
 
   const alterarLocalStorageAposCadastrarPedido = () => {
-    localStorage.removeItem("productsInCart")
-    localStorage.setItem("qtdProduto", "0")
-    setarQuantidadeAoExcluirProps(0)
-    alterIsOrderFinishedProps(1)
-  }
+    localStorage.removeItem('productsInCart');
+    localStorage.setItem('qtdProduto', '0');
+    setarQuantidadeAoExcluirProps(0);
+    alterIsOrderFinishedProps(1);
+  };
 
   const cadastrarPedido = (pedidoAPostar: IPedidoPost) => {
     httpApiMockada
-      .post("/pedidos-pst", pedidoAPostar)
+      .post('/pedidos-pst', pedidoAPostar)
       .then((response) => alterarLocalStorageAposCadastrarPedido())
       .catch((error) => alterIsOrderFinishedProps(2));
   };
@@ -152,10 +159,10 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
                 mt="sm"
                 radius="xl"
                 data={[
-                  { value: "2", label: "2x sem juros" },
-                  { value: "3", label: "3x sem juros" },
-                  { value: "4", label: "4x sem juros" },
-                  { value: "5", label: "5x sem juros" },
+                  { value: '2', label: '2x sem juros' },
+                  { value: '3', label: '3x sem juros' },
+                  { value: '4', label: '4x sem juros' },
+                  { value: '5', label: '5x sem juros' },
                 ]}
               />
             </Tabs.Panel>
@@ -164,7 +171,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
               <Group>
                 <TextInput
                   label="Chave PIX"
-                  value={"DDPAK102M4S0M1DMIAJSKM121"}
+                  value={'DDPAK102M4S0M1DMIAJSKM121'}
                   placeholder="Número do cartão"
                   radius="xl"
                   readOnly
@@ -184,7 +191,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
               <Group>
                 <TextInput
                   label="Código de Barras:"
-                  value={"7891234567890"}
+                  value={'7891234567890'}
                   placeholder="Número do cartão"
                   radius="xl"
                   readOnly
@@ -214,14 +221,14 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
             <li>Desconto: -</li>
             <li>Total: {valorTotal}</li>
           </ul>
-          <Group position="apart" mt={"xl"}>
+          <Group position="apart" mt={'xl'}>
             <Button variant="default" onClick={prevStep} radius="xl">
               Voltar
             </Button>
             <Button
               onClick={(e) => {
                 nextStep();
-                cadastrarPedido(pedidoTemplate); 
+                cadastrarPedido(pedidoTemplate);
               }}
               radius="xl"
             >
@@ -230,7 +237,7 @@ const PaymentPreview = ({ prevStep, nextStep, overlay, valorTotal, setarQuantida
           </Group>
         </section>
 
-        {overlay && <Overlay color="#ffffff" opacity={0.75} />}
+        {overlay && <Overlay color="#f4f4f4" opacity={0.75} />}
       </AspectRatio>
     </>
   );

@@ -4,19 +4,17 @@ import { AspectRatio, Overlay, Table } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-
 const ProductPreview = () => {
   const [arrayProdutosDesejados, setArrayProdutosDesejados] = useState<
     IProdutoGet[]
   >([]);
 
-
   // AQUI VAI TER QUE SER ONDE A LÓGICA DE RESGATAR OS PRODUTOS FICA
 
   useEffect(() => {
-    if (typeof localStorage !== "undefined") {
+    if (typeof localStorage !== 'undefined') {
       const arrayProductsInCart = JSON.parse(
-        localStorage.getItem("productsInCart")
+        localStorage.getItem('productsInCart')
       );
       if (arrayProductsInCart) {
         setArrayProdutosDesejados([
@@ -26,29 +24,23 @@ const ProductPreview = () => {
       }
     }
   }, []);
-  
 
   const calcularOValorTotal = () => {
     let somaTotal = 0.0;
-    let valorFormatado = "";
+    let valorFormatado = '';
     arrayProdutosDesejados.forEach((produto) => {
       const preco = Number(produto.preco);
       const quantidade = produto.quantidadeCarrinho;
       const subtotal = preco * quantidade;
       somaTotal += subtotal;
-      valorFormatado = somaTotal.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
+      valorFormatado = somaTotal.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
       });
     });
 
     return valorFormatado;
   };
-  
-
-  
-  
-
 
   return (
     <>
@@ -73,7 +65,8 @@ const ProductPreview = () => {
                   <td>
                     <p>{product.nome}</p>
                     <p>
-                      Tamanho: <span>{product.detalhes_dos_produtos[0].tamanho}</span>
+                      Tamanho:{' '}
+                      <span>{product.detalhes_dos_produtos[0].tamanho}</span>
                     </p>
                     <p>
                       Quantidade: <span>{product.quantidadeCarrinho}</span>
@@ -90,7 +83,7 @@ const ProductPreview = () => {
             </tbody>
           </Table>
         </section>
-        {<Overlay color="#ffffff" opacity={0.35} />}
+        {<Overlay color="#f4f4f4" opacity={0.35} />}
       </AspectRatio>
     </>
   );
