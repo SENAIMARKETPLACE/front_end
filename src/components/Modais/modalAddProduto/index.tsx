@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { httpApiMockada, httpProduto } from '../../../http';
 import { IProdutoPost } from '../../../compartilhado/IProdutoPost';
 import { IconAt, IconPaint, IconPackage, IconPhoto } from '@tabler/icons-react';
+import noImage from '../../../../public/images/no_image.jpg';
 
 // Modern or es5 bundle (pay attention to the note below!)
 import { IDetalhesProduto } from '../../../compartilhado/IDetalhesProduto';
@@ -88,6 +89,7 @@ export default function ModalAddProduto({
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [optionsCategories, setOptionsCategories] = useState([]);
   const [optionsSubCategories, setOptionsSubCategories] = useState([]);
+  const [error, setError] = useState(false); // Estado para controlar se ocorreu um erro no carregamento da imagem
 
   const targetAudienceList = [
     {
@@ -290,8 +292,9 @@ export default function ModalAddProduto({
           <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
             <div className={styles.form__part1}>
               <img
-                src={form.values.url}
+                src={error ? noImage.src : form.values.url}
                 alt={`Imagem ilustrativa: ${form.values.name}`}
+                onError={() => setError(true)}
                 className={styles['form__part1--image']}
               />
               <div className={styles['form__part1--text']}>
@@ -334,6 +337,7 @@ export default function ModalAddProduto({
                 placeholder="Insira o link (url) da imagem"
                 {...inputProps}
                 {...form.getInputProps('url')}
+                onBlur={() => setError(false)}
               />
               <NumberInput
                 // icon={'kg'}
@@ -444,12 +448,14 @@ export default function ModalAddProduto({
                 {...form.getInputProps('size')}
               />
               <TextInput
-                icon={'kg'}
+                icon={'g'}
                 className={styles.weight}
                 label="Peso"
                 placeholder="Informe o peso do produto"
                 {...inputProps}
                 {...form.getInputProps('weight')}
+                min={1}
+                onChange={handleInputChange('weight', masks.numbers)}
               />
             </SimpleGrid>
 
@@ -459,8 +465,9 @@ export default function ModalAddProduto({
                 // onClick={criarProduto}
                 type="submit"
                 mt="xl"
-                radius="sm"
+                radius="xl"
                 mb={'xl'}
+                color="green"
               >
                 Cadastrar Produto
               </Button>
