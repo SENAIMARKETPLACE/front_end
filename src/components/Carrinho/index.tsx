@@ -54,6 +54,7 @@ const Carrinho = ({
       quantidadeTemp += produto.quantidadeCarrinho;
     });
 
+    
     return quantidadeTemp;
   };
 
@@ -70,6 +71,10 @@ const Carrinho = ({
       }
     }
   }, []);
+
+  
+  
+
 
   useEffect(() => {
     if (idExcluir != "0") {
@@ -101,6 +106,10 @@ const Carrinho = ({
   const obterProdutoExcluir = (id: string) => {
     setIdExcluir(id);
   };
+
+  useEffect(() => {
+    setarQuantidade(quantidade)
+  }, [quantidade])
 
   return (
     <section>

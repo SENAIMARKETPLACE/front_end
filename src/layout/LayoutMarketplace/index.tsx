@@ -16,19 +16,21 @@ const LayoutMarketplace = ({
   quantidade,
 }: LayoutMarketplaceProps) => {
   const [isLogged, setIsLogged] = useState(false);
-  const [quantidadeCarrinho, setQuantidadeCarrinho] = useState(1);
+  const [quantidadeCarrinho, setQuantidadeCarrinho] = useState(4);
 
 
-
+  const atualizarQuantidade =(newValue: number) => {
+    setQuantidadeCarrinho(newValue);
+  }
 
   return (
     <>
       <div className={styles.layout}>
         <Sidebar />
         <div className={styles.layout__content}>
-          <MarketplaceHeader quantidade={quantidadeCarrinho} isLogged={isLogged} />
+          <MarketplaceHeader quantidade={quantidadeCarrinho} setarQuantidade={atualizarQuantidade} isLogged={isLogged} />
           <section className={styles["layout__content--children"]}>
-            {children}
+            {children }
           </section>
         </div>
       </div>

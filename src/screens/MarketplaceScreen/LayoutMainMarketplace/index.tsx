@@ -36,11 +36,7 @@ const LayoutMainMarketPlace = () => {
         <p className={styles.banner_text}>Encontre sua velocidade</p>
         <EmpresaBanner image={Banner} alt="Capa da empresa" />
         <h2 className={styles.section__title}>Explore Categorias Populares</h2>
-        <div className={styles.categories}>
-          <ProdutoCategoria />
-          <ProdutoCategoria />
-          <ProdutoCategoria />
-        </div>
+        
 
         <h2 className={styles.section__title}>Produtos para você</h2>
         <section className={styles.products_list}>

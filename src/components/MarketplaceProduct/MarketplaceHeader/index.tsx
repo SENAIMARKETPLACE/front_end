@@ -45,6 +45,7 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   const router = useRouter();
   const { id } = router.query;
 
+  const [quantidadeFromCart, setQuantidadeFromCart] = useState(0)
   const carrinhoRef = useRef<HTMLDivElement>(null);
 
   function ClickForaCarrinho(event: MouseEvent) {
