@@ -170,20 +170,20 @@ const ModalEditarProduto = ({
       .then((resp) => {
         const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ');
         console.log(arrayCores);
-        setNomeProduto(resp.data.nome);
-        setDescricao(resp.data.descricao);
-        setUrlImagem(resp.data.img);
-        setPublico(resp.data.publico);
-        setCategoria(resp.data.categoria.id);
-        setSubCategoria(resp.data.categoria.sub_categoria.id);
-        setPreco(resp.data.preco);
-        setIdDetalhesProdutos(resp.data.detalhes_dos_produtos[0].id);
-        setPeso(resp.data.detalhes_dos_produtos[0].peso);
-        setTamanho(resp.data.detalhes_dos_produtos[0].tamanho);
-        setQuantidade(resp.data.detalhes_dos_produtos[0].quantidade);
+        form.setFieldValue('name', resp.data.nome);
+        form.setFieldValue('description',resp.data.descricao);
+        form.setFieldValue('url', resp.data.img);
+        form.setFieldValue('targetAudience',(resp.data.publico));
+        form.setFieldValue('category',resp.data.categoria.id);
+        form.setFieldValue('subCategory',resp.data.categoria.sub_categoria.id);
+        form.setFieldValue('price',resp.data.preco);
+        form.setFieldValue('weight',resp.data.detalhes_dos_produtos[0].peso);
+        form.setFieldValue('size',resp.data.detalhes_dos_produtos[0].tamanho);
+        form.setFieldValue('amount', Number(resp.data.detalhes_dos_produtos[0].quantidade));
         setarSub(resp.data.categoria.id);
-        setColorPrimary(arrayCores[0]);
-        setColorSecondary(arrayCores[1]);
+        form.setFieldValue('primaryColor', arrayCores[0])
+        form.setFieldValue('secondaryColor', arrayCores[1]);
+
       })
 
       .catch((err) => alert(err));
@@ -290,18 +290,18 @@ const ModalEditarProduto = ({
   const form = useForm({
     validateInputOnBlur: true,
     initialValues: {
-      name: nomeProduto,
-      description: descricao,
-      url: urlImagem,
-      targetAudience: publico,
-      categorie: categoria,
-      subCategorie: subCategoria,
-      price: preco,
-      size: tamanho,
-      weight: peso,
-      amount: quantidade,
-      primaryColor: colorPrimary,
-      secondaryColor: colorSecondary,
+      name: '',
+      description: '',
+      url: '',
+      targetAudience: '',
+      categorie: '',
+      subCategorie: '',
+      price: '',
+      size: '',
+      weight: '',
+      amount: '',
+      primaryColor: '',
+      secondaryColor: '',
     },
 
     // Validações dos campos
@@ -522,7 +522,7 @@ const ModalEditarProduto = ({
                 // onClick={criarProduto}
                 type="submit"
                 mt="xl"
-                radius="sm"
+                radius="xl"
                 mb={'xl'}
               >
                 Salvar alterações

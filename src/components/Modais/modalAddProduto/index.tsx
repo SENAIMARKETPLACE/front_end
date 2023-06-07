@@ -169,7 +169,7 @@ export default function ModalAddProduto({
         setIsSubCategoriaDisable(true);
         setIsSubCategoriaDisable(true);
         // Reset values in mantine form
-        // form.reset();
+        form.reset();
       })
       .catch((erro: any) => console.log(erro));
     setIsSubCategoriaDisable(true);
