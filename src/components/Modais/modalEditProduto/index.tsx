@@ -171,19 +171,21 @@ const ModalEditarProduto = ({
         const arrayCores = resp.data.detalhes_dos_produtos[0].cor.split(' ');
         console.log(arrayCores);
         form.setFieldValue('name', resp.data.nome);
-        form.setFieldValue('description',resp.data.descricao);
+        form.setFieldValue('description', resp.data.descricao);
         form.setFieldValue('url', resp.data.img);
-        form.setFieldValue('targetAudience',(resp.data.publico));
-        form.setFieldValue('category',resp.data.categoria.id);
-        form.setFieldValue('subCategory',resp.data.categoria.sub_categoria.id);
-        form.setFieldValue('price',resp.data.preco);
-        form.setFieldValue('weight',resp.data.detalhes_dos_produtos[0].peso);
-        form.setFieldValue('size',resp.data.detalhes_dos_produtos[0].tamanho);
-        form.setFieldValue('amount', Number(resp.data.detalhes_dos_produtos[0].quantidade));
-        setarSub(resp.data.categoria.id);
-        form.setFieldValue('primaryColor', arrayCores[0])
+        form.setFieldValue('targetAudience', resp.data.publico);
+        form.setFieldValue('category', resp.data.categoria.id);
+        setarSubTeste(resp.data.categoria.id);
+        form.setFieldValue('subCategory', resp.data.categoria.sub_categoria.id);
+        form.setFieldValue('price', resp.data.preco);
+        form.setFieldValue('weight', resp.data.detalhes_dos_produtos[0].peso);
+        form.setFieldValue('size', resp.data.detalhes_dos_produtos[0].tamanho);
+        form.setFieldValue(
+          'amount',
+          Number(resp.data.detalhes_dos_produtos[0].quantidade)
+        );
+        form.setFieldValue('primaryColor', arrayCores[0]);
         form.setFieldValue('secondaryColor', arrayCores[1]);
-
       })
 
       .catch((err) => alert(err));
@@ -294,8 +296,8 @@ const ModalEditarProduto = ({
       description: '',
       url: '',
       targetAudience: '',
-      categorie: '',
-      subCategorie: '',
+      category: '',
+      subCategory: '',
       price: '',
       size: '',
       weight: '',
@@ -424,9 +426,9 @@ const ModalEditarProduto = ({
                 label="Público"
                 placeholder="Selecione o público alvo "
                 data={targetAudienceList}
-                // {...inputProps}
-                // {...form.getInputProps('targetAudience')}
-                onChange={(value) => genreCategoriaMantine(value)}
+                {...inputProps}
+                {...form.getInputProps('targetAudience')}
+                // onChange={(value) => genreCategoriaMantine(value)}
               />
               <Select
                 value={categoriaMantine}
@@ -434,10 +436,12 @@ const ModalEditarProduto = ({
                 label="Categoria"
                 placeholder="Selecione uma categoria"
                 data={optionsCategories}
-                onChange={(value) => setCategoriaMantine(value)}
+                // onChange={(value) => setCategoriaMantine(value)}
+                {...inputProps}
+                {...form.getInputProps('category')}
                 onBlur={() => {
-                  if (categoriaMantine !== '') {
-                    setarSubTeste(categoriaMantine);
+                  if (form.values.category !== '') {
+                    setarSubTeste(form.values.category);
                   }
                 }}
               />
@@ -447,7 +451,9 @@ const ModalEditarProduto = ({
                 label="Sub-Categoria"
                 data={optionsSubCategories}
                 placeholder="Selecione uma sub-categoria"
-                onChange={(value) => setSubCategoriaMantine(value)}
+                // onChange={(value) => setSubCategoriaMantine(value)}
+                {...inputProps}
+                {...form.getInputProps('subCategory')}
               />
             </SimpleGrid>
 
