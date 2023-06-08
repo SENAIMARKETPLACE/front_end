@@ -1,25 +1,25 @@
-import styles from "./EmpresaProdutosScreen.module.scss";
-import MenuLateralEmpresa from "../../patterns/MenuLateralEmpresa";
-import EmpresaBanner from "../../components/EmpresaBanner";
-import ModalAddProduto from "../../components/Modais/modalAddProduto";
-import Banner from "../../../public/images/banner.png";
-import { useEffect, useState } from "react";
-import ProdutoLista from "../../components/EmpresaProduto/ProdutoItemLista";
-import SearchBar from "../../components/SearchBar";
-import ToggleBtn from "../../components/Buttons/ToggleButton";
-import StatusAlert from "../../components/StatusMsg/SucessMsg";
-import { httpApiMockada, httpCategoria, httpProduto } from "../../http";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
-import { error } from "console";
-import { stringify } from "querystring";
-import { ICategory } from "../../compartilhado/ICategory";
-import { MdGridOn, MdGridView, MdOutlineList } from "react-icons/md";
-import ProductItemList from "../../patterns/Products/List";
-import ProdutoItemLista from "../../components/EmpresaProduto/ProdutoItemLista";
-import ProdutoItemGrid from "../../components/EmpresaProduto/ProdutoItemGrid";
-import { ISubcategory } from "compartilhado/ISubcategory";
+import styles from './EmpresaProdutosScreen.module.scss';
+import MenuLateralEmpresa from '../../patterns/MenuLateralEmpresa';
+import EmpresaBanner from '../../components/EmpresaBanner';
+import ModalAddProduto from '../../components/Modais/modalAddProduto';
+import Banner from '../../../public/images/banner.png';
+import { useEffect, useState } from 'react';
+import ProdutoLista from '../../components/EmpresaProduto/ProdutoItemLista';
+import SearchBar from '../../components/SearchBar';
+import ToggleBtn from '../../components/Buttons/ToggleButton';
+import StatusAlert from '../../components/StatusMsg/SucessMsg';
+import { httpApiMockada, httpCategoria, httpProduto } from '../../http';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import { error } from 'console';
+import { stringify } from 'querystring';
+import { ICategory } from '../../compartilhado/ICategory';
+import { MdGridOn, MdGridView, MdOutlineList } from 'react-icons/md';
+import ProductItemList from '../../patterns/Products/List';
+import ProdutoItemLista from '../../components/EmpresaProduto/ProdutoItemLista';
+import ProdutoItemGrid from '../../components/EmpresaProduto/ProdutoItemGrid';
+import { ISubcategory } from 'compartilhado/ISubcategory';
 
 const EmpresaProdutosScreen = () => {
   const [products, setProducts] = useState([]);
@@ -27,12 +27,10 @@ const EmpresaProdutosScreen = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarEditOpen, setSnackbarEditOpen] = useState(false);
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
-  const [mensagem, setMensagem] = useState("");
+  const [mensagem, setMensagem] = useState('');
   const [catchCategorias, setCatchCategorias] = useState<ICategory[]>([]);
   const [isButtonListAtivo, setIsButtonListAtivo] = useState(false);
   const [modoLista, setModoLista] = useState(true);
-
-
 
   function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -50,7 +48,7 @@ const EmpresaProdutosScreen = () => {
     event: React.SyntheticEvent | undefined,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
 
@@ -61,7 +59,7 @@ const EmpresaProdutosScreen = () => {
     event: React.SyntheticEvent | undefined,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
 
@@ -72,7 +70,7 @@ const EmpresaProdutosScreen = () => {
     event: React.SyntheticEvent | undefined,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
 
@@ -83,26 +81,27 @@ const EmpresaProdutosScreen = () => {
     try {
       // const response = await httpProduto.get("/api/products");
       // /api/products/my_products/{id}
-      const response = await httpApiMockada.get("/produto-get");
+      const response = await httpApiMockada.get('/produto-get');
       setProducts(response.data);
     } catch (error) {
       console.error(error);
     }
   }
 
-
   async function getCategoriesAndSubs(): Promise<void> {
     try {
-      const response = await httpApiMockada.get("/categoriasSubcategorias");
+      const response = await httpApiMockada.get('/categoriasSubcategorias');
       const categories: ICategory[] = response.data.map((categoryData: any) => {
         const { sub_categorias, ...category } = categoryData;
-        const subcategories: ISubcategory[] = sub_categorias.map((subcategoryData: any) => ({
-          id: subcategoryData.id,
-          nome: subcategoryData.nome
-        }));
+        const subcategories: ISubcategory[] = sub_categorias.map(
+          (subcategoryData: any) => ({
+            id: subcategoryData.id,
+            nome: subcategoryData.nome,
+          })
+        );
         return { ...category, sub_categorias: subcategories };
       });
-      
+
       setCatchCategorias(categories);
     } catch (error) {
       console.log(error);
@@ -137,7 +136,7 @@ const EmpresaProdutosScreen = () => {
 
   return (
     <>
-      <Stack spacing={2} sx={{ width: "100%" }}>
+      <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar
           open={snackbarOpen}
           autoHideDuration={4000}
@@ -174,7 +173,6 @@ const EmpresaProdutosScreen = () => {
       </Stack>
 
       <div className={styles.page_container}>
-    
         <section className={styles.sectionViewProducts}>
           <EmpresaBanner image={Banner} alt="Capa da empresa" />
           <main className={styles.main_content}>
@@ -194,7 +192,7 @@ const EmpresaProdutosScreen = () => {
                 <button
                   onClick={(e) => tornarModoGrid()}
                   className={`${styles.buttonsVisualization__button} ${
-                    !isButtonListAtivo ? styles.botaoAtivo : ""
+                    !isButtonListAtivo ? styles.botaoAtivo : ''
                   }`}
                 >
                   <MdGridOn />
@@ -202,7 +200,7 @@ const EmpresaProdutosScreen = () => {
                 <button
                   onClick={(e) => tornarModoList()}
                   className={`${styles.buttonsVisualization__button} ${
-                    isButtonListAtivo ? styles.botaoAtivo : ""
+                    isButtonListAtivo ? styles.botaoAtivo : ''
                   }`}
                 >
                   <MdOutlineList />
@@ -211,8 +209,18 @@ const EmpresaProdutosScreen = () => {
               <StatusAlert isOpen={isOpen} mensagem={mensagem} />
             </div>
 
-            <div className={`${isButtonListAtivo ? "": styles.containerProdutuct}` }>
-              <ul className={`${isButtonListAtivo? styles.products__list : styles.products__grid }`}>
+            <div
+              className={`${
+                isButtonListAtivo ? '' : styles.containerProdutuct
+              }`}
+            >
+              <ul
+                className={`${
+                  isButtonListAtivo
+                    ? styles.products__list
+                    : styles.products__grid
+                }`}
+              >
                 {products.map((product) =>
                   isButtonListAtivo ? (
                     <ProdutoItemLista
@@ -223,7 +231,6 @@ const EmpresaProdutosScreen = () => {
                       setSnackbarDeleteOpen={setSnackbarDeleteOpen}
                       setarLista={atualizarListaProdutos}
                       id={product.id}
-                      key={product.id}
                       photo={product.img}
                       name={product.nome}
                       price={product.preco}
@@ -238,7 +245,7 @@ const EmpresaProdutosScreen = () => {
                       setSnackbarDeleteOpen={setSnackbarDeleteOpen}
                       setarLista={atualizarListaProdutos}
                       id={product.id}
-                      key={product.id}
+                      key={`grid_${product.id}`}
                       photo={product.img}
                       name={product.nome}
                       subcategoria={product.categoria.sub_categoria.nome}

@@ -1,11 +1,10 @@
-import { ICategory } from "compartilhado/ICategory";
-import ModalDeletarProduto from "../../Modais/ModalDeletarProduto";
-import ModalEditarProduto from "../../Modais/modalEditProduto";
-import styles from "./ProdutoItemGrid.module.scss";
+import { ICategory } from 'compartilhado/ICategory';
+import ModalDeletarProduto from '../../Modais/ModalDeletarProduto';
+import ModalEditarProduto from '../../Modais/modalEditProduto';
+import styles from './ProdutoItemGrid.module.scss';
 
 interface ProdutoItemGridProps {
   id: string;
-  key: string;
   photo: string;
   name: string;
   price: string;
@@ -26,7 +25,6 @@ function enviaId(id: string) {
 
 const ProdutoItemGrid = ({
   id,
-  key,
   photo,
   name,
   price,
@@ -39,9 +37,9 @@ const ProdutoItemGrid = ({
   setSnackbarDeleteOpen,
   categoriesAndSubCategories,
 }: ProdutoItemGridProps) => {
-  const precoFormatado = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
   }).format(parseFloat(price));
 
   return (

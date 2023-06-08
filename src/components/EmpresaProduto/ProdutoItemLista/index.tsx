@@ -1,13 +1,12 @@
-import styles from "./ProdutoItemLista.module.scss";
-import { MdModeEdit } from "react-icons/md";
-import ModalDeletarProduto from "../../Modais/ModalDeletarProduto";
-import ModalAddProduto from "../../Modais/modalAddProduto";
-import ModalEditarProduto from "../../Modais/modalEditProduto";
-import { ICategory } from "../../../compartilhado/ICategory";
+import styles from './ProdutoItemLista.module.scss';
+import { MdModeEdit } from 'react-icons/md';
+import ModalDeletarProduto from '../../Modais/ModalDeletarProduto';
+import ModalAddProduto from '../../Modais/modalAddProduto';
+import ModalEditarProduto from '../../Modais/modalEditProduto';
+import { ICategory } from '../../../compartilhado/ICategory';
 
 interface ProductItemListProps {
   id: string;
-  key: string;
   photo: string;
   name: string;
   price: string;
@@ -35,11 +34,13 @@ const ProdutoItemLista = ({
   categoriesAndSubCategories,
   snackbarOpenEdit,
   setSnackbarEditOpen,
-  snackbarDeleteOpen, 
-  setSnackbarDeleteOpen
+  snackbarDeleteOpen,
+  setSnackbarDeleteOpen,
 }: ProductItemListProps) => {
-
-  const precoFormatado = new Intl.NumberFormat('pt-BR', {style: 'currency',currency: 'BRL'}).format(parseFloat(price))
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(parseFloat(price));
 
   return (
     <li
@@ -53,8 +54,19 @@ const ProdutoItemLista = ({
       <p>{amount} unid.</p>
       <p className={styles.product__highlight}>{precoFormatado}</p>
       <div className={styles.product__btns}>
-        <ModalEditarProduto setSnackbarEditOpen={setSnackbarEditOpen} snackbarOpenEdit={snackbarOpenEdit} setarLista={setarLista} idSelecionado={id} categoriesAndSubCategories={categoriesAndSubCategories}/>
-        <ModalDeletarProduto setSnackbarDeleteOpen={setSnackbarDeleteOpen} snackbarDeleteOpen={snackbarDeleteOpen} setarLista={setarLista} idExcluir={id} />
+        <ModalEditarProduto
+          setSnackbarEditOpen={setSnackbarEditOpen}
+          snackbarOpenEdit={snackbarOpenEdit}
+          setarLista={setarLista}
+          idSelecionado={id}
+          categoriesAndSubCategories={categoriesAndSubCategories}
+        />
+        <ModalDeletarProduto
+          setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+          snackbarDeleteOpen={snackbarDeleteOpen}
+          setarLista={setarLista}
+          idExcluir={id}
+        />
       </div>
     </li>
   );

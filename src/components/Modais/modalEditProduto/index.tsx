@@ -210,19 +210,21 @@ const ModalEditarProduto = ({
     e.preventDefault();
     const detalhesProduto: IDetalhesProduto = {
       id: idDetalhesProduto,
-      tamanho: tamanho,
-      quantidade: quantidade,
-      peso: peso,
-      cor: `${colorPrimary} ${colorSecondary ? '' + colorSecondary : ''}`,
+      tamanho: form.values.size,
+      quantidade: form.values.amount,
+      peso: form.values.price,
+      cor: `${form.values.primaryColor} ${
+        form.values.secondaryColor ? '' + form.values.secondaryColor : ''
+      }`,
     };
     const produtoAtualizado: IProdutoPost = {
-      nome: nomeProduto,
-      descricao: descricao,
-      img: urlImagem,
-      publico: publico,
-      categoria_id: categoria,
-      sub_categoria_id: subCategoria,
-      preco: preco,
+      nome: form.values.name,
+      descricao: form.values.description,
+      img: form.values.url,
+      publico: form.values.targetAudience,
+      categoria_id: form.values.category,
+      sub_categoria_id: form.values.subCategory,
+      preco: form.values.price,
       detalhes_do_produto: detalhesProduto,
     };
     // httpProduto
@@ -270,7 +272,7 @@ const ModalEditarProduto = ({
     }));
 
     setOptionsCategories(transformarDados);
-  });
+  }, [categoriesAndSubCategories]);
 
   const inputProps = {
     radius: 'sm',
@@ -525,7 +527,7 @@ const ModalEditarProduto = ({
             {/* SE IsFormValid ser false na propriedade disabled ele vira true | se IsFormValid ser true na propriedade disabled ele vira false  */}
             <Center>
               <Button
-                // onClick={criarProduto}
+                onClick={form.isValid() ? atualizarProduto : null}
                 type="submit"
                 mt="xl"
                 radius="xl"

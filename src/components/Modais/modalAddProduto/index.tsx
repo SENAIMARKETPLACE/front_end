@@ -91,6 +91,15 @@ export default function ModalAddProduto({
   const [optionsSubCategories, setOptionsSubCategories] = useState([]);
   const [error, setError] = useState(false); // Estado para controlar se ocorreu um erro no carregamento da imagem
 
+  useEffect(() => {
+    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
+      value: categoria.id,
+      label: categoria.nome,
+    }));
+
+    setOptionsCategories(transformarDados);
+  }, [categoriesAndSubCategories]);
+
   const targetAudienceList = [
     {
       value: 'MASCULINO',
@@ -192,15 +201,6 @@ export default function ModalAddProduto({
 
     setOptionsSubCategories(subCategoriasLista);
   };
-
-  useEffect(() => {
-    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
-      value: categoria.id,
-      label: categoria.nome,
-    }));
-
-    setOptionsCategories(transformarDados);
-  });
 
   const inputProps = {
     radius: 'sm',
@@ -362,7 +362,7 @@ export default function ModalAddProduto({
                 onChange={handleInputChange('price', masks.real)}
               />
               <Select
-                value={genreMantine}
+                value={optionsCategories}
                 className={styles.genre}
                 label="Público"
                 placeholder="Selecione o público alvo "
