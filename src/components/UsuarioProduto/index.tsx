@@ -22,7 +22,7 @@ const UsuarioProduto = ({ image, name, price, id }: UsuarioProdutoProps) => {
   }).format(parseFloat(price));
 
   return (
-    <Link href={`/marketplace-produto/${id}`}>
+    <Link href={`marketplace/produto/${id}`}>
       <div className={styles.produto}>
         {/* <span className={styles.favorite_container}>
           <Rating

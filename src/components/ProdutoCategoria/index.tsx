@@ -1,13 +1,58 @@
 import { Avatar, Tooltip } from '@mantine/core';
 import styles from './ProdutoCategoria.module.scss';
+import { ICategory } from 'compartilhado/ICategory';
+import { useEffect, useState } from 'react';
+import suplementos from '../../../public/images/categories/Suplementos.png';
+import roupas from '../../../public/images/categories/Roupas.webp';
+import calcados from '../../../public/images/categories/Calçados.webp';
+import esportes from '../../../public/images/categories/Esportes.jpg';
+import acessorios from '../../../public/images/categories/Acessórios.webp';
+import Link from 'next/link';
 
 interface ProdutoCategoriaProps {
-  categories: object;
+  category: ICategory;
 }
 
-const ProdutoCategoria = ({ categories }: ProdutoCategoriaProps) => {
+const ProdutoCategoria = ({ category }: ProdutoCategoriaProps) => {
+  const [categoryImage, setCategoryImage] = useState('');
+  // Alterar com a URL de busca apropriada
+  const searchRoute: string = 'pesquisar?categoria';
+  const [parameter, setParameter] = useState('');
+
+  function updateCategory(category: string) {
+    switch (category) {
+      case 'Roupas':
+        setCategoryImage(roupas.src);
+        setParameter('roupas');
+        break;
+      case 'Calçados':
+        setCategoryImage(calcados.src);
+        setParameter('calcados');
+        break;
+      case 'Suplementos':
+        setCategoryImage(suplementos.src);
+        setParameter('suplementos');
+        break;
+      case 'Esportes':
+        setCategoryImage(esportes.src);
+        setParameter('esportes');
+        break;
+      case 'Acessórios':
+        setCategoryImage(acessorios.src);
+        setParameter('acessorios');
+        break;
+      default:
+        console.log('Categoria não reconhecida.');
+    }
+  }
+
+  useEffect(() => {
+    updateCategory(category.nome);
+  }, []);
+
   return (
-    <div
+    <Link
+      href={`${searchRoute}=${parameter}`}
       className={styles.category}
       onClick={() =>
         alert('Ir para a página de busca com o filtro da categoria carregado')
@@ -15,37 +60,13 @@ const ProdutoCategoria = ({ categories }: ProdutoCategoriaProps) => {
     >
       <Tooltip.Group openDelay={300} closeDelay={100}>
         <Avatar.Group spacing="sm" mr="xs">
-          <Tooltip label="Salazar Troop" withArrow>
-            <Avatar
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80"
-              radius="xl"
-            />
-          </Tooltip>
-          <Tooltip label="Jane Rata" withArrow>
-            <Avatar src="https://github.com/alexandresouva.png" radius="xl" />
-          </Tooltip>
-          <Tooltip
-            withArrow
-            label={
-              <>
-                <div>John Outcast</div>
-                <div>Levi Capitan</div>
-              </>
-            }
-          >
-            {/* Incluir lógica de subcategorias */}
-            <Avatar radius="xl">+2</Avatar>
+          <Tooltip label={category.nome} withArrow>
+            <Avatar src={categoryImage} radius="50%" size={70} />
           </Tooltip>
         </Avatar.Group>
       </Tooltip.Group>
-      {/* <span className={styles.avatars}>
-        <Avatar alt="Remy Sharp" src="" sx={{ width: 24, height: 24 }} />
-        <Avatar alt="Remy Sharp" src="" sx={{ width: 24, height: 24 }} />
-        <Avatar alt="Remy Sharp" src="" sx={{ width: 24, height: 24 }} />
-        <Avatar alt="Remy Sharp" src="" sx={{ width: 24, height: 24 }} />
-      </span> */}
-      <p className={styles.text}>Treino e Academia</p>
-    </div>
+      <p className={styles.text}>{category.nome}</p>
+    </Link>
   );
 };
 
