@@ -12,7 +12,7 @@ interface UsuarioProdutoProps {
   image: string;
   name: string;
   price: string;
-  id: string;
+  id: number;
 }
 
 const UsuarioProduto = ({ image, name, price, id }: UsuarioProdutoProps) => {

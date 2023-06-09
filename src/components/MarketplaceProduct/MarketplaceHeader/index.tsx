@@ -127,7 +127,7 @@ function ResponsiveSideBar() {
   const mockdata = [
     { icon: IconHome2, label: 'Início', path: '/marketplace' },
     { icon: IconCalendarStats, label: 'Pedidos', path: '/pedidos' },
-    { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
+    // { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
     { icon: IconUser, label: 'Perfil', path: '/perfil' },
   ];
 
