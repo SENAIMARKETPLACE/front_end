@@ -199,7 +199,7 @@ const ModalEditarProduto = ({
     // httpProduto
     //   .get("/api/products")
     httpApiMockada
-      .get('produtos-get')
+      .get('produto-get')
       .then((response) => {
         setarLista(response.data);
       })
