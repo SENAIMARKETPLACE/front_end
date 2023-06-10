@@ -25,6 +25,7 @@ import { IPedidoPost } from 'compartilhado/IPedidoPost';
 import { useEffect, useState } from 'react';
 import { IProdutoGet } from 'compartilhado/IProdutoGet';
 import { httpApiMockada } from '../../../../http';
+import masks from 'util/fieldMasks';
 
 function RandomBarCode() {
   return (
@@ -66,6 +67,12 @@ const PaymentPreview = ({
   const [pagamentoSelecionado, setPagamentoSelecionado] = useState<string>('0'); // Estado para controlar a opção de pagamento selecionada
   const [isFormValid, setIsFormValid] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  // INPUT STATES
+  const [ownerName, setOwnerName] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [validityCard, setValidityCard] = useState('');
 
   const pedidoTemplate: IPedidoPost = {
     usuario_id: '1',
@@ -126,6 +133,20 @@ const PaymentPreview = ({
     setIsCheckboxChecked(event.currentTarget.checked);
   };
 
+  const updateBtnState = (type?: string) => {
+    if (type === 'credit') {
+      !isFormValid || !isCheckboxChecked
+        ? setIsDisabled(true)
+        : setIsDisabled(false);
+    } else {
+      !isCheckboxChecked ? setIsDisabled(true) : setIsDisabled(false);
+    }
+  };
+
+  useEffect(() => {
+    updateBtnState();
+  }, [isFormValid, isCheckboxChecked]);
+
   return (
     <>
       <AspectRatio
@@ -144,16 +165,24 @@ const PaymentPreview = ({
             onTabChange={(value) => setPagamentoSelecionado(value)}
           >
             <Tabs.List>
-              <Tabs.Tab value="credit" icon={<IconCreditCard size="0.8rem" />}>
+              <Tabs.Tab
+                value="credit"
+                icon={<IconCreditCard size="0.8rem" />}
+                onClick={() => updateBtnState('credit')}
+              >
                 Crédito
               </Tabs.Tab>
-              <Tabs.Tab value="pix" icon={<IconQrcode size="0.8rem" />}>
+              <Tabs.Tab
+                value="pix"
+                icon={<IconQrcode size="0.8rem" />}
+                onClick={() => updateBtnState()}
+              >
                 Pix
               </Tabs.Tab>
               <Tabs.Tab
                 value="boleto"
                 icon={<IconScan size="0.8rem" />}
-                onClick={() => alert('Cliquei')}
+                onClick={() => updateBtnState()}
               >
                 Boleto
               </Tabs.Tab>
@@ -165,15 +194,32 @@ const PaymentPreview = ({
                 placeholder="Número do cartão"
                 description="Preencha todos os campos para finalizar a compra."
                 radius="xl"
-                onChange={checkFormValidity}
+                value={cardNumber}
+                onChange={(e) => {
+                  setCardNumber(masks.numbers(e.target.value));
+                  checkFormValidity();
+                }}
               />
-              <TextInput placeholder="Nome do titular" mt="xs" radius="xl" />
+              <TextInput
+                placeholder="Nome do titular"
+                mt="xs"
+                radius="xl"
+                value={ownerName}
+                onChange={(e) => {
+                  setOwnerName(masks.letters(e.target.value));
+                  checkFormValidity();
+                }}
+              />
               <TextInput
                 label="Validade"
                 placeholder="MM/AA"
                 mt="sm"
                 radius="xl"
-                onChange={checkFormValidity}
+                value={validityCard}
+                onChange={(e) => {
+                  setValidityCard(masks.monthAndYear(e.target.value));
+                  checkFormValidity();
+                }}
               />
               <TextInput
                 label="Código de segurança"
@@ -181,6 +227,8 @@ const PaymentPreview = ({
                 mt="sm"
                 radius="xl"
                 onChange={checkFormValidity}
+                type="number"
+                maxLength={3}
               />
               <Select
                 label="Número de parcelas"
@@ -264,7 +312,7 @@ const PaymentPreview = ({
                 nextStep();
                 cadastrarPedido(pedidoTemplate);
               }}
-              disabled={!isFormValid || !isCheckboxChecked}
+              disabled={isDisabled}
               radius="xl"
             >
               Finalizar Compra
