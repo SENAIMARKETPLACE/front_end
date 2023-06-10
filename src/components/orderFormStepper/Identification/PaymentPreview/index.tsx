@@ -26,7 +26,7 @@ import { useEffect, useState } from 'react';
 import { IProdutoGet } from 'compartilhado/IProdutoGet';
 import { httpApiMockada } from '../../../../http';
 
-function Demo() {
+function RandomBarCode() {
   return (
     <CopyButton value="DDPAK102M4S0M1DMIAJSKM121" timeout={2000}>
       {({ copied, copy }) => (
@@ -45,6 +45,7 @@ interface props {
   nextStep: any;
   overlay: boolean;
   valorTotal: string;
+  validateFields?: boolean;
   setarQuantidadeAoExcluirProps?: (novaQuantidade: number) => void;
   alterIsOrderFinishedProps?: (newValue: number) => void;
 }
@@ -54,6 +55,7 @@ const PaymentPreview = ({
   nextStep,
   overlay,
   valorTotal,
+  validateFields,
   setarQuantidadeAoExcluirProps,
   alterIsOrderFinishedProps,
 }: props) => {
@@ -62,6 +64,8 @@ const PaymentPreview = ({
     IProdutoGet[]
   >([]);
   const [pagamentoSelecionado, setPagamentoSelecionado] = useState<string>('0'); // Estado para controlar a opção de pagamento selecionada
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const pedidoTemplate: IPedidoPost = {
     usuario_id: '1',
@@ -105,6 +109,23 @@ const PaymentPreview = ({
       .catch((error) => alterIsOrderFinishedProps(2));
   };
 
+  const checkFormValidity = () => {
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    let isFormValid = true;
+
+    textInputs.forEach((input) => {
+      if (input instanceof HTMLInputElement && input.value === '') {
+        isFormValid = false;
+      }
+    });
+
+    setIsFormValid(isFormValid);
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsCheckboxChecked(event.currentTarget.checked);
+  };
+
   return (
     <>
       <AspectRatio
@@ -117,28 +138,34 @@ const PaymentPreview = ({
           <Tabs
             color="gray"
             variant="outline"
-            defaultValue="gallery"
+            defaultValue={validateFields ? 'credit' : ''}
             mt="md"
             mb="lg"
             onTabChange={(value) => setPagamentoSelecionado(value)}
           >
             <Tabs.List>
-              <Tabs.Tab value="3" icon={<IconCreditCard size="0.8rem" />}>
+              <Tabs.Tab value="credit" icon={<IconCreditCard size="0.8rem" />}>
                 Crédito
               </Tabs.Tab>
-              <Tabs.Tab value="1" icon={<IconQrcode size="0.8rem" />}>
+              <Tabs.Tab value="pix" icon={<IconQrcode size="0.8rem" />}>
                 Pix
               </Tabs.Tab>
-              <Tabs.Tab value="4" icon={<IconScan size="0.8rem" />}>
+              <Tabs.Tab
+                value="boleto"
+                icon={<IconScan size="0.8rem" />}
+                onClick={() => alert('Cliquei')}
+              >
                 Boleto
               </Tabs.Tab>
             </Tabs.List>
 
-            <Tabs.Panel value="3" pt="xs">
+            <Tabs.Panel value="credit" pt="xs">
               <TextInput
                 label="Dados do cartão"
                 placeholder="Número do cartão"
+                description="Preencha todos os campos para finalizar a compra."
                 radius="xl"
+                onChange={checkFormValidity}
               />
               <TextInput placeholder="Nome do titular" mt="xs" radius="xl" />
               <TextInput
@@ -146,18 +173,22 @@ const PaymentPreview = ({
                 placeholder="MM/AA"
                 mt="sm"
                 radius="xl"
+                onChange={checkFormValidity}
               />
               <TextInput
                 label="Código de segurança"
                 placeholder="CVV"
                 mt="sm"
                 radius="xl"
+                onChange={checkFormValidity}
               />
               <Select
                 label="Número de parcelas"
                 placeholder="Parcelamento"
                 mt="sm"
                 radius="xl"
+                // onChange={checkFormValidity}
+                defaultValue="2"
                 data={[
                   { value: '2', label: '2x sem juros' },
                   { value: '3', label: '3x sem juros' },
@@ -167,7 +198,7 @@ const PaymentPreview = ({
               />
             </Tabs.Panel>
 
-            <Tabs.Panel value="1" pt="xs">
+            <Tabs.Panel value="pix" pt="xs">
               <Group>
                 <TextInput
                   label="Chave PIX"
@@ -176,7 +207,7 @@ const PaymentPreview = ({
                   radius="xl"
                   readOnly
                 />
-                <Demo />
+                <RandomBarCode />
               </Group>
               <Text mt="sm">Ou se preferir: </Text>
               <Image
@@ -187,7 +218,7 @@ const PaymentPreview = ({
               />
             </Tabs.Panel>
 
-            <Tabs.Panel value="4" pt="xs">
+            <Tabs.Panel value="boleto" pt="xs">
               <Group>
                 <TextInput
                   label="Código de Barras:"
@@ -196,7 +227,7 @@ const PaymentPreview = ({
                   radius="xl"
                   readOnly
                 />
-                <Demo />
+                <RandomBarCode />
               </Group>
               <Text mt="sm">Ou se preferir: </Text>
               <Image
@@ -209,8 +240,11 @@ const PaymentPreview = ({
           </Tabs>
 
           <Checkbox
+            checked={isCheckboxChecked}
+            onChange={handleCheckboxChange}
             label="Aceito a Política de Trocas e Devoluções"
             className={styles.terms}
+            required
           />
           <h4>Resumo</h4>
           <ul className={styles.payment__resumeList}>
@@ -230,6 +264,7 @@ const PaymentPreview = ({
                 nextStep();
                 cadastrarPedido(pedidoTemplate);
               }}
+              disabled={!isFormValid || !isCheckboxChecked}
               radius="xl"
             >
               Finalizar Compra
