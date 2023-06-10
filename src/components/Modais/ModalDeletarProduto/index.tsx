@@ -4,10 +4,10 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { MdDelete } from 'react-icons/md';
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import { httpApiMockada, httpProduto } from '../../../http';
+import { Button } from '@mantine/core';
 
 interface modalDeletarProps {
   idExcluir?: string;
@@ -93,10 +93,15 @@ const ModalDeletarProduto = ({
       <MdDelete className={styles.product__remove} onClick={handleOpen} />
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
-          <p>Deseja excluir este produto? {idExcluir}</p>
-          <div className={styles.btns_container}>
-            <Button onClick={deletarProduto}> Sim</Button>
-            <Button onClick={handleClose}>Não</Button>
+          <p>Deseja excluir este produto?</p>
+          <div className={styles.btns__container}>
+            <Button onClick={deletarProduto} mr={'md'} mt={'xl'} color="red">
+              {' '}
+              Sim
+            </Button>
+            <Button onClick={handleClose} variant="outline" color="dark">
+              Não
+            </Button>
           </div>
         </Box>
       </Modal>

@@ -19,8 +19,13 @@ import ProductItemList from '../../patterns/Products/List';
 import ProdutoItemLista from '../../components/EmpresaProduto/ProdutoItemLista';
 import ProdutoItemGrid from '../../components/EmpresaProduto/ProdutoItemGrid';
 import { ISubcategory } from 'compartilhado/ISubcategory';
+import SignInMessage from 'patterns/SignInMessage';
+import { Center, Container } from '@mantine/core';
 
 const EmpresaProdutosScreen = () => {
+  // Altera a exibição da tela se estiver logado
+  const [isLogged, setIsLogged] = useState(true);
+
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -145,7 +150,11 @@ const EmpresaProdutosScreen = () => {
     getCategoriesAndSubs();
   }, []);
 
-  return (
+  return !isLogged ? (
+    <div style={{ marginTop: '20px' }}>
+      <SignInMessage message="Faça o login para acessar seus produtos." />
+    </div>
+  ) : (
     <>
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Snackbar
@@ -244,42 +253,50 @@ const EmpresaProdutosScreen = () => {
                     : styles.products__grid
                 }`}
               >
-                {products.map((product) =>
-                  isButtonListAtivo ? (
-                    <ProdutoItemLista
-                      categoriesAndSubCategories={catchCategorias}
-                      snackbarOpenEdit={snackbarEditOpen}
-                      setSnackbarEditOpen={setSnackbarEditOpen}
-                      snackbarDeleteOpen={snackbarDeleteOpen}
-                      setSnackbarDeleteOpen={setSnackbarDeleteOpen}
-                      snackbarErrorOpen={snackbarErrorOpen}
-                      setSnackbarErrorOpen={setSnackbarErrorOpen}
-                      setarLista={atualizarListaProdutos}
-                      id={product.id}
-                      photo={product.img}
-                      name={product.nome}
-                      price={product.preco}
-                      amount={product.detalhes_dos_produtos[0].quantidade}
-                    />
-                  ) : (
-                    <ProdutoItemGrid
-                      categoriesAndSubCategories={catchCategorias}
-                      snackbarOpenEdit={snackbarEditOpen}
-                      setSnackbarEditOpen={setSnackbarEditOpen}
-                      snackbarDeleteOpen={snackbarDeleteOpen}
-                      setSnackbarDeleteOpen={setSnackbarDeleteOpen}
-                      snackbarErrorOpen={snackbarErrorOpen}
-                      setSnackbarErrorOpen={setSnackbarErrorOpen}
-                      setarLista={atualizarListaProdutos}
-                      id={product.id}
-                      key={`grid_${product.id}`}
-                      photo={product.img}
-                      name={product.nome}
-                      subcategoria={product.categoria.sub_categoria.nome}
-                      price={product.preco}
-                      amount={product.detalhes_dos_produtos[0].quantidade}
-                    />
+                {products.length > 0 ? (
+                  products.map((product) =>
+                    isButtonListAtivo ? (
+                      <ProdutoItemLista
+                        categoriesAndSubCategories={catchCategorias}
+                        snackbarOpenEdit={snackbarEditOpen}
+                        setSnackbarEditOpen={setSnackbarEditOpen}
+                        snackbarDeleteOpen={snackbarDeleteOpen}
+                        setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                        snackbarErrorOpen={snackbarErrorOpen}
+                        setSnackbarErrorOpen={setSnackbarErrorOpen}
+                        setarLista={atualizarListaProdutos}
+                        id={product.id}
+                        photo={product.img}
+                        name={product.nome}
+                        price={product.preco}
+                        amount={product.detalhes_dos_produtos[0].quantidade}
+                      />
+                    ) : (
+                      <ProdutoItemGrid
+                        categoriesAndSubCategories={catchCategorias}
+                        snackbarOpenEdit={snackbarEditOpen}
+                        setSnackbarEditOpen={setSnackbarEditOpen}
+                        snackbarDeleteOpen={snackbarDeleteOpen}
+                        setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                        snackbarErrorOpen={snackbarErrorOpen}
+                        setSnackbarErrorOpen={setSnackbarErrorOpen}
+                        setarLista={atualizarListaProdutos}
+                        id={product.id}
+                        key={`grid_${product.id}`}
+                        photo={product.img}
+                        name={product.nome}
+                        subcategoria={product.categoria.sub_categoria.nome}
+                        price={product.preco}
+                        amount={product.detalhes_dos_produtos[0].quantidade}
+                      />
+                    )
                   )
+                ) : (
+                  <div>
+                    {' '}
+                    Hmm, parece que você ainda não tem nenhum produto
+                    cadastrado.
+                  </div>
                 )}
               </ul>
             </div>
