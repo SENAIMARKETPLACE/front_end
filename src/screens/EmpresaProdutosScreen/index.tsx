@@ -231,7 +231,7 @@ const EmpresaProdutosScreen = () => {
                   <MdOutlineList />
                 </button>
               </div>
-              <StatusAlert isOpen={isOpen} mensagem={mensagem} />
+              {/* <StatusAlert isOpen={isOpen} mensagem={mensagem} /> */}
             </div>
 
             <div

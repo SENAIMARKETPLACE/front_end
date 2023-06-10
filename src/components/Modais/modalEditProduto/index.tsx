@@ -547,6 +547,7 @@ const ModalEditarProduto = ({
                 mt="xl"
                 radius="xl"
                 mb={'xl'}
+                style={{ backgroundColor: '#7889d8' }}
               >
                 Salvar alterações
               </Button>
