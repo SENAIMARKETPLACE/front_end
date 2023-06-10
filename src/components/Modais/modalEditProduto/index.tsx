@@ -44,6 +44,8 @@ interface modalEditarProps {
   setarLista: (listaAtualizada: string[]) => void;
   snackbarOpenEdit: boolean;
   setSnackbarEditOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
+  setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
 
@@ -53,6 +55,8 @@ const ModalEditarProduto = ({
   setarLista,
   setSnackbarEditOpen,
   snackbarOpenEdit,
+  snackbarErrorOpen,
+  setSnackbarErrorOpen,
 }: modalEditarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -187,8 +191,10 @@ const ModalEditarProduto = ({
         form.setFieldValue('primaryColor', arrayCores[0]);
         form.setFieldValue('secondaryColor', arrayCores[1]);
       })
-
-      .catch((err) => alert(err));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
   };
 
   function atirarFuncoes() {
@@ -203,7 +209,10 @@ const ModalEditarProduto = ({
       .then((response) => {
         setarLista(response.data);
       })
-      .catch((error) => console.error);
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
   }
 
   const atualizarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -233,7 +242,10 @@ const ModalEditarProduto = ({
     //   .then((resp) => {
     //     regastarListaProdutos();
     //   })
-    //   .catch((err) => console.log(err));
+    // .catch((err) => {
+    //   setSnackbarErrorOpen(true);
+    //   console.log(err);
+    // });
     httpApiMockada
       .put(`produtos-post/${idSelecionado}`, produtoAtualizado)
       .then((response) => setOpen(false))
@@ -241,7 +253,10 @@ const ModalEditarProduto = ({
         regastarListaProdutos();
         setSnackbarEditOpen(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
   };
   // <h1>PRODUTO DE CÓDIGprodutos-postO: {idSelecionado} </h1>
 

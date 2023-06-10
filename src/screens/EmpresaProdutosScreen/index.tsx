@@ -254,6 +254,8 @@ const EmpresaProdutosScreen = () => {
                       setSnackbarEditOpen={setSnackbarEditOpen}
                       snackbarDeleteOpen={snackbarDeleteOpen}
                       setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                      snackbarErrorOpen={snackbarErrorOpen}
+                      setSnackbarErrorOpen={setSnackbarErrorOpen}
                       setarLista={atualizarListaProdutos}
                       id={product.id}
                       photo={product.img}
@@ -268,6 +270,8 @@ const EmpresaProdutosScreen = () => {
                       setSnackbarEditOpen={setSnackbarEditOpen}
                       snackbarDeleteOpen={snackbarDeleteOpen}
                       setSnackbarDeleteOpen={setSnackbarDeleteOpen}
+                      snackbarErrorOpen={snackbarErrorOpen}
+                      setSnackbarErrorOpen={setSnackbarErrorOpen}
                       setarLista={atualizarListaProdutos}
                       id={product.id}
                       key={`grid_${product.id}`}

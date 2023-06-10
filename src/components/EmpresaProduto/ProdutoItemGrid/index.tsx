@@ -15,6 +15,8 @@ interface ProdutoItemGridProps {
   setSnackbarEditOpen: (open: boolean) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
+  setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
 
@@ -35,6 +37,8 @@ const ProdutoItemGrid = ({
   setSnackbarEditOpen,
   snackbarDeleteOpen,
   setSnackbarDeleteOpen,
+  snackbarErrorOpen,
+  setSnackbarErrorOpen,
   categoriesAndSubCategories,
 }: ProdutoItemGridProps) => {
   const precoFormatado = new Intl.NumberFormat('pt-BR', {
@@ -62,6 +66,8 @@ const ProdutoItemGrid = ({
           <ModalEditarProduto
             setSnackbarEditOpen={setSnackbarEditOpen}
             snackbarOpenEdit={snackbarOpenEdit}
+            setSnackbarErrorOpen={setSnackbarErrorOpen}
+            snackbarErrorOpen={snackbarErrorOpen}
             setarLista={setarLista}
             idSelecionado={id}
             categoriesAndSubCategories={categoriesAndSubCategories}
@@ -69,6 +75,8 @@ const ProdutoItemGrid = ({
           <ModalDeletarProduto
             setSnackbarDeleteOpen={setSnackbarDeleteOpen}
             snackbarDeleteOpen={snackbarDeleteOpen}
+            setSnackbarErrorOpen={setSnackbarErrorOpen}
+            snackbarErrorOpen={snackbarErrorOpen}
             setarLista={setarLista}
             idExcluir={id}
           />

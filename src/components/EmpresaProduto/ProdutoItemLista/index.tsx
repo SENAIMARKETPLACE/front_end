@@ -16,6 +16,8 @@ interface ProductItemListProps {
   setSnackbarEditOpen: (open: boolean) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
+  setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
 
@@ -36,6 +38,8 @@ const ProdutoItemLista = ({
   setSnackbarEditOpen,
   snackbarDeleteOpen,
   setSnackbarDeleteOpen,
+  snackbarErrorOpen,
+  setSnackbarErrorOpen,
 }: ProductItemListProps) => {
   const precoFormatado = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -57,6 +61,8 @@ const ProdutoItemLista = ({
         <ModalEditarProduto
           setSnackbarEditOpen={setSnackbarEditOpen}
           snackbarOpenEdit={snackbarOpenEdit}
+          setSnackbarErrorOpen={setSnackbarErrorOpen}
+          snackbarErrorOpen={snackbarErrorOpen}
           setarLista={setarLista}
           idSelecionado={id}
           categoriesAndSubCategories={categoriesAndSubCategories}
@@ -64,6 +70,8 @@ const ProdutoItemLista = ({
         <ModalDeletarProduto
           setSnackbarDeleteOpen={setSnackbarDeleteOpen}
           snackbarDeleteOpen={snackbarDeleteOpen}
+          setSnackbarErrorOpen={setSnackbarErrorOpen}
+          snackbarErrorOpen={snackbarErrorOpen}
           setarLista={setarLista}
           idExcluir={id}
         />

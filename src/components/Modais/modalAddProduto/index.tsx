@@ -32,8 +32,8 @@ interface modalAddProductProp {
     mensagemProps: string
   ) => void;
   snackbarOpen: boolean;
-  snackbarErrorOpen: boolean;
   setSnackbarOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
   setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
@@ -42,8 +42,8 @@ export default function ModalAddProduto({
   categoriesAndSubCategories,
   setarMensagemEEstadoRequisicao,
   snackbarOpen,
-  snackbarErrorOpen,
   setSnackbarOpen,
+  snackbarErrorOpen,
   setSnackbarErrorOpen,
 }: modalAddProductProp) {
   const [open, setOpen] = useState(false);
