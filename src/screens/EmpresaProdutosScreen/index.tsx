@@ -20,7 +20,7 @@ import ProdutoItemLista from '../../components/EmpresaProduto/ProdutoItemLista';
 import ProdutoItemGrid from '../../components/EmpresaProduto/ProdutoItemGrid';
 import { ISubcategory } from 'compartilhado/ISubcategory';
 import SignInMessage from 'patterns/SignInMessage';
-import { Center, Container } from '@mantine/core';
+import { Center, Container, TextInput } from '@mantine/core';
 
 const EmpresaProdutosScreen = () => {
   // Altera a exibição da tela se estiver logado
@@ -101,6 +101,7 @@ const EmpresaProdutosScreen = () => {
       setProducts(response.data);
     } catch (error) {
       console.error(error);
+      setSnackbarErrorOpen(true);
     }
   }
 
@@ -121,6 +122,7 @@ const EmpresaProdutosScreen = () => {
       setCatchCategorias(categories);
     } catch (error) {
       console.log(error);
+      setSnackbarErrorOpen(true);
     }
   }
 
@@ -145,10 +147,31 @@ const EmpresaProdutosScreen = () => {
     setMensagem(mensagemProps);
   }
 
+  const [productsSearched, setProductsSearched] = useState([]);
+  function searchProducts(name: string) {
+    // Converter a palavra-chave para minúsculas para fazer a pesquisa case-insensitive
+    const sequency = name.toLowerCase();
+
+    // Filtrar os produtos com base na sequência digitada
+    const filteredProducts = products.filter((product) =>
+      product.nome.toLowerCase().includes(sequency)
+    );
+
+    setProductsSearched(filteredProducts);
+    // Retornar os produtos filtrados
+    // return filteredProducts;
+  }
+
+  // Trazendo produtos, categorias e subs
   useEffect(() => {
     getProducts();
     getCategoriesAndSubs();
   }, []);
+
+  // Quando a variável products for alterada, replico o valor para productsSearched, que será renderizada na tela. Ela está sincronizada com a busca.
+  useEffect(() => {
+    setProductsSearched(products);
+  }, [products]);
 
   return !isLogged ? (
     <div style={{ marginTop: '20px' }}>
@@ -219,7 +242,14 @@ const EmpresaProdutosScreen = () => {
               />
             </div>
             <div className={styles.searchAndFilter}>
-              <SearchBar />
+              <TextInput
+                placeholder="Pesquisar produtos."
+                type="search"
+                radius={'xl'}
+                onChange={(e) => searchProducts(e.target.value)}
+                className={styles.searchBar}
+                size="lg"
+              />
               <div className={styles.buttonsVisualization}>
                 <button
                   onClick={(e) => tornarModoGrid()}
@@ -254,7 +284,7 @@ const EmpresaProdutosScreen = () => {
                 }`}
               >
                 {products.length > 0 ? (
-                  products.map((product) =>
+                  productsSearched.map((product) =>
                     isButtonListAtivo ? (
                       <ProdutoItemLista
                         categoriesAndSubCategories={catchCategorias}

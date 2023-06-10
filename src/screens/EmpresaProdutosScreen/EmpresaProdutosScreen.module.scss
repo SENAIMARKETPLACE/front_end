@@ -36,6 +36,13 @@
         margin-bottom: 44px;
         max-width: 650px;
 
+        .searchBar {
+          min-width: 120px;
+          max-width: 500px;
+          width: 100%;
+          font-size: 15px;
+        }
+
         .buttonsVisualization {
           display: flex;
           border: none;

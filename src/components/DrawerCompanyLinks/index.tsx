@@ -35,9 +35,6 @@ export function DrawerCompanyLinks() {
             <img src={LogoSollaris.src} alt="Logo do Sollaris" />
           </Link>
         </Center>
-        <Center mt={40}>
-          <SearchBar />
-        </Center>
 
         <ul className={styles.drawer__list}>
           {mockdata.map((link) => (
