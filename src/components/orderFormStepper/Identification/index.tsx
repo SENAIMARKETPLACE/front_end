@@ -18,7 +18,12 @@ const Identification = ({ prevStep, nextStep, valorTotal }: props) => {
         nextStep={nextStep}
         overlay={false}
       />
-      <PaymentPreview valorTotal={valorTotal} prevStep={prevStep} nextStep={nextStep} overlay={true} />
+      <PaymentPreview
+        valorTotal={valorTotal}
+        prevStep={prevStep}
+        nextStep={nextStep}
+        overlay={true}
+      />
     </div>
   );
 };

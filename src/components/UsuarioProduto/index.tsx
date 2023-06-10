@@ -12,7 +12,7 @@ interface UsuarioProdutoProps {
   image: string;
   name: string;
   price: string;
-  id: string;
+  id: number;
 }
 
 const UsuarioProduto = ({ image, name, price, id }: UsuarioProdutoProps) => {
@@ -20,6 +20,14 @@ const UsuarioProduto = ({ image, name, price, id }: UsuarioProdutoProps) => {
     style: 'currency',
     currency: 'BRL',
   }).format(parseFloat(price));
+
+  const nomeFormatado = (name: string) => {
+    if (name.length <= 50) {
+      return name;
+    }
+
+    return name.slice(0, 45) + '...';
+  };
 
   return (
     <Link href={`marketplace/produto/${id}`}>
@@ -42,7 +50,7 @@ const UsuarioProduto = ({ image, name, price, id }: UsuarioProdutoProps) => {
         <div className={styles.photo_container}>
           <img className={styles.photo} src={image} alt={name} />
         </div>
-        <p className={styles.name}>{name}</p>
+        <p className={styles.name}>{nomeFormatado(name)}</p>
         <div className={styles.icons_container}>
           <div className={styles.rate}>
             <p className={styles.rate_value}>5</p>

@@ -17,6 +17,7 @@ export default function ProductsCarousel({ products }: ProductsCarouselProps) {
       dragFree
       className={styles.carousel}
     >
+
       {products.map((product: { id: string ; img: string; nome: string; preco: string }) => (
         <Carousel.Slide key={product.nome} pb={20}>
           <UsuarioProduto
@@ -28,6 +29,7 @@ export default function ProductsCarousel({ products }: ProductsCarouselProps) {
           />
         </Carousel.Slide>
       ))}
+
     </Carousel>
   );
 }

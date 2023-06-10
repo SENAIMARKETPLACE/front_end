@@ -1,28 +1,28 @@
-import styles from "./modalAddProduct.module.scss";
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import { Button, FormControl, OutlinedInput, styled } from "@mui/material";
-import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
-import { useState } from "react";
-import { httpApiMockada, httpProduto } from "../../../http";
-import { IProdutoPost } from "../../../compartilhado/IProdutoPost";
-import { BsPlus } from "react-icons/bs";
-import { IconType } from "react-icons/lib";
-import {
-  MuiColorInput,
-  MuiColorInputColors,
-  MuiColorInputFormat,
-} from "mui-color-input";
+import styles from './modalAddProduct.module.scss';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import { useState, useEffect } from 'react';
+import { httpApiMockada, httpProduto } from '../../../http';
+import { IProdutoPost } from '../../../compartilhado/IProdutoPost';
+import { IconAt, IconPaint, IconPackage, IconPhoto } from '@tabler/icons-react';
 
 // Modern or es5 bundle (pay attention to the note below!)
-import { IDetalhesProduto } from "../../../compartilhado/IDetalhesProduto";
-import { FaLessThanEqual } from "react-icons/fa";
-import { ICategory } from "compartilhado/ICategory";
-import { Select } from "@mantine/core";
+import { IDetalhesProduto } from '../../../compartilhado/IDetalhesProduto';
+import { ICategory } from 'compartilhado/ICategory';
+import {
+  Button,
+  Center,
+  ColorInput,
+  NumberInput,
+  Select,
+  SimpleGrid,
+  TextInput,
+  Textarea,
+} from '@mantine/core';
+import masks from 'util/fieldMasks';
+import { validates } from 'util/validations';
+import { useForm } from '@mantine/form';
 
 interface modalAddProductProp {
   setarLista: (listaAtualizada: string[]) => void;
@@ -45,117 +45,74 @@ export default function ModalAddProduto({
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setNomeProduto("");
-    setDescricao("");
-    setUrlImagem("");
-    setPublico("");
-    setCategoriaMantine("");
-    setQuantidade("");
-    setSubCategoriaMantine("");
-    setPreco("");
-    setPeso("");
-    setColorPrimary("");
-    setColorSecondary("");
-    setIsSubCategoriaDisable(true);
-    setErroNomeProduto(true);
-    setErroDescricao(true);
-    setErroUrlImagem(true);
-    setErroPublico(true);
-    setErroCategoria(true);
-    setErroSubCategoria(true);
-    setErroPreco(true);
-    setErroPeso(true);
-    setErroPrimaryColor(true);
-    setErroQuantidade(true);
-    setErroTamanho(true);
+    setPublico('');
   };
 
-  // STATES PARA CAPTURA DE CAMPOS
-  const [nomeProduto, setNomeProduto] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [urlImagem, setUrlImagem] = useState("");
-  const [publico, setPublico] = useState("");
-  const [categoria, setCategoria] = useState("");
-  const [subCategoria, setSubCategoria] = useState("");
-  const [preco, setPreco] = useState("");
-  const [empresaid, setEmpresaId] = useState("1");
-  const [peso, setPeso] = useState("");
-  const [tamanho, setTamanho] = useState("");
-  const [quantidade, setQuantidade] = useState("");
-  const [colorPrimary, setColorPrimary] = useState("");
-  const [colorSecondary, setColorSecondary] = useState("");
+  // STYLING MODAL IN SMALL SCREEN
 
-  let [subCategoriasTeste, setSubCategoriasTeste] = useState<JSX.Element[]>([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 700);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '1200px',
+    width: '95vw',
+    maxHeight: '95vh',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    display: 'flex',
+    justifyContent: 'center',
+    padding: isSmallScreen ? 2 : 4, // Define o valor do padding com base no tamanho da tela
+    overflow: 'auto',
+  };
+
+  // USE STATES AND VARIABLES
+
+  const [empresaid, setEmpresaId] = useState('1');
+  const [publico, setPublico] = useState('');
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
-
-  const [secondColorField, setColorSecondColorField] = useState(true);
-  const [index, setIndex] = useState(0);
-
-  //TESTES SELECT
   const [optionsCategories, setOptionsCategories] = useState([]);
   const [optionsSubCategories, setOptionsSubCategories] = useState([]);
 
-  // ERROS
-  const [erroNomeProduto, setErroNomeProduto] = useState(true);
-  const [erroDescricao, setErroDescricao] = useState(true);
-  const [erroUrlImagem, setErroUrlImagem] = useState(true);
-  const [erroPublico, setErroPublico] = useState(true);
-  const [erroCategoria, setErroCategoria] = useState(true);
-  const [erroSubCategoria, setErroSubCategoria] = useState(true);
-  const [erroPreco, setErroPreco] = useState(true);
-  const [erroPeso, setErroPeso] = useState(true);
-  const [erroTamanho, setErroTamanho] = useState(true);
-  const [erroQuantidade, setErroQuantidade] = useState(true);
-  const [erroPrimaryColor, setErroPrimaryColor] = useState(true);
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const format: MuiColorInputFormat = "hex";
-
-  const style = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    minWidth: "900px",
-    maxWidth: "1200px",
-    width: "100vw",
-    bgcolor: "background.paper",
-    boxShadow: 24,
-    display: "flex",
-    justifyContent: "center",
-    p: 4,
-  };
-
-  const trocarPrimeiraCor = (newValue: string, colors: MuiColorInputColors) => {
-    setColorPrimary(newValue);
-  };
-  const trocarSegundaCor = (newValue: string, colors: MuiColorInputColors) => {
-    setColorSecondary(newValue);
-  };
-
   const targetAudienceList = [
     {
-      value: "MASCULINO",
-      label: "Masculino",
+      value: 'MASCULINO',
+      label: 'Masculino',
     },
     {
-      value: "FEMININO",
-      label: "Feminino",
+      value: 'FEMININO',
+      label: 'Feminino',
     },
     {
-      value: "UNISSEX",
-      label: "Unissex",
+      value: 'UNISSEX',
+      label: 'Unissex',
     },
     {
-      value: "CRIANÇA",
-      label: "Criança",
+      value: 'CRIANÇA',
+      label: 'Criança',
     },
   ].map((option) => ({ value: option.value, label: option.label }));
 
+  // LIST PRODUCTS
+
   const resgatarListaProdutos = () => {
     httpProduto
-      .get("/api/products")
+      .get('/api/products')
       .then((resp) => {
         setarLista(resp.data.content);
       })
@@ -168,166 +125,61 @@ export default function ModalAddProduto({
     //   .catch((err) => console.log(err));
   };
 
+  // CREATE PRODUCT
+
   const criarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // SETAR VARIÁVEL DO TIPO CATEGORIA
     let detalhes_produto: IDetalhesProduto = {
-      tamanho: tamanho,
-      peso: peso,
-      cor: `${colorPrimary} ${colorSecondary ? "" + colorSecondary : ""}`,
-      quantidade: quantidade,
+      tamanho: form.values.size,
+      peso: form.values.weight,
+      cor: `${form.values.primaryColor} ${
+        form.values.secondaryColor ? '' + form.values.secondaryColor : ''
+      }`,
+      quantidade: form.values.amount,
     };
     let produto: IProdutoPost = {
       empresa_id: empresaid,
-      nome: nomeProduto,
-      descricao: descricao,
-      img: urlImagem,
+      nome: form.values.name,
+      descricao: form.values.description,
+      img: form.values.url,
       publico,
       categoria_id: categoriaMantine,
       sub_categoria_id: subCategoriaMantine,
-      preco: preco.replace(/,/g, "."),
+      preco: form.values.price.replace(/,/g, '.'),
       detalhes_do_produto: detalhes_produto,
     };
 
-    httpProduto
-      .post("/api/products", produto)
-      // httpApiMockada
-      //   .post("produtos-post", produto)
-      //   .then((resp) => {
-      //     console.log("Produto Criado com Sucesso");
-      //   })
+    // httpProduto
+    //   .post('/api/products', produto)
+    httpApiMockada
+      .post('produtos-post', produto)
+      .then((resp) => {
+        console.log('Produto Criado com Sucesso');
+      })
       .then((resp) => {
         resgatarListaProdutos();
         setOpen(false);
         setSnackbarOpen(true);
-        setNomeProduto("");
-        setDescricao("");
-        setUrlImagem("");
-        setPublico("");
-        setCategoriaMantine("");
-        setQuantidade("");
-        setSubCategoriaMantine("");
-        setPreco("");
-        setTamanho("");
-        setPeso("");
-        setColorPrimary("");
-        setColorSecondary("");
+        setPublico('');
+        setCategoriaMantine('');
+        setSubCategoriaMantine('');
         setIsSubCategoriaDisable(true);
         setIsSubCategoriaDisable(true);
-        setErroNomeProduto(true);
-        setErroDescricao(true);
-        setErroUrlImagem(true);
-        setErroPublico(true);
-        setErroCategoria(true);
-        setErroSubCategoria(true);
-        setErroPreco(true);
-        setErroPeso(true);
-        setErroPrimaryColor(true);
-        setErroQuantidade(true);
-        setErroTamanho(true);
+        // Reset values in mantine form
+        // form.reset();
       })
       .catch((erro: any) => console.log(erro));
     setIsSubCategoriaDisable(true);
   };
 
-  const validarSomenteTamanho = (
-    nomeDigitado: string,
-    minimo: string,
-    maximo: string,
-    funcaoSetar?: (valor: React.SetStateAction<boolean>) => void
-  ): boolean => {
-    const regexNome = new RegExp(`^.{${minimo},${maximo}}$`);
-    if (regexNome.test(nomeDigitado)) {
-      funcaoSetar(false);
-      return false;
-    } else {
-      funcaoSetar(true);
-      return true;
-    }
-  };
-
-  const validarFoto = (fotoDigitada: string) => {
-    const regexFoto = /https?:\/\/.*\.(jpe?g|png)/;
-    if (regexFoto.test(fotoDigitada)) {
-      setErroUrlImagem(false);
-      return false;
-    } else {
-      setErroUrlImagem(true);
-      return true;
-    }
-  };
-
-  const validarField = (
-    opcaoEscolhida: string,
-    funcaoSetar: (valor: React.SetStateAction<boolean>) => void
-  ): boolean => {
-    if (opcaoEscolhida != "") {
-      funcaoSetar(false);
-      return false;
-    } else {
-      funcaoSetar(true);
-      return true;
-    }
-  };
-
-  const validarQuantidade = (quantidadeEscolhida: string): boolean => {
-    if (quantidadeEscolhida != "") {
-      if (parseInt(quantidadeEscolhida) <= 0) {
-        setErroQuantidade(true);
-        return true;
-      } else {
-        setErroQuantidade(false);
-        return false;
-      }
-    } else {
-      setErroQuantidade(true);
-      return true;
-    }
-  };
-
-  React.useEffect(() => {
-    setIsFormValid(
-      !erroNomeProduto &&
-        !erroDescricao &&
-        !erroUrlImagem &&
-        !erroPublico &&
-        !erroCategoria &&
-        !erroSubCategoria &&
-        !erroPeso &&
-        !erroTamanho &&
-        !erroPrimaryColor &&
-        !erroQuantidade &&
-        !erroPreco
-    );
-  }, [
-    erroNomeProduto,
-    erroDescricao,
-    erroUrlImagem,
-    erroPublico,
-    erroCategoria,
-    erroSubCategoria,
-    erroPreco,
-    erroPeso,
-    erroTamanho,
-    erroQuantidade,
-    erroPrimaryColor,
-  ]);
-
-  React.useEffect(() => {
-    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
-      value: categoria.id,
-      label: categoria.nome,
-    }));
-
-    setOptionsCategories(transformarDados);
-  });
-
-  const [categoriaMantine, setCategoriaMantine] = useState("");
-  const [subCategoriaMantine, setSubCategoriaMantine] = useState("");
-  const [genreMantine, genreCategoriaMantine] = useState("");
+  // MANTINE FORM
+  const [categoriaMantine, setCategoriaMantine] = useState('');
+  const [subCategoriaMantine, setSubCategoriaMantine] = useState('');
+  const [genreMantine, genreCategoriaMantine] = useState('');
 
   const setarSubTeste = (idCategorieSelected: string) => {
-    setSubCategoriaMantine("");
+    setSubCategoriaMantine('');
     const categorias = categoriesAndSubCategories.filter(
       (c) => c.id === idCategorieSelected
     );
@@ -339,11 +191,96 @@ export default function ModalAddProduto({
     setOptionsSubCategories(subCategoriasLista);
   };
 
+  useEffect(() => {
+    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
+      value: categoria.id,
+      label: categoria.nome,
+    }));
+
+    setOptionsCategories(transformarDados);
+  });
+
+  const inputProps = {
+    radius: 'sm',
+    required: true,
+    withAsterisk: false,
+    mb: 'xs',
+  };
+
+  const remainingCharacters = (
+    value: number,
+    fieldName: keyof typeof form.values
+  ) => {
+    const str = `Caracteres restantes: ${
+      value - form.values[fieldName].length
+    }`;
+    return str;
+  };
+
+  const form = useForm({
+    validateInputOnBlur: true,
+    // Valores que serão substituídos pelo GET. Mantenha as máscaras.
+    initialValues: {
+      name: '',
+      description: '',
+      url: '',
+      targetAudience: '',
+      categorie: '',
+      subCategorie: '',
+      price: '',
+      size: '',
+      weight: '',
+      amount: '',
+      primaryColor: '',
+      secondaryColor: '',
+    },
+
+    // Validações dos campos
+    validate: {
+      name: (value) =>
+        value.length > 6
+          ? null
+          : 'O nome deve conter no mínimo 6 letras. Usar um nome curto demais resulta em baixa conversão de vendas.',
+      description: (value) =>
+        value.length > 20
+          ? null
+          : 'A descrição deve conter no mínimo 20 letras. Interessados usarão este texto para obter informações sobre o seu produto.',
+      url: (value: string) => {
+        const errors: Array<string> = [];
+
+        /^(http|https):\/\//.test(value)
+          ? null
+          : errors.push(
+              'Certifique-se de que a url inicie com http:// ou https://'
+            );
+        /\.(jpg|jpeg|png|gif|bmp)$/i.test(value)
+          ? null
+          : errors.push(
+              'A url deve terminar com um tipo válido de imagem (jpeg, jpg ou png)'
+            );
+
+        return errors.length > 0 ? errors[0] : null;
+      },
+      // amount: (value) => (value.length > 0 ? null : 'Informe a quantidade.'),
+      // price: (value) => (value.length > 0 ? null : 'Informe o preço.'),
+      // size: (value) => (value.length > 0 ? null : 'Informe o tamanho.'),
+      // weight: (value) => (value.length > 0 ? null : 'Informe o peso.'),
+    },
+  });
+
+  const handleInputChange =
+    (fieldName: string, maskFunction?: Function) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = event.target.value;
+      const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
+      form.setFieldValue(fieldName, maskedValue);
+    };
+
   return (
     <div>
       <Button
         variant="outlined"
-        startIcon={<BsPlus />}
+        // startIcon={<BsPlus />}
         onClick={handleOpen}
         className={styles.open_btn}
       >
@@ -351,74 +288,82 @@ export default function ModalAddProduto({
       </Button>
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
-          <form className={styles.form}>
-            <div className={styles.product}>
-              <div className={styles.photo}>
-                <img src={urlImagem} alt={nomeProduto} />
+          <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
+            <div className={styles.form__part1}>
+              <img
+                src={form.values.url}
+                alt={`Imagem ilustrativa: ${form.values.name}`}
+                className={styles['form__part1--image']}
+              />
+              <div className={styles['form__part1--text']}>
+                <TextInput
+                  icon={<IconPackage size="1.2rem" />}
+                  label="Produto"
+                  placeholder="Informe o nome do produto"
+                  maxLength={100}
+                  description={remainingCharacters(100, 'name')}
+                  inputWrapperOrder={['label', 'error', 'input', 'description']}
+                  {...inputProps}
+                  {...form.getInputProps('name')}
+                />
+                <Textarea
+                  label="Descrição"
+                  placeholder="Descreva os detalhes e diferenciais do seu produto."
+                  maxLength={800}
+                  description={remainingCharacters(800, 'description')}
+                  inputWrapperOrder={['label', 'error', 'input', 'description']}
+                  {...inputProps}
+                  {...form.getInputProps('description')}
+                  minRows={4}
+                  maxRows={4}
+                />
               </div>
-              <TextField
-                label="Nome do produto"
-                className={styles.name}
-                onChange={(e) => setNomeProduto(e.target.value)}
-                onBlur={(e) =>
-                  validarSomenteTamanho(
-                    nomeProduto,
-                    "10",
-                    "30",
-                    setErroNomeProduto
-                  )
-                }
-                value={nomeProduto}
-                error={erroNomeProduto}
-                inputProps={{ minLength: 10, maxLength: 30 }}
-              />
-              <TextField
-                label="Descrição"
-                onChange={(e) => {
-                  setDescricao(e.target.value);
-                }}
-                onBlur={(e) =>
-                  validarSomenteTamanho(
-                    descricao,
-                    "10",
-                    "500",
-                    setErroDescricao
-                  )
-                }
-                error={erroDescricao}
-                multiline
-                rows={4}
-                className={styles.description}
-                value={descricao}
-                inputProps={{ minLength: 10, maxLength: 500 }}
-              />
-              <TextField
-                label="URL da imagem"
+            </div>
+            <SimpleGrid
+              cols={3}
+              verticalSpacing={4}
+              mb={16}
+              breakpoints={[
+                { maxWidth: '700', cols: 2, verticalSpacing: '0' },
+                { maxWidth: '500', cols: 1, verticalSpacing: '0' },
+              ]}
+            >
+              <TextInput
+                icon={<IconPhoto size="1.1rem" />}
                 className={styles.url}
-                onChange={(e) => setUrlImagem(e.target.value)}
-                value={urlImagem}
-                onBlur={(e) => validarFoto(urlImagem)}
-                error={erroUrlImagem}
+                label="Foto do produto"
+                placeholder="Insira o link (url) da imagem"
+                {...inputProps}
+                {...form.getInputProps('url')}
               />
-              {/* <TextField
-                select
-                label="Público"
-                className={styles.genre}
-                onChange={(e) => setPublico(e.target.value)}
-                value={publico}
-                onBlur={(e) => {
-                  validarField(publico, setErroPublico);
-                }}
-                error={erroPublico}
-              >
-                {targetAudienceList}
-              </TextField> */}
+              <NumberInput
+                // icon={'kg'}
+                className={styles.amount}
+                label="Quantidade"
+                placeholder="Informe o estoque disponível"
+                min={1}
+                {...inputProps}
+                {...form.getInputProps('amount')}
+                type="number"
+              />
+              <TextInput
+                icon={'R$'}
+                className={styles.price}
+                label="Preço"
+                placeholder="Informe o valor do produto"
+                {...inputProps}
+                {...form.getInputProps('price')}
+                min={1}
+                onChange={handleInputChange('price', masks.real)}
+              />
               <Select
                 value={genreMantine}
                 className={styles.genre}
                 label="Público"
                 placeholder="Selecione o público alvo "
                 data={targetAudienceList}
+                // {...inputProps}
+                // {...form.getInputProps('targetAudience')}
                 onChange={(value) => genreCategoriaMantine(value)}
               />
               <Select
@@ -429,7 +374,7 @@ export default function ModalAddProduto({
                 data={optionsCategories}
                 onChange={(value) => setCategoriaMantine(value)}
                 onBlur={() => {
-                  if (categoriaMantine !== "") {
+                  if (categoriaMantine !== '') {
                     setarSubTeste(categoriaMantine);
                   }
                 }}
@@ -442,78 +387,85 @@ export default function ModalAddProduto({
                 placeholder="Selecione uma sub-categoria"
                 onChange={(value) => setSubCategoriaMantine(value)}
               />
-              <TextField
-                type="number"
-                label="Quantidade"
-                className={styles.amount}
-                onChange={(e) => setQuantidade(e.target.value)}
-                onBlur={(e) => validarQuantidade(quantidade)}
-                value={quantidade}
-                error={erroQuantidade}
-              />
-              <FormControl className={styles.price}>
-                <InputLabel>Preço</InputLabel>
-                <OutlinedInput
-                  startAdornment={
-                    <InputAdornment position="start">R$</InputAdornment>
-                  }
-                  label="Amount"
-                  value={preco}
-                  onBlur={(e) => validarField(preco, setErroPreco)}
-                  onChange={(e) => setPreco(e.target.value)}
-                  error={erroPreco}
-                />
-              </FormControl>
-              <TextField
-                label="Tamanho"
-                className={styles.size}
-                onChange={(e) => setTamanho(e.target.value)}
-                onBlur={(e) => validarField(tamanho, setErroTamanho)}
-                value={tamanho}
-                error={erroTamanho}
-              />
-              <TextField
-                label="Peso"
-                className={styles.weight}
-                onChange={(e) => setPeso(e.target.value)}
-                onBlur={(e) => validarField(peso, setErroPeso)}
-                value={peso}
-                error={erroPeso}
-              />
+            </SimpleGrid>
 
-              <MuiColorInput
-                value={colorPrimary}
-                onChange={trocarPrimeiraCor}
-                onBlur={(e) => {
-                  setColorSecondColorField(false),
-                    validarField(colorPrimary, setErroPrimaryColor);
-                }}
-                format={format}
-                label="Cor Primária"
+            <SimpleGrid
+              cols={4}
+              breakpoints={[
+                { maxWidth: '700', cols: 2, verticalSpacing: '0' },
+                { maxWidth: '500', cols: 1, verticalSpacing: '0' },
+              ]}
+            >
+              <ColorInput
                 className={styles.colors}
-                error={erroPrimaryColor}
+                label={'Cor primária'}
+                dropdownZIndex={1500}
+                format="hex"
+                swatches={[
+                  '#000000',
+                  '#ffffff',
+                  '#b40000',
+                  '#005baf',
+                  '#e3e622',
+                  '#02b10a',
+                  '#df50f2',
+                  '#df6a26',
+                  '#5f15bf',
+                ]}
+                {...inputProps}
+                {...form.getInputProps('primaryColor')}
               />
-
-              <MuiColorInput
-                disabled={secondColorField}
-                value={colorSecondary}
-                onChange={trocarSegundaCor}
-                format={format}
+              <ColorInput
                 className={styles.colors2}
-                label="Cor Secundária"
+                label={'Cor secundária'}
+                dropdownZIndex={1500}
+                format="hex"
+                swatches={[
+                  '#000000',
+                  '#ffffff',
+                  '#b40000',
+                  '#005baf',
+                  '#e3e622',
+                  '#02b10a',
+                  '#df50f2',
+                  '#df6a26',
+                  '#5f15bf',
+                ]}
+                {...inputProps}
+                {...form.getInputProps('secondaryColor')}
+                required={false}
+                disabled={form.values.primaryColor === '' ? true : false}
               />
-            </div>
+              <TextInput
+                // icon={'M'}
+                className={styles.size}
+                label="Tamanho"
+                placeholder="Informe o tamanho do produto"
+                {...inputProps}
+                {...form.getInputProps('size')}
+              />
+              <TextInput
+                icon={'kg'}
+                className={styles.weight}
+                label="Peso"
+                placeholder="Informe o peso do produto"
+                {...inputProps}
+                {...form.getInputProps('weight')}
+              />
+            </SimpleGrid>
 
             {/* SE IsFormValid ser false na propriedade disabled ele vira true | se IsFormValid ser true na propriedade disabled ele vira false  */}
-            <Button
-              onClick={criarProduto}
-              variant="contained"
-              type="submit"
-              disabled={!isFormValid}
-              className={styles.submit_btn}
-            >
-              CADASTRAR PRODUTO
-            </Button>
+            <Center>
+              <Button
+                // onClick={criarProduto}
+                type="submit"
+                mt="xl"
+                radius="sm"
+                mb={'xl'}
+              >
+                Cadastrar Produto
+              </Button>
+            </Center>
           </form>
         </Box>
       </Modal>
