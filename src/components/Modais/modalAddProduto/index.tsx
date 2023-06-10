@@ -32,7 +32,9 @@ interface modalAddProductProp {
     mensagemProps: string
   ) => void;
   snackbarOpen: boolean;
+  snackbarErrorOpen: boolean;
   setSnackbarOpen: (open: boolean) => void;
+  setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
 export default function ModalAddProduto({
@@ -40,7 +42,9 @@ export default function ModalAddProduto({
   categoriesAndSubCategories,
   setarMensagemEEstadoRequisicao,
   snackbarOpen,
+  snackbarErrorOpen,
   setSnackbarOpen,
+  setSnackbarErrorOpen,
 }: modalAddProductProp) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -127,13 +131,19 @@ export default function ModalAddProduto({
       .then((resp) => {
         setarLista(resp.data.content);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
     // httpApiMockada
-    //   .get("produtos")
+    //   .get('produtos')
     //   .then((resp) => {
     //     setarLista(resp.data);
     //   })
-    //   .catch((err) => console.log(err));
+    //   .catch((err) => {
+    //     setSnackbarErrorOpen(true);
+    //     console.log(err);
+    //   });
   };
 
   // CREATE PRODUCT
@@ -180,7 +190,10 @@ export default function ModalAddProduto({
         // Reset values in mantine form
         form.reset();
       })
-      .catch((erro: any) => console.log(erro));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
     setIsSubCategoriaDisable(true);
   };
 

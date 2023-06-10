@@ -27,6 +27,7 @@ const EmpresaProdutosScreen = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarEditOpen, setSnackbarEditOpen] = useState(false);
   const [snackbarDeleteOpen, setSnackbarDeleteOpen] = useState(false);
+  const [snackbarErrorOpen, setSnackbarErrorOpen] = useState(false);
   const [mensagem, setMensagem] = useState('');
   const [catchCategorias, setCatchCategorias] = useState<ICategory[]>([]);
   const [isButtonListAtivo, setIsButtonListAtivo] = useState(false);
@@ -75,6 +76,17 @@ const EmpresaProdutosScreen = () => {
     }
 
     setSnackbarDeleteOpen(false);
+  };
+
+  const handleSnackbarErrorClose = (
+    event: React.SyntheticEvent | undefined,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackbarErrorOpen(false);
   };
 
   async function getProducts() {
@@ -170,6 +182,17 @@ const EmpresaProdutosScreen = () => {
             </Alert>
           </div>
         </Snackbar>
+        <Snackbar
+          open={snackbarErrorOpen}
+          autoHideDuration={4000}
+          onClose={handleSnackbarErrorClose}
+        >
+          <div>
+            <Alert onClose={handleSnackbarErrorClose} severity="error">
+              Hmm, um erro foi encontrado, tente novamente em instantes...
+            </Alert>
+          </div>
+        </Snackbar>
       </Stack>
 
       <div className={styles.page_container}>
@@ -182,6 +205,8 @@ const EmpresaProdutosScreen = () => {
                 categoriesAndSubCategories={catchCategorias}
                 snackbarOpen={snackbarOpen}
                 setSnackbarOpen={setSnackbarOpen}
+                snackbarErrorOpen={snackbarErrorOpen}
+                setSnackbarErrorOpen={setSnackbarErrorOpen}
                 setarLista={atualizarListaProdutos}
                 setarMensagemEEstadoRequisicao={setarMensagemEEstadoRequisicao}
               />
