@@ -1,18 +1,18 @@
-import { Avatar } from '@mui/material';
-import MiniSearchBar from '../../MiniSearchBar';
-import styles from './MarketplaceHeader.module.scss';
-import { IoIosArrowDropleftCircle } from 'react-icons/io';
-import { useEffect, useRef, useState } from 'react';
-import Carrinho from 'components/Carrinho';
-import { BsBag } from 'react-icons/bs';
-import { IProdutoGet } from 'compartilhado/IProdutoGet';
-import { useRouter } from 'next/router';
-import { MdOutlineArrowBackIosNew } from 'react-icons/md';
-import { Burger, Center } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { Drawer, Group, Button } from '@mantine/core';
-import AvatarIcon from 'components/Avatar';
-import LogoSollaris from '/public/images/logo.svg';
+import { Avatar } from "@mui/material";
+import MiniSearchBar from "../../MiniSearchBar";
+import styles from "./MarketplaceHeader.module.scss";
+import { IoIosArrowDropleftCircle } from "react-icons/io";
+import { useEffect, useRef, useState } from "react";
+import Carrinho from "components/Carrinho";
+import { BsBag } from "react-icons/bs";
+import { IProdutoGet } from "compartilhado/IProdutoGet";
+import { useRouter } from "next/router";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { Burger, Center } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Drawer, Group, Button } from "@mantine/core";
+import AvatarIcon from "components/Avatar";
+import LogoSollaris from "/public/images/logo.svg";
 import {
   IconHome2,
   IconGauge,
@@ -23,15 +23,18 @@ import {
   IconSettings,
   IconLogout,
   IconHeart,
-} from '@tabler/icons-react';
-import Link from 'next/link';
+} from "@tabler/icons-react";
+import Link from "next/link";
+import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
 
 interface MarketplaceHeaderProps {
   isLogged: boolean;
   quantidade?: number;
+  userConnect?:IResponseLoginUser,  
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos?: (novoArray: IProdutoGet[]) => void;
   setarQuantidade?: (novaQuantidade: number) => void;
+  setarIsLogged?: (newState: boolean) => void;
 }
 
 const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
@@ -40,11 +43,14 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   setarListaProdutos,
   setarQuantidade,
   isLogged,
+  setarIsLogged, 
+  userConnect
 }) => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
+  const [quantidadeFromCart, setQuantidadeFromCart] = useState(0)
   const carrinhoRef = useRef<HTMLDivElement>(null);
 
   function ClickForaCarrinho(event: MouseEvent) {
@@ -56,14 +62,18 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
     }
   }
 
+  function fecharCarrinho() {
+    setIsCartVisible(false);
+  }
+
   useEffect(() => {
     if (isCartVisible) {
-      document.addEventListener('mousedown', ClickForaCarrinho);
+      document.addEventListener("mousedown", ClickForaCarrinho);
     } else {
-      document.removeEventListener('mousedown', ClickForaCarrinho);
+      document.removeEventListener("mousedown", ClickForaCarrinho);
     }
     return () => {
-      document.removeEventListener('mousedown', ClickForaCarrinho);
+      document.removeEventListener("mousedown", ClickForaCarrinho);
     };
   }, [isCartVisible]);
 
@@ -78,11 +88,11 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
       setWindowWidth(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     setWindowWidth(window.innerWidth);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -94,6 +104,7 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
       <div ref={carrinhoRef}>
         {isCartVisible && (
           <Carrinho
+            fecharCarrinho={fecharCarrinho}
             setarQuantidade={setarQuantidade}
             setarListaProdutos={setarListaProdutos}
             quantidadeDeProdutos={quantidade}
@@ -104,7 +115,7 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
       </div>
       <div className={styles.searchbar_and_avatar}>
         {windowWidth > 600 && <MiniSearchBar />}
-        <AvatarIcon isLogged={isLogged} />
+        <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged} />
         <button onClick={acionarCarrinho} className={styles.buttonCart}>
           <BsBag />
           <span className={styles.buttonCart__quantidadeProdutos}>
@@ -122,13 +133,15 @@ function ResponsiveSideBar() {
   const [opened, { open, close }] = useDisclosure(false);
 
   const [openedBurguer, { toggle }] = useDisclosure(false);
-  const label = opened ? 'Close navigation' : 'Open navigation';
+  const label = opened ? "Close navigation" : "Open navigation";
 
   const mockdata = [
+
     { icon: IconHome2, label: 'Início', path: '/marketplace' },
     { icon: IconCalendarStats, label: 'Pedidos', path: '/pedidos' },
     // { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
     { icon: IconUser, label: 'Perfil', path: '/perfil' },
+
   ];
 
   return (
@@ -140,7 +153,7 @@ function ResponsiveSideBar() {
         className={styles.drawer}
       >
         <Center>
-          <Link href={'/marketplace'}>
+          <Link href={"/marketplace"}>
             <img src={LogoSollaris.src} alt="Logo do Sollaris" />
           </Link>
         </Center>
@@ -161,7 +174,7 @@ function ResponsiveSideBar() {
         opened={opened}
         onClick={open}
         aria-label={label}
-        size={'sm'}
+        size={"sm"}
         color="#5f78e7"
       />
     </>

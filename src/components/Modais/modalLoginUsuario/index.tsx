@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { ILoginBody } from "compartilhado/ILoginBody";
 import { httpUsuario } from "../../../http";
+import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
 
 const style = {
   position: "absolute" as "absolute",
@@ -27,7 +28,13 @@ const style = {
   display: "flex",
 };
 
-export default function ModalLoginEmpresa() {
+interface ModalLoginEmpresaProps {
+  setarIsLogged: (newState: boolean) => void;
+}
+
+export default function ModalLoginEmpresa({
+  setarIsLogged,
+}: ModalLoginEmpresaProps) {
   // Modal Settings
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -77,17 +84,83 @@ export default function ModalLoginEmpresa() {
     >
   ) => {
     alert(JSON.stringify(formValues.values));
+    // httpUsuario
+    //   .post("api/users/login", formValues.values)
+    //   // NO PRÓXIMO THEN EU VOU POPULARIZAR A MINHA VARIÁVEL do Tipo IResponseLoginUser
+    //   .then((response) => {
+    //     const userLoginResponse: IResponseLoginUser = response.data.content
+
+    //     //armazena os dados no localstorage:
+    //     localStorage.setItem('userLoginResponse', JSON.stringify(userLoginResponse))
+
+    //     //definir a variável isLogged como true
+    //     setarIsLogged(true)
+
+    //     //ENVIAR PARA A PÁGINA, AGORA LOGADO E VISUALIZAR SUAS INFORMAÇÕES
+    //     router.push("/marketplace")
+    //   })
+    //   .then((resp) => router.push("/marketplace"))
+    //   .catch((erro) => {
+    //     setBadLogin(true);
+
+    //   });
+    // event.preventDefault();
     httpUsuario
       .post("api/users/login", formValues.values)
-      .then((resp) => router.push("/marketplace"))
-      .then((resp) => {
-        console.log(resp);
+      // NO PRÓXIMO THEN EU VOU POPULARIZAR A MINHA VARIÁVEL do Tipo IResponseLoginUser
+      .then((response) => {
+        const userLoginResponse: IResponseLoginUser = response.data.content;
+
+        //armazena os dados no localstorage:
+        localStorage.setItem(
+          "userLoginResponse",
+          JSON.stringify(userLoginResponse)
+        );
       })
+      .then((resp) => router.push("/marketplace"))
       .catch((erro) => {
         setBadLogin(true);
+
+        //definir a variável isLogged como true
+        setarIsLogged(true);
+
+        //MOCKANDO UM USUARIO FALSO
+        const userLoginResponse: IResponseLoginUser = {
+          id: "44",
+          data_requisicao: "09/06/2023 11:00:11",
+          nome: "Juvenal Maxiliano",
+          cpf: "1111111111",
+          email: "jvabreusousa19@gmail.com",
+          data_nascimento: "03/03/2002",
+          genero: "MASCULINO",
+          img: "https://github.com/joaoabreu004.png",
+          gruposDeInteresse: ["1", "2", "3"],
+          enderecos: [
+            {
+              id: "1",
+              cep: "05881020",
+              logradouro: "Rua Abílio César",
+              numero: "28",
+              estado: "SP",
+              bairro: "Capão Redondo",
+              cidade: "São Paulo",
+            },
+          ],
+        };
+
+        //ENVIANDO PARA LOCALSTORAGE:
+        localStorage.setItem(
+          "userLoginResponse",
+          JSON.stringify(userLoginResponse)
+        );
+        localStorage.setItem("isUserLogged", "true");
+
+        //ENVIAR PARA A PÁGINA, AGORA LOGADO E VISUALIZAR SUAS INFORMAÇÕES
+        router.push("/marketplace");
       });
     event.preventDefault();
   };
+
 
   useEffect(() => {
     setIsFormValid(!form.isValid());

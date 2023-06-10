@@ -3,6 +3,7 @@ import MarketplaceProdutoScreen from '../../../screens/MarketplaceProdutoScreen'
 import LayoutMarketplace from 'layout/LayoutMarketplace';
 
 const MarketplaceProduto = () => {
+
   return (
     <LayoutMarketplace>
       <MarketplaceProdutoScreen />

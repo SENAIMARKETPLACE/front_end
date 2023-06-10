@@ -17,19 +17,19 @@ export default function ProductsCarousel({ products }: ProductsCarouselProps) {
       dragFree
       className={styles.carousel}
     >
-      {products.map(
-        (product: { img: string; nome: string; preco: string; id: number }) => (
-          <Carousel.Slide key={product.nome} pb={20}>
-            <UsuarioProduto
-              key={product.nome}
-              id={product.id}
-              image={product.img}
-              name={product.nome}
-              price={product.preco}
-            />
-          </Carousel.Slide>
-        )
-      )}
+
+      {products.map((product: { id: string ; img: string; nome: string; preco: string }) => (
+        <Carousel.Slide key={product.nome} pb={20}>
+          <UsuarioProduto
+            key={product.nome}
+            id={product.id}
+            image={product.img}
+            name={product.nome}
+            price={product.preco}
+          />
+        </Carousel.Slide>
+      ))}
+
     </Carousel>
   );
 }
