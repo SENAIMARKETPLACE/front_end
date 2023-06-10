@@ -26,11 +26,12 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
+import LoadingGif from "layout/LoadingGif";
 
 interface MarketplaceHeaderProps {
   isLogged: boolean;
   quantidade?: number;
-  userConnect?:IResponseLoginUser,  
+  userConnect?: IResponseLoginUser;
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos?: (novoArray: IProdutoGet[]) => void;
   setarQuantidade?: (novaQuantidade: number) => void;
@@ -43,14 +44,14 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   setarListaProdutos,
   setarQuantidade,
   isLogged,
-  setarIsLogged, 
-  userConnect
+  setarIsLogged,
+  userConnect,
 }) => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
-  const [quantidadeFromCart, setQuantidadeFromCart] = useState(0)
+  const [quantidadeFromCart, setQuantidadeFromCart] = useState(0);
   const carrinhoRef = useRef<HTMLDivElement>(null);
 
   function ClickForaCarrinho(event: MouseEvent) {
@@ -97,33 +98,69 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   }, []);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.header__rightIcons}>
-        {windowWidth < 850 && <ResponsiveSideBar />}
-      </div>
-      <div ref={carrinhoRef}>
-        {isCartVisible && (
-          <Carrinho
-            fecharCarrinho={fecharCarrinho}
-            setarQuantidade={setarQuantidade}
-            setarListaProdutos={setarListaProdutos}
-            quantidadeDeProdutos={quantidade}
-            isCartAtivado={isCartVisible}
-            produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
-          />
-        )}
-      </div>
-      <div className={styles.searchbar_and_avatar}>
-        {windowWidth > 600 && <MiniSearchBar />}
-        <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged} />
-        <button onClick={acionarCarrinho} className={styles.buttonCart}>
-          <BsBag />
-          <span className={styles.buttonCart__quantidadeProdutos}>
-            {quantidade}
-          </span>
-        </button>
-      </div>
-    </header>
+    <>
+      {!userConnect ? (
+        <header className={styles.header}>
+        <div className={styles.header__rightIcons}>
+          {windowWidth < 850 && <ResponsiveSideBar />}
+        </div>
+        <div ref={carrinhoRef}>
+          
+          {isCartVisible && (
+            <Carrinho
+              fecharCarrinho={fecharCarrinho}
+              setarQuantidade={setarQuantidade}
+              setarListaProdutos={setarListaProdutos}
+              quantidadeDeProdutos={quantidade}
+              isCartAtivado={isCartVisible}
+              produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
+            />
+          )}
+        </div>
+        <div className={styles.searchbar_and_avatar}>
+          {windowWidth > 600 && <MiniSearchBar />}
+          <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged}  />
+          <button onClick={acionarCarrinho} className={styles.buttonCart}>
+            <BsBag />
+            <span className={styles.buttonCart__quantidadeProdutos}>
+              {quantidade}
+            </span>
+          </button>
+        </div>
+      </header>
+        
+      ) : (
+        <header className={styles.header}>
+         
+          <div className={styles.header__rightIcons}>
+            {windowWidth < 850 && <ResponsiveSideBar />}
+          </div>
+          <div ref={carrinhoRef}>
+            
+            {isCartVisible && (
+              <Carrinho
+                fecharCarrinho={fecharCarrinho}
+                setarQuantidade={setarQuantidade}
+                setarListaProdutos={setarListaProdutos}
+                quantidadeDeProdutos={quantidade}
+                isCartAtivado={isCartVisible}
+                produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
+              />
+            )}
+          </div>
+          <div className={styles.searchbar_and_avatar}>
+            {windowWidth > 600 && <MiniSearchBar />}
+            <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged} nomeUserConnect={userConnect.nome} avatarUserConnect={userConnect.img} />
+            <button onClick={acionarCarrinho} className={styles.buttonCart}>
+              <BsBag />
+              <span className={styles.buttonCart__quantidadeProdutos}>
+                {quantidade}
+              </span>
+            </button>
+          </div>
+        </header>
+      )}
+    </>
   );
 };
 
@@ -136,12 +173,10 @@ function ResponsiveSideBar() {
   const label = opened ? "Close navigation" : "Open navigation";
 
   const mockdata = [
-
-    { icon: IconHome2, label: 'Início', path: '/marketplace' },
-    { icon: IconCalendarStats, label: 'Pedidos', path: '/pedidos' },
+    { icon: IconHome2, label: "Início", path: "/marketplace" },
+    { icon: IconCalendarStats, label: "Pedidos", path: "/pedidos" },
     // { icon: IconHeart, label: 'Favoritos', path: '/favoritos' },
-    { icon: IconUser, label: 'Perfil', path: '/perfil' },
-
+    { icon: IconUser, label: "Perfil", path: "/perfil" },
   ];
 
   return (

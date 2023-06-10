@@ -1,10 +1,11 @@
 import styles from './OrdersTable.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Table, Avatar, Tooltip, Button } from '@mantine/core';
 import React from 'react';
 import emptyCart from '../../../public/images/empty_cart_co35.svg';
 import Link from 'next/link';
 import OrderDetails from './OrderDetails';
+
 
 const orders = [
   {
@@ -107,6 +108,11 @@ export default OrdersTable;
 function Orders() {
   const [openItem, setOpenItem] = useState(null);
   const [accordionText, setAccordionText] = useState('Abrir');
+
+
+  
+
+
 
   const handleAccordionToggle = (index: number) => {
     setOpenItem(index === openItem ? null : index);
