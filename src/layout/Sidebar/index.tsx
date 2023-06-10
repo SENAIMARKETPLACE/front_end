@@ -89,11 +89,24 @@ const mockdata = [
 ];
 
 const mockDataBusiness = [
-  { icon: IconBuildingStore, label: "Minha Loja", path: "http://localhost:3000/empresa/minha-loja" },
-  { icon: IconTag, label: "Meus Produtos", path: "http://localhost:3000/empresa/produtos" },
+  {
+    icon: IconBuildingStore,
+    label: "Minha Loja",
+    path: "http://localhost:3000/empresa/minha-loja",
+  },
+  {
+    icon: IconTag,
+    label: "Meus Produtos",
+    path: "http://localhost:3000/empresa/produtos",
+  },
 ];
 
-export function Sidebar() {
+
+interface SideBarProps{
+  setarIsLogged?: (newState: boolean) => void;
+}
+
+export function Sidebar({setarIsLogged}: SideBarProps) {
   const router = useRouter();
   const { pathname } = router;
   const [isUser, setIsUser] = useState(false);
@@ -106,6 +119,17 @@ export function Sidebar() {
   //     setIsUser(false);
   //   }
   // });
+
+  const deslogar = () => {
+    // EXCLUIR VARIÁVEL DO LOCALSTORAGE
+    localStorage.removeItem("userLoginResponse");
+
+    // setar is Logged como false
+    localStorage.setItem("isUserLogged", "false");
+    setarIsLogged(false);
+    //ENVIAR PARA A PÁGINA, AGORA DESLOGADO 
+    router.reload()
+  };
 
   useEffect(() => {
     if (pathname.includes("marketplace")) {
@@ -167,7 +191,7 @@ export function Sidebar() {
           <NavbarLink
             icon={IconLogout}
             label="Sair"
-            onClick={() => alert("Saindo!")}
+            onClick={() => deslogar()}
           />
         </Stack>
       </Navbar.Section>

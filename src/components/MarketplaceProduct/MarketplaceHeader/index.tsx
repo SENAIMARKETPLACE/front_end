@@ -25,13 +25,16 @@ import {
   IconHeart,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
 
 interface MarketplaceHeaderProps {
   isLogged: boolean;
   quantidade?: number;
+  userConnect?:IResponseLoginUser,  
   produtoDesejadoNoCarrinho?: IProdutoGet;
   setarListaProdutos?: (novoArray: IProdutoGet[]) => void;
   setarQuantidade?: (novaQuantidade: number) => void;
+  setarIsLogged?: (newState: boolean) => void;
 }
 
 const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
@@ -40,6 +43,8 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   setarListaProdutos,
   setarQuantidade,
   isLogged,
+  setarIsLogged, 
+  userConnect
 }) => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const router = useRouter();
@@ -110,7 +115,7 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
       </div>
       <div className={styles.searchbar_and_avatar}>
         {windowWidth > 600 && <MiniSearchBar />}
-        <AvatarIcon isLogged={isLogged} />
+        <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged} />
         <button onClick={acionarCarrinho} className={styles.buttonCart}>
           <BsBag />
           <span className={styles.buttonCart__quantidadeProdutos}>
