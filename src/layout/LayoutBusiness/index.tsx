@@ -1,20 +1,19 @@
-import MarketplaceHeader from "components/MarketplaceProduct/MarketplaceHeader";
-import FooterSollaris from "layout/Footer";
-import MenuLateralUsuario from "patterns/MenuLateralUsuario";
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import styles from "./LayoutBusiness.module.scss";
-import { AppShell, Navbar, Header } from "@mantine/core";
-import { Sidebar } from "layout/Sidebar";
+import MarketplaceHeader from 'components/MarketplaceProduct/MarketplaceHeader';
+import FooterSollaris from 'layout/Footer';
+import MenuLateralUsuario from 'patterns/MenuLateralUsuario';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
+import styles from './LayoutBusiness.module.scss';
+import { AppShell, Navbar, Header } from '@mantine/core';
+import { Sidebar } from 'layout/Sidebar';
+import EmpresaBanner from 'components/EmpresaBanner';
+import Banner from '../../../public/images/banner.png';
 
 interface LayoutBusinessProps {
   children: ReactNode;
   quantidade?: number;
 }
 
-const LayoutBusiness = ({
-  children,
-  quantidade,
-}: LayoutBusinessProps) => {
+const LayoutBusiness = ({ children, quantidade }: LayoutBusinessProps) => {
   const [isLogged, setIsLogged] = useState(true);
 
   return (
@@ -22,7 +21,8 @@ const LayoutBusiness = ({
       <div className={styles.layout}>
         <Sidebar />
         <div className={styles.layout__content}>
-          <section className={styles["layout__content--children"]}>
+          <EmpresaBanner image={Banner} alt="Capa da empresa" />
+          <section className={styles['layout__content--children']}>
             {children}
           </section>
         </div>

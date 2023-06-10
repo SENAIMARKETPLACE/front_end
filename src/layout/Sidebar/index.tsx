@@ -1,6 +1,6 @@
-import styles from "./Sidebar.module.scss";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import styles from './Sidebar.module.scss';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import {
   Navbar,
   Center,
@@ -9,7 +9,7 @@ import {
   createStyles,
   Stack,
   rem,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
   IconHome2,
   IconGauge,
@@ -22,39 +22,39 @@ import {
   IconHeart,
   IconBuildingStore,
   IconTag,
-} from "@tabler/icons-react";
-import LogoSollaris from "/public/images/logo.svg";
-import { Avatar } from "@mui/material";
-import { useRouter } from "next/router";
+} from '@tabler/icons-react';
+import LogoSollaris from '/public/images/logo.svg';
+import { Avatar } from '@mui/material';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   link: {
     width: rem(50),
     height: rem(50),
     borderRadius: theme.radius.md,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     color:
-      theme.colorScheme === "dark"
+      theme.colorScheme === 'dark'
         ? theme.colors.dark[0]
         : theme.colors.gray[7],
 
-    "&:hover": {
+    '&:hover': {
       backgroundColor:
-        theme.colorScheme === "dark"
+        theme.colorScheme === 'dark'
           ? theme.colors.dark[5]
           : theme.colors.gray[0],
     },
   },
 
   active: {
-    "&, &:hover": {
+    '&, &:hover': {
       backgroundColor: theme.fn.variant({
-        variant: "light",
+        variant: 'light',
         color: theme.primaryColor,
       }).background,
-      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor })
         .color,
     },
   },
@@ -82,15 +82,15 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 }
 
 const mockdata = [
-  { icon: IconHome2, label: "Início", path: "/marketplace" },
-  { icon: IconCalendarStats, label: "Pedidos", path: "/marketplace/pedidos" },
-  { icon: IconHeart, label: "Favoritos", path: "/marketplace/favoritos" },
-  { icon: IconUser, label: "Perfil", path: "/marketplace/perfil" },
+  { icon: IconHome2, label: 'Início', path: '/marketplace' },
+  { icon: IconCalendarStats, label: 'Pedidos', path: '/marketplace/pedidos' },
+  { icon: IconHeart, label: 'Favoritos', path: '/marketplace/favoritos' },
+  { icon: IconUser, label: 'Perfil', path: '/marketplace/perfil' },
 ];
 
 const mockDataBusiness = [
-  { icon: IconBuildingStore, label: "Minha Loja", path: "/empresa/minha-loja" },
-  { icon: IconTag, label: "Meus Produtos", path: "/empresa/produtos" },
+  { icon: IconTag, label: 'Meus Produtos', path: '/empresa/produtos' },
+  { icon: IconBuildingStore, label: 'Minha Loja', path: '/empresa/minha-loja' },
 ];
 
 export function Sidebar() {
@@ -99,16 +99,8 @@ export function Sidebar() {
   const [isUser, setIsUser] = useState(false);
   const [active, setActive] = useState(0);
 
-  // useEffect(() => {
-  //   if (pathname.includes("marketplace")) {
-  //     setIsUser(true);
-  //   } else {
-  //     setIsUser(false);
-  //   }
-  // });
-
   useEffect(() => {
-    if (pathname.includes("marketplace")) {
+    if (pathname.includes('marketplace')) {
       setIsUser(true);
       const activeIndex = mockdata.findIndex((link) => link.path === pathname);
       setActive(activeIndex);
@@ -146,7 +138,7 @@ export function Sidebar() {
   return (
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
-        <Link href={"minha-loja"}>
+        <Link href={'minha-loja'}>
           <img src={LogoSollaris.src} alt="Logo do Sollaris" />
         </Link>
       </Center>
@@ -161,7 +153,7 @@ export function Sidebar() {
           <NavbarLink
             icon={IconLogout}
             label="Sair"
-            onClick={() => alert("Saindo!")}
+            onClick={() => alert('Saindo!')}
           />
         </Stack>
       </Navbar.Section>

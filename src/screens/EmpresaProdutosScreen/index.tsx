@@ -2,7 +2,6 @@ import styles from './EmpresaProdutosScreen.module.scss';
 import MenuLateralEmpresa from '../../patterns/MenuLateralEmpresa';
 import EmpresaBanner from '../../components/EmpresaBanner';
 import ModalAddProduto from '../../components/Modais/modalAddProduto';
-import Banner from '../../../public/images/banner.png';
 import { useEffect, useState } from 'react';
 import ProdutoLista from '../../components/EmpresaProduto/ProdutoItemLista';
 import SearchBar from '../../components/SearchBar';
@@ -197,7 +196,6 @@ const EmpresaProdutosScreen = () => {
 
       <div className={styles.page_container}>
         <section className={styles.sectionViewProducts}>
-          <EmpresaBanner image={Banner} alt="Capa da empresa" />
           <main className={styles.main_content}>
             <div className={styles.title_container}>
               <h1 className={styles.title}>Meus Produtos</h1>
