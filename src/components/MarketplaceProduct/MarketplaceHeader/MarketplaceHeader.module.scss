@@ -1,5 +1,12 @@
 @import '/src/styles/brand';
 
+
+
+.searchBarActiveHeader {
+  height: 40vh;
+}
+
+
 .header {
   display: flex;
   align-items: center;
@@ -8,15 +15,17 @@
   padding: 20px 30px;
   width: 100%;
   background-color: white;
-  // background-color: map-get($map: $colors, $key: gray-100);
   line-height: 1.4;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-
+  
   &__rightIcons {
     display: flex;
     align-items: center;
     gap: 10px;
   }
+
+  
+
 
   .buttonCart__returnAPage {
     // border: none;
@@ -45,6 +54,7 @@
       font-size: 10px;
     }
   }
+
   .return_icon {
     font-size: 20px;
     color: #454545;
@@ -96,14 +106,18 @@
   }
 }
 
+
+
 .drawer {
   img {
     width: 60px;
     height: 60px;
   }
+
   &__list {
     margin-top: 32px;
     text-align: center;
+
     li {
       padding: 20px 0;
       color: map-get($map: $colors, $key: text-700);

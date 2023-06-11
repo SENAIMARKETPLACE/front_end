@@ -185,8 +185,7 @@ const ModalEditarProduto = ({
         form.setFieldValue('weight', resp.data.detalhes_dos_produtos[0].peso);
         form.setFieldValue('size', resp.data.detalhes_dos_produtos[0].tamanho);
         form.setFieldValue(
-          'amount',
-          Number(resp.data.detalhes_dos_produtos[0].quantidade)
+          'amount',resp.data.detalhes_dos_produtos[0].quantidade
         );
         form.setFieldValue('primaryColor', arrayCores[0]);
         form.setFieldValue('secondaryColor', arrayCores[1]);

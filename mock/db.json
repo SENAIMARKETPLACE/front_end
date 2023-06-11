@@ -279,8 +279,8 @@
           "quantidade": 2,
           "valorUnitario": 299.99
         }
-      ], 
-      "valorTotal": 1800.0
+      ],
+      "valorTotal": 1800
     },
     {
       "pedido_id": 4,
@@ -317,8 +317,8 @@
           "quantidade": 3,
           "valorUnitario": 2200.15
         }
-      ], 
-      "valorTotal": 1400.0
+      ],
+      "valorTotal": 1400
     },
     {
       "pedido_id": 27,
@@ -367,8 +367,8 @@
           "quantidade": 3,
           "valorUnitario": 2200.15
         }
-      ], 
-      "valorTotal": 100.0
+      ],
+      "valorTotal": 100
     }
   ],
   "usuarios": [
@@ -494,18 +494,18 @@
       "id": 2
     },
     {
-      "nome": "Nike Camiseta",
-      "descricao": "Melhor camiseta do mundo",
-      "img": "https://static.netshoes.com.br/produtos/camiseta-nike-dri-fit-academy-masculina/06/2IC-1838-006/2IC-1838-006_zoom2.jpg?ts=1614614671&ims=326x",
+      "nome": "Nike Camiseta 3",
+      "descricao": "Melhor camiseta do mundo haha ",
+      "img": "https://d1ulmyt8kny60e.cloudfront.net/Custom/Content/Products/48/03/48035_camiseta-santos-classic-large-pr-16049-8710_z1_638210854400282422.png",
       "publico": "MASCULINO",
       "categoria_id": 4,
       "sub_categoria_id": 22,
-      "preco": "215.15",
+      "preco": 215.15,
       "detalhes_do_produto": {
-        "id": 1,
+        "id": "",
         "tamanho": "70cm",
-        "quantidade": "1000",
-        "peso": "150gr",
+        "quantidade": 1000,
+        "peso": 215.15,
         "cor": "#902626 #ffffff"
       },
       "id": 3
@@ -545,19 +545,19 @@
       "id": 5
     },
     {
-      "empresa_id": "1",
-      "nome": "sasodjqwodjqwojqwoejqwe",
-      "descricao": "qeqewqeqeqweqweqweqweqwe",
-      "img": "https://.png",
+      "nome": "Nike Camiseta 6",
+      "descricao": "Melhor camiseta do mundo",
+      "img": "https://d1ulmyt8kny60e.cloudfront.net/Custom/Content/Products/48/03/48035_camiseta-santos-classic-large-pr-16049-8710_z1_638210854400282422.png",
       "publico": "MASCULINO",
-      "categoria_id": 2,
-      "sub_categoria_id": 7,
-      "preco": "2400.50",
+      "categoria_id": 4,
+      "sub_categoria_id": 22,
+      "preco": 215.15,
       "detalhes_do_produto": {
-        "tamanho": "M",
-        "peso": "150g",
-        "cor": "#b29191 ",
-        "quantidade": "100"
+        "id": "",
+        "tamanho": "70cm",
+        "quantidade": 1000,
+        "peso": 215.15,
+        "cor": "#902626 #ffffff"
       },
       "id": 6
     },

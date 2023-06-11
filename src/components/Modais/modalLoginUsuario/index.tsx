@@ -83,7 +83,7 @@ export default function ModalLoginEmpresa({
       }
     >
   ) => {
-    alert(JSON.stringify(formValues.values));
+    
     // httpUsuario
     //   .post("api/users/login", formValues.values)
     //   // NO PRÓXIMO THEN EU VOU POPULARIZAR A MINHA VARIÁVEL do Tipo IResponseLoginUser
@@ -129,12 +129,12 @@ export default function ModalLoginEmpresa({
           id: "44",
           data_requisicao: "09/06/2023 11:00:11",
           nome: "Juvenal Maxiliano",
-          cpf: "1111111111",
+          cpf: "53950516867",
           email: "jvabreusousa19@gmail.com",
           data_nascimento: "03/03/2002",
           genero: "MASCULINO",
           img: "https://github.com/joaoabreu004.png",
-          gruposDeInteresse: ["1", "2", "3"],
+          gruposDeInteresse: ["1", "5"],
           enderecos: [
             {
               id: "1",
@@ -144,6 +144,7 @@ export default function ModalLoginEmpresa({
               estado: "SP",
               bairro: "Capão Redondo",
               cidade: "São Paulo",
+              complemento: "Teste"
             },
           ],
         };

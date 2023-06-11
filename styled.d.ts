@@ -15,5 +15,6 @@ declare module 'styled-components' {
     ColorProduct?: string
     DivComDuasCores?: string
     LadoDireito?: string
+    CloseButton?: string
 }
 }

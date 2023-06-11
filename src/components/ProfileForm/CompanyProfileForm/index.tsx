@@ -46,7 +46,7 @@ const CompanyProfileForm = () => {
   return (
     <Tabs defaultValue="personalData" orientation={orientation}>
       <Tabs.List>
-        <Tabs.Tab value="personalData">Dados pessoais</Tabs.Tab>
+        <Tabs.Tab value="personalData">Dados da Empresa</Tabs.Tab>
         <Tabs.Tab value="address">Endereço</Tabs.Tab>
         <Tabs.Tab value="accessData">Alterar a senha</Tabs.Tab>
       </Tabs.List>

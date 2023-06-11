@@ -7,7 +7,7 @@ import Carrinho from "components/Carrinho";
 import { BsBag } from "react-icons/bs";
 import { IProdutoGet } from "compartilhado/IProdutoGet";
 import { useRouter } from "next/router";
-import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { MdOutlineArrowBackIosNew, MdOutlineCancel } from "react-icons/md";
 import { Burger, Center } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Drawer, Group, Button } from "@mantine/core";
@@ -27,6 +27,7 @@ import {
 import Link from "next/link";
 import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
 import LoadingGif from "layout/LoadingGif";
+import styled from "styled-components";
 
 interface MarketplaceHeaderProps {
   isLogged: boolean;
@@ -37,6 +38,7 @@ interface MarketplaceHeaderProps {
   setarQuantidade?: (novaQuantidade: number) => void;
   setarIsLogged?: (newState: boolean) => void;
 }
+
 
 const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   quantidade,
@@ -53,6 +55,31 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
 
   const [quantidadeFromCart, setQuantidadeFromCart] = useState(0);
   const carrinhoRef = useRef<HTMLDivElement>(null);
+
+  const [isSearchBarActive, setIsSearchBarActive] = useState(false);
+
+  const expandirHeaderParaPesquisar = () => {
+    setTimeout(() => {
+      setIsSearchBarActive(true);
+    }, 10);
+  };
+  
+  const fecharHeaderParaPesquisar = () => {
+    setTimeout(() => {
+      setIsSearchBarActive(false);
+    }, 10);
+  };
+  const CloseButton = styled.button`
+  color: red;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+`;
+
+
+
 
   function ClickForaCarrinho(event: MouseEvent) {
     if (
@@ -100,43 +127,15 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
   return (
     <>
       {!userConnect ? (
-        <header className={styles.header}>
-        <div className={styles.header__rightIcons}>
-          {windowWidth < 850 && <ResponsiveSideBar />}
-        </div>
-        <div ref={carrinhoRef}>
-          
-          {isCartVisible && (
-            <Carrinho
-              fecharCarrinho={fecharCarrinho}
-              setarQuantidade={setarQuantidade}
-              setarListaProdutos={setarListaProdutos}
-              quantidadeDeProdutos={quantidade}
-              isCartAtivado={isCartVisible}
-              produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
-            />
-          )}
-        </div>
-        <div className={styles.searchbar_and_avatar}>
-          {windowWidth > 600 && <MiniSearchBar />}
-          <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged}  />
-          <button onClick={acionarCarrinho} className={styles.buttonCart}>
-            <BsBag />
-            <span className={styles.buttonCart__quantidadeProdutos}>
-              {quantidade}
-            </span>
-          </button>
-        </div>
-      </header>
-        
-      ) : (
-        <header className={styles.header}>
-         
+        <header
+        className={`${styles.header} ${
+          isSearchBarActive ? styles.searchBarActiveHeader : ""
+        }`}
+      >
           <div className={styles.header__rightIcons}>
             {windowWidth < 850 && <ResponsiveSideBar />}
           </div>
           <div ref={carrinhoRef}>
-            
             {isCartVisible && (
               <Carrinho
                 fecharCarrinho={fecharCarrinho}
@@ -149,14 +148,71 @@ const MarketplaceHeader: React.FC<MarketplaceHeaderProps> = ({
             )}
           </div>
           <div className={styles.searchbar_and_avatar}>
-            {windowWidth > 600 && <MiniSearchBar />}
-            <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged} nomeUserConnect={userConnect.nome} avatarUserConnect={userConnect.img} />
-            <button onClick={acionarCarrinho} className={styles.buttonCart}>
-              <BsBag />
-              <span className={styles.buttonCart__quantidadeProdutos}>
-                {quantidade}
-              </span>
-            </button>
+            {windowWidth > 600 && (
+              <MiniSearchBar
+                prepararCampoParaBusca={expandirHeaderParaPesquisar}
+              />
+            )}
+            <AvatarIcon setarIsLogged={setarIsLogged} isLogged={isLogged} />
+            {isSearchBarActive ? (
+              <CloseButton onClick={fecharHeaderParaPesquisar} >
+                <MdOutlineCancel />
+              </CloseButton>
+            ) : (
+              <button onClick={acionarCarrinho} className={styles.buttonCart}>
+                <BsBag />
+                <span className={styles.buttonCart__quantidadeProdutos}>
+                  {quantidade}
+                </span>
+              </button>
+            )}
+          </div>
+        </header>
+      ) : (
+        <header
+          className={`${styles.header} ${
+            isSearchBarActive ? styles.searchBarActiveHeader : ""
+          }`}
+        >
+          <div className={styles.header__rightIcons}>
+            {windowWidth < 850 && <ResponsiveSideBar />}
+          </div>
+          <div ref={carrinhoRef}>
+            {isCartVisible && (
+              <Carrinho
+                fecharCarrinho={fecharCarrinho}
+                setarQuantidade={setarQuantidade}
+                setarListaProdutos={setarListaProdutos}
+                quantidadeDeProdutos={quantidade}
+                isCartAtivado={isCartVisible}
+                produtoDesejadoNoCarrinho={produtoDesejadoNoCarrinho}
+              />
+            )}
+          </div>
+          <div className={styles.searchbar_and_avatar}>
+            {windowWidth > 600 && (
+              <MiniSearchBar
+                prepararCampoParaBusca={expandirHeaderParaPesquisar}
+              />
+            )}
+            <AvatarIcon
+              setarIsLogged={setarIsLogged}
+              isLogged={isLogged}
+              nomeUserConnect={userConnect.nome}
+              avatarUserConnect={userConnect.img}
+            />
+            {isSearchBarActive ? (
+              <CloseButton onClick={fecharHeaderParaPesquisar} >
+                <MdOutlineCancel />
+              </CloseButton>
+            ) : (
+              <button onClick={acionarCarrinho} className={styles.buttonCart}>
+                <BsBag />
+                <span className={styles.buttonCart__quantidadeProdutos}>
+                  {quantidade}
+                </span>
+              </button>
+            )}
           </div>
         </header>
       )}

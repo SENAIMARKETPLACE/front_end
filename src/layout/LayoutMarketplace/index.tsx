@@ -52,11 +52,16 @@ const LayoutMarketplace = ({
     }
   }, [isLogged]);
 
-  
+
   useEffect(() => {
-    
-    console.log(usuarioInfo)
-  }, [usuarioInfo])
+    const currentQuantity = localStorage.getItem("qtdProduto")
+
+    setQuantidadeCarrinho(Number(currentQuantity))
+
+  }, [])
+
+  
+
 
 
   return (

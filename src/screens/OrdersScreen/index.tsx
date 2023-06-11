@@ -16,6 +16,7 @@ const OrdersScreen = () => {
       const isLoggedFromLocalStorage = localStorage.getItem("isUserLogged");
       if (isLoggedFromLocalStorage === "true") {
         setIsLogged(true);
+      
         setIsLoading(false);
       } else {
         setIsLogged(false);

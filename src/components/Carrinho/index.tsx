@@ -54,7 +54,6 @@ const Carrinho = ({
       quantidadeTemp += produto.quantidadeCarrinho;
     });
 
-    
     return quantidadeTemp;
   };
 
@@ -71,10 +70,6 @@ const Carrinho = ({
       }
     }
   }, []);
-
-  
-  
-
 
   useEffect(() => {
     if (idExcluir != "0") {
@@ -108,8 +103,8 @@ const Carrinho = ({
   };
 
   useEffect(() => {
-    setarQuantidade(quantidade)
-  }, [quantidade])
+    setarQuantidade(quantidade);
+  }, [quantidade]);
 
   return (
     <section>
@@ -136,7 +131,12 @@ const Carrinho = ({
               Navegue pelas categorias da loja ou faça uma busca pelo seu
               produto.
             </p>
-            <button className={styles.buttonOne}>Continuar Comprando</button>
+            <button
+              className={styles.buttonOne}
+              onClick={(e) => fecharCarrinho()}
+            >
+              Continuar Comprando
+            </button>
           </div>
         ) : (
           <div className={styles.bodyWithProduct}>
@@ -169,7 +169,7 @@ const Carrinho = ({
             <div className={styles.visualizacoesButtons}>
               <button
                 className={styles.visualizacoesButtons__primaryButton}
-                onClick={() => fecharCarrinho()}
+                onClick={(e) => fecharCarrinho()}
               >
                 Continuar Comprando
               </button>

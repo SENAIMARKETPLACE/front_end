@@ -111,6 +111,8 @@ const CustomBox = styled(Box)`
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: none;
+  box-shadow: none;
   row-gap: 30px;
   text-align: center;
   border: none;
@@ -150,11 +152,13 @@ export default function SpringModal({ setarIsLogged }: SpringModalProps) {
         onClose={handleClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
+  
         slotProps={{
           backdrop: {
             TransitionComponent: Fade,
           },
         }}
+       
       >
         <Fade in={open}>
           <CustomBox sx={style}>
