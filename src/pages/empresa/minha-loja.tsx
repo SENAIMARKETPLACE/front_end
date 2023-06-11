@@ -1,9 +1,10 @@
-import LayoutBusiness from "layout/LayoutBusiness";
+import LayoutBusiness from 'layout/LayoutBusiness';
+import CompanyProfile from 'screens/ProfileScreen/CompanyProfile';
 
 const MinhaLoja = () => {
   return (
     <LayoutBusiness>
-      <h1>TESTANDO</h1>
+      <CompanyProfile />
     </LayoutBusiness>
   );
 };

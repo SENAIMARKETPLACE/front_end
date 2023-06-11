@@ -1,11 +1,10 @@
-import { ICategory } from "compartilhado/ICategory";
-import ModalDeletarProduto from "../../Modais/ModalDeletarProduto";
-import ModalEditarProduto from "../../Modais/modalEditProduto";
-import styles from "./ProdutoItemGrid.module.scss";
+import { ICategory } from 'compartilhado/ICategory';
+import ModalDeletarProduto from '../../Modais/ModalDeletarProduto';
+import ModalEditarProduto from '../../Modais/modalEditProduto';
+import styles from './ProdutoItemGrid.module.scss';
 
 interface ProdutoItemGridProps {
   id: string;
-  key: string;
   photo: string;
   name: string;
   price: string;
@@ -16,6 +15,8 @@ interface ProdutoItemGridProps {
   setSnackbarEditOpen: (open: boolean) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
+  setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
 
@@ -26,7 +27,6 @@ function enviaId(id: string) {
 
 const ProdutoItemGrid = ({
   id,
-  key,
   photo,
   name,
   price,
@@ -37,11 +37,13 @@ const ProdutoItemGrid = ({
   setSnackbarEditOpen,
   snackbarDeleteOpen,
   setSnackbarDeleteOpen,
+  snackbarErrorOpen,
+  setSnackbarErrorOpen,
   categoriesAndSubCategories,
 }: ProdutoItemGridProps) => {
-  const precoFormatado = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
+  const precoFormatado = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
   }).format(parseFloat(price));
 
   return (
@@ -64,6 +66,8 @@ const ProdutoItemGrid = ({
           <ModalEditarProduto
             setSnackbarEditOpen={setSnackbarEditOpen}
             snackbarOpenEdit={snackbarOpenEdit}
+            setSnackbarErrorOpen={setSnackbarErrorOpen}
+            snackbarErrorOpen={snackbarErrorOpen}
             setarLista={setarLista}
             idSelecionado={id}
             categoriesAndSubCategories={categoriesAndSubCategories}
@@ -71,6 +75,8 @@ const ProdutoItemGrid = ({
           <ModalDeletarProduto
             setSnackbarDeleteOpen={setSnackbarDeleteOpen}
             snackbarDeleteOpen={snackbarDeleteOpen}
+            setSnackbarErrorOpen={setSnackbarErrorOpen}
+            snackbarErrorOpen={snackbarErrorOpen}
             setarLista={setarLista}
             idExcluir={id}
           />

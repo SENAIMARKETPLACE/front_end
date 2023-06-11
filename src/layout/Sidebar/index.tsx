@@ -90,9 +90,8 @@ const mockdata = [
 
 const mockDataBusiness = [
 
-  { icon: IconBuildingStore, label: 'Minha Loja', path: '/empresa/minha-loja' },
   { icon: IconTag, label: 'Meus Produtos', path: '/empresa/produtos' },
-
+  { icon: IconBuildingStore, label: 'Minha Loja', path: '/empresa/minha-loja' },
 ];
 
 
@@ -105,6 +104,7 @@ export function Sidebar({setarIsLogged}: SideBarProps) {
   const { pathname } = router;
   const [isUser, setIsUser] = useState(false);
   const [active, setActive] = useState(0);
+
 
   // useEffect(() => {
   //   if (pathname.includes("marketplace")) {
@@ -124,6 +124,7 @@ export function Sidebar({setarIsLogged}: SideBarProps) {
     //ENVIAR PARA A PÁGINA, AGORA DESLOGADO 
     router.reload()
   };
+
 
   useEffect(() => {
     if (pathname.includes('marketplace')) {
@@ -165,6 +166,7 @@ export function Sidebar({setarIsLogged}: SideBarProps) {
     <Navbar className={styles.sidebar}>
       <Center className={styles.sidebar__logo}>
 
+
         {isUser ? (
           <Link href={"/#"}>
             <img src={LogoSollaris.src} alt="Logo do Sollaris" />
@@ -174,6 +176,7 @@ export function Sidebar({setarIsLogged}: SideBarProps) {
             <img src={LogoSollaris.src} alt="Logo do Sollaris" />
           </Link>
         )}
+
 
       </Center>
       <Navbar.Section grow mt={50}>
@@ -188,7 +191,9 @@ export function Sidebar({setarIsLogged}: SideBarProps) {
             icon={IconLogout}
             label="Sair"
 
+
             onClick={() => deslogar()}
+
 
           />
         </Stack>

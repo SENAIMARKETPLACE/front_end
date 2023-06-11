@@ -13,9 +13,16 @@
       margin-left: 0;
     }
 
+    &--menu {
+      padding-left: 16px;
+    }
+
     &--children {
       padding: 0px 40px 100px;
+
+      @media (max-width: 850px) {
+        padding: 0px 20px 100px;
+      }
     }
-    // background-color: red;
   }
 }
