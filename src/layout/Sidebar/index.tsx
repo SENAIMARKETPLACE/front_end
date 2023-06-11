@@ -91,8 +91,9 @@ const mockdata = [
 ];
 
 const mockDataBusiness = [
-  { icon: IconBuildingStore, label: "Minha Loja", path: "/empresa/minha-loja" },
-  { icon: IconTag, label: "Meus Produtos", path: "/empresa/produtos" },
+
+  { icon: IconTag, label: 'Meus Produtos', path: '/empresa/produtos' },
+  { icon: IconBuildingStore, label: 'Minha Loja', path: '/empresa/minha-loja' },
 ];
 
 interface SideBarProps {
@@ -105,6 +106,7 @@ export function Sidebar({ setarIsLogged }: SideBarProps) {
   const [isUser, setIsUser] = useState(false);
   const [active, setActive] = useState(0);
   const [isUserLogged, setIsUserLogged] = useState<boolean>();
+
 
   useEffect(() => {
     const isLoggedFromLocalStorage = localStorage.getItem("isUserLogged");

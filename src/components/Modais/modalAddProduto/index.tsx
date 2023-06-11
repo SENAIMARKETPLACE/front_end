@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { httpApiMockada, httpProduto } from '../../../http';
 import { IProdutoPost } from '../../../compartilhado/IProdutoPost';
 import { IconAt, IconPaint, IconPackage, IconPhoto } from '@tabler/icons-react';
+import noImage from '../../../../public/images/no_image.jpg';
 
 // Modern or es5 bundle (pay attention to the note below!)
 import { IDetalhesProduto } from '../../../compartilhado/IDetalhesProduto';
@@ -32,6 +33,8 @@ interface modalAddProductProp {
   ) => void;
   snackbarOpen: boolean;
   setSnackbarOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
+  setSnackbarErrorOpen: (open: boolean) => void;
   categoriesAndSubCategories: ICategory[];
 }
 export default function ModalAddProduto({
@@ -40,12 +43,14 @@ export default function ModalAddProduto({
   setarMensagemEEstadoRequisicao,
   snackbarOpen,
   setSnackbarOpen,
+  snackbarErrorOpen,
+  setSnackbarErrorOpen,
 }: modalAddProductProp) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setPublico('');
+    // setPublico('');
   };
 
   // STYLING MODAL IN SMALL SCREEN
@@ -84,10 +89,20 @@ export default function ModalAddProduto({
   // USE STATES AND VARIABLES
 
   const [empresaid, setEmpresaId] = useState('1');
-  const [publico, setPublico] = useState('');
+  // const [publico, setPublico] = useState('');
   const [isSubCategoriaDisable, setIsSubCategoriaDisable] = useState(true);
   const [optionsCategories, setOptionsCategories] = useState([]);
   const [optionsSubCategories, setOptionsSubCategories] = useState([]);
+  const [error, setError] = useState(false); // Estado para controlar se ocorreu um erro no carregamento da imagem
+
+  useEffect(() => {
+    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
+      value: categoria.id,
+      label: categoria.nome,
+    }));
+
+    setOptionsCategories(transformarDados);
+  }, [categoriesAndSubCategories]);
 
   const targetAudienceList = [
     {
@@ -116,13 +131,19 @@ export default function ModalAddProduto({
       .then((resp) => {
         setarLista(resp.data.content);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
     // httpApiMockada
-    //   .get("produtos")
+    //   .get('produtos')
     //   .then((resp) => {
     //     setarLista(resp.data);
     //   })
-    //   .catch((err) => console.log(err));
+    //   .catch((err) => {
+    //     setSnackbarErrorOpen(true);
+    //     console.log(err);
+    //   });
   };
 
   // CREATE PRODUCT
@@ -143,9 +164,9 @@ export default function ModalAddProduto({
       nome: form.values.name,
       descricao: form.values.description,
       img: form.values.url,
-      publico,
-      categoria_id: categoriaMantine,
-      sub_categoria_id: subCategoriaMantine,
+      publico: form.values.targetAudience,
+      categoria_id: form.values.category,
+      sub_categoria_id: form.values.subCategory,
       preco: form.values.price.replace(/,/g, '.'),
       detalhes_do_produto: detalhes_produto,
     };
@@ -161,15 +182,18 @@ export default function ModalAddProduto({
         resgatarListaProdutos();
         setOpen(false);
         setSnackbarOpen(true);
-        setPublico('');
+        // setPublico('');
         setCategoriaMantine('');
         setSubCategoriaMantine('');
         setIsSubCategoriaDisable(true);
         setIsSubCategoriaDisable(true);
         // Reset values in mantine form
-        // form.reset();
+        form.reset();
       })
-      .catch((erro: any) => console.log(erro));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
     setIsSubCategoriaDisable(true);
   };
 
@@ -191,15 +215,6 @@ export default function ModalAddProduto({
     setOptionsSubCategories(subCategoriasLista);
   };
 
-  useEffect(() => {
-    const transformarDados = categoriesAndSubCategories.map((categoria) => ({
-      value: categoria.id,
-      label: categoria.nome,
-    }));
-
-    setOptionsCategories(transformarDados);
-  });
-
   const inputProps = {
     radius: 'sm',
     required: true,
@@ -219,14 +234,13 @@ export default function ModalAddProduto({
 
   const form = useForm({
     validateInputOnBlur: true,
-    // Valores que serão substituídos pelo GET. Mantenha as máscaras.
     initialValues: {
       name: '',
       description: '',
       url: '',
       targetAudience: '',
-      categorie: '',
-      subCategorie: '',
+      category: '',
+      subCategory: '',
       price: '',
       size: '',
       weight: '',
@@ -261,10 +275,13 @@ export default function ModalAddProduto({
 
         return errors.length > 0 ? errors[0] : null;
       },
-      // amount: (value) => (value.length > 0 ? null : 'Informe a quantidade.'),
-      // price: (value) => (value.length > 0 ? null : 'Informe o preço.'),
-      // size: (value) => (value.length > 0 ? null : 'Informe o tamanho.'),
-      // weight: (value) => (value.length > 0 ? null : 'Informe o peso.'),
+      amount: (value) => (value ? null : 'Informe a quantidade.'),
+      price: (value) => (value ? null : 'Informe o preço.'),
+      size: (value) => (value ? null : 'Informe o tamanho.'),
+      weight: (value) => (value ? null : 'Informe o peso.'),
+      targetAudience: (value) => (value ? null : 'Selecione uma opção.'),
+      category: (value) => (value ? null : 'Selecione uma opção.'),
+      subCategory: (value) => (value ? null : 'Selecione uma opção.'),
     },
   });
 
@@ -291,8 +308,9 @@ export default function ModalAddProduto({
           <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
             <div className={styles.form__part1}>
               <img
-                src={form.values.url}
+                src={error ? noImage.src : form.values.url}
                 alt={`Imagem ilustrativa: ${form.values.name}`}
+                onError={() => setError(true)}
                 className={styles['form__part1--image']}
               />
               <div className={styles['form__part1--text']}>
@@ -331,10 +349,11 @@ export default function ModalAddProduto({
               <TextInput
                 icon={<IconPhoto size="1.1rem" />}
                 className={styles.url}
-                label="Foto do produto"
+                label="Imagem do produto"
                 placeholder="Insira o link (url) da imagem"
                 {...inputProps}
                 {...form.getInputProps('url')}
+                onBlur={() => setError(false)}
               />
               <NumberInput
                 // icon={'kg'}
@@ -344,7 +363,6 @@ export default function ModalAddProduto({
                 min={1}
                 {...inputProps}
                 {...form.getInputProps('amount')}
-                type="number"
               />
               <TextInput
                 icon={'R$'}
@@ -357,14 +375,14 @@ export default function ModalAddProduto({
                 onChange={handleInputChange('price', masks.real)}
               />
               <Select
-                value={genreMantine}
+                value={optionsCategories}
                 className={styles.genre}
                 label="Público"
                 placeholder="Selecione o público alvo "
                 data={targetAudienceList}
-                // {...inputProps}
-                // {...form.getInputProps('targetAudience')}
-                onChange={(value) => genreCategoriaMantine(value)}
+                {...inputProps}
+                {...form.getInputProps('targetAudience')}
+                // onChange={(value) => genreCategoriaMantine(value)}
               />
               <Select
                 value={categoriaMantine}
@@ -372,10 +390,12 @@ export default function ModalAddProduto({
                 label="Categoria"
                 placeholder="Selecione uma categoria"
                 data={optionsCategories}
-                onChange={(value) => setCategoriaMantine(value)}
+                // onChange={(value) => setCategoriaMantine(value)}
+                {...inputProps}
+                {...form.getInputProps('category')}
                 onBlur={() => {
-                  if (categoriaMantine !== '') {
-                    setarSubTeste(categoriaMantine);
+                  if (form.values.category !== '') {
+                    setarSubTeste(form.values.category);
                   }
                 }}
               />
@@ -385,7 +405,9 @@ export default function ModalAddProduto({
                 label="Sub-Categoria"
                 data={optionsSubCategories}
                 placeholder="Selecione uma sub-categoria"
-                onChange={(value) => setSubCategoriaMantine(value)}
+                // onChange={(value) => setSubCategoriaMantine(value)}
+                {...inputProps}
+                {...form.getInputProps('subCategory')}
               />
             </SimpleGrid>
 
@@ -445,23 +467,26 @@ export default function ModalAddProduto({
                 {...form.getInputProps('size')}
               />
               <TextInput
-                icon={'kg'}
+                icon={'g'}
                 className={styles.weight}
                 label="Peso"
                 placeholder="Informe o peso do produto"
                 {...inputProps}
                 {...form.getInputProps('weight')}
+                min={1}
+                onChange={handleInputChange('weight', masks.numbers)}
               />
             </SimpleGrid>
 
             {/* SE IsFormValid ser false na propriedade disabled ele vira true | se IsFormValid ser true na propriedade disabled ele vira false  */}
             <Center>
               <Button
-                // onClick={criarProduto}
+                onClick={form.isValid() ? criarProduto : null}
                 type="submit"
                 mt="xl"
-                radius="sm"
+                radius="xl"
                 mb={'xl'}
+                color="green"
               >
                 Cadastrar Produto
               </Button>

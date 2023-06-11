@@ -1,0 +1,16 @@
+@import '/src/styles/brand';
+
+.drawer {
+  img {
+    width: 60px;
+    height: 60px;
+  }
+  &__list {
+    margin-top: 32px;
+    text-align: center;
+    li {
+      padding: 20px 0;
+      color: map-get($map: $colors, $key: text-700);
+    }
+  }
+}
