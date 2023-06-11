@@ -6,5 +6,6 @@ export interface IPersonalData{
     cpf: string; 
     genero: string; 
     data_nascimento: string;
+    telefone: string;
     grupo_de_interesses: string[]
 }

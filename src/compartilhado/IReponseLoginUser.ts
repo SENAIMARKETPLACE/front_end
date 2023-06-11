@@ -7,6 +7,7 @@ export interface IResponseLoginUser{
     cpf: string, 
     email: string,
     data_nascimento: string,
+    telefone: string
     genero: string,
     img: string, 
     gruposDeInteresse: string[],

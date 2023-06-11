@@ -71,7 +71,7 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
     initialValues: {
       name: userConnect.nome,
       email: userConnect.email,
-      phone: `${masks.phone("11111111111")}`,
+      phone: `${masks.phone(userConnect.telefone)}`,
       cpf: `${masks.cpf(userConnect.cpf)}`,
       birthDate: new Date(userConnect.data_nascimento),
       genre: userConnect.genero,
@@ -134,7 +134,9 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
       genero: form.values.genre, 
       data_nascimento: form.values.birthDate.toLocaleDateString('pt-BR', { year: '2-digit', month: '2-digit', day: '2-digit' }),   
       grupo_de_interesses: form.values.interests,
-      img: profilePhoto
+      img: profilePhoto, 
+      telefone: form.values.phone
+      
       
     }
     // httpUsuario.put(`endpoint/${userConnect.id}`, novosDadosPessoais)
@@ -152,6 +154,7 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
     novosDadosLocalStorage.gruposDeInteresse = novosDadosPessoais.grupo_de_interesses
     novosDadosLocalStorage.img = novosDadosPessoais.img
     novosDadosLocalStorage.data_nascimento = novosDadosPessoais.data_nascimento
+    novosDadosLocalStorage.telefone = novosDadosPessoais.telefone
 
 
     localStorage.setItem('userLoginResponse', JSON.stringify(novosDadosLocalStorage));

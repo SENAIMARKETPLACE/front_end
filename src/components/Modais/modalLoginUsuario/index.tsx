@@ -133,6 +133,7 @@ export default function ModalLoginEmpresa({
           email: "jvabreusousa19@gmail.com",
           data_nascimento: "03/03/2002",
           genero: "MASCULINO",
+          telefone: "11940333175",
           img: "https://github.com/joaoabreu004.png",
           gruposDeInteresse: ["1", "5"],
           enderecos: [
