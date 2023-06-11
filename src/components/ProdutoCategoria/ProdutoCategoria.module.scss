@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: max-content;
-  padding: 16px;
+  width: 240px;
+  padding: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 10px;
   background-color: #7889d8;
@@ -23,6 +23,6 @@
   .text {
     color: white;
     border-left: 2px solid white;
-    font-size: 13px;
+    font-size: 16px;
   }
 }

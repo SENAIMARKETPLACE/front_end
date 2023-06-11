@@ -6,6 +6,7 @@ const masks = {
   letters: onlyLetters,
   numbers: onlyNumbers,
   real: maskReal,
+  monthAndYear: maskMountYear,
 };
 
 function maskCEP(value: string) {
@@ -69,6 +70,13 @@ function maskReal(value: string) {
 
   // Retorna o valor formatado
   return formattedValue;
+}
+
+function maskMountYear(value: string) {
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '$1/$2')
+    .replace(/(\d{2})\d+?$/, '$1');
 }
 
 export default masks;
