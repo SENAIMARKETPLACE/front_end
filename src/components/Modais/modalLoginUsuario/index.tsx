@@ -153,10 +153,11 @@ export default function ModalLoginEmpresa({
           "userLoginResponse",
           JSON.stringify(userLoginResponse)
         );
-        localStorage.setItem("isUserLogged", "true");
-
+        
         //ENVIAR PARA A PÁGINA, AGORA LOGADO E VISUALIZAR SUAS INFORMAÇÕES
         router.push("/marketplace");
+        localStorage.setItem("isUserLogged", "true");
+        router.reload();
       });
     event.preventDefault();
   };

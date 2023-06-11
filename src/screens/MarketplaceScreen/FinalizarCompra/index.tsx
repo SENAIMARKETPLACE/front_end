@@ -33,6 +33,7 @@ import CartFinish from "components/orderFormStepper/Cart/CartFinish";
 import { IPedidoPost } from "compartilhado/IPedidoPost";
 import { IProdutoPost } from "compartilhado/IProdutoPost";
 import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
+import SignInMessage from "patterns/SignInMessage";
 
 interface FinalizarCompraProps {
   setarQuantidadeAoExcluirProps: (novaQuantidade: number) => void;
@@ -122,10 +123,11 @@ export default function FinalizarCompra({
   return (
     <>
       {!usuarioInfo ? (
-        ""
-      ) : (
-        <section className={styles.main}>
+        (<SignInMessage message="Faça o login para acessar o seu perfil." />)
+        ) : (
+          <section className={styles.main}>
           {isLoadingPage && <LoadingGif />}
+          <h1 className={styles.title}>Finalizar Compra</h1>
           <Stepper active={active} breakpoint="sm">
             {/* ETAPA 1 - CARRINHO */}
             <Stepper.Step
