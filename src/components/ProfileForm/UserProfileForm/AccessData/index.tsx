@@ -1,96 +1,84 @@
-import { Button, Center, PasswordInput, SimpleGrid } from '@mantine/core';
-import styles from './AccessData.module.scss';
-import { useForm } from '@mantine/form';
-import { validates } from 'util/validations';
-import StrongPassword from 'components/StrongPassword';
-import { IResponseLoginUser } from 'compartilhado/IReponseLoginUser';
-import { IAccessData } from 'compartilhado/AlteracoesPerfilUser/IAccessData';
-import { useRouter } from 'next/router';
+import { Button, Center, PasswordInput, SimpleGrid } from "@mantine/core";
+import styles from "./AccessData.module.scss";
+import { useForm } from "@mantine/form";
+import { validates } from "util/validations";
+import StrongPassword from "components/StrongPassword";
+import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
+import { IAccessData } from "compartilhado/AlteracoesPerfilUser/IAccessData";
 
 interface AccessDataProps {
   inputProps: object;
-  userConnect: IResponseLoginUser
+  userConnect: IResponseLoginUser;
 }
 
 const AccessData = ({ inputProps, userConnect }: AccessDataProps) => {
-  const router = useRouter();
   const form: any = useForm({
     initialValues: {
-      password: '',
-      newPassword: '',
-      confirmPassword: '',
+      password: "",
+      newPassword: "",
+      confirmPassword: "",
     },
-
 
     // functions will be used to validate values at corresponding key
     validate: {
       password: (value) => {
         const errors: Array<string> = [];
 
-        value.length > 0 ? null : errors.push('Digite sua senha.');
+        value.length > 0 ? null : errors.push("Digite sua senha.");
 
-        //ERRO NA HORA DE ALTERAR
-        value === 'admin' ? null : errors.push('Senha incorreta.');
+        value === "admin" ? null : errors.push("Senha incorreta.");
 
         return errors.length > 0 ? errors[0] : null;
       },
       newPassword: (value) => {
         const errors: Array<string> = [];
 
-        /[0-9]/.test(value) ? null : errors.push('Includes number');
+        /[0-9]/.test(value) ? null : errors.push("Includes number");
 
-        /[a-z]/.test(value) ? null : errors.push('Includes lowercase letter');
+        /[a-z]/.test(value) ? null : errors.push("Includes lowercase letter");
 
-        /[A-Z]/.test(value) ? null : errors.push('Includes uppercase letter');
+        /[A-Z]/.test(value) ? null : errors.push("Includes uppercase letter");
 
         /[$&+,:;=?@#|'<>.^*()%!-]/.test(value)
           ? null
-          : errors.push('Includes special symbol');
+          : errors.push("Includes special symbol");
 
         value.length >= 8
           ? null
-          : errors.push('A senha deve ter no mínimo 8 caracteres.');
+          : errors.push("A senha deve ter no mínimo 8 caracteres.");
 
         return errors.length > 0 ? errors[0] : null;
       },
       confirmPassword: (value) =>
         form.values.newPassword === form.values.confirmPassword
           ? null
-          : 'As senhas digitadas são diferentes.',
+          : "As senhas digitadas são diferentes.",
     },
   });
 
-  const handleInputChange =
-    (fieldName: string, maskFunction?: Function) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value;
-      const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
-      form.setFieldValue(fieldName, maskedValue);
+  const handleInputChange = (fieldName: string, maskFunction?: Function) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const inputValue = event.target.value;
+    const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
+    form.setFieldValue(fieldName, maskedValue);
+  };
+
+  const alterarDados = () => {
+    const alterarSenha: IAccessData = {
+      usuario_id: userConnect.id,
+      senha_antiga: form.values.password,
+      senha_nova: form.values.newPassword,
     };
 
-
-
-  
-
-    const alterarDados = () => {
-      const alterarSenha: IAccessData = {
-        usuario_id: userConnect.id, 
-        senha_antiga: form.values.password, 
-        senha_nova: form.values.newPassword
-      }
-      // httpUsuario.put(`endpoint/${userConnect.id}`, alterarSenha)
-      // .then(() => alert("Informações do novo endereço Salvas!"))
-      // .catch((erro) => alert("deu ruim"))
-  
-  
-      form.values.password = " "
-      form.values.newPassword = " "
-      form.values.confirmPassword = " "
-      console.log(alterarSenha)
-      // router.reload();
-    }
-
-    
+    // console.log(alterarSenha)
+    // httpUsuario.put(`endpoint/${userConnect.id}`, alterarSenha)
+    // .then(() => alert("Informações do novo endereço Salvas!"))
+    // .catch((erro) => alert("deu ruim"))
+    form.isValid() ? form.reset() : null;
+    console.log(alterarSenha);
+    // router.reload();
+  };
   return (
     <>
       <form onSubmit={form.onSubmit(console.log)} className={styles.form}>
@@ -99,7 +87,7 @@ const AccessData = ({ inputProps, userConnect }: AccessDataProps) => {
           label="Senha Atual"
           placeholder="Senha atual"
           {...inputProps}
-          {...form.getInputProps('password')}
+          {...form.getInputProps("password")}
         />
 
         <SimpleGrid cols={2}>
@@ -114,20 +102,20 @@ const AccessData = ({ inputProps, userConnect }: AccessDataProps) => {
             label="Nova Senha"
             placeholder="Digite a nova senha"
             {...inputProps}
-            {...form.getInputProps('newPassword')}
+            {...form.getInputProps("newPassword")}
           />
           <PasswordInput
             label="Confirme a nova senha"
             placeholder="Confirme a nova senha"
             {...inputProps}
-            {...form.getInputProps('confirmPassword')}
+            {...form.getInputProps("confirmPassword")}
 
             // {...form.getInputProps('email')}
           />
         </SimpleGrid>
 
         <Center>
-          <Button type="submit" mt="xl" radius="xl" onClick={(e) => alterarDados()}>
+          <Button type="submit" mt="xl" radius="xl" onClick={alterarDados}>
             Salvar
           </Button>
         </Center>

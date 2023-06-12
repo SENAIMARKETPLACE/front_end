@@ -6,25 +6,38 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SignInMessage from "patterns/SignInMessage";
 import LoadingGif from "layout/LoadingGif";
+import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
 
 const OrdersScreen = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [userConnect, setUserConnect] = useState<IResponseLoginUser>();
 
   useEffect(() => {
     setTimeout(() => {
       const isLoggedFromLocalStorage = localStorage.getItem("isUserLogged");
+      const userTemp = localStorage.getItem("userLoginResponse")
+
       if (isLoggedFromLocalStorage === "true") {
         setIsLogged(true);
-      
         setIsLoading(false);
+        if(userTemp){
+          const userData: IResponseLoginUser = JSON.parse(userTemp)
+          setUserConnect(userData)
+        }
       } else {
         setIsLogged(false);
         setIsLoading(false)
-
       }
     }, 2000);
   }, []);
+
+
+
+
+  
+
+
 
   return (
     <LayoutMarketplace>
@@ -36,7 +49,7 @@ const OrdersScreen = () => {
         <section>
           <h1 className={styles.title}>Meus pedidos</h1>
           {isLogged ? (
-            <OrdersTable />
+            <OrdersTable idUser={userConnect.id}/>
           ) : (
             <SignInMessage message="Faça o login para visualizar seus pedidos." />
           )}

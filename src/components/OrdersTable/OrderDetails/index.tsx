@@ -2,16 +2,24 @@ import { Accordion, Table, Text } from '@mantine/core';
 import styles from './OrdersDetails.module.scss';
 
 interface OrderDetailsProps {
-  order: any;
+  order: IPedido;
 }
 
 const OrderDetails = ({ order }: OrderDetailsProps) => {
+
+  function formatCurrency(value: number) {
+    const options = { style: 'currency', currency: 'BRL' };
+    const formatter = new Intl.NumberFormat('pt-BR', options);
+  
+    return formatter.format(Number(value));
+  }
+  
   return (
     <Accordion>
       <Accordion.Item value="Detalhes" className={styles.accordion}>
         <Table verticalSpacing="md" className={styles.table}>
           <tbody>
-            {order.products.map((product, productIndex) => (
+            {order.produtos.map((product, productIndex) => (
               <tr key={productIndex}>
                 <td className={styles.td__image}>
                   <img src={product.img} alt="" />
@@ -20,13 +28,12 @@ const OrderDetails = ({ order }: OrderDetailsProps) => {
                   <div>
                     <b>{product.nome}</b>
                     <p>Cor: {product.cor}</p>
-                    <p>Valor unitário: R$ {product.preco}</p>
+                    <p>Valor unitário: {formatCurrency(Number(product.valorUnitario))}</p>
                     <p>Quantidade: {product.quantidade}</p>
                   </div>
                   <div className={styles.productDetails__total}>
                     <p>
-                      Sub total: R${' '}
-                      {(product.preco * product.quantidade).toFixed(2)}
+                      Sub total: {formatCurrency(product.valorUnitario * product.quantidade)}
                     </p>
                   </div>
                 </td>
@@ -35,7 +42,7 @@ const OrderDetails = ({ order }: OrderDetailsProps) => {
           </tbody>
         </Table>
         <Text>Entregue em:</Text>
-        <Text>Rua dos Alfeneiros, nº 04. Mundo da Magia, Hogwarts.</Text>
+        <Text>{`${order.endereco.logradouro}, ${order.endereco.numero} - ${order.endereco.cidade}, ${order.endereco.estado}.`}</Text>
       </Accordion.Item>
     </Accordion>
   );

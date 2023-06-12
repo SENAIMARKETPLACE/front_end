@@ -163,7 +163,7 @@ export default function SpringModal({ setarIsLogged }: SpringModalProps) {
         <Fade in={open}>
           <CustomBox sx={style}>
             <img src={sollarisImg.src} alt="" />
-            <h1>Atleta, você deseja mesmo sair de campo?</h1>
+            <p>Atleta, você deseja mesmo sair de campo?</p>
             <div>
               <CancelButton onClick={() => handleClose()}>
                 Não sair

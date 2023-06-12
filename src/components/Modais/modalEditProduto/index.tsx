@@ -152,6 +152,8 @@ const ModalEditarProduto = ({
     </MenuItem>
   ));
 
+ 
+
   // Fix a ts bug about Categories's request
   const setarSub = (idCategorieSelected: string) => {
     let categorias = categoriesAndSubCategories.filter(
@@ -185,7 +187,7 @@ const ModalEditarProduto = ({
         form.setFieldValue('weight', resp.data.detalhes_dos_produtos[0].peso);
         form.setFieldValue('size', resp.data.detalhes_dos_produtos[0].tamanho);
         form.setFieldValue(
-          'amount',resp.data.detalhes_dos_produtos[0].quantidade
+          'amount',Number(resp.data.detalhes_dos_produtos[0].quantidade)
         );
         form.setFieldValue('primaryColor', arrayCores[0]);
         form.setFieldValue('secondaryColor', arrayCores[1]);
