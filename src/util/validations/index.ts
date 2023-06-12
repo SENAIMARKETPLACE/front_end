@@ -2,6 +2,7 @@ export const validates = {
   name: validateName,
   email: validateEmail,
   cpf: validateCPF,
+  cnpj: validateCNPJ,
   simplePassword: validateSimplePassword,
   safePassword: validateSafePassword,
 };
@@ -58,6 +59,47 @@ function validateCPF(cpf: string) {
 
   // Valid CPF
   return true;
+}
+
+function validateCNPJ(cnpj: string) {
+  cnpj = cnpj.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+  // Verifica se a string possui 14 dígitos
+  if (cnpj.length !== 14) {
+    return false;
+  }
+
+  // Verifica se todos os dígitos são iguais (caso contrário, não é um CNPJ válido)
+  if (/^(\d)\1*$/.test(cnpj)) {
+    return false;
+  }
+
+  // Calcula o primeiro dígito verificador
+  let soma = 0;
+  let peso = 5;
+  for (let i = 0; i < 12; i++) {
+    soma += parseInt(cnpj.charAt(i)) * peso;
+    peso = peso === 2 ? 9 : peso - 1;
+  }
+  let digito1 = 11 - (soma % 11);
+  if (digito1 > 9) {
+    digito1 = 0;
+  }
+
+  // Calcula o segundo dígito verificador
+  soma = 0;
+  peso = 6;
+  for (let i = 0; i < 13; i++) {
+    soma += parseInt(cnpj.charAt(i)) * peso;
+    peso = peso === 2 ? 9 : peso - 1;
+  }
+  let digito2 = 11 - (soma % 11);
+  if (digito2 > 9) {
+    digito2 = 0;
+  }
+
+  // Verifica se os dígitos verificadores estão corretos
+  return cnpj.slice(-2) === digito1.toString() + digito2.toString();
 }
 
 function validateSimplePassword(password: string) {

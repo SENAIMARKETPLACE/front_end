@@ -16,6 +16,8 @@ import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
 interface AvatarIconProps {
   isLogged: boolean;
   setarIsLogged: (newState: boolean) => void;
+  nomeUserConnect?: string;
+  avatarUserConnect?: string
 }
 
 interface DisconnectedProps {
@@ -24,11 +26,15 @@ interface DisconnectedProps {
 
 interface ConnectProps {
   isLogged: boolean;
+  nomeUserConnect: string;
+  avatarUserConnect: string
+
+  
 }
 
-const AvatarIcon = ({ isLogged, setarIsLogged }: AvatarIconProps) => {
+const AvatarIcon = ({ isLogged, setarIsLogged, nomeUserConnect, avatarUserConnect }: AvatarIconProps) => {
   return isLogged ? (
-    <Connected isLogged={isLogged} />
+    <Connected isLogged={isLogged} nomeUserConnect={nomeUserConnect ? nomeUserConnect : " "} avatarUserConnect={avatarUserConnect} />
   ) : (
     <Disconnected setarIsLogged={setarIsLogged} />
   );
@@ -36,21 +42,27 @@ const AvatarIcon = ({ isLogged, setarIsLogged }: AvatarIconProps) => {
 
 export default AvatarIcon;
 
-function Connected({ isLogged }: ConnectProps) {
-  const [usuarioInfo, setUsuarioInfo] = useState<IResponseLoginUser>();
+function Connected({ isLogged, nomeUserConnect, avatarUserConnect}: ConnectProps) {
+
+  const nomeUsuario = nomeUserConnect.split(" ")
+
+
+
+
+
 
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <Avatar
-          src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt96a5fcd6c6f93d80/60dc5e4215da443b102fbe95/50670def60e2e315c689f6cd589d2f2ac8a42f5a.jpg?auto=webp&format=pjpg&width=3840&quality=60"
+          src={avatarUserConnect}
           className={styles.avatar}
         />
       </Menu.Target>
 
       <Menu.Dropdown className={styles.avatar__list}>
         {/* AQUI PRECISA VIR O PRIMEIRO NOME DO USUÁRIO */}
-        <Menu.Label>Olá, João Acesse:</Menu.Label>
+        <Menu.Label>Olá, {nomeUsuario[0]}  Acesse:</Menu.Label>
         <Menu.Item icon={<IconCalendarStats size={14} />}>
           <Link href="/pedidos">Seus pedidos</Link>
         </Menu.Item>

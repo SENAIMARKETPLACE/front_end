@@ -1,0 +1,12 @@
+@import '/src/styles/brand';
+
+.title {
+  font-weight: 500;
+  color: map-get($map: $colors, $key: text-800);
+  margin-bottom: 20px;
+}
+
+.form {
+  max-width: 800px;
+  margin: auto;
+}

@@ -30,35 +30,39 @@ const LayoutMarketplace = ({
 
   useEffect(() => {
     const isLoggedFromLocalStorage = localStorage.getItem("isUserLogged");
-    if(isLoggedFromLocalStorage === "true"){
-      setIsLogged(true)
-    }else{
-      setIsLogged(false)
+    if (isLoggedFromLocalStorage === "true") {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
     }
   }, []);
 
-
- 
-
   useEffect(() => {
-
     if (isLogged === true) {
       const userDataString = localStorage.getItem("userLoginResponse");
 
       if (userDataString) {
         const userData: IResponseLoginUser = JSON.parse(userDataString);
 
-        alert(userData.id);
-        alert(userData.nome);
-        alert(userData.email);
-
         // ...faça o que for necessário com os dados do usuário
         setUsuarioInfo(userData);
       } else {
-        setIsLogged(false);
+        ""
       }
     }
-  }, []);
+  }, [isLogged]);
+
+
+  useEffect(() => {
+    const currentQuantity = localStorage.getItem("qtdProduto")
+
+    setQuantidadeCarrinho(Number(currentQuantity))
+
+  }, [])
+
+  
+
+
 
   return (
     <>
@@ -70,6 +74,7 @@ const LayoutMarketplace = ({
             setarQuantidade={atualizarQuantidade}
             isLogged={isLogged}
             setarIsLogged={setarIsLogged}
+            userConnect={usuarioInfo}
           />
           <section className={styles["layout__content--children"]}>
             {children}

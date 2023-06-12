@@ -18,6 +18,8 @@ const MarketplaceFinalizarCompraScreen = () => {
     }
   }, []);
 
+  
+
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 880);

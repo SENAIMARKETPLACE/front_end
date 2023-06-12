@@ -12,6 +12,7 @@ import {
 import PersonalData from './PersonalData';
 import AccessData from './AccessData';
 import AddressData from './AddressData';
+import { IResponseLoginUser } from 'compartilhado/IReponseLoginUser';
 
 const inputProps = {
   radius: 'xl',
@@ -20,7 +21,13 @@ const inputProps = {
   mt: 'xs',
 };
 
-const UserProfileForm = () => {
+
+interface UserProfileFormProps {
+  userConnect: IResponseLoginUser
+  
+}
+
+const UserProfileForm = ({userConnect}: UserProfileFormProps) => {
   const [windowWidth, setWindowWidth] = useState(null);
 
   useEffect(() => {
@@ -43,6 +50,7 @@ const UserProfileForm = () => {
   const orientation =
     windowWidth && windowWidth >= 850 ? 'vertical' : 'horizontal';
 
+
   return (
     <Tabs defaultValue="personalData" orientation={orientation}>
       <Tabs.List>
@@ -52,13 +60,13 @@ const UserProfileForm = () => {
       </Tabs.List>
 
       <Tabs.Panel value="personalData" p="lg">
-        <PersonalData inputProps={inputProps} />
+        <PersonalData inputProps={inputProps} userConnect={userConnect} />
       </Tabs.Panel>
       <Tabs.Panel value="accessData" p="lg">
-        <AccessData inputProps={inputProps} />
+        <AccessData inputProps={inputProps} userConnect={userConnect}/>
       </Tabs.Panel>
       <Tabs.Panel value="address" p="lg">
-        <AddressData inputProps={inputProps} />
+        <AddressData inputProps={inputProps} userConnect={userConnect}/>
       </Tabs.Panel>
     </Tabs>
   );

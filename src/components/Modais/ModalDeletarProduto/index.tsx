@@ -4,19 +4,28 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { MdDelete } from 'react-icons/md';
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, OutlinedInput } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import { httpApiMockada, httpProduto } from '../../../http';
+import { Button } from '@mantine/core';
 
 interface modalDeletarProps {
   idExcluir?: string;
-  setarLista: (listaAtualizada: string[]) => void
+  setarLista: (listaAtualizada: string[]) => void;
   snackbarDeleteOpen: boolean;
   setSnackbarDeleteOpen: (open: boolean) => void;
+  snackbarErrorOpen: boolean;
+  setSnackbarErrorOpen: (open: boolean) => void;
 }
 
-const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSnackbarDeleteOpen }: modalDeletarProps) => {
+const ModalDeletarProduto = ({
+  idExcluir,
+  setarLista,
+  snackbarDeleteOpen,
+  setSnackbarDeleteOpen,
+  snackbarErrorOpen,
+  setSnackbarErrorOpen,
+}: modalDeletarProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,34 +44,48 @@ const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSna
     p: 4,
   };
 
-
-  function regastarListaProdutos(){
-    httpProduto.get('/api/products')
-    .then((response) => {setarLista(response.data.content)})
-    .catch((error) => console.error)
+  function regastarListaProdutos() {
+    httpProduto
+      .get('/api/products')
+      .then((response) => {
+        setarLista(response.data.content);
+      })
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
     // httpApiMockada.get('produto-get')
     // .then((response) => {setarLista(response.data)})
-    // .catch((error) => console.error)
+    // .catch((err) => {
+    //   setSnackbarErrorOpen(true);
+    //   console.log(err);
+    // });
   }
 
   const deletarProduto = () => {
     httpProduto
       .delete(`/api/products/${idExcluir}`)
       .then((resp) => {
-        regastarListaProdutos(); 
-        setSnackbarDeleteOpen(true)
+        regastarListaProdutos();
+        setSnackbarDeleteOpen(true);
         setOpen(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setSnackbarErrorOpen(true);
+        console.log(err);
+      });
     // httpApiMockada
     //   .delete(`produto-get/${idExcluir}`)
     //   .then((resp) => {
     //     regastarListaProdutos()
     //     setOpen(false);
     //     setSnackbarDeleteOpen(true)
-        
+
     //   })
-    //   .catch((err) => console.error(err));
+    // .catch((err) => {
+    //   setSnackbarErrorOpen(true);
+    //   console.log(err);
+    // });
   };
 
   return (
@@ -70,10 +93,15 @@ const ModalDeletarProduto = ({ idExcluir, setarLista, snackbarDeleteOpen, setSna
       <MdDelete className={styles.product__remove} onClick={handleOpen} />
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
-          <p>Deseja excluir este produto? {idExcluir}</p>
-          <div className={styles.btns_container}>
-            <Button onClick={deletarProduto}> Sim</Button>
-            <Button onClick={handleClose}>Não</Button>
+          <p>Deseja excluir este produto?</p>
+          <div className={styles.btns__container}>
+            <Button onClick={deletarProduto} mr={'md'} mt={'xl'} color="red">
+              {' '}
+              Sim
+            </Button>
+            <Button onClick={handleClose} variant="outline" color="dark">
+              Não
+            </Button>
           </div>
         </Box>
       </Modal>
