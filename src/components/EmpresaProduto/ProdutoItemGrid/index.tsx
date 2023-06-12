@@ -46,6 +46,14 @@ const ProdutoItemGrid = ({
     currency: 'BRL',
   }).format(parseFloat(price));
 
+  const nomeFormatado = (name: string) => {
+    if (name.length <= 50) {
+      return name;
+    }
+
+    return name.slice(0, 45) + '...';
+  };
+
   return (
     <li
       className={styles.product}
@@ -56,7 +64,7 @@ const ProdutoItemGrid = ({
       <img className={styles.product__photo} src={photo} alt={name} />
       <div className={styles.product__body}>
         <div className={styles.product__name}>
-          <p className={styles.product__name__letters}>{name}</p>
+          <p className={styles.product__name__letters}>{nomeFormatado(name)}</p>
         </div>
         <p className={styles.product__subcategoria}>{subcategoria}</p>
         <p className={styles.product__highlight}>{precoFormatado}</p>

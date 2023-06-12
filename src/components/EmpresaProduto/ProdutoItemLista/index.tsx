@@ -46,6 +46,14 @@ const ProdutoItemLista = ({
     currency: 'BRL',
   }).format(parseFloat(price));
 
+  const nomeFormatado = (name: string) => {
+    if (name.length <= 50) {
+      return name;
+    }
+
+    return name.slice(0, 45) + '...';
+  };
+
   return (
     <li
       className={styles.product}
@@ -54,7 +62,7 @@ const ProdutoItemLista = ({
       }}
     >
       <img className={styles.product__photo} src={photo} alt={name} />
-      <p>{name}</p>
+      <p>{nomeFormatado(name)}</p>
       <p>{amount} unid.</p>
       <p className={styles.product__highlight}>{precoFormatado}</p>
       <div className={styles.product__btns}>
