@@ -109,6 +109,7 @@ export function Sidebar({ setarIsLogged }: SideBarProps) {
 
 
   useEffect(() => {
+
     const isLoggedFromLocalStorage = localStorage.getItem("isUserLogged");
     if (isLoggedFromLocalStorage === "true") {
       setIsUserLogged(true);
@@ -118,7 +119,8 @@ export function Sidebar({ setarIsLogged }: SideBarProps) {
   }, []);
 
   useEffect(() => {
-    if (pathname.includes("marketplace")) {
+
+    if (!pathname.includes('empresa')) {
       setIsUser(true);
       const activeIndex = mockdata.findIndex((link) => link.path === pathname);
       setActive(activeIndex);
