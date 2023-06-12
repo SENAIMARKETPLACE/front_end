@@ -108,7 +108,7 @@ export function Sidebar() {
   // });
 
   useEffect(() => {
-    if (pathname.includes('marketplace')) {
+    if (!pathname.includes('empresa')) {
       setIsUser(true);
       const activeIndex = mockdata.findIndex((link) => link.path === pathname);
       setActive(activeIndex);
