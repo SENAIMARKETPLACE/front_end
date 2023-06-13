@@ -5,7 +5,7 @@ export interface IPersonalData{
     img: string;
     cpf: string; 
     genero: string; 
-    data_nascimento: string;
+    data_nascimento?: string;
     telefone: string;
     grupo_de_interesses: string[]
 }

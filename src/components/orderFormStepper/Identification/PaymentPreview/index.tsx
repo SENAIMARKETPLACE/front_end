@@ -24,8 +24,9 @@ import {
 import { IPedidoPost } from 'compartilhado/IPedidoPost';
 import { useEffect, useState } from 'react';
 import { IProdutoGet } from 'compartilhado/IProdutoGet';
-import { httpApiMockada } from '../../../../http';
+import { httpApiMockada, httpPedido } from '../../../../http';
 import masks from 'util/fieldMasks';
+import { httpEmpresa } from '../../../../http';
 
 function RandomBarCode() {
   return (
@@ -74,6 +75,8 @@ const PaymentPreview = ({
   const [cardNumber, setCardNumber] = useState('');
   const [validityCard, setValidityCard] = useState('');
 
+  
+
   const pedidoTemplate: IPedidoPost = {
     usuario_id: '1',
     endereco_id: '1',
@@ -110,10 +113,11 @@ const PaymentPreview = ({
   };
 
   const cadastrarPedido = (pedidoAPostar: IPedidoPost) => {
-    httpApiMockada
-      .post('/pedidos-pst', pedidoAPostar)
+    console.log(pedidoAPostar)
+    httpPedido
+      .post('/api/orders', pedidoAPostar)
       .then((response) => alterarLocalStorageAposCadastrarPedido())
-      .catch((error) => alterIsOrderFinishedProps(2));
+      .catch((error) => alert(error));
   };
 
   const checkFormValidity = () => {
@@ -166,21 +170,21 @@ const PaymentPreview = ({
           >
             <Tabs.List>
               <Tabs.Tab
-                value="credit"
+                value="3"
                 icon={<IconCreditCard size="0.8rem" />}
                 onClick={() => updateBtnState('credit')}
               >
                 Crédito
               </Tabs.Tab>
               <Tabs.Tab
-                value="pix"
+                value="1"
                 icon={<IconQrcode size="0.8rem" />}
                 onClick={() => updateBtnState()}
               >
                 Pix
               </Tabs.Tab>
               <Tabs.Tab
-                value="boleto"
+                value="4"
                 icon={<IconScan size="0.8rem" />}
                 onClick={() => updateBtnState()}
               >
@@ -188,7 +192,7 @@ const PaymentPreview = ({
               </Tabs.Tab>
             </Tabs.List>
 
-            <Tabs.Panel value="credit" pt="xs">
+            <Tabs.Panel value="3" pt="xs">
               <TextInput
                 label="Dados do cartão"
                 placeholder="Número do cartão"
@@ -246,7 +250,7 @@ const PaymentPreview = ({
               />
             </Tabs.Panel>
 
-            <Tabs.Panel value="pix" pt="xs">
+            <Tabs.Panel value="1" pt="xs">
               <Group>
                 <TextInput
                   label="Chave PIX"
@@ -266,7 +270,7 @@ const PaymentPreview = ({
               />
             </Tabs.Panel>
 
-            <Tabs.Panel value="boleto" pt="xs">
+            <Tabs.Panel value="4" pt="xs">
               <Group>
                 <TextInput
                   label="Código de Barras:"

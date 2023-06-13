@@ -60,6 +60,8 @@ export default function FinalizarCompra({
 
   const [usuarioInfo, setUsuarioInfo] = useState<IResponseLoginUser>();
 
+
+  
   useEffect(() => {
     const userDataString = localStorage.getItem("userLoginResponse");
 

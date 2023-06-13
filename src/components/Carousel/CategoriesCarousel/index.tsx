@@ -1,7 +1,7 @@
 import { Carousel } from '@mantine/carousel';
 import styles from './CategoriesCarousel.module.scss';
 import ProdutoCategoria from 'components/ProdutoCategoria';
-import { httpApiMockada } from '../../../http';
+import { httpApiMockada, httpProduto } from '../../../http';
 import { ICategory } from 'compartilhado/ICategory';
 import { ISubcategory } from 'compartilhado/ISubcategory';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ export default function CategoriesCarousel() {
 
   async function getCategoriesAndSubs(): Promise<void> {
     try {
-      const response = await httpApiMockada.get('/categoriasSubcategorias');
+      const response = await httpApiMockada.get("categoriasSubcategorias");
       const categories: ICategory[] = response.data.map((categoryData: any) => {
         const { sub_categorias, ...category } = categoryData;
         const subcategories: ISubcategory[] = sub_categorias.map(

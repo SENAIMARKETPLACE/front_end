@@ -13,7 +13,7 @@
     "@emotion/cache": "^11.10.8",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.10.6",
-    "@mantine/carousel": "^6.0.11",
+    "@mantine/carousel": "^6.0.13",
     "@mantine/core": "^6.0.13",
     "@mantine/dates": "^6.0.11",
     "@mantine/form": "^6.0.11",

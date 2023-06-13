@@ -44,7 +44,7 @@ const genresData = [
   { value: "NAO_INFORMADO", label: "Não Informar" },
 ];
 
-interface PersonalData {}
+interface PersonalData { }
 
 const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
   // A URL de perfil deve vir no State abaixo
@@ -57,23 +57,27 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
 
   const gruposDeInteresse = userConnect.gruposDeInteresse;
   // Simulando lista de interesses
- 
-    const data = [
-      { value: '1', label: 'Roupas', selected: gruposDeInteresse.includes('1') },
-      { value: '2', label: 'Calçados', selected: gruposDeInteresse.includes('2') },
-      { value: '3', label: 'Suplementos', selected: gruposDeInteresse.includes('3') },
-      { value: '4', label: 'Esportes', selected: gruposDeInteresse.includes('4') },
-      { value: '5', label: 'Acessórios', selected: gruposDeInteresse.includes('5') }
-    ];
+
+  const data = [
+    { value: '1', label: 'Roupas', selected: gruposDeInteresse.includes('1') },
+    { value: '2', label: 'Calçados', selected: gruposDeInteresse.includes('2') },
+    { value: '3', label: 'Suplementos', selected: gruposDeInteresse.includes('3') },
+    { value: '4', label: 'Esportes', selected: gruposDeInteresse.includes('4') },
+    { value: '5', label: 'Acessórios', selected: gruposDeInteresse.includes('5') }
+  ];
+
+
 
   const form = useForm({
     // Valores que serão substituídos pelo GET. Mantenha as máscaras.
+
+
+
     initialValues: {
       name: userConnect.nome,
       email: userConnect.email,
       phone: `${masks.phone(userConnect.telefone)}`,
       cpf: `${masks.cpf(userConnect.cpf)}`,
-      birthDate: new Date(userConnect.data_nascimento),
       genre: userConnect.genero,
       interests: userConnect.gruposDeInteresse,
     },
@@ -96,22 +100,22 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
 
         return errors.length > 0 ? errors[0] : null;
       },
-      birthDate: (value) => {
-        const dateOfBirth = new Date(value);
-        const currentDate = new Date();
+      // birthDate: (value) => {
+      //   const dateOfBirth = new Date(value);
+      //   const currentDate = new Date();
 
-        let yearsDiff =
-          currentDate.getUTCFullYear() - dateOfBirth.getUTCFullYear();
-        const monthsDiff =
-          currentDate.getUTCMonth() - dateOfBirth.getUTCMonth();
-        const daysDiff = currentDate.getUTCDate() - dateOfBirth.getUTCDate();
+      //   let yearsDiff =
+      //     currentDate.getUTCFullYear() - dateOfBirth.getUTCFullYear();
+      //   const monthsDiff =
+      //     currentDate.getUTCMonth() - dateOfBirth.getUTCMonth();
+      //   const daysDiff = currentDate.getUTCDate() - dateOfBirth.getUTCDate();
 
-        if (monthsDiff < 0 || daysDiff < 0) yearsDiff--;
+      //   if (monthsDiff < 0 || daysDiff < 0) yearsDiff--;
 
-        return yearsDiff >= 16
-          ? null
-          : "Você deve ter no mínimo 16 anos de idade.";
-      },
+      //   return yearsDiff >= 16
+      //     ? null
+      //     : "Você deve ter no mínimo 16 anos de idade.";
+      // },
       interests: (value) =>
         value.length > 0 ? null : "Você deve selecionar ao menos uma opção",
     },
@@ -124,42 +128,48 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
     return data.toLocaleDateString();
   };
 
+  
+  const removeSpecialCaracteres = (campoInformado: string) => {
+    return campoInformado.replace(/[,!()-./]/g, '').replaceAll(' ', '');
+  };
 
   const alterarDados = () => {
+    
     const novosDadosPessoais: IPersonalData = {
-      usuario_id: userConnect.id, 
-      nome: form.values.name, 
-      email: form.values.email, 
-      cpf: form.values.cpf, 
-      genero: form.values.genre, 
-      data_nascimento: form.values.birthDate.toLocaleDateString('pt-BR', { year: '2-digit', month: '2-digit', day: '2-digit' }),   
+      usuario_id: userConnect.id,
+      nome: form.values.name,
+      email: form.values.email,
+      cpf: removeSpecialCaracteres(form.values.cpf),
+      genero: form.values.genre,
       grupo_de_interesses: form.values.interests,
-      img: profilePhoto, 
-      telefone: form.values.phone
-      
-      
+      img: profilePhoto,
+      telefone: removeSpecialCaracteres(form.values.phone)
+
     }
-    // httpUsuario.put(`endpoint/${userConnect.id}`, novosDadosPessoais)
-    // .then(() => alert("Informações Pessoais Salvas!"))
-    // .catch((erro) => alert("deu ruim"))
+    httpUsuario.put(`api/users/address`, novosDadosPessoais)
+      .then(() => {
+        // AO TESTAR AMANHÃ, NO PRIMEIRO THEN ATUALIZAR NO LOCALSTORAGE
+        const novosDadosLocalStorage: IResponseLoginUser = JSON.parse(localStorage.getItem('userLoginResponse'));
+
+        novosDadosLocalStorage.nome = novosDadosPessoais.nome,
+          novosDadosLocalStorage.email = novosDadosPessoais.email,
+          novosDadosLocalStorage.cpf = novosDadosPessoais.cpf,
+          novosDadosLocalStorage.genero = novosDadosPessoais.genero,
+          novosDadosLocalStorage.gruposDeInteresse = novosDadosPessoais.grupo_de_interesses
+        novosDadosLocalStorage.img = novosDadosPessoais.img
+        novosDadosLocalStorage.data_nascimento = novosDadosPessoais.data_nascimento
+        novosDadosLocalStorage.telefone = novosDadosPessoais.telefone
 
 
-    // AO TESTAR AMANHÃ, NO PRIMEIRO THEN ATUALIZAR NO LOCALSTORAGE
-    const novosDadosLocalStorage:IResponseLoginUser = JSON.parse(localStorage.getItem('userLoginResponse'));
+        localStorage.setItem('userLoginResponse', JSON.stringify(novosDadosLocalStorage));
 
-    novosDadosLocalStorage.nome = novosDadosPessoais.nome, 
-    novosDadosLocalStorage.email = novosDadosPessoais.email,
-    novosDadosLocalStorage.cpf = novosDadosPessoais.cpf,
-    novosDadosLocalStorage.genero = novosDadosPessoais.genero, 
-    novosDadosLocalStorage.gruposDeInteresse = novosDadosPessoais.grupo_de_interesses
-    novosDadosLocalStorage.img = novosDadosPessoais.img
-    novosDadosLocalStorage.data_nascimento = novosDadosPessoais.data_nascimento
-    novosDadosLocalStorage.telefone = novosDadosPessoais.telefone
+        router.reload();
+      })
+      .then(() => alert("Informações do usuário alteradas com sucesso!"))
+      .catch((erro) => alert("deu ruim"))
 
 
-    localStorage.setItem('userLoginResponse', JSON.stringify(novosDadosLocalStorage));
 
-    router.reload();
   }
 
   // Função genérica que atualiza valor do Input que o chama, substituindo useState.
@@ -226,25 +236,25 @@ const PersonalData = ({ inputProps, userConnect }: PersonalDataProps) => {
             onChange={handleInputChange("cpf", masks.cpf)}
           />
         </SimpleGrid>
-        <SimpleGrid
+        {/* <SimpleGrid
           cols={2}
           breakpoints={[{ maxWidth: "500", cols: 1, verticalSpacing: "0" }]}
-        >
-          <DateInput
+        > */}
+        {/* <DateInput
             label="Data de Nascimento"
             placeholder="Data de nascimento"
-            {...inputProps}
             valueFormat="DD/MM/YYYY"
-            {...form.getInputProps("birthDate")}
-          />
-          <Select
-            label="Gênero"
-            placeholder="Escolha uma opção"
-            data={genresData}
             {...inputProps}
-            {...form.getInputProps("genre")}
-          />
-        </SimpleGrid>
+            {...form.getInputProps("birthDate")}
+          /> */}
+        <Select
+          label="Gênero"
+          placeholder="Escolha uma opção"
+          data={genresData}
+          {...inputProps}
+          {...form.getInputProps("genre")}
+        />
+        {/* </SimpleGrid> */}
         <MultiSelect
           data={data}
           label="Lista de interesses"

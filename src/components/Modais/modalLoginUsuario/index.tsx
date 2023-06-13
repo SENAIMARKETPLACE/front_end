@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { ILoginBody } from "compartilhado/ILoginBody";
 import { httpUsuario } from "../../../http";
 import { IResponseLoginUser } from "compartilhado/IReponseLoginUser";
+import { IProdutoGet } from "compartilhado/IProdutoGet";
 
 const style = {
   position: "absolute" as "absolute",
@@ -83,7 +84,7 @@ export default function ModalLoginEmpresa({
       }
     >
   ) => {
-    
+
     // httpUsuario
     //   .post("api/users/login", formValues.values)
     //   // NO PRÓXIMO THEN EU VOU POPULARIZAR A MINHA VARIÁVEL do Tipo IResponseLoginUser
@@ -109,57 +110,29 @@ export default function ModalLoginEmpresa({
       .post("api/users/login", formValues.values)
       // NO PRÓXIMO THEN EU VOU POPULARIZAR A MINHA VARIÁVEL do Tipo IResponseLoginUser
       .then((response) => {
-        const userLoginResponse: IResponseLoginUser = response.data.content;
-
+        console.log(response)
+        const userLoginResponse: IResponseLoginUser = response.data.usuario;
+        const productLoginResponse: IProdutoGet[] = response.data.produtos
         //armazena os dados no localstorage:
         localStorage.setItem(
           "userLoginResponse",
           JSON.stringify(userLoginResponse)
         );
-      })
-      .then((resp) => router.push("/marketplace"))
-      .catch((erro) => {
-        setBadLogin(true);
+
+        localStorage.setItem(
+          "productsResponse", JSON.stringify(productLoginResponse)
+        )
+
 
         //definir a variável isLogged como true
         setarIsLogged(true);
-
-        //MOCKANDO UM USUARIO FALSO
-        const userLoginResponse: IResponseLoginUser = {
-          id: "44",
-          data_requisicao: "09/06/2023 11:00:11",
-          nome: "Juvenal Maxiliano",
-          cpf: "53950516867",
-          email: "jvabreusousa19@gmail.com",
-          data_nascimento: "03/03/2002",
-          genero: "MASCULINO",
-          telefone: "11940333175",
-          img: "https://github.com/joaoabreu004.png",
-          gruposDeInteresse: ["1", "5"],
-          enderecos: [
-            {
-              id: "1",
-              cep: "05881020",
-              logradouro: "Rua Abílio César",
-              numero: "28",
-              estado: "SP",
-              bairro: "Capão Redondo",
-              cidade: "São Paulo",
-              complemento: "Teste"
-            },
-          ],
-        };
-
-        //ENVIANDO PARA LOCALSTORAGE:
-        localStorage.setItem(
-          "userLoginResponse",
-          JSON.stringify(userLoginResponse)
-        );
-        
+        localStorage.setItem("isUserLogged", "true");
         //ENVIAR PARA A PÁGINA, AGORA LOGADO E VISUALIZAR SUAS INFORMAÇÕES
         router.push("/marketplace");
-        localStorage.setItem("isUserLogged", "true");
         router.reload();
+      })
+      .catch((erro) => {
+        setBadLogin(true);
       });
     event.preventDefault();
   };

@@ -6,6 +6,7 @@ import masks from 'util/fieldMasks';
 import { IResponseLoginUser } from 'compartilhado/IReponseLoginUser';
 import { IAdressData } from 'compartilhado/AlteracoesPerfilUser/IAdressData';
 import { useRouter } from 'next/router';
+import { httpUsuario } from '../../../../http';
 
 interface AddressDataProps {
   inputProps: object;
@@ -28,11 +29,11 @@ const AddressData = ({ inputProps, userConnect }: AddressDataProps) => {
   const router = useRouter();
   const handleInputChange =
     (fieldName: string, maskFunction?: Function) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value;
-      const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
-      form.setFieldValue(fieldName, maskedValue);
-    };
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = event.target.value;
+        const maskedValue = maskFunction ? maskFunction(inputValue) : inputValue;
+        form.setFieldValue(fieldName, maskedValue);
+      };
 
   async function consumeViaCepApi(cep: string) {
     const formattedCep = cep.replace(/[^0-9]/g, '');
@@ -57,27 +58,46 @@ const AddressData = ({ inputProps, userConnect }: AddressDataProps) => {
     }
   }
 
+  const removeSpecialCaracteres = (campoInformado: string) => {
+    return campoInformado.replace(/[,!()-.]/g, '').replaceAll(' ', '');
+  };
 
   const alterarDados = () => {
     const novosDadosResidenciais: IAdressData = {
-      usuario_id: userConnect.id, 
-      endereco_id: "1",
-      cep: form.values.cep, 
-      logradouro: form.values.address, 
-      numero: form.values.number, 
-      estado: form.values.state, 
-      bairro: form.values.neighborhood, 
-      cidade: form.values.city, 
+      usuario_id: userConnect.id,
+      endereco_id: userConnect.enderecos[0].id,
+      cep: removeSpecialCaracteres(form.values.cep),
+      logradouro: form.values.address,
+      numero: form.values.number,
+      estado: form.values.state,
+      bairro: form.values.neighborhood,
+      cidade: form.values.city,
       complemento: form.values.complement
       // complemento: form.values.complement 
     }
-    // httpUsuario.put(`endpoint/${userConnect.id}`, novosDadosResidenciais)
-    // .then(() => alert("Informações do novo endereço Salvas!"))
-    // .catch((erro) => alert("deu ruim"))
+
+    httpUsuario.put(`api/users/address/`, novosDadosResidenciais)
+      .then(() => {
+        novosDadosLocalStorage.enderecos[0].cep = novosDadosResidenciais.cep,
+          novosDadosLocalStorage.enderecos[0].logradouro = novosDadosResidenciais.logradouro,
+          novosDadosLocalStorage.enderecos[0].numero = novosDadosResidenciais.numero,
+          novosDadosLocalStorage.enderecos[0].estado = novosDadosResidenciais.estado,
+          novosDadosLocalStorage.enderecos[0].cidade = novosDadosResidenciais.cidade
+        novosDadosLocalStorage.enderecos[0].bairro = novosDadosResidenciais.bairro
+        novosDadosLocalStorage.enderecos[0].complemento = novosDadosResidenciais.complemento
+
+
+        localStorage.setItem('userLoginResponse', JSON.stringify(novosDadosLocalStorage));
+
+        router.reload();
+
+      })
+      .then(() => {alert("Informações do novo endereço Salvas!")})
+      .catch(() => alert("deu ruim")); 
 
 
     // AO TESTAR AMANHÃ, NO PRIMEIRO THEN ATUALIZAR NO LOCALSTORAGE
-    const novosDadosLocalStorage:IResponseLoginUser = JSON.parse(localStorage.getItem('userLoginResponse'));
+    const novosDadosLocalStorage: IResponseLoginUser = JSON.parse(localStorage.getItem('userLoginResponse'));
 
     // novosDadosLocalStorage.nome = novosDadosPessoais.nome, 
     // novosDadosLocalStorage.email = novosDadosPessoais.email,
@@ -87,18 +107,7 @@ const AddressData = ({ inputProps, userConnect }: AddressDataProps) => {
     // novosDadosLocalStorage.img = novosDadosPessoais.img
     // novosDadosLocalStorage.data_nascimento = novosDadosPessoais.data_nascimento
 
-    novosDadosLocalStorage.enderecos[0].cep = novosDadosResidenciais.cep, 
-    novosDadosLocalStorage.enderecos[0].logradouro = novosDadosResidenciais.logradouro, 
-    novosDadosLocalStorage.enderecos[0].numero = novosDadosResidenciais.numero, 
-    novosDadosLocalStorage.enderecos[0].estado = novosDadosResidenciais.estado, 
-    novosDadosLocalStorage.enderecos[0].cidade = novosDadosResidenciais.cidade
-    novosDadosLocalStorage.enderecos[0].bairro = novosDadosResidenciais.bairro
-    novosDadosLocalStorage.enderecos[0].complemento = novosDadosResidenciais.complemento
-    
 
-    localStorage.setItem('userLoginResponse', JSON.stringify(novosDadosLocalStorage));
-
-    router.reload();
   }
 
   return (

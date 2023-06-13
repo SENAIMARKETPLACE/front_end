@@ -1,4 +1,5 @@
 import { IEndereco } from "./IEndereco";
+import { IProdutoGet } from "./IProdutoGet";
 
 export interface IResponseLoginUser{
     id: string, 
@@ -6,10 +7,11 @@ export interface IResponseLoginUser{
     nome: string,
     cpf: string, 
     email: string,
-    data_nascimento: string,
+    data_nascimento?: string,
     telefone: string
     genero: string,
     img: string, 
     gruposDeInteresse: string[],
-    enderecos: IEndereco[]
+    enderecos: IEndereco[]; 
+    produtos?: IProdutoGet[];
 }
